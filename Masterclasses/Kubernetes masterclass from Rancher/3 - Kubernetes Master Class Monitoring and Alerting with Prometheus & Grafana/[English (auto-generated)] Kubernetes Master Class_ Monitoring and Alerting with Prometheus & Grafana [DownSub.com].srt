@@ -1,0 +1,8583 @@
+1
+00:00:03,600 --> 00:00:05,729
+hey everybody welcome to today's
+
+2
+00:00:05,729 --> 00:00:08,100
+kubernetes masterclass really happy to
+
+3
+00:00:08,100 --> 00:00:10,290
+have you all join us today as we go
+
+4
+00:00:10,290 --> 00:00:11,910
+through monitoring and alerting with
+
+5
+00:00:11,910 --> 00:00:14,100
+communities from Griffin we have a lot
+
+6
+00:00:14,100 --> 00:00:16,379
+of people joining today and so we're
+
+7
+00:00:16,379 --> 00:00:18,270
+just getting started while you all are
+
+8
+00:00:18,270 --> 00:00:19,800
+arriving I want you all to know that
+
+9
+00:00:19,800 --> 00:00:23,160
+this session is being recorded you will
+
+10
+00:00:23,160 --> 00:00:24,750
+get the the recording and the slides
+
+11
+00:00:24,750 --> 00:00:27,180
+after the training we're doing
+
+12
+00:00:27,180 --> 00:00:30,510
+everything live here we have about an
+
+13
+00:00:30,510 --> 00:00:33,090
+hour hour and a half with you all so if
+
+14
+00:00:33,090 --> 00:00:35,789
+you need to drop don't worry you will
+
+15
+00:00:35,789 --> 00:00:37,230
+still get the recording and the slides
+
+16
+00:00:37,230 --> 00:00:38,909
+after we have a lot of material to go
+
+17
+00:00:38,909 --> 00:00:40,620
+through so I'm gonna go ahead and jump
+
+18
+00:00:40,620 --> 00:00:43,109
+right in here so as a way of
+
+19
+00:00:43,109 --> 00:00:44,460
+introduction on Matthew Shearer a
+
+20
+00:00:44,460 --> 00:00:46,679
+marketing manager here rancher I host
+
+21
+00:00:46,679 --> 00:00:49,260
+these training sessions and and others
+
+22
+00:00:49,260 --> 00:00:50,729
+which we'll talk about in a moment I
+
+23
+00:00:50,729 --> 00:00:54,389
+mean you can kind of use me as a point
+
+24
+00:00:54,389 --> 00:00:56,039
+of contact at Rancher if you are looking
+
+25
+00:00:56,039 --> 00:00:59,549
+for educational resource maybe an e-book
+
+26
+00:00:59,549 --> 00:01:01,559
+or you know one of these recordings or
+
+27
+00:01:01,559 --> 00:01:03,209
+something like that for whatever reason
+
+28
+00:01:03,209 --> 00:01:04,979
+you don't get the slides afterwards
+
+29
+00:01:04,979 --> 00:01:06,870
+please reach out to me at Matthew
+
+30
+00:01:06,870 --> 00:01:09,450
+Rancher comm or you can reach me on the
+
+31
+00:01:09,450 --> 00:01:12,360
+user slap just simply at Matthew there
+
+32
+00:01:12,360 --> 00:01:13,799
+and I'll talk a little bit more about
+
+33
+00:01:13,799 --> 00:01:15,780
+that as well but the man who's really
+
+34
+00:01:15,780 --> 00:01:18,539
+gonna be doing the heavy lifting on the
+
+35
+00:01:18,539 --> 00:01:22,939
+line today is amen amen are you there I
+
+36
+00:01:24,409 --> 00:01:28,259
+am here to Jamie oh no I do yes sir
+
+37
+00:01:28,259 --> 00:01:31,259
+there we go excellent okay great got
+
+38
+00:01:31,259 --> 00:01:35,729
+scared for a second alright awesome well
+
+39
+00:01:35,729 --> 00:01:37,890
+I'll let a man a little bit more as we
+
+40
+00:01:37,890 --> 00:01:39,149
+go just want to get through a couple
+
+41
+00:01:39,149 --> 00:01:41,820
+other housekeeping items before we dive
+
+42
+00:01:41,820 --> 00:01:43,859
+into the material so as I said we have
+
+43
+00:01:43,859 --> 00:01:44,490
+about an hour
+
+44
+00:01:44,490 --> 00:01:48,090
+you know our 15 questions are absolutely
+
+45
+00:01:48,090 --> 00:01:50,009
+welcome we try to make these responses
+
+46
+00:01:50,009 --> 00:01:53,249
+to what you all want to learn my only
+
+47
+00:01:53,249 --> 00:01:54,840
+request is just try to as best as
+
+48
+00:01:54,840 --> 00:01:56,789
+possible keep it keep this your
+
+49
+00:01:56,789 --> 00:01:59,340
+questions you know on topic we do have
+
+50
+00:01:59,340 --> 00:02:01,409
+other kinds of trainings you'll enjoy to
+
+51
+00:02:01,409 --> 00:02:03,060
+kubernetes intro to ranch or you know
+
+52
+00:02:03,060 --> 00:02:06,090
+intro to other materials so if for
+
+53
+00:02:06,090 --> 00:02:07,560
+whatever reason is just off topic we
+
+54
+00:02:07,560 --> 00:02:09,600
+might refer you to another resource also
+
+55
+00:02:09,600 --> 00:02:12,090
+if you want your question to be private
+
+56
+00:02:12,090 --> 00:02:14,850
+just let us know otherwise we will ask
+
+57
+00:02:14,850 --> 00:02:16,800
+it or answer it
+
+58
+00:02:16,800 --> 00:02:18,900
+for the benefit of everyone there is a
+
+59
+00:02:18,900 --> 00:02:21,420
+very cool chat feature and GoToWebinar
+
+60
+00:02:21,420 --> 00:02:23,340
+so you put your questions there and you
+
+61
+00:02:23,340 --> 00:02:25,560
+know while Amon is presenting and going
+
+62
+00:02:25,560 --> 00:02:27,120
+through the slides demo I'll do my best
+
+63
+00:02:27,120 --> 00:02:29,460
+to answer questions in the chat and all
+
+64
+00:02:29,460 --> 00:02:31,770
+the other ones we'll leave to Amon to
+
+65
+00:02:31,770 --> 00:02:33,720
+answer you might pause during mostly
+
+66
+00:02:33,720 --> 00:02:37,050
+we'll take questions at the end as I
+
+67
+00:02:37,050 --> 00:02:38,640
+said this session is being recorded we
+
+68
+00:02:38,640 --> 00:02:40,620
+post everything on YouTube so please
+
+69
+00:02:40,620 --> 00:02:42,420
+check check out the rancher YouTube
+
+70
+00:02:42,420 --> 00:02:45,720
+channel there are a ton of fantastic
+
+71
+00:02:45,720 --> 00:02:48,060
+videos fantastic presentations you know
+
+72
+00:02:48,060 --> 00:02:49,980
+with links to the slides and the
+
+73
+00:02:49,980 --> 00:02:51,720
+manifests and you know all that good
+
+74
+00:02:51,720 --> 00:02:54,870
+stuff so Chuck do check that out we will
+
+75
+00:02:54,870 --> 00:02:57,050
+be posting this session there as well
+
+76
+00:02:57,050 --> 00:03:00,390
+and as I mentioned before the Rancho
+
+77
+00:03:00,390 --> 00:03:01,740
+user slacked waiting to get in touch
+
+78
+00:03:01,740 --> 00:03:03,480
+with cleen and many other Rancher
+
+79
+00:03:03,480 --> 00:03:05,910
+community members it's absolutely free
+
+80
+00:03:05,910 --> 00:03:07,140
+there's thousands of members and
+
+81
+00:03:07,140 --> 00:03:08,430
+hundreds of people asking and answering
+
+82
+00:03:08,430 --> 00:03:10,230
+questions they are every day including
+
+83
+00:03:10,230 --> 00:03:12,300
+rancher engineers so just go to slacker
+
+84
+00:03:12,300 --> 00:03:14,880
+rancher die oh there's a many different
+
+85
+00:03:14,880 --> 00:03:17,790
+channels on our user slack you can you
+
+86
+00:03:17,790 --> 00:03:20,670
+can join the master class 1-pound master
+
+87
+00:03:20,670 --> 00:03:22,230
+class if you want you know news and
+
+88
+00:03:22,230 --> 00:03:25,490
+updates about these master classes and
+
+89
+00:03:25,490 --> 00:03:27,810
+finally there's other upcoming trainings
+
+90
+00:03:27,810 --> 00:03:29,490
+I have him and I have you down for next
+
+91
+00:03:29,490 --> 00:03:33,300
+week to sort of yeah so that should be a
+
+92
+00:03:33,300 --> 00:03:35,160
+fantastic session as well understanding
+
+93
+00:03:35,160 --> 00:03:36,690
+and implementing service smash a lot of
+
+94
+00:03:36,690 --> 00:03:38,670
+people have you know won't want to use
+
+95
+00:03:38,670 --> 00:03:40,800
+service mesh and it is integrated in
+
+96
+00:03:40,800 --> 00:03:42,770
+Rancher so we'll go over that and then
+
+97
+00:03:42,770 --> 00:03:45,240
+the intro training which we do every
+
+98
+00:03:45,240 --> 00:03:47,040
+week is a fantastic place to get to know
+
+99
+00:03:47,040 --> 00:03:49,440
+kubernetes and getting to know the
+
+100
+00:03:49,440 --> 00:03:51,030
+rancher management server so that is
+
+101
+00:03:51,030 --> 00:03:53,430
+every Thursday including this one so
+
+102
+00:03:53,430 --> 00:03:55,890
+that is all I have so a man I'm gonna
+
+103
+00:03:55,890 --> 00:03:58,830
+pass this over to you go we can get into
+
+104
+00:03:58,830 --> 00:04:01,800
+the heart of the material and make you
+
+105
+00:04:01,800 --> 00:04:08,370
+the presenter and I will show my screen
+
+106
+00:04:08,370 --> 00:04:11,190
+here and hopefully everybody can see
+
+107
+00:04:11,190 --> 00:04:15,180
+that cool yeah that's good okay so
+
+108
+00:04:15,180 --> 00:04:17,459
+welcome everyone to monitoring and
+
+109
+00:04:17,459 --> 00:04:18,959
+alerting with Prometheus and go fauna
+
+110
+00:04:18,959 --> 00:04:20,520
+thank you for that great introduction
+
+111
+00:04:20,520 --> 00:04:23,400
+Matt as you alluded to I of course am a
+
+112
+00:04:23,400 --> 00:04:25,050
+man bomb and I'm a field engineer here
+
+113
+00:04:25,050 --> 00:04:27,450
+rancher labs been here for about a year
+
+114
+00:04:27,450 --> 00:04:29,370
+very happy at rancher a lot of awesome
+
+115
+00:04:29,370 --> 00:04:30,550
+stuff going on at the
+
+116
+00:04:30,550 --> 00:04:32,790
+organization I love doing these
+
+117
+00:04:32,790 --> 00:04:35,080
+presentations these master classes these
+
+118
+00:04:35,080 --> 00:04:37,240
+trainings you know every few weeks or so
+
+119
+00:04:37,240 --> 00:04:38,650
+I'm it's always fun to engage with the
+
+120
+00:04:38,650 --> 00:04:40,090
+community and be able to present things
+
+121
+00:04:40,090 --> 00:04:41,830
+that I'm passionate about or that I
+
+122
+00:04:41,830 --> 00:04:43,750
+learned about and want to share with
+
+123
+00:04:43,750 --> 00:04:46,900
+folks so to that here's what we're gonna
+
+124
+00:04:46,900 --> 00:04:49,870
+do today first off for those who aren't
+
+125
+00:04:49,870 --> 00:04:51,280
+familiar we're going to cover some
+
+126
+00:04:51,280 --> 00:04:53,350
+basics of what Prometheus and Griffin
+
+127
+00:04:53,350 --> 00:04:55,000
+are so I'm going to go over some basic
+
+128
+00:04:55,000 --> 00:04:58,270
+concepts of these tools will actually
+
+129
+00:04:58,270 --> 00:05:00,280
+walk through and deploy Prometheus and
+
+130
+00:05:00,280 --> 00:05:03,100
+Griffin interactively as part of this
+
+131
+00:05:03,100 --> 00:05:04,870
+demo and then we'll walk through what
+
+132
+00:05:04,870 --> 00:05:06,730
+Rancho brings to the table with doing
+
+133
+00:05:06,730 --> 00:05:09,010
+it's monitoring feature and how Rancher
+
+134
+00:05:09,010 --> 00:05:10,990
+can manage for me theist and Griffin in
+
+135
+00:05:10,990 --> 00:05:13,240
+two great components of those tools and
+
+136
+00:05:13,240 --> 00:05:14,980
+to the rancher product and things like
+
+137
+00:05:14,980 --> 00:05:18,130
+that so without any further ado let's
+
+138
+00:05:18,130 --> 00:05:20,710
+jump in oh and and as matt said earlier
+
+139
+00:05:20,710 --> 00:05:21,790
+please feel free to ask questions
+
+140
+00:05:21,790 --> 00:05:23,710
+there's that little question section in
+
+141
+00:05:23,710 --> 00:05:26,830
+the GoToWebinar the apply interview or
+
+142
+00:05:26,830 --> 00:05:28,570
+whatever you're using so we will either
+
+143
+00:05:28,570 --> 00:05:30,400
+get to those throughout the presentation
+
+144
+00:05:30,400 --> 00:05:32,920
+or at the end but I love questions love
+
+145
+00:05:32,920 --> 00:05:35,020
+answering them love engagements during
+
+146
+00:05:35,020 --> 00:05:37,320
+and after the fact so please ask away
+
+147
+00:05:37,320 --> 00:05:40,600
+okay Prometheus and Griffin Oh what are
+
+148
+00:05:40,600 --> 00:05:42,490
+they so first of all start off with
+
+149
+00:05:42,490 --> 00:05:45,370
+Prometheus it is a time series database
+
+150
+00:05:45,370 --> 00:05:48,250
+and monitoring system well what does
+
+151
+00:05:48,250 --> 00:05:49,350
+that actually mean
+
+152
+00:05:49,350 --> 00:05:52,480
+Prometheus stores metrics over a period
+
+153
+00:05:52,480 --> 00:05:54,610
+of time and I put metrics in quotes
+
+154
+00:05:54,610 --> 00:05:55,960
+because we'll need to describe what a
+
+155
+00:05:55,960 --> 00:05:59,050
+metric is so a metric is going to be a
+
+156
+00:05:59,050 --> 00:06:01,210
+value that's going to change over that
+
+157
+00:06:01,210 --> 00:06:04,180
+period of time so we will store those
+
+158
+00:06:04,180 --> 00:06:06,340
+pieces of information in Prometheus and
+
+159
+00:06:06,340 --> 00:06:08,170
+we will collect those from a whole
+
+160
+00:06:08,170 --> 00:06:10,900
+different bunch of sources Prometheus
+
+161
+00:06:10,900 --> 00:06:13,300
+allows us then to query these metrics
+
+162
+00:06:13,300 --> 00:06:15,070
+using an expressive language that
+
+163
+00:06:15,070 --> 00:06:17,950
+they've titled prom QL so what we can do
+
+164
+00:06:17,950 --> 00:06:20,080
+that is with Prometheus store bits of
+
+165
+00:06:20,080 --> 00:06:22,630
+information that change over time and
+
+166
+00:06:22,630 --> 00:06:25,000
+then query those bits of information
+
+167
+00:06:25,000 --> 00:06:28,240
+using that prom ql language Prometheus
+
+168
+00:06:28,240 --> 00:06:29,980
+also gives us the ability to generate
+
+169
+00:06:29,980 --> 00:06:32,950
+alerts based on criteria so if we have a
+
+170
+00:06:32,950 --> 00:06:34,660
+value that exceeds a certain threshold
+
+171
+00:06:34,660 --> 00:06:37,270
+or exceeds a lower threshold whatever
+
+172
+00:06:37,270 --> 00:06:39,010
+the word for exceed on the lower side is
+
+173
+00:06:39,010 --> 00:06:42,010
+we can generate alerts based on that
+
+174
+00:06:42,010 --> 00:06:43,990
+criteria we
+
+175
+00:06:43,990 --> 00:06:46,300
+also have the ability to export metrics
+
+176
+00:06:46,300 --> 00:06:48,910
+from nodes in kubernetes now Prometheus
+
+177
+00:06:48,910 --> 00:06:50,380
+it's important to stop a note here is
+
+178
+00:06:50,380 --> 00:06:53,920
+not just a kubernetes tool so Prometheus
+
+179
+00:06:53,920 --> 00:06:58,960
+and Griffin ax are independent pieces of
+
+180
+00:06:58,960 --> 00:07:01,240
+software so it is a time-series database
+
+181
+00:07:01,240 --> 00:07:03,340
+and monitoring system that while it
+
+182
+00:07:03,340 --> 00:07:05,380
+integrates really well with kubernetes
+
+183
+00:07:05,380 --> 00:07:07,450
+and as you'll see when we deploy it and
+
+184
+00:07:07,450 --> 00:07:09,490
+when we manage it with Rancher is able
+
+185
+00:07:09,490 --> 00:07:11,500
+to grab a lot of information quickly out
+
+186
+00:07:11,500 --> 00:07:14,440
+of kubernetes its sole focus is not the
+
+187
+00:07:14,440 --> 00:07:17,290
+kubernetes ecosystem so there's a lot of
+
+188
+00:07:17,290 --> 00:07:19,630
+ways to grab information from a bunch of
+
+189
+00:07:19,630 --> 00:07:21,220
+different sources grab metrics that is
+
+190
+00:07:21,220 --> 00:07:22,840
+from a bunch of different sources and
+
+191
+00:07:22,840 --> 00:07:25,750
+store those in Prometheus obviously
+
+192
+00:07:25,750 --> 00:07:27,610
+you're here today to talk about rancher
+
+193
+00:07:27,610 --> 00:07:28,870
+and talk about kubernetes so that's what
+
+194
+00:07:28,870 --> 00:07:31,480
+we'll be focusing on but just know that
+
+195
+00:07:31,480 --> 00:07:33,730
+with Prometheus I can grab metrics from
+
+196
+00:07:33,730 --> 00:07:36,100
+a whole host of different sources I can
+
+197
+00:07:36,100 --> 00:07:39,100
+grab them from sequel databases I can
+
+198
+00:07:39,100 --> 00:07:41,980
+put tooling into my actual code to send
+
+199
+00:07:41,980 --> 00:07:44,290
+metrics to Prometheus like if I write a
+
+200
+00:07:44,290 --> 00:07:45,760
+little application and I want to
+
+201
+00:07:45,760 --> 00:07:47,380
+directly send metrics into the
+
+202
+00:07:47,380 --> 00:07:49,390
+Prometheus database I can do that
+
+203
+00:07:49,390 --> 00:07:51,820
+so not entirely kubernetes focus just an
+
+204
+00:07:51,820 --> 00:07:53,440
+important note to make there but
+
+205
+00:07:53,440 --> 00:07:54,550
+obviously that's where we've spending
+
+206
+00:07:54,550 --> 00:07:57,130
+our time today gravano
+
+207
+00:07:57,130 --> 00:07:59,110
+then on the other side is the visible
+
+208
+00:07:59,110 --> 00:08:02,350
+excuse me visualization tool for those
+
+209
+00:08:02,350 --> 00:08:04,390
+metrics that are stored in prometheus
+
+210
+00:08:04,390 --> 00:08:06,490
+so griffons going to allow us to build
+
+211
+00:08:06,490 --> 00:08:08,800
+visualizations of Prometheus metrics
+
+212
+00:08:08,800 --> 00:08:12,280
+Agrafena is really meant for visualizing
+
+213
+00:08:12,280 --> 00:08:15,010
+Prometheus metrics but it also has a
+
+214
+00:08:15,010 --> 00:08:17,230
+whole host of other data sources that
+
+215
+00:08:17,230 --> 00:08:19,780
+you can import information from so as we
+
+216
+00:08:19,780 --> 00:08:21,430
+go through the demo of deploying
+
+217
+00:08:21,430 --> 00:08:23,680
+Prometheus and grow fauna I'm gonna walk
+
+218
+00:08:23,680 --> 00:08:25,870
+through importing the Prometheus data
+
+219
+00:08:25,870 --> 00:08:27,670
+source but know that we also have other
+
+220
+00:08:27,670 --> 00:08:29,740
+options for instance that graph on ax
+
+221
+00:08:29,740 --> 00:08:32,890
+can pull in data sources like my sequel
+
+222
+00:08:32,890 --> 00:08:36,370
+from elasticsearch from things like an
+
+223
+00:08:36,370 --> 00:08:40,060
+AWS like the I can't think of time I had
+
+224
+00:08:40,060 --> 00:08:42,610
+like RDS there are other data sources
+
+225
+00:08:42,610 --> 00:08:44,710
+you can pull Integra fauna and create
+
+226
+00:08:44,710 --> 00:08:47,980
+visualizations using so it's not just a
+
+227
+00:08:47,980 --> 00:08:50,200
+Prometheus integration but they are kind
+
+228
+00:08:50,200 --> 00:08:51,330
+of a match made in heaven
+
+229
+00:08:51,330 --> 00:08:54,310
+Griffon also allows us to build complex
+
+230
+00:08:54,310 --> 00:08:56,290
+visualizations from several data sources
+
+231
+00:08:56,290 --> 00:08:57,730
+so a really cool
+
+232
+00:08:57,730 --> 00:08:59,470
+feature about Cortana that I don't know
+
+233
+00:08:59,470 --> 00:09:01,119
+that will have time to get to today is
+
+234
+00:09:01,119 --> 00:09:03,309
+the ability if you want to create
+
+235
+00:09:03,309 --> 00:09:05,309
+visualizations that pull data from
+
+236
+00:09:05,309 --> 00:09:07,420
+Prometheus and then also incorporate
+
+237
+00:09:07,420 --> 00:09:08,800
+information from my sequel or
+
+238
+00:09:08,800 --> 00:09:10,509
+elasticsearch whatever
+
+239
+00:09:10,509 --> 00:09:12,399
+combine those together into single
+
+240
+00:09:12,399 --> 00:09:14,199
+visualization so you can start to pull
+
+241
+00:09:14,199 --> 00:09:16,809
+in data from across your organization
+
+242
+00:09:16,809 --> 00:09:19,779
+from different data sources and be able
+
+243
+00:09:19,779 --> 00:09:22,329
+to present that in one single pane of
+
+244
+00:09:22,329 --> 00:09:23,670
+glass so to speak
+
+245
+00:09:23,670 --> 00:09:26,110
+final point you can compile these
+
+246
+00:09:26,110 --> 00:09:28,209
+visualizations that we're making into
+
+247
+00:09:28,209 --> 00:09:30,069
+dashboards and other groupings within
+
+248
+00:09:30,069 --> 00:09:32,199
+Griffon a-- so when I say visualization
+
+249
+00:09:32,199 --> 00:09:34,480
+it's it's kind of a broad term what I'm
+
+250
+00:09:34,480 --> 00:09:38,019
+really referring to our graphs and other
+
+251
+00:09:38,019 --> 00:09:41,829
+ways to present data visually so that's
+
+252
+00:09:41,829 --> 00:09:45,699
+gonna be maybe dials graphs bar line
+
+253
+00:09:45,699 --> 00:09:48,399
+charts bar charts pie charts things like
+
+254
+00:09:48,399 --> 00:09:51,970
+that any way that when you have data and
+
+255
+00:09:51,970 --> 00:09:53,439
+you want to be able to express it
+
+256
+00:09:53,439 --> 00:09:55,059
+visually that's what we're talking about
+
+257
+00:09:55,059 --> 00:09:57,389
+when we refer to as visualizations here
+
+258
+00:09:57,389 --> 00:10:00,160
+so digging into Prometheus again it's a
+
+259
+00:10:00,160 --> 00:10:01,899
+time series database and as I said we're
+
+260
+00:10:01,899 --> 00:10:04,139
+tracking changes to a metric over time
+
+261
+00:10:04,139 --> 00:10:06,519
+we're gonna collect metrics from many
+
+262
+00:10:06,519 --> 00:10:08,499
+different sources and the two that are
+
+263
+00:10:08,499 --> 00:10:09,879
+really important to think about our
+
+264
+00:10:09,879 --> 00:10:12,759
+clients and exporters so when we talk
+
+265
+00:10:12,759 --> 00:10:15,100
+about clients what I refer to when I say
+
+266
+00:10:15,100 --> 00:10:18,009
+that is Prometheus comes with a whole
+
+267
+00:10:18,009 --> 00:10:20,379
+host of SDKs that you can integrate with
+
+268
+00:10:20,379 --> 00:10:22,269
+your favorite language and then build
+
+269
+00:10:22,269 --> 00:10:25,839
+Prometheus metric integrations into your
+
+270
+00:10:25,839 --> 00:10:28,329
+applications so for instance I do a lot
+
+271
+00:10:28,329 --> 00:10:30,339
+of golang programming there's a great
+
+272
+00:10:30,339 --> 00:10:32,019
+goal laying integration for Prometheus
+
+273
+00:10:32,019 --> 00:10:33,879
+where literally when you set it up out
+
+274
+00:10:33,879 --> 00:10:36,369
+of the box and just wire up the basics
+
+275
+00:10:36,369 --> 00:10:38,829
+of the Prometheus integration you get a
+
+276
+00:10:38,829 --> 00:10:40,299
+whole host of metrics that are being
+
+277
+00:10:40,299 --> 00:10:42,279
+collected automatically about the
+
+278
+00:10:42,279 --> 00:10:44,499
+performance of the go application so
+
+279
+00:10:44,499 --> 00:10:45,459
+this is going to be things like the
+
+280
+00:10:45,459 --> 00:10:47,999
+number of go routines memory overhead
+
+281
+00:10:47,999 --> 00:10:50,439
+the total memory space that's being
+
+282
+00:10:50,439 --> 00:10:51,129
+occupied
+
+283
+00:10:51,129 --> 00:10:54,970
+I'm CPU usage things like that you can
+
+284
+00:10:54,970 --> 00:10:56,799
+do that than in any of these languages
+
+285
+00:10:56,799 --> 00:10:58,990
+that Prometheus has a client for so
+
+286
+00:10:58,990 --> 00:11:01,209
+there's Python clients Java JavaScript
+
+287
+00:11:01,209 --> 00:11:03,309
+all over the place collect different
+
+288
+00:11:03,309 --> 00:11:05,259
+metrics about your application and then
+
+289
+00:11:05,259 --> 00:11:07,269
+forward them into Prometheus or rather
+
+290
+00:11:07,269 --> 00:11:08,919
+make them available for Prometheus to
+
+291
+00:11:08,919 --> 00:11:11,030
+scrape to use specific language here
+
+292
+00:11:11,030 --> 00:11:13,820
+the other way to collect metrics our
+
+293
+00:11:13,820 --> 00:11:16,010
+exporters so we're going to specifically
+
+294
+00:11:16,010 --> 00:11:17,570
+focus on some of the kubernetes
+
+295
+00:11:17,570 --> 00:11:20,180
+exporters today but Prometheus has the
+
+296
+00:11:20,180 --> 00:11:22,400
+ability to export metrics from a bunch
+
+297
+00:11:22,400 --> 00:11:23,270
+of different sources
+
+298
+00:11:23,270 --> 00:11:26,080
+when I say export versus clients here a
+
+299
+00:11:26,080 --> 00:11:28,850
+client is an integration with a language
+
+300
+00:11:28,850 --> 00:11:31,100
+that you will build in order to present
+
+301
+00:11:31,100 --> 00:11:33,080
+metrics that Prometheus will scrape so
+
+302
+00:11:33,080 --> 00:11:35,450
+you literally define the metrics for
+
+303
+00:11:35,450 --> 00:11:36,140
+collection
+
+304
+00:11:36,140 --> 00:11:38,810
+in your application code and Prometheus
+
+305
+00:11:38,810 --> 00:11:41,420
+will grab and store those metrics on the
+
+306
+00:11:41,420 --> 00:11:43,850
+other hand an exporter is sort of more
+
+307
+00:11:43,850 --> 00:11:46,730
+of a prepackaged tool that you will
+
+308
+00:11:46,730 --> 00:11:48,680
+apply to something that you want to
+
+309
+00:11:48,680 --> 00:11:51,290
+collect metrics from now exporters exist
+
+310
+00:11:51,290 --> 00:11:52,970
+for a whole host of different things
+
+311
+00:11:52,970 --> 00:11:54,500
+like obviously we're gonna focus on
+
+312
+00:11:54,500 --> 00:11:56,690
+kubernetes today but there are metric
+
+313
+00:11:56,690 --> 00:11:59,060
+exporters for things like sequel server
+
+314
+00:11:59,060 --> 00:12:01,610
+for things like Network Devices for log
+
+315
+00:12:01,610 --> 00:12:03,680
+aggregation tools a whole host of stuff
+
+316
+00:12:03,680 --> 00:12:06,140
+now if we take like a network device for
+
+317
+00:12:06,140 --> 00:12:08,270
+example we're not using a client in that
+
+318
+00:12:08,270 --> 00:12:09,320
+regard because we can't directly
+
+319
+00:12:09,320 --> 00:12:11,390
+integrate with a network devices code
+
+320
+00:12:11,390 --> 00:12:13,130
+but we can use an exporter as a
+
+321
+00:12:13,130 --> 00:12:15,800
+pre-built package to collect metrics
+
+322
+00:12:15,800 --> 00:12:17,870
+from that network device and make those
+
+323
+00:12:17,870 --> 00:12:19,610
+available to Prometheus so the
+
+324
+00:12:19,610 --> 00:12:20,930
+difference is a client is a direct
+
+325
+00:12:20,930 --> 00:12:22,520
+integration with the code you build it
+
+326
+00:12:22,520 --> 00:12:24,920
+into your application the exporter is
+
+327
+00:12:24,920 --> 00:12:27,320
+something we use for existing tooling or
+
+328
+00:12:27,320 --> 00:12:29,420
+existing devices to collect that
+
+329
+00:12:29,420 --> 00:12:31,130
+information and make it available for
+
+330
+00:12:31,130 --> 00:12:34,070
+Prometheus will also collect information
+
+331
+00:12:34,070 --> 00:12:36,380
+from our nodes so when we deploy
+
+332
+00:12:36,380 --> 00:12:38,930
+exporters using Rancher we're going to
+
+333
+00:12:38,930 --> 00:12:41,600
+deploy an exporter for kubernetes to
+
+334
+00:12:41,600 --> 00:12:43,910
+grab state out of kubernetes things like
+
+335
+00:12:43,910 --> 00:12:46,490
+I'm deployments and pods and secrets you
+
+336
+00:12:46,490 --> 00:12:48,260
+know grab information from what the
+
+337
+00:12:48,260 --> 00:12:49,820
+world looks like inside of the
+
+338
+00:12:49,820 --> 00:12:51,860
+kubernetes cluster but also will use a
+
+339
+00:12:51,860 --> 00:12:54,050
+node exporter to grab information about
+
+340
+00:12:54,050 --> 00:12:56,030
+the nodes themselves so this will be
+
+341
+00:12:56,030 --> 00:12:59,330
+things like vmstat and network
+
+342
+00:12:59,330 --> 00:13:02,060
+statistics disk utilization you know all
+
+343
+00:13:02,060 --> 00:13:03,470
+the things you would want to monitor
+
+344
+00:13:03,470 --> 00:13:05,570
+about an odor rather about an operating
+
+345
+00:13:05,570 --> 00:13:09,200
+system again we touched on Prometheus
+
+346
+00:13:09,200 --> 00:13:10,670
+has the ability to generate alerts that
+
+347
+00:13:10,670 --> 00:13:13,100
+are based on criteria these criteria in
+
+348
+00:13:13,100 --> 00:13:16,280
+Prometheus parlance are called rules so
+
+349
+00:13:16,280 --> 00:13:19,250
+rules define when an alert will be
+
+350
+00:13:19,250 --> 00:13:22,130
+generated we combine these alerts or
+
+351
+00:13:22,130 --> 00:13:24,560
+these rules with receivers now
+
+352
+00:13:24,560 --> 00:13:26,180
+receivers are going to tell Prometheus
+
+353
+00:13:26,180 --> 00:13:28,400
+where should I send this alert so by
+
+354
+00:13:28,400 --> 00:13:30,200
+default when Prometheus generates alert
+
+355
+00:13:30,200 --> 00:13:32,480
+it's not going to go anywhere we have to
+
+356
+00:13:32,480 --> 00:13:34,940
+actually configure a receiver in the
+
+357
+00:13:34,940 --> 00:13:36,950
+Prometheus configuration in order to
+
+358
+00:13:36,950 --> 00:13:39,680
+define for Prometheus where to send that
+
+359
+00:13:39,680 --> 00:13:42,320
+alert so jump in to Gravano and
+
+360
+00:13:42,320 --> 00:13:43,940
+apparently I don't have any cool slide
+
+361
+00:13:43,940 --> 00:13:46,490
+transitions here Gravano is how we'll
+
+362
+00:13:46,490 --> 00:13:48,320
+build visualizations of those Prometheus
+
+363
+00:13:48,320 --> 00:13:50,270
+metrics we will connect in this next
+
+364
+00:13:50,270 --> 00:13:51,290
+demo Gravano
+
+365
+00:13:51,290 --> 00:13:53,120
+to Prometheus and we'll build those
+
+366
+00:13:53,120 --> 00:13:55,520
+visualizations using prom QL queries as
+
+367
+00:13:55,520 --> 00:13:57,589
+I touched on before we can build
+
+368
+00:13:57,589 --> 00:13:59,810
+visualizations of other metrics so my
+
+369
+00:13:59,810 --> 00:14:01,580
+sequel is one of those example sources
+
+370
+00:14:01,580 --> 00:14:04,880
+but RDS is and other source we can pull
+
+371
+00:14:04,880 --> 00:14:07,010
+information from elasticsearch from a
+
+372
+00:14:07,010 --> 00:14:08,900
+whole host of places where data is
+
+373
+00:14:08,900 --> 00:14:11,330
+stored we can pull that into Gravano and
+
+374
+00:14:11,330 --> 00:14:13,040
+visualize those pieces of information
+
+375
+00:14:13,040 --> 00:14:15,710
+and then again finally we can combine
+
+376
+00:14:15,710 --> 00:14:17,060
+data sources to build complex
+
+377
+00:14:17,060 --> 00:14:19,339
+visualizations so we're not tied when
+
+378
+00:14:19,339 --> 00:14:20,810
+we're building these graphs and these
+
+379
+00:14:20,810 --> 00:14:23,240
+visualizations to just a single data
+
+380
+00:14:23,240 --> 00:14:24,770
+source like my sequel or a single data
+
+381
+00:14:24,770 --> 00:14:26,630
+source like Prometheus we can combine
+
+382
+00:14:26,630 --> 00:14:28,339
+these together and make really cool
+
+383
+00:14:28,339 --> 00:14:30,220
+visualizations okay
+
+384
+00:14:30,220 --> 00:14:33,260
+deploying Prometheus angriff on it is
+
+385
+00:14:33,260 --> 00:14:35,690
+super easy we're going to use help
+
+386
+00:14:35,690 --> 00:14:37,790
+charts hell charts make life super easy
+
+387
+00:14:37,790 --> 00:14:39,920
+or super complex depending on how do you
+
+388
+00:14:39,920 --> 00:14:42,200
+get into them but for this example we're
+
+389
+00:14:42,200 --> 00:14:44,120
+going to use Prometheus and Griffin I
+
+390
+00:14:44,120 --> 00:14:45,980
+deployed for your help charts which will
+
+391
+00:14:45,980 --> 00:14:49,250
+be super easy now configuring Prometheus
+
+392
+00:14:49,250 --> 00:14:52,520
+and Grenada is not so super easy now I
+
+393
+00:14:52,520 --> 00:14:54,589
+say not so super easy in that it takes a
+
+394
+00:14:54,589 --> 00:14:56,540
+lot of time to do this to build up these
+
+395
+00:14:56,540 --> 00:14:58,760
+configurations that will make sense for
+
+396
+00:14:58,760 --> 00:15:00,860
+your organization like what metrics so
+
+397
+00:15:00,860 --> 00:15:02,390
+monitor what visualizations to build
+
+398
+00:15:02,390 --> 00:15:04,550
+what things to see so that part is not
+
+399
+00:15:04,550 --> 00:15:06,830
+so super easy and I'm gonna go over
+
+400
+00:15:06,830 --> 00:15:08,540
+deploying Prometheus and Griffin here
+
+401
+00:15:08,540 --> 00:15:10,160
+and talk a little bit about what those
+
+402
+00:15:10,160 --> 00:15:12,260
+configurations look like but then we'll
+
+403
+00:15:12,260 --> 00:15:14,150
+be able to see how Rancher can make that
+
+404
+00:15:14,150 --> 00:15:16,280
+process easier by deploying and
+
+405
+00:15:16,280 --> 00:15:18,190
+configuring these things on our behalf
+
+406
+00:15:18,190 --> 00:15:21,560
+now before I do this we're gonna have to
+
+407
+00:15:21,560 --> 00:15:23,510
+start with everyone raising their right
+
+408
+00:15:23,510 --> 00:15:25,670
+hand so wherever you are in the world if
+
+409
+00:15:25,670 --> 00:15:27,230
+you're at work if you're at home if
+
+410
+00:15:27,230 --> 00:15:28,190
+you're in quarantine if you're in
+
+411
+00:15:28,190 --> 00:15:30,260
+isolation whatever raise your right hand
+
+412
+00:15:30,260 --> 00:15:31,880
+and repeat after me
+
+413
+00:15:31,880 --> 00:15:38,540
+i webinar attendee do solemnly swear
+
+414
+00:15:38,540 --> 00:15:41,390
+to hold a man Baumann responsible for
+
+415
+00:15:41,390 --> 00:15:43,820
+any mishaps that occur during this live
+
+416
+00:15:43,820 --> 00:15:48,980
+demo so how me kubernetes alright let us
+
+417
+00:15:48,980 --> 00:15:50,510
+jump in and deploy Prometheus and
+
+418
+00:15:50,510 --> 00:15:52,430
+Cortana so I will whoops
+
+419
+00:15:52,430 --> 00:15:54,860
+hit escape on that we will move that
+
+420
+00:15:54,860 --> 00:15:57,580
+window out of the way minimize that I
+
+421
+00:15:57,580 --> 00:16:00,950
+have running here a rancher instance two
+
+422
+00:16:00,950 --> 00:16:02,570
+three five as you can see down there in
+
+423
+00:16:02,570 --> 00:16:04,940
+the lower left this is my personal
+
+424
+00:16:04,940 --> 00:16:07,370
+instance of Rancher and I've got three
+
+425
+00:16:07,370 --> 00:16:08,900
+different clusters here but local
+
+426
+00:16:08,900 --> 00:16:10,400
+cluster is obviously or of course if
+
+427
+00:16:10,400 --> 00:16:12,080
+you're not familiar the one that Rancher
+
+428
+00:16:12,080 --> 00:16:13,610
+itself runs on top of so we're gonna
+
+429
+00:16:13,610 --> 00:16:15,380
+leave that one alone for today but I
+
+430
+00:16:15,380 --> 00:16:16,850
+have two other clusters that will play
+
+431
+00:16:16,850 --> 00:16:19,490
+around with a Rio cluster which I use
+
+432
+00:16:19,490 --> 00:16:20,990
+for playing around with in demoing one
+
+433
+00:16:20,990 --> 00:16:22,910
+of ranchers other excellent products Rio
+
+434
+00:16:22,910 --> 00:16:25,340
+and then I have a work cluster which is
+
+435
+00:16:25,340 --> 00:16:26,900
+just a generic name for a cluster that I
+
+436
+00:16:26,900 --> 00:16:29,300
+do work and other play around stuff in
+
+437
+00:16:29,300 --> 00:16:31,130
+the work cluster is where we're going to
+
+438
+00:16:31,130 --> 00:16:33,200
+spend a lot of our time in this section
+
+439
+00:16:33,200 --> 00:16:35,540
+of the demo so what we will do here is
+
+440
+00:16:35,540 --> 00:16:37,580
+go under the global drop down to my work
+
+441
+00:16:37,580 --> 00:16:39,500
+cluster and then to the monitoring
+
+442
+00:16:39,500 --> 00:16:42,110
+project if you're not familiar with
+
+443
+00:16:42,110 --> 00:16:45,500
+rancher projects projects are groupings
+
+444
+00:16:45,500 --> 00:16:48,200
+of namespaces with in kubernetes there
+
+445
+00:16:48,200 --> 00:16:50,060
+are a rancher specific concept and a lot
+
+446
+00:16:50,060 --> 00:16:51,560
+of providers have different words for
+
+447
+00:16:51,560 --> 00:16:54,170
+them our word is projects it's a way to
+
+448
+00:16:54,170 --> 00:16:56,930
+group namespaces together and give you
+
+449
+00:16:56,930 --> 00:16:59,510
+the ability to apply our back controls
+
+450
+00:16:59,510 --> 00:17:01,880
+as well as resource quotas and
+
+451
+00:17:01,880 --> 00:17:03,890
+limitations to that grouping of
+
+452
+00:17:03,890 --> 00:17:06,140
+namespaces as opposed to having to do it
+
+453
+00:17:06,140 --> 00:17:09,470
+on a per namespace basis so now we're
+
+454
+00:17:09,470 --> 00:17:11,780
+inside of this monitoring project here
+
+455
+00:17:11,780 --> 00:17:13,640
+what we'll do is go to the app section
+
+456
+00:17:13,640 --> 00:17:17,150
+apps is our apps our ranchers approach
+
+457
+00:17:17,150 --> 00:17:19,699
+to deploying helm charts it's not
+
+458
+00:17:19,699 --> 00:17:21,140
+prescriptive so you can use your own
+
+459
+00:17:21,140 --> 00:17:22,880
+method if you want to but for this
+
+460
+00:17:22,880 --> 00:17:25,520
+instance we can use apps as a simple way
+
+461
+00:17:25,520 --> 00:17:28,370
+to get to our Prometheus and graph on a
+
+462
+00:17:28,370 --> 00:17:31,160
+how arts stood up so what we'll do is
+
+463
+00:17:31,160 --> 00:17:32,960
+we'll launch in the upper right and
+
+464
+00:17:32,960 --> 00:17:34,910
+we'll go ahead and search for the
+
+465
+00:17:34,910 --> 00:17:37,450
+Prometheus chart here so type in
+
+466
+00:17:37,450 --> 00:17:40,490
+Prometheus all right we have the
+
+467
+00:17:40,490 --> 00:17:42,620
+Prometheus helm chart right here that's
+
+468
+00:17:42,620 --> 00:17:44,720
+populated from the upstream helm short
+
+469
+00:17:44,720 --> 00:17:47,090
+repository and what we're going to have
+
+470
+00:17:47,090 --> 00:17:48,800
+to start with is configuring a few
+
+471
+00:17:48,800 --> 00:17:50,180
+different bits of information about this
+
+472
+00:17:50,180 --> 00:17:52,460
+chart first of all this is the
+
+473
+00:17:52,460 --> 00:17:53,870
+your interface for deploying a help
+
+474
+00:17:53,870 --> 00:17:55,910
+chart so this is the interface you would
+
+475
+00:17:55,910 --> 00:17:57,590
+see when you use Rancher to deploy any
+
+476
+00:17:57,590 --> 00:18:00,140
+help chart at all so go ahead and edit
+
+477
+00:18:00,140 --> 00:18:01,880
+as yamo here and i've got a bunch of
+
+478
+00:18:01,880 --> 00:18:03,530
+different configurations that will drop
+
+479
+00:18:03,530 --> 00:18:06,020
+in so first off we're going to do alert
+
+480
+00:18:06,020 --> 00:18:08,000
+manager and we're going to turn off
+
+481
+00:18:08,000 --> 00:18:10,370
+persistent volumes since we're just
+
+482
+00:18:10,370 --> 00:18:11,990
+doing this demo we don't really care if
+
+483
+00:18:11,990 --> 00:18:14,180
+persistent volumes are turned on and in
+
+484
+00:18:14,180 --> 00:18:16,340
+fact I actually don't have a storage
+
+485
+00:18:16,340 --> 00:18:17,930
+class inside this cluster that could
+
+486
+00:18:17,930 --> 00:18:20,420
+satisfy that persistent volume so we'll
+
+487
+00:18:20,420 --> 00:18:22,910
+turn that off then we'll change settings
+
+488
+00:18:22,910 --> 00:18:24,260
+about the Prometheus server and I am
+
+489
+00:18:24,260 --> 00:18:25,610
+going to go over what these components
+
+490
+00:18:25,610 --> 00:18:26,630
+are and things like that in just a
+
+491
+00:18:26,630 --> 00:18:29,120
+moment we're gonna turn on ingress for
+
+492
+00:18:29,120 --> 00:18:30,560
+the Prometheus server so we'll do
+
+493
+00:18:30,560 --> 00:18:33,200
+enabled true there I'm going to use a
+
+494
+00:18:33,200 --> 00:18:35,510
+hosts declaration here and type in
+
+495
+00:18:35,510 --> 00:18:41,300
+Prometheus 1010 11 33 dot X IP dot IO so
+
+496
+00:18:41,300 --> 00:18:42,980
+since this is my private instance of
+
+497
+00:18:42,980 --> 00:18:45,170
+Rancher I have the setup at IP address
+
+498
+00:18:45,170 --> 00:18:47,990
+10 10 11 33 in my little mock data
+
+499
+00:18:47,990 --> 00:18:49,850
+center if you're not familiar with what
+
+500
+00:18:49,850 --> 00:18:53,030
+xip io is this is a tool that allows you
+
+501
+00:18:53,030 --> 00:18:55,130
+to create a fully qualified domain name
+
+502
+00:18:55,130 --> 00:18:57,260
+and as long as it includes an IP address
+
+503
+00:18:57,260 --> 00:18:59,660
+as the first section here before the X
+
+504
+00:18:59,660 --> 00:19:03,080
+IP dot IO whatever comes before that
+
+505
+00:19:03,080 --> 00:19:05,000
+then will be a fully qualified domain
+
+506
+00:19:05,000 --> 00:19:09,050
+name that results in 10.10.5.3 3 so in
+
+507
+00:19:09,050 --> 00:19:11,120
+this case Prometheus dot IP address dot
+
+508
+00:19:11,120 --> 00:19:14,720
+X IP dot IO will resolve to 10 10 11 33
+
+509
+00:19:14,720 --> 00:19:18,620
+quick and dirty way to get an F qdm just
+
+510
+00:19:18,620 --> 00:19:19,970
+like with alert manager we're going to
+
+511
+00:19:19,970 --> 00:19:22,340
+turn persistent volume off so persistent
+
+512
+00:19:22,340 --> 00:19:24,350
+volume enabled equals false and those
+
+513
+00:19:24,350 --> 00:19:25,730
+are the different options we're going to
+
+514
+00:19:25,730 --> 00:19:28,010
+have to set now so what I will do is hit
+
+515
+00:19:28,010 --> 00:19:30,080
+launch here at the bottom and we'll
+
+516
+00:19:30,080 --> 00:19:31,640
+watch as Rancher pulls in that helm
+
+517
+00:19:31,640 --> 00:19:33,710
+chart and then deploys it on to our
+
+518
+00:19:33,710 --> 00:19:36,110
+project now if I click on from easiest
+
+519
+00:19:36,110 --> 00:19:37,640
+here we can see ranch you're walking
+
+520
+00:19:37,640 --> 00:19:39,500
+through these different steps and here
+
+521
+00:19:39,500 --> 00:19:41,120
+are a bunch of different components that
+
+522
+00:19:41,120 --> 00:19:42,860
+are deployed with this Prometheus helm
+
+523
+00:19:42,860 --> 00:19:45,710
+chart we can alert ok so let me start
+
+524
+00:19:45,710 --> 00:19:47,990
+from the basics the Prometheus server is
+
+525
+00:19:47,990 --> 00:19:49,880
+where the core of Prometheus data
+
+526
+00:19:49,880 --> 00:19:51,920
+storage and collection is done so the
+
+527
+00:19:51,920 --> 00:19:53,990
+Prometheus server here has a couple of
+
+528
+00:19:53,990 --> 00:19:55,820
+different images that are deployed the
+
+529
+00:19:55,820 --> 00:19:57,680
+first is that little config map reload
+
+530
+00:19:57,680 --> 00:19:59,570
+image you can see that just reloads
+
+531
+00:19:59,570 --> 00:20:01,460
+configuration Maps when we change
+
+532
+00:20:01,460 --> 00:20:04,070
+Prometheus configuration the other image
+
+533
+00:20:04,070 --> 00:20:06,580
+that shown there is that prom
+
+534
+00:20:06,580 --> 00:20:09,670
+that's the core prometheus operation we
+
+535
+00:20:09,670 --> 00:20:11,230
+also have things like the Prometheus
+
+536
+00:20:11,230 --> 00:20:13,480
+alert manager in the slides before I
+
+537
+00:20:13,480 --> 00:20:15,130
+spoke about prometheus having the
+
+538
+00:20:15,130 --> 00:20:16,930
+ability to generate alerts based on
+
+539
+00:20:16,930 --> 00:20:19,660
+criteria the alert manager is the two of
+
+540
+00:20:19,660 --> 00:20:21,100
+them that's responsible for doing that
+
+541
+00:20:21,100 --> 00:20:23,590
+we also have prometheus cube state
+
+542
+00:20:23,590 --> 00:20:26,170
+metrics this is one of those exporters
+
+543
+00:20:26,170 --> 00:20:27,340
+that I was talking about
+
+544
+00:20:27,340 --> 00:20:29,230
+so the Prometheus cube state metrics is
+
+545
+00:20:29,230 --> 00:20:31,870
+an exporter that allows Prometheus to
+
+546
+00:20:31,870 --> 00:20:34,000
+grab information about the state of the
+
+547
+00:20:34,000 --> 00:20:36,510
+world inside of the kubernetes cluster
+
+548
+00:20:36,510 --> 00:20:38,980
+so Prometheus cube state metrics then
+
+549
+00:20:38,980 --> 00:20:40,600
+will query our kubernetes cluster and
+
+550
+00:20:40,600 --> 00:20:42,790
+make that information available to this
+
+551
+00:20:42,790 --> 00:20:45,460
+Prometheus instance the node exporter
+
+552
+00:20:45,460 --> 00:20:47,500
+then again as another exporter and this
+
+553
+00:20:47,500 --> 00:20:48,580
+one's going to be responsible for
+
+554
+00:20:48,580 --> 00:20:50,500
+grabbing metrics from the nodes that I
+
+555
+00:20:50,500 --> 00:20:52,570
+have in this cluster so again this is my
+
+556
+00:20:52,570 --> 00:20:54,250
+private cluster I've got three little
+
+557
+00:20:54,250 --> 00:20:55,870
+nodes in it and you can see right here
+
+558
+00:20:55,870 --> 00:20:59,530
+that there's these on 9100 tcp ports if
+
+559
+00:20:59,530 --> 00:21:01,780
+I actually click on one of these we can
+
+560
+00:21:01,780 --> 00:21:03,550
+see the metrics that are being generated
+
+561
+00:21:03,550 --> 00:21:06,070
+by this node exporter so right off the
+
+562
+00:21:06,070 --> 00:21:08,020
+bat if you remember I discussed when I
+
+563
+00:21:08,020 --> 00:21:11,080
+use the Prometheus client library I get
+
+564
+00:21:11,080 --> 00:21:12,730
+a bunch of golang application
+
+565
+00:21:12,730 --> 00:21:14,440
+information and here's some of that
+
+566
+00:21:14,440 --> 00:21:16,390
+stuff being shown here so like mem stat
+
+567
+00:21:16,390 --> 00:21:19,060
+heap things like that but if I scroll
+
+568
+00:21:19,060 --> 00:21:21,970
+down on this page I'm now exporting and
+
+569
+00:21:21,970 --> 00:21:24,070
+making available to Prometheus metrics
+
+570
+00:21:24,070 --> 00:21:26,230
+about this node itself so if we scroll
+
+571
+00:21:26,230 --> 00:21:29,350
+down here no network carrier up changes
+
+572
+00:21:29,350 --> 00:21:31,060
+total well whatever that means for the
+
+573
+00:21:31,060 --> 00:21:33,760
+Calico device that metric has now been
+
+574
+00:21:33,760 --> 00:21:36,180
+made available for Prometheus this
+
+575
+00:21:36,180 --> 00:21:38,560
+format is the format that Prometheus
+
+576
+00:21:38,560 --> 00:21:41,740
+uses to grab metrics from a source so
+
+577
+00:21:41,740 --> 00:21:43,630
+even though this is the node exporter
+
+578
+00:21:43,630 --> 00:21:45,790
+output this is what the output this
+
+579
+00:21:45,790 --> 00:21:48,310
+format with these helper sections here
+
+580
+00:21:48,310 --> 00:21:50,470
+and then the metric sections here this
+
+581
+00:21:50,470 --> 00:21:52,180
+is what the output looks like for any
+
+582
+00:21:52,180 --> 00:21:54,130
+application that's going to spit out
+
+583
+00:21:54,130 --> 00:21:56,050
+Prometheus metrics and that Prometheus
+
+584
+00:21:56,050 --> 00:21:58,780
+will scrape so I'll close that simple
+
+585
+00:21:58,780 --> 00:22:01,060
+example here and what we have happened
+
+586
+00:22:01,060 --> 00:22:04,270
+now is Prometheus 1010 11:33 has been
+
+587
+00:22:04,270 --> 00:22:07,630
+generated so if I click on that we get
+
+588
+00:22:07,630 --> 00:22:10,180
+brought to the Prometheus UI pretty
+
+589
+00:22:10,180 --> 00:22:12,250
+simple user interface and this will give
+
+590
+00:22:12,250 --> 00:22:14,200
+us the ability to explore what the
+
+591
+00:22:14,200 --> 00:22:15,970
+operational status of Prometheus looks
+
+592
+00:22:15,970 --> 00:22:18,430
+like as well as clear query some of the
+
+593
+00:22:18,430 --> 00:22:19,550
+metrics that we've got
+
+594
+00:22:19,550 --> 00:22:21,470
+and take a look at any alerts that have
+
+595
+00:22:21,470 --> 00:22:24,110
+been generated so first let's go to the
+
+596
+00:22:24,110 --> 00:22:25,430
+status drop down and take a look at
+
+597
+00:22:25,430 --> 00:22:28,250
+configuration this configuration is
+
+598
+00:22:28,250 --> 00:22:31,160
+being imported from a config map inside
+
+599
+00:22:31,160 --> 00:22:32,690
+of that kubernetes cluster that were
+
+600
+00:22:32,690 --> 00:22:34,970
+deployed on - so if we wanted to edit
+
+601
+00:22:34,970 --> 00:22:36,470
+this and change that config map real
+
+602
+00:22:36,470 --> 00:22:38,240
+order would take care of that for us
+
+603
+00:22:38,240 --> 00:22:39,740
+you can see there's a whole bunch of
+
+604
+00:22:39,740 --> 00:22:40,970
+different sections that have been Auto
+
+605
+00:22:40,970 --> 00:22:44,180
+populated here like scrape Conn fix the
+
+606
+00:22:44,180 --> 00:22:46,640
+scrape config allows us to define where
+
+607
+00:22:46,640 --> 00:22:49,010
+and how we're going to scrape metrics
+
+608
+00:22:49,010 --> 00:22:51,680
+from a particular endpoint so for
+
+609
+00:22:51,680 --> 00:22:53,690
+instance this job named kubernetes API
+
+610
+00:22:53,690 --> 00:22:55,910
+servers here we're going to scrape
+
+611
+00:22:55,910 --> 00:22:57,890
+Prometheus metrics from the slash
+
+612
+00:22:57,890 --> 00:23:01,610
+metrics HTTP endpoint and we're going to
+
+613
+00:23:01,610 --> 00:23:04,190
+collect that endpoint it's specified
+
+614
+00:23:04,190 --> 00:23:07,160
+somewhere here I can't find enough time
+
+615
+00:23:07,160 --> 00:23:09,800
+ahead but we will use the kubernetes api
+
+616
+00:23:09,800 --> 00:23:12,500
+server slash metrics endpoint to grab
+
+617
+00:23:12,500 --> 00:23:14,260
+Prometheus metrics for collection
+
+618
+00:23:14,260 --> 00:23:16,040
+there's a whole host of other
+
+619
+00:23:16,040 --> 00:23:17,780
+configurations we could go through but
+
+620
+00:23:17,780 --> 00:23:19,220
+just know that this is the basic
+
+621
+00:23:19,220 --> 00:23:20,870
+approach that Prometheus has for
+
+622
+00:23:20,870 --> 00:23:23,420
+configuring the tool back under status
+
+623
+00:23:23,420 --> 00:23:24,940
+let's take a look at targets here
+
+624
+00:23:24,940 --> 00:23:29,390
+targets is a selection or rather a list
+
+625
+00:23:29,390 --> 00:23:32,210
+all of endpoints that Prometheus is
+
+626
+00:23:32,210 --> 00:23:35,150
+scraping to grab metrics so you remember
+
+627
+00:23:35,150 --> 00:23:36,680
+when we were back in Rancher here and we
+
+628
+00:23:36,680 --> 00:23:39,440
+had these 9100 slash tcp ports for our
+
+629
+00:23:39,440 --> 00:23:42,080
+node exporters these are showing up here
+
+630
+00:23:42,080 --> 00:23:44,090
+so on each one of these I can click
+
+631
+00:23:44,090 --> 00:23:45,410
+actually I'm sorry those are the API
+
+632
+00:23:45,410 --> 00:23:47,420
+servers so these are my kubernetes api
+
+633
+00:23:47,420 --> 00:23:50,510
+servers on part 6 4 4 3 there those are
+
+634
+00:23:50,510 --> 00:23:52,010
+the slash metrics endpoint where if I
+
+635
+00:23:52,010 --> 00:23:54,230
+effected correctly to those I would get
+
+636
+00:23:54,230 --> 00:23:57,140
+metrics the node exporters are probably
+
+637
+00:23:57,140 --> 00:23:58,640
+lower down here here we go
+
+638
+00:23:58,640 --> 00:24:01,940
+10 10 11 33 here's the metrics endpoints
+
+639
+00:24:01,940 --> 00:24:03,680
+we were looking at so you can see that
+
+640
+00:24:03,680 --> 00:24:06,530
+these are target's for Prometheus to
+
+641
+00:24:06,530 --> 00:24:08,900
+scrape metrics from and that correspond
+
+642
+00:24:08,900 --> 00:24:11,240
+to that node exporter that we dropped in
+
+643
+00:24:11,240 --> 00:24:12,830
+there actually those are kubernetes pots
+
+644
+00:24:12,830 --> 00:24:15,860
+but the example still remains let's go
+
+645
+00:24:15,860 --> 00:24:17,810
+back under status and go to service
+
+646
+00:24:17,810 --> 00:24:21,140
+discovery Prometheus has the ability to
+
+647
+00:24:21,140 --> 00:24:24,200
+auto discover metrics from a bunch of
+
+648
+00:24:24,200 --> 00:24:26,330
+different sources so if I expand this
+
+649
+00:24:26,330 --> 00:24:28,910
+kubernetes pod section here within
+
+650
+00:24:28,910 --> 00:24:31,370
+kubernetes because of that cube state
+
+651
+00:24:31,370 --> 00:24:33,290
+exporter being available and
+
+652
+00:24:33,290 --> 00:24:34,700
+of a couple other configurations
+
+653
+00:24:34,700 --> 00:24:37,580
+Prometheus can autodiscover pods inside
+
+654
+00:24:37,580 --> 00:24:39,800
+the cluster now when those pods are Auto
+
+655
+00:24:39,800 --> 00:24:42,860
+discovered we can add annotations on to
+
+656
+00:24:42,860 --> 00:24:44,780
+the pods themselves in order to scrape
+
+657
+00:24:44,780 --> 00:24:46,910
+metrics from a particular end point so
+
+658
+00:24:46,910 --> 00:24:48,710
+when a custom Prometheus deployment what
+
+659
+00:24:48,710 --> 00:24:51,470
+I can do is on my pods annotate them
+
+660
+00:24:51,470 --> 00:24:53,270
+with some Prometheus annotations that
+
+661
+00:24:53,270 --> 00:24:55,520
+allow me to introduce me allow me to
+
+662
+00:24:55,520 --> 00:24:57,920
+declaratively tell Prometheus this is my
+
+663
+00:24:57,920 --> 00:25:00,320
+application here is the metrics endpoint
+
+664
+00:25:00,320 --> 00:25:03,820
+go forth and grab those metrics for me
+
+665
+00:25:03,820 --> 00:25:06,470
+last thing to talk about is under alerts
+
+666
+00:25:06,470 --> 00:25:08,060
+it's kind of a whirlwind tour I don't
+
+667
+00:25:08,060 --> 00:25:09,170
+want to spend too much time here because
+
+668
+00:25:09,170 --> 00:25:11,390
+the point is not about deploying
+
+669
+00:25:11,390 --> 00:25:13,100
+Prometheus itself right it's about you
+
+670
+00:25:13,100 --> 00:25:15,320
+know the integration alerts is where we
+
+671
+00:25:15,320 --> 00:25:17,180
+see any of the alerts that we had
+
+672
+00:25:17,180 --> 00:25:19,160
+defined and again an alert is an
+
+673
+00:25:19,160 --> 00:25:20,990
+instance of a metric cross metric
+
+674
+00:25:20,990 --> 00:25:23,600
+crossing a threshold we don't have any
+
+675
+00:25:23,600 --> 00:25:25,850
+alerts configured currently but if we
+
+676
+00:25:25,850 --> 00:25:27,710
+did and there were alerts configured or
+
+677
+00:25:27,710 --> 00:25:29,510
+they were you know firing or crossing
+
+678
+00:25:29,510 --> 00:25:31,430
+that threshold status they would show up
+
+679
+00:25:31,430 --> 00:25:33,500
+here so we can define those using
+
+680
+00:25:33,500 --> 00:25:35,270
+Rancher and I'll show you that later in
+
+681
+00:25:35,270 --> 00:25:37,010
+this demo and then we'll have alerts
+
+682
+00:25:37,010 --> 00:25:40,190
+show up in this interface by default
+
+683
+00:25:40,190 --> 00:25:41,690
+when Prometheus is installed on the
+
+684
+00:25:41,690 --> 00:25:43,130
+kubernetes cluster like we have
+
+685
+00:25:43,130 --> 00:25:45,230
+currently those alerts are configured
+
+686
+00:25:45,230 --> 00:25:47,300
+via config map so if I go back to
+
+687
+00:25:47,300 --> 00:25:48,800
+Rancher and under the resources
+
+688
+00:25:48,800 --> 00:25:51,770
+drop-down I go to config I actually have
+
+689
+00:25:51,770 --> 00:25:53,870
+my Prometheus server configuration here
+
+690
+00:25:53,870 --> 00:25:56,240
+and I can define my alerting rules as a
+
+691
+00:25:56,240 --> 00:25:58,850
+yellow statement here in this value
+
+692
+00:25:58,850 --> 00:26:01,040
+section of the config map we looked at
+
+693
+00:26:01,040 --> 00:26:03,260
+our configuration in the Prometheus
+
+694
+00:26:03,260 --> 00:26:04,790
+interface and this is where it's being
+
+695
+00:26:04,790 --> 00:26:06,290
+pulled from that Prometheus server
+
+696
+00:26:06,290 --> 00:26:09,290
+config map okay that's good enough for
+
+697
+00:26:09,290 --> 00:26:10,850
+Prometheus and that wasn't a lot of work
+
+698
+00:26:10,850 --> 00:26:12,740
+to get it deployed and honestly it's not
+
+699
+00:26:12,740 --> 00:26:14,360
+a lot of work to get it to start
+
+700
+00:26:14,360 --> 00:26:15,980
+collecting metrics especially in a
+
+701
+00:26:15,980 --> 00:26:17,960
+kubernetes cluster so much of those
+
+702
+00:26:17,960 --> 00:26:19,310
+targets so much of that service
+
+703
+00:26:19,310 --> 00:26:21,590
+discovery functionality is built in by
+
+704
+00:26:21,590 --> 00:26:23,540
+way of deploying that helm chart and
+
+705
+00:26:23,540 --> 00:26:25,610
+those exporters along with their there's
+
+706
+00:26:25,610 --> 00:26:27,110
+not a lot of extra work short of
+
+707
+00:26:27,110 --> 00:26:28,190
+defining these alerts
+
+708
+00:26:28,190 --> 00:26:29,720
+excuse me short of defining these alerts
+
+709
+00:26:29,720 --> 00:26:31,640
+that we need to do for setting up
+
+710
+00:26:31,640 --> 00:26:33,680
+Prometheus so let's go ahead and deploy
+
+711
+00:26:33,680 --> 00:26:35,180
+Griffin and take a look at what that's
+
+712
+00:26:35,180 --> 00:26:37,310
+like so go back to my apps interface
+
+713
+00:26:37,310 --> 00:26:39,110
+here and my monitoring cluster or
+
+714
+00:26:39,110 --> 00:26:41,600
+monitoring project we'll click Launch
+
+715
+00:26:41,600 --> 00:26:45,440
+and we'll search for Griffin oh well not
+
+716
+00:26:45,440 --> 00:26:46,580
+Grovner
+
+717
+00:26:46,580 --> 00:26:49,549
+perfect under the helm shark repository
+
+718
+00:26:49,549 --> 00:26:51,620
+here we'll grab ref onna and just like
+
+719
+00:26:51,620 --> 00:26:53,000
+we were doing before we'll add it as e
+
+720
+00:26:53,000 --> 00:26:54,830
+ammo and import a couple configurations
+
+721
+00:26:54,830 --> 00:26:56,809
+then we'll need first off again we're
+
+722
+00:26:56,809 --> 00:26:59,120
+going to enable ingress because graph on
+
+723
+00:26:59,120 --> 00:27:01,100
+ax is a visualization tool we obviously
+
+724
+00:27:01,100 --> 00:27:03,500
+will be enable to be need to be able to
+
+725
+00:27:03,500 --> 00:27:05,210
+see something here so we'll enable that
+
+726
+00:27:05,210 --> 00:27:07,640
+and just like before we'll do another X
+
+727
+00:27:07,640 --> 00:27:08,929
+IP dot IO thing
+
+728
+00:27:08,929 --> 00:27:13,399
+11:33 dot X IP dot IO then also in the
+
+729
+00:27:13,399 --> 00:27:15,440
+admin interface we will set up an
+
+730
+00:27:15,440 --> 00:27:19,720
+existing secret existing secret Ravana
+
+731
+00:27:19,720 --> 00:27:22,580
+what we're doing here is we're telling
+
+732
+00:27:22,580 --> 00:27:25,010
+Griffin actually open secrets we're
+
+733
+00:27:25,010 --> 00:27:27,019
+telling Griffin that there is a
+
+734
+00:27:27,019 --> 00:27:29,269
+pre-existing secret called Griffin ah
+
+735
+00:27:29,269 --> 00:27:31,909
+that has our admin credentials and I'll
+
+736
+00:27:31,909 --> 00:27:33,860
+show you the username is admin and the
+
+737
+00:27:33,860 --> 00:27:35,690
+password is admin so nothing too
+
+738
+00:27:35,690 --> 00:27:37,279
+mysterious there but we're telling
+
+739
+00:27:37,279 --> 00:27:39,169
+Griffin ah that's where the secret lives
+
+740
+00:27:39,169 --> 00:27:41,240
+to automatically configure the admin
+
+741
+00:27:41,240 --> 00:27:43,730
+username and password will hit launch
+
+742
+00:27:43,730 --> 00:27:45,620
+here and Griffin Oh we'll get started up
+
+743
+00:27:45,620 --> 00:27:47,600
+for us when I click into this
+
+744
+00:27:47,600 --> 00:27:49,519
+application then similar to Prometheus
+
+745
+00:27:49,519 --> 00:27:50,929
+will see the workloads being deployed
+
+746
+00:27:50,929 --> 00:27:53,210
+but Griffin doesn't have a whole host of
+
+747
+00:27:53,210 --> 00:27:54,830
+workloads that are going to be deployed
+
+748
+00:27:54,830 --> 00:27:57,019
+like Prometheus does with the exporters
+
+749
+00:27:57,019 --> 00:27:59,179
+and the alert manager Griffin is just a
+
+750
+00:27:59,179 --> 00:28:00,980
+single instance here that does our
+
+751
+00:28:00,980 --> 00:28:03,230
+visualizations now we'll wait for that
+
+752
+00:28:03,230 --> 00:28:05,059
+ingress rule to be created and once it
+
+753
+00:28:05,059 --> 00:28:06,529
+is we'll be able to open up the Griffin
+
+754
+00:28:06,529 --> 00:28:08,210
+interface and build our first
+
+755
+00:28:08,210 --> 00:28:09,740
+visualization based on those metrics
+
+756
+00:28:09,740 --> 00:28:12,380
+we've collected now that it has we've
+
+757
+00:28:12,380 --> 00:28:14,720
+got Griffin at 10 10 11 33 so I click on
+
+758
+00:28:14,720 --> 00:28:16,960
+that and here's our Griffin an instance
+
+759
+00:28:16,960 --> 00:28:19,940
+will log in with a basic admin admin
+
+760
+00:28:19,940 --> 00:28:22,429
+username and password wants me to change
+
+761
+00:28:22,429 --> 00:28:23,870
+password we'll skip that for the time
+
+762
+00:28:23,870 --> 00:28:27,889
+being and now here is a bone-stock
+
+763
+00:28:27,889 --> 00:28:29,870
+Griffin instance nothing's been
+
+764
+00:28:29,870 --> 00:28:32,059
+configured about it no changes have been
+
+765
+00:28:32,059 --> 00:28:32,600
+made
+
+766
+00:28:32,600 --> 00:28:35,000
+we just have Griffin installed at its
+
+767
+00:28:35,000 --> 00:28:38,120
+base so what we will do now is set this
+
+768
+00:28:38,120 --> 00:28:40,360
+up by add
+
+769
+00:28:40,360 --> 00:28:42,159
+being a datasource so we'll start by
+
+770
+00:28:42,159 --> 00:28:44,080
+adding a data source here and we'll
+
+771
+00:28:44,080 --> 00:28:45,549
+configure it to connect to Prometheus
+
+772
+00:28:45,549 --> 00:28:47,289
+now remember I talked earlier about
+
+773
+00:28:47,289 --> 00:28:49,210
+Gravano having the ability to collect
+
+774
+00:28:49,210 --> 00:28:51,130
+metrics from Earth scuse me visualize
+
+775
+00:28:51,130 --> 00:28:53,260
+information from different sources
+
+776
+00:28:53,260 --> 00:28:55,149
+Prometheus obviously at the top of the
+
+777
+00:28:55,149 --> 00:28:56,500
+list they kind of go hat in hand
+
+778
+00:28:56,500 --> 00:28:58,600
+together but we also have in flux DB
+
+779
+00:28:58,600 --> 00:29:01,120
+elasticsearch my sequel bunch of
+
+780
+00:29:01,120 --> 00:29:03,010
+different cloud sources like cloud watch
+
+781
+00:29:03,010 --> 00:29:05,019
+Oracle New Relic all these different
+
+782
+00:29:05,019 --> 00:29:07,059
+Enterprise plugins soukra fauna can
+
+783
+00:29:07,059 --> 00:29:08,740
+visualize things from a whole host of
+
+784
+00:29:08,740 --> 00:29:09,700
+different sources
+
+785
+00:29:09,700 --> 00:29:11,649
+we'll start with Prometheus and we'll
+
+786
+00:29:11,649 --> 00:29:13,510
+click select there and we'll need to
+
+787
+00:29:13,510 --> 00:29:16,000
+give it a URL all the configures gives
+
+788
+00:29:16,000 --> 00:29:17,620
+me all the communication with Prometheus
+
+789
+00:29:17,620 --> 00:29:20,559
+has done over HTTP so we'll do HTTP
+
+790
+00:29:20,559 --> 00:29:22,450
+colon slash slash and I haven't enabled
+
+791
+00:29:22,450 --> 00:29:24,399
+TLS otherwise we'd of course have a nest
+
+792
+00:29:24,399 --> 00:29:27,669
+there we'll put in Prometheus Meethi yes
+
+793
+00:29:27,669 --> 00:29:31,630
+- server dot Prometheus so this is going
+
+794
+00:29:31,630 --> 00:29:34,179
+to be in kubernetes a DNS resolution
+
+795
+00:29:34,179 --> 00:29:36,880
+parlance this will be the name of the
+
+796
+00:29:36,880 --> 00:29:39,279
+service the Prometheus - server service
+
+797
+00:29:39,279 --> 00:29:42,279
+inside the Prometheus namespace so if we
+
+798
+00:29:42,279 --> 00:29:44,409
+look in Rancher here resource go back to
+
+799
+00:29:44,409 --> 00:29:46,179
+the resources workloads service
+
+800
+00:29:46,179 --> 00:29:48,690
+discovery we have a Prometheus server
+
+801
+00:29:48,690 --> 00:29:51,370
+service inside the Prometheus namespace
+
+802
+00:29:51,370 --> 00:29:54,070
+so we've got that set up and because
+
+803
+00:29:54,070 --> 00:29:55,809
+we've done no other configuration about
+
+804
+00:29:55,809 --> 00:29:57,730
+Prometheus security anything like that
+
+805
+00:29:57,730 --> 00:29:59,440
+there's nothing else we have to change
+
+806
+00:29:59,440 --> 00:30:03,130
+we can just save and test data source is
+
+807
+00:30:03,130 --> 00:30:04,659
+working so we're good to go there
+
+808
+00:30:04,659 --> 00:30:07,179
+we'll go back to graph fauna we can
+
+809
+00:30:07,179 --> 00:30:08,799
+check off now that we've created a data
+
+810
+00:30:08,799 --> 00:30:09,940
+source so let's go ahead and create our
+
+811
+00:30:09,940 --> 00:30:12,100
+first new dashboard we've got a
+
+812
+00:30:12,100 --> 00:30:13,840
+dashboard and dashboards are comprised
+
+813
+00:30:13,840 --> 00:30:16,330
+of different panels now a panel will
+
+814
+00:30:16,330 --> 00:30:18,639
+allow us to define a visualization so
+
+815
+00:30:18,639 --> 00:30:20,710
+we'll choose visualization here and
+
+816
+00:30:20,710 --> 00:30:22,480
+let's say actually know what let's do it
+
+817
+00:30:22,480 --> 00:30:24,549
+by query first so enter a prompt ql
+
+818
+00:30:24,549 --> 00:30:27,279
+query and this prompt ql query dropdown
+
+819
+00:30:27,279 --> 00:30:29,289
+will auto populate with metrics that are
+
+820
+00:30:29,289 --> 00:30:30,669
+being collected in our Prometheus
+
+821
+00:30:30,669 --> 00:30:32,830
+instance so if I type a there for
+
+822
+00:30:32,830 --> 00:30:35,110
+instance and scroll down we've got a
+
+823
+00:30:35,110 --> 00:30:37,120
+whole host of different metrics that are
+
+824
+00:30:37,120 --> 00:30:39,990
+being Auto matched here so let's grab
+
+825
+00:30:39,990 --> 00:30:44,380
+API server request latency x' count now
+
+826
+00:30:44,380 --> 00:30:46,990
+if I add query we should see here
+
+827
+00:30:46,990 --> 00:30:48,220
+there's a little spinning circle up here
+
+828
+00:30:48,220 --> 00:30:50,100
+we'll wait for that to resolve a
+
+829
+00:30:50,100 --> 00:30:52,870
+visualization that shows us API server
+
+830
+00:30:52,870 --> 00:30:54,340
+requests latencies
+
+831
+00:30:54,340 --> 00:30:56,440
+now we don't have a lot of information
+
+832
+00:30:56,440 --> 00:30:57,700
+about these currently because we've only
+
+833
+00:30:57,700 --> 00:30:59,440
+been collecting data for about ten
+
+834
+00:30:59,440 --> 00:31:01,120
+minutes or so so I'll change my
+
+835
+00:31:01,120 --> 00:31:02,800
+drop-down here should last five minutes
+
+836
+00:31:02,800 --> 00:31:04,930
+and now that visualization looks a
+
+837
+00:31:04,930 --> 00:31:06,640
+little cooler I mean it's a little flat
+
+838
+00:31:06,640 --> 00:31:08,830
+but it looks a little cool maybe we'll
+
+839
+00:31:08,830 --> 00:31:10,420
+do something neater how about go
+
+840
+00:31:10,420 --> 00:31:12,130
+routines I kind of like this one
+
+841
+00:31:12,130 --> 00:31:14,440
+go underscore go routine so I had that
+
+842
+00:31:14,440 --> 00:31:17,080
+query or not add that career I don't
+
+843
+00:31:17,080 --> 00:31:18,970
+need to do that those will just show up
+
+844
+00:31:18,970 --> 00:31:20,950
+there gogo routines do I have to hit
+
+845
+00:31:20,950 --> 00:31:24,490
+enter maybe we'll leave oh sorry it
+
+846
+00:31:24,490 --> 00:31:25,390
+already visualized here
+
+847
+00:31:25,390 --> 00:31:27,250
+so go-go routines will show us the
+
+848
+00:31:27,250 --> 00:31:29,020
+number of go routines that are executing
+
+849
+00:31:29,020 --> 00:31:30,610
+for any of these different sources so
+
+850
+00:31:30,610 --> 00:31:32,700
+this engine X ingress controller
+
+851
+00:31:32,700 --> 00:31:37,330
+currently has there we go drop over here
+
+852
+00:31:37,330 --> 00:31:39,310
+90 go routines that are being executed
+
+853
+00:31:39,310 --> 00:31:42,490
+so Prometheus is excuse me storing these
+
+854
+00:31:42,490 --> 00:31:44,440
+metrics anchor fountas is pulling those
+
+855
+00:31:44,440 --> 00:31:46,810
+in and visualizing those for us so now
+
+856
+00:31:46,810 --> 00:31:47,740
+we've done that we'll go to the
+
+857
+00:31:47,740 --> 00:31:50,200
+visualizations section and we can change
+
+858
+00:31:50,200 --> 00:31:51,670
+some of the labeling options that we
+
+859
+00:31:51,670 --> 00:31:53,740
+have here so this section down at the
+
+860
+00:31:53,740 --> 00:31:55,240
+bottom is kind of silly right like we've
+
+861
+00:31:55,240 --> 00:31:57,220
+got the metric that's being collected
+
+862
+00:31:57,220 --> 00:31:59,530
+and then we've got labels that show us
+
+863
+00:31:59,530 --> 00:32:00,850
+different and pieces of information
+
+864
+00:32:00,850 --> 00:32:03,040
+about that metric so the metrics are
+
+865
+00:32:03,040 --> 00:32:05,320
+stored together go-go routines is one
+
+866
+00:32:05,320 --> 00:32:07,360
+metric inside out from me theists and
+
+867
+00:32:07,360 --> 00:32:09,550
+the labels help us separate the source
+
+868
+00:32:09,550 --> 00:32:11,980
+of that metric so we can see I've got
+
+869
+00:32:11,980 --> 00:32:14,260
+all these different instances here well
+
+870
+00:32:14,260 --> 00:32:17,470
+let's actually add a title for this
+
+871
+00:32:17,470 --> 00:32:19,540
+where do I do that general panel title
+
+872
+00:32:19,540 --> 00:32:21,040
+we'll say this is going to be go
+
+873
+00:32:21,040 --> 00:32:23,290
+routines okay so now we have a go
+
+874
+00:32:23,290 --> 00:32:25,660
+routines title let's change what these
+
+875
+00:32:25,660 --> 00:32:27,240
+labels look like down on the bottom and
+
+876
+00:32:27,240 --> 00:32:29,650
+in Griffin here and make that look a
+
+877
+00:32:29,650 --> 00:32:31,900
+little nicer so if I go to the legend
+
+878
+00:32:31,900 --> 00:32:33,040
+actually do I have to do that under
+
+879
+00:32:33,040 --> 00:32:36,100
+general I kind of forget off Tom my head
+
+880
+00:32:36,100 --> 00:32:38,320
+where I have to do that label right so I
+
+881
+00:32:38,320 --> 00:32:40,780
+think in the label section we can set
+
+882
+00:32:40,780 --> 00:32:43,900
+for the x-axis where do I want to do
+
+883
+00:32:43,900 --> 00:32:48,820
+this I remember not off the top of my
+
+884
+00:32:48,820 --> 00:32:52,270
+head how to fix this doo doo maybe it's
+
+885
+00:32:52,270 --> 00:32:54,250
+under Chris legend format right so in
+
+886
+00:32:54,250 --> 00:32:56,140
+the legend format we can define where
+
+887
+00:32:56,140 --> 00:32:58,380
+the source is for this so let's go
+
+888
+00:32:58,380 --> 00:33:00,970
+instance as the source for the legend
+
+889
+00:33:00,970 --> 00:33:04,030
+here now we've simplified the axis down
+
+890
+00:33:04,030 --> 00:33:05,650
+here so the source for the goal routines
+
+891
+00:33:05,650 --> 00:33:07,240
+is this so the source for the girl
+
+892
+00:33:07,240 --> 00:33:08,179
+routine is Ubuntu
+
+893
+00:33:08,179 --> 00:33:09,980
+for where the source with the go routine
+
+894
+00:33:09,980 --> 00:33:12,049
+is that end point maybe not necessarily
+
+895
+00:33:12,049 --> 00:33:14,210
+descriptive in this instance but gives
+
+896
+00:33:14,210 --> 00:33:15,830
+us a little bit better information than
+
+897
+00:33:15,830 --> 00:33:17,690
+if I deleted this and we've just got
+
+898
+00:33:17,690 --> 00:33:19,820
+that garbage feeding vomited there so
+
+899
+00:33:19,820 --> 00:33:20,990
+we'll leave that back in there the
+
+900
+00:33:20,990 --> 00:33:22,669
+instance section here and then we'll go
+
+901
+00:33:22,669 --> 00:33:24,499
+back and now we have our go routines
+
+902
+00:33:24,499 --> 00:33:26,450
+dashboard so I can click on any of these
+
+903
+00:33:26,450 --> 00:33:29,240
+change that visualization there and once
+
+904
+00:33:29,240 --> 00:33:31,159
+we're done I can click back excuse me
+
+905
+00:33:31,159 --> 00:33:33,639
+click back there save our changes and
+
+906
+00:33:33,639 --> 00:33:36,110
+now we have our first dashboard built in
+
+907
+00:33:36,110 --> 00:33:37,850
+Griffon a pretty easy to configure
+
+908
+00:33:37,850 --> 00:33:39,230
+pretty easy to get through all those
+
+909
+00:33:39,230 --> 00:33:40,580
+steps but there's a lot to know about
+
+910
+00:33:40,580 --> 00:33:42,830
+ingre fauna and a lot that we'd have to
+
+911
+00:33:42,830 --> 00:33:44,389
+configure in order to build some really
+
+912
+00:33:44,389 --> 00:33:46,639
+beautiful dashboards now obviously these
+
+913
+00:33:46,639 --> 00:33:49,190
+are all cloud native tooling so we can
+
+914
+00:33:49,190 --> 00:33:50,840
+do API is to integrate with this and we
+
+915
+00:33:50,840 --> 00:33:52,519
+can script creation of all these
+
+916
+00:33:52,519 --> 00:33:54,440
+visualizations but the fact still
+
+917
+00:33:54,440 --> 00:33:55,580
+remains that if you want to build these
+
+918
+00:33:55,580 --> 00:33:57,619
+dashboards from scratch there's a lot of
+
+919
+00:33:57,619 --> 00:33:59,090
+legwork that needs to go in ahead of
+
+920
+00:33:59,090 --> 00:34:02,690
+time so let me close this and we will go
+
+921
+00:34:02,690 --> 00:34:05,119
+back to our presentation so I'll jump
+
+922
+00:34:05,119 --> 00:34:08,119
+back to PowerPoint here so let's deploy
+
+923
+00:34:08,119 --> 00:34:10,069
+for me some Granof rafin oh well we just
+
+924
+00:34:10,069 --> 00:34:11,929
+did we deploy Prometheus when we
+
+925
+00:34:11,929 --> 00:34:13,399
+explored some of the basics of that
+
+926
+00:34:13,399 --> 00:34:14,960
+Prometheus tool now we saw how
+
+927
+00:34:14,960 --> 00:34:16,819
+kubernetes metrics were Auto imported
+
+928
+00:34:16,819 --> 00:34:19,460
+and again that was by virtue of those
+
+929
+00:34:19,460 --> 00:34:21,409
+exporters being deployed alongside
+
+930
+00:34:21,409 --> 00:34:24,079
+Prometheus so that keeps state exporter
+
+931
+00:34:24,079 --> 00:34:26,389
+the node exporter those metrics became
+
+932
+00:34:26,389 --> 00:34:27,799
+available because we deploy those
+
+933
+00:34:27,799 --> 00:34:29,990
+exporter tools we also discussed how
+
+934
+00:34:29,990 --> 00:34:31,669
+alerts could be created I didn't get a
+
+935
+00:34:31,669 --> 00:34:33,589
+chance to show you those but when we
+
+936
+00:34:33,589 --> 00:34:34,819
+walk through our next demo which is
+
+937
+00:34:34,819 --> 00:34:36,859
+deploying this with Rancher we'll be
+
+938
+00:34:36,859 --> 00:34:38,480
+able to see how those alerts are created
+
+939
+00:34:38,480 --> 00:34:41,149
+we also deployed graph on ax and we got
+
+940
+00:34:41,149 --> 00:34:42,889
+a chance really to explore the dashboard
+
+941
+00:34:42,889 --> 00:34:44,270
+in Griffin ax because it is such a
+
+942
+00:34:44,270 --> 00:34:46,520
+visual tool so we connected graph on a
+
+943
+00:34:46,520 --> 00:34:48,349
+to Prometheus we added our first
+
+944
+00:34:48,349 --> 00:34:50,359
+visualization of those go routines we
+
+945
+00:34:50,359 --> 00:34:51,799
+changed some labels we saved our
+
+946
+00:34:51,799 --> 00:34:53,780
+dashboard and we adjusted a few things
+
+947
+00:34:53,780 --> 00:34:56,480
+so that's what we just did however what
+
+948
+00:34:56,480 --> 00:34:59,240
+would we still mean to do now with
+
+949
+00:34:59,240 --> 00:35:00,859
+Prometheus we need to wire up metrics
+
+950
+00:35:00,859 --> 00:35:02,720
+sources from other things now a list of
+
+951
+00:35:02,720 --> 00:35:04,880
+cube State metrics here it comes out of
+
+952
+00:35:04,880 --> 00:35:06,740
+the box with the helm chart deployment
+
+953
+00:35:06,740 --> 00:35:08,089
+but if you're going to be deploying it
+
+954
+00:35:08,089 --> 00:35:09,829
+in a different way you may need to wire
+
+955
+00:35:09,829 --> 00:35:12,020
+up cube State metrics yourself and of
+
+956
+00:35:12,020 --> 00:35:13,490
+course also we may need to wire up
+
+957
+00:35:13,490 --> 00:35:15,380
+custom sources so if you have
+
+958
+00:35:15,380 --> 00:35:16,970
+application code that you want to
+
+959
+00:35:16,970 --> 00:35:18,650
+instrument or if you have different
+
+960
+00:35:18,650 --> 00:35:21,020
+sources like network devices firewalls
+
+961
+00:35:21,020 --> 00:35:21,890
+whatever
+
+962
+00:35:21,890 --> 00:35:23,660
+that you want to grab information from
+
+963
+00:35:23,660 --> 00:35:25,190
+you're gonna have to wire up those
+
+964
+00:35:25,190 --> 00:35:27,980
+sources independently we also have to go
+
+965
+00:35:27,980 --> 00:35:29,720
+through the steps of building those
+
+966
+00:35:29,720 --> 00:35:31,390
+alerting rules that we touched on
+
+967
+00:35:31,390 --> 00:35:33,380
+gravano of course what we would still
+
+968
+00:35:33,380 --> 00:35:34,850
+need to do we built a very simple
+
+969
+00:35:34,850 --> 00:35:36,530
+visualization but we'd have to define
+
+970
+00:35:36,530 --> 00:35:38,420
+all the dashboards and all the graphs
+
+971
+00:35:38,420 --> 00:35:40,130
+and all the visualizations that we need
+
+972
+00:35:40,130 --> 00:35:42,050
+and of course integrate Cortana with
+
+973
+00:35:42,050 --> 00:35:44,810
+other data sources okay so now that
+
+974
+00:35:44,810 --> 00:35:46,490
+we've seen the basics of how you deploy
+
+975
+00:35:46,490 --> 00:35:47,930
+for me theist and Griffin on how you
+
+976
+00:35:47,930 --> 00:35:49,850
+configure them let's take a look at
+
+977
+00:35:49,850 --> 00:35:52,610
+ranchers monitoring tool and see what
+
+978
+00:35:52,610 --> 00:35:55,280
+that brings to the picture so I'll click
+
+979
+00:35:55,280 --> 00:35:57,410
+here Rancher monitoring the next thing
+
+980
+00:35:57,410 --> 00:36:00,770
+to cover so Rancher monitoring Rancher
+
+981
+00:36:00,770 --> 00:36:02,510
+and I really wish I had some slide
+
+982
+00:36:02,510 --> 00:36:03,920
+transitions here because it would make
+
+983
+00:36:03,920 --> 00:36:05,630
+this a lot cooler and more dramatic as
+
+984
+00:36:05,630 --> 00:36:08,630
+these things slide in Rancher deploys
+
+985
+00:36:08,630 --> 00:36:11,060
+Prometheus and related exporters for us
+
+986
+00:36:11,060 --> 00:36:13,310
+so that we got out of the box with the
+
+987
+00:36:13,310 --> 00:36:15,050
+help track deployment not a lot to do
+
+988
+00:36:15,050 --> 00:36:18,650
+there but Rancher deploys Griffin and it
+
+989
+00:36:18,650 --> 00:36:20,240
+wires up through the Prometheus data
+
+990
+00:36:20,240 --> 00:36:22,490
+source for us now that may sound pretty
+
+991
+00:36:22,490 --> 00:36:25,220
+simple unless you get to the next step
+
+992
+00:36:25,220 --> 00:36:26,870
+where Rancher also configures
+
+993
+00:36:26,870 --> 00:36:29,360
+visualizations in Griffin ax so when we
+
+994
+00:36:29,360 --> 00:36:31,490
+deploy our monitoring feature in Rancher
+
+995
+00:36:31,490 --> 00:36:33,500
+we're going to build all those graphs
+
+996
+00:36:33,500 --> 00:36:35,270
+and all those pieces of information and
+
+997
+00:36:35,270 --> 00:36:37,460
+graph on ax programmatically for you so
+
+998
+00:36:37,460 --> 00:36:39,140
+you don't have to do all that stuff
+
+999
+00:36:39,140 --> 00:36:41,480
+we're also going to configure dashboards
+
+1000
+00:36:41,480 --> 00:36:43,550
+in Griffin on your behalf and build
+
+1001
+00:36:43,550 --> 00:36:45,260
+those panes of glass so you can see
+
+1002
+00:36:45,260 --> 00:36:46,720
+different sections of information
+
+1003
+00:36:46,720 --> 00:36:49,730
+rancher also has the ability to import
+
+1004
+00:36:49,730 --> 00:36:51,950
+those graph onto visualizations into the
+
+1005
+00:36:51,950 --> 00:36:54,440
+ranch or UI so in certain contexts
+
+1006
+00:36:54,440 --> 00:36:56,270
+within Rancher again which we will see
+
+1007
+00:36:56,270 --> 00:36:58,190
+you don't actually have to go out to
+
+1008
+00:36:58,190 --> 00:37:00,020
+Befana to see visualization of your
+
+1009
+00:37:00,020 --> 00:37:02,030
+metrics we will import those crucial
+
+1010
+00:37:02,030 --> 00:37:04,130
+bits of information right into Rancher
+
+1011
+00:37:04,130 --> 00:37:06,710
+itself Rancher also makes available
+
+1012
+00:37:06,710 --> 00:37:09,260
+alerting configurations now these can be
+
+1013
+00:37:09,260 --> 00:37:10,760
+configured either through the ranch or
+
+1014
+00:37:10,760 --> 00:37:13,250
+UI or our API and I'll show you that
+
+1015
+00:37:13,250 --> 00:37:16,370
+again but you can configure alerts and
+
+1016
+00:37:16,370 --> 00:37:18,050
+where they're going to go so remember
+
+1017
+00:37:18,050 --> 00:37:20,390
+that's going to be the rules and the
+
+1018
+00:37:20,390 --> 00:37:21,920
+receiver section of Prometheus
+
+1019
+00:37:21,920 --> 00:37:24,080
+configuration right from within Rancher
+
+1020
+00:37:24,080 --> 00:37:26,720
+and I can do all of this with three
+
+1021
+00:37:26,720 --> 00:37:29,570
+clicks so we're not counting yet telling
+
+1022
+00:37:29,570 --> 00:37:31,130
+you all this stuff is nice but showing
+
+1023
+00:37:31,130 --> 00:37:32,660
+you all this stuff is better I really
+
+1024
+00:37:32,660 --> 00:37:34,190
+want this to be a demo heavy
+
+1025
+00:37:34,190 --> 00:37:35,690
+presentation so
+
+1026
+00:37:35,690 --> 00:37:38,720
+take a look and jump into that so I'll
+
+1027
+00:37:38,720 --> 00:37:40,040
+export that and we'll go back to the
+
+1028
+00:37:40,040 --> 00:37:41,839
+global context here within Rancher and
+
+1029
+00:37:41,839 --> 00:37:44,690
+I'm going to first do little legwork in
+
+1030
+00:37:44,690 --> 00:37:47,569
+this work cluster here by deleting the
+
+1031
+00:37:47,569 --> 00:37:49,190
+monitoring things that we've just set up
+
+1032
+00:37:49,190 --> 00:37:50,990
+I don't want to tax this cluster too
+
+1033
+00:37:50,990 --> 00:37:52,849
+much just because it's my little home
+
+1034
+00:37:52,849 --> 00:37:54,829
+demo cluster here so we'll delete
+
+1035
+00:37:54,829 --> 00:37:56,390
+griffon and delete Prometheus that we
+
+1036
+00:37:56,390 --> 00:37:58,520
+just applied and both of those two links
+
+1037
+00:37:58,520 --> 00:38:00,079
+should clean themselves up and then
+
+1038
+00:38:00,079 --> 00:38:03,410
+disappear here momentarily once those
+
+1039
+00:38:03,410 --> 00:38:05,329
+have disappeared then we'll go ahead and
+
+1040
+00:38:05,329 --> 00:38:07,670
+deploy monitoring so from the global
+
+1041
+00:38:07,670 --> 00:38:08,839
+context we're going to start with our
+
+1042
+00:38:08,839 --> 00:38:11,690
+three clicks in Rancher hover over the
+
+1043
+00:38:11,690 --> 00:38:13,400
+upper left drop down here and we'll go
+
+1044
+00:38:13,400 --> 00:38:16,790
+to the work cluster one click hover over
+
+1045
+00:38:16,790 --> 00:38:18,500
+the tools drop down in the upper right
+
+1046
+00:38:18,500 --> 00:38:20,990
+and go to the monitoring section two
+
+1047
+00:38:20,990 --> 00:38:23,420
+clicks now this cluster monitoring
+
+1048
+00:38:23,420 --> 00:38:25,640
+configuration allows us to change
+
+1049
+00:38:25,640 --> 00:38:27,230
+different bits of information that we'd
+
+1050
+00:38:27,230 --> 00:38:29,000
+like for the helm chart deployment
+
+1051
+00:38:29,000 --> 00:38:30,859
+what's going to happen in the background
+
+1052
+00:38:30,859 --> 00:38:32,180
+here is Rancher will deploy the
+
+1053
+00:38:32,180 --> 00:38:34,609
+Prometheus and helm Prometheus and
+
+1054
+00:38:34,609 --> 00:38:36,800
+Gravano helm charts on our behalf and as
+
+1055
+00:38:36,800 --> 00:38:37,910
+I said in that slide before
+
+1056
+00:38:37,910 --> 00:38:40,250
+automatically configure those tools so
+
+1057
+00:38:40,250 --> 00:38:42,020
+we can set different options here and
+
+1058
+00:38:42,020 --> 00:38:43,700
+when I scroll to the bottom here is my
+
+1059
+00:38:43,700 --> 00:38:46,609
+third click enable hopefully that came
+
+1060
+00:38:46,609 --> 00:38:47,930
+through I didn't hold the mouse up to my
+
+1061
+00:38:47,930 --> 00:38:49,839
+mic but I hope you all heard that click
+
+1062
+00:38:49,839 --> 00:38:52,640
+with that now we'll go back to the work
+
+1063
+00:38:52,640 --> 00:38:55,339
+cluster into the system project and you
+
+1064
+00:38:55,339 --> 00:38:57,260
+can see once we're in the system project
+
+1065
+00:38:57,260 --> 00:39:01,339
+here that we have Prometheus stuff being
+
+1066
+00:39:01,339 --> 00:39:02,839
+deployed all over the place we're back
+
+1067
+00:39:02,839 --> 00:39:04,790
+in services let's go to work loads we've
+
+1068
+00:39:04,790 --> 00:39:06,500
+got cattle Prometheus namespace so I've
+
+1069
+00:39:06,500 --> 00:39:08,569
+got the Prometheus cluster monitoring
+
+1070
+00:39:08,569 --> 00:39:10,700
+being deployed I've got from II theist
+
+1071
+00:39:10,700 --> 00:39:12,859
+operator being deployed the alert
+
+1072
+00:39:12,859 --> 00:39:14,329
+manager sections already been deployed
+
+1073
+00:39:14,329 --> 00:39:16,040
+all this stuff Khurana is being deployed
+
+1074
+00:39:16,040 --> 00:39:17,869
+on my behalf all these different things
+
+1075
+00:39:17,869 --> 00:39:19,760
+are being set up some of these may not
+
+1076
+00:39:19,760 --> 00:39:22,150
+fully satisfied cuz I think I left
+
+1077
+00:39:22,150 --> 00:39:24,890
+persistent storage on but we will be
+
+1078
+00:39:24,890 --> 00:39:26,420
+able to see an example of how this all
+
+1079
+00:39:26,420 --> 00:39:27,280
+works
+
+1080
+00:39:27,280 --> 00:39:30,560
+what happens now now this is going to be
+
+1081
+00:39:30,560 --> 00:39:32,480
+kind of like a cooking show where you
+
+1082
+00:39:32,480 --> 00:39:34,520
+know the cooking host takes the chicken
+
+1083
+00:39:34,520 --> 00:39:36,680
+that you've prepared over the first 20
+
+1084
+00:39:36,680 --> 00:39:38,720
+minutes of the presentation and they put
+
+1085
+00:39:38,720 --> 00:39:40,369
+it into the oven and then there's a
+
+1086
+00:39:40,369 --> 00:39:41,690
+commercial break and you come back and
+
+1087
+00:39:41,690 --> 00:39:43,099
+the chicken is magically cooked right
+
+1088
+00:39:43,099 --> 00:39:44,540
+that's what we're going to do in this
+
+1089
+00:39:44,540 --> 00:39:45,829
+demo because we don't have time to wait
+
+1090
+00:39:45,829 --> 00:39:47,240
+for Prometheus to collect all these
+
+1091
+00:39:47,240 --> 00:39:49,640
+metrics so let's click on our real
+
+1092
+00:39:49,640 --> 00:39:51,920
+you're here and tada the chicken has
+
+1093
+00:39:51,920 --> 00:39:55,220
+been cooked so the dashboard page that
+
+1094
+00:39:55,220 --> 00:39:56,630
+we were on earlier remember we were in
+
+1095
+00:39:56,630 --> 00:39:57,890
+this work cluster in the dashboard page
+
+1096
+00:39:57,890 --> 00:40:00,410
+it was kind of boring and plain here in
+
+1097
+00:40:00,410 --> 00:40:02,119
+this real cluster now it has been
+
+1098
+00:40:02,119 --> 00:40:03,829
+enhanced by the metrics we are
+
+1099
+00:40:03,829 --> 00:40:06,109
+collecting from Prometheus so instead of
+
+1100
+00:40:06,109 --> 00:40:08,630
+just having a tachometer here that only
+
+1101
+00:40:08,630 --> 00:40:11,299
+shows CPU utilization because of that
+
+1102
+00:40:11,299 --> 00:40:12,589
+cube State metrics and the node
+
+1103
+00:40:12,589 --> 00:40:15,289
+exporters being available I can see use
+
+1104
+00:40:15,289 --> 00:40:17,900
+versus reserve CPU here and same with
+
+1105
+00:40:17,900 --> 00:40:21,140
+this memory dial all of these component
+
+1106
+00:40:21,140 --> 00:40:23,150
+statuses here like at CDE the controller
+
+1107
+00:40:23,150 --> 00:40:24,319
+manager the scheduler
+
+1108
+00:40:24,319 --> 00:40:27,019
+these all have gravano icons associated
+
+1109
+00:40:27,019 --> 00:40:28,940
+with them if I click on one of these
+
+1110
+00:40:28,940 --> 00:40:30,829
+Gryphon icons like sed for instance
+
+1111
+00:40:30,829 --> 00:40:33,380
+Rancher is going to proxy me to the
+
+1112
+00:40:33,380 --> 00:40:35,269
+running gravano instance note that I
+
+1113
+00:40:35,269 --> 00:40:37,519
+never left the ranch or URL we actually
+
+1114
+00:40:37,519 --> 00:40:41,239
+just do a HTTP proxy to get you to this
+
+1115
+00:40:41,239 --> 00:40:43,519
+graph on instance so now I can see
+
+1116
+00:40:43,519 --> 00:40:45,019
+different visualizations about the
+
+1117
+00:40:45,019 --> 00:40:47,420
+performance of NCD and all of this was
+
+1118
+00:40:47,420 --> 00:40:49,970
+set up out of the box for me so distinct
+
+1119
+00:40:49,970 --> 00:40:52,549
+duration memory client traffic peer
+
+1120
+00:40:52,549 --> 00:40:54,619
+traffic in and out all these different
+
+1121
+00:40:54,619 --> 00:40:56,450
+metrics came out of the box just by
+
+1122
+00:40:56,450 --> 00:40:58,279
+virtue of enabling that monitoring
+
+1123
+00:40:58,279 --> 00:41:01,220
+function if I wanted I have the ability
+
+1124
+00:41:01,220 --> 00:41:03,410
+to customize these so on the lower left
+
+1125
+00:41:03,410 --> 00:41:06,079
+I can sign in and in an instance of
+
+1126
+00:41:06,079 --> 00:41:08,119
+graph on a deployed by Rancher the
+
+1127
+00:41:08,119 --> 00:41:10,640
+default password is admin admin we don't
+
+1128
+00:41:10,640 --> 00:41:13,099
+make things too hard now that that's
+
+1129
+00:41:13,099 --> 00:41:15,140
+been deployed here I can go back to my
+
+1130
+00:41:15,140 --> 00:41:18,920
+dashboard section and let's go to @cd
+
+1131
+00:41:18,920 --> 00:41:21,289
+dashboard and my I can make adjustments
+
+1132
+00:41:21,289 --> 00:41:22,789
+to any of these that I want
+
+1133
+00:41:22,789 --> 00:41:24,829
+so looking edit Etsy D has a leader and
+
+1134
+00:41:24,829 --> 00:41:27,650
+if it does we can set it to yes or I
+
+1135
+00:41:27,650 --> 00:41:30,289
+don't know what graph QL looks like but
+
+1136
+00:41:30,289 --> 00:41:32,299
+if I said not okay well change no value
+
+1137
+00:41:32,299 --> 00:41:34,069
+anyways you get the idea but we can make
+
+1138
+00:41:34,069 --> 00:41:36,319
+adjustments to the visualizations here
+
+1139
+00:41:36,319 --> 00:41:38,930
+insight graph on ax there's a whole host
+
+1140
+00:41:38,930 --> 00:41:40,970
+of other things being shown all these
+
+1141
+00:41:40,970 --> 00:41:42,799
+dashboards were built out of the box
+
+1142
+00:41:42,799 --> 00:41:45,529
+when we deployed monitoring nodes is one
+
+1143
+00:41:45,529 --> 00:41:47,930
+that I like to show because it's got
+
+1144
+00:41:47,930 --> 00:41:50,180
+such a great selection of information
+
+1145
+00:41:50,180 --> 00:41:53,450
+so here's node information for 10.10 9
+
+1146
+00:41:53,450 --> 00:41:55,670
+11.30 which is one of the nodes in my
+
+1147
+00:41:55,670 --> 00:41:56,660
+REO cluster
+
+1148
+00:41:56,660 --> 00:41:58,749
+I can see CPU and memory information
+
+1149
+00:41:58,749 --> 00:42:01,880
+swap that's a lot of CPU load I should
+
+1150
+00:42:01,880 --> 00:42:03,060
+probably take a look at that
+
+1151
+00:42:03,060 --> 00:42:04,950
+but scroll down here on this page and
+
+1152
+00:42:04,950 --> 00:42:08,130
+now we have vmstat information so I can
+
+1153
+00:42:08,130 --> 00:42:10,830
+see memory pages I can see all this disk
+
+1154
+00:42:10,830 --> 00:42:12,720
+detail that's been set up system detail
+
+1155
+00:42:12,720 --> 00:42:13,950
+all these different bits of information
+
+1156
+00:42:13,950 --> 00:42:16,320
+all these different visualizations that
+
+1157
+00:42:16,320 --> 00:42:18,780
+have been wired up for me so we'll close
+
+1158
+00:42:18,780 --> 00:42:21,690
+that now you remember when I was talking
+
+1159
+00:42:21,690 --> 00:42:24,420
+in the slides about Rancher having the
+
+1160
+00:42:24,420 --> 00:42:26,730
+ability to pull in these visualizations
+
+1161
+00:42:26,730 --> 00:42:29,520
+into the rancher UI let's take a look at
+
+1162
+00:42:29,520 --> 00:42:32,190
+that so if I expand at CD metrics here
+
+1163
+00:42:32,190 --> 00:42:34,770
+on this page I can see these imported
+
+1164
+00:42:34,770 --> 00:42:37,350
+visualizations from grifone ax so gr PC
+
+1165
+00:42:37,350 --> 00:42:39,330
+client traffic shows up as a graph here
+
+1166
+00:42:39,330 --> 00:42:41,220
+though that otherwise I would have to
+
+1167
+00:42:41,220 --> 00:42:43,170
+click on this graph on a link to proxy
+
+1168
+00:42:43,170 --> 00:42:45,900
+out and view that metric I can change
+
+1169
+00:42:45,900 --> 00:42:47,520
+its drop-down and of course that
+
+1170
+00:42:47,520 --> 00:42:49,260
+corresponds with Accra fauna drop down
+
+1171
+00:42:49,260 --> 00:42:50,940
+in the upper right to see the time
+
+1172
+00:42:50,940 --> 00:42:52,260
+period over which we'd like to visualize
+
+1173
+00:42:52,260 --> 00:42:55,980
+these different metrics scrolling up
+
+1174
+00:42:55,980 --> 00:42:58,440
+here let's take a look if I go into the
+
+1175
+00:42:58,440 --> 00:43:00,320
+Rio cluster into the default project
+
+1176
+00:43:00,320 --> 00:43:03,030
+another place inside Rancher we're
+
+1177
+00:43:03,030 --> 00:43:06,810
+monitoring gets deployed Rio is a
+
+1178
+00:43:06,810 --> 00:43:09,660
+project of ranchers it's an application
+
+1179
+00:43:09,660 --> 00:43:11,970
+deployment engine there's a whole host
+
+1180
+00:43:11,970 --> 00:43:14,340
+of presentations that I've given on Rio
+
+1181
+00:43:14,340 --> 00:43:16,020
+you can find them on YouTube I'm sure
+
+1182
+00:43:16,020 --> 00:43:17,100
+I'll give another one in the future
+
+1183
+00:43:17,100 --> 00:43:19,320
+so not to talk too much about that but
+
+1184
+00:43:19,320 --> 00:43:22,500
+just that Rio is deployed here in this
+
+1185
+00:43:22,500 --> 00:43:24,510
+workloads page and if I click on one of
+
+1186
+00:43:24,510 --> 00:43:25,620
+these tools like let's take the
+
+1187
+00:43:25,620 --> 00:43:27,930
+autoscaler from Rio for instance this
+
+1188
+00:43:27,930 --> 00:43:30,210
+workload metrics tab becomes available
+
+1189
+00:43:30,210 --> 00:43:33,150
+inside Rancher so if I expand workload
+
+1190
+00:43:33,150 --> 00:43:35,310
+metrics here there's more of these
+
+1191
+00:43:35,310 --> 00:43:36,690
+visualizations that are being made
+
+1192
+00:43:36,690 --> 00:43:38,970
+available but in the context of a
+
+1193
+00:43:38,970 --> 00:43:41,700
+deployed application so for instance
+
+1194
+00:43:41,700 --> 00:43:44,910
+here I can see the CPU utilization for
+
+1195
+00:43:44,910 --> 00:43:47,220
+that autoscaler pod or the memory
+
+1196
+00:43:47,220 --> 00:43:49,560
+utilization or packets per second or
+
+1197
+00:43:49,560 --> 00:43:51,090
+network i/o or disk i/o or all those
+
+1198
+00:43:51,090 --> 00:43:53,190
+different bits here and if I want to
+
+1199
+00:43:53,190 --> 00:43:55,740
+click on graph an ax and head out to all
+
+1200
+00:43:55,740 --> 00:43:57,510
+of the metrics that kafan is collecting
+
+1201
+00:43:57,510 --> 00:43:59,580
+and visualizing for me here they are
+
+1202
+00:43:59,580 --> 00:44:02,070
+available in Sanger fauna for the Rio
+
+1203
+00:44:02,070 --> 00:44:03,900
+system namespace and my autoscaler
+
+1204
+00:44:03,900 --> 00:44:06,810
+deployment so that's the other section
+
+1205
+00:44:06,810 --> 00:44:08,880
+in which you'll see metrics being
+
+1206
+00:44:08,880 --> 00:44:11,940
+deployed in the rancher interface now
+
+1207
+00:44:11,940 --> 00:44:13,350
+one other cool thing to talk about
+
+1208
+00:44:13,350 --> 00:44:15,420
+before we get into some of the alerting
+
+1209
+00:44:15,420 --> 00:44:16,349
+stuff
+
+1210
+00:44:16,349 --> 00:44:18,210
+that the monitoring capability is
+
+1211
+00:44:18,210 --> 00:44:20,309
+deployable not only at the cluster level
+
+1212
+00:44:20,309 --> 00:44:23,339
+but also at the project level within
+
+1213
+00:44:23,339 --> 00:44:26,220
+rancher so what that means is currently
+
+1214
+00:44:26,220 --> 00:44:28,319
+I have monitoring deployed in my real
+
+1215
+00:44:28,319 --> 00:44:30,299
+cluster which is to say if I go under
+
+1216
+00:44:30,299 --> 00:44:32,729
+tools and monitoring here we can see I
+
+1217
+00:44:32,729 --> 00:44:35,039
+have monitoring enabled and if I were to
+
+1218
+00:44:35,039 --> 00:44:36,569
+hit save I could upgrade any of these
+
+1219
+00:44:36,569 --> 00:44:40,140
+changes that's at the cluster level so
+
+1220
+00:44:40,140 --> 00:44:42,359
+what happens when you deploy monitoring
+
+1221
+00:44:42,359 --> 00:44:44,670
+at the cluster level is metrics from all
+
+1222
+00:44:44,670 --> 00:44:47,819
+across the cluster and every workload
+
+1223
+00:44:47,819 --> 00:44:50,220
+inside that cluster those metrics are
+
+1224
+00:44:50,220 --> 00:44:53,009
+going to be collected and visualized we
+
+1225
+00:44:53,009 --> 00:44:55,349
+can do the same thing inside one of the
+
+1226
+00:44:55,349 --> 00:44:57,180
+projects so if I go to the default
+
+1227
+00:44:57,180 --> 00:44:59,940
+project in Rio and I go back under tools
+
+1228
+00:44:59,940 --> 00:45:03,150
+and monitoring I could enable monitoring
+
+1229
+00:45:03,150 --> 00:45:05,489
+at the project level now this won't grab
+
+1230
+00:45:05,489 --> 00:45:07,859
+metrics from the nodes themselves but
+
+1231
+00:45:07,859 --> 00:45:09,930
+this is really useful if you use Rancher
+
+1232
+00:45:09,930 --> 00:45:12,119
+with our projects feature to create
+
+1233
+00:45:12,119 --> 00:45:15,180
+multi tenant kubernetes clusters when
+
+1234
+00:45:15,180 --> 00:45:17,009
+monitoring is enabled at the project
+
+1235
+00:45:17,009 --> 00:45:18,989
+level you can give your tenants than the
+
+1236
+00:45:18,989 --> 00:45:21,150
+ability to visualize and track metrics
+
+1237
+00:45:21,150 --> 00:45:23,369
+and performance of their specific
+
+1238
+00:45:23,369 --> 00:45:27,150
+workloads so workload because it were to
+
+1239
+00:45:27,150 --> 00:45:29,249
+exists inside this default project and
+
+1240
+00:45:29,249 --> 00:45:31,859
+if I enabled monitoring I could have
+
+1241
+00:45:31,859 --> 00:45:34,499
+those workload metrics show up here just
+
+1242
+00:45:34,499 --> 00:45:36,390
+for my workload without necessarily the
+
+1243
+00:45:36,390 --> 00:45:39,239
+cluster admin having to give me cluster
+
+1244
+00:45:39,239 --> 00:45:42,539
+level admin access ok let's talk a
+
+1245
+00:45:42,539 --> 00:45:45,269
+little bit about a learning let's go
+
+1246
+00:45:45,269 --> 00:45:47,430
+back to the Rio drop down here and we're
+
+1247
+00:45:47,430 --> 00:45:49,349
+at the cluster level now we'll go to the
+
+1248
+00:45:49,349 --> 00:45:51,059
+tools section at the top and click on
+
+1249
+00:45:51,059 --> 00:45:55,380
+alerts alerts are powered by again that
+
+1250
+00:45:55,380 --> 00:45:57,390
+Prometheus alert manager and in this
+
+1251
+00:45:57,390 --> 00:45:59,849
+section this is how we will define alert
+
+1252
+00:45:59,849 --> 00:46:02,609
+rules so Rancher makes it really easy to
+
+1253
+00:46:02,609 --> 00:46:05,190
+define alert rules visually so what
+
+1254
+00:46:05,190 --> 00:46:07,079
+we'll do is we can group first of all
+
+1255
+00:46:07,079 --> 00:46:08,430
+our rules together so as you can see
+
+1256
+00:46:08,430 --> 00:46:09,809
+I've got a bunch of different alert
+
+1257
+00:46:09,809 --> 00:46:12,329
+rules that have been grouped here if I
+
+1258
+00:46:12,329 --> 00:46:14,729
+add a new alert rule to one of these
+
+1259
+00:46:14,729 --> 00:46:17,489
+groups I can define for the Prometheus
+
+1260
+00:46:17,489 --> 00:46:19,769
+alert manager what criteria should
+
+1261
+00:46:19,769 --> 00:46:21,989
+change in order to generate this alert
+
+1262
+00:46:21,989 --> 00:46:24,029
+so that could be something very broad
+
+1263
+00:46:24,029 --> 00:46:27,390
+like the @cd excuse me when a system
+
+1264
+00:46:27,390 --> 00:46:30,119
+service at CD is unhealthy
+
+1265
+00:46:30,119 --> 00:46:32,220
+two critical alert that's pretty generic
+
+1266
+00:46:32,220 --> 00:46:34,740
+pretty broad right I can get a little
+
+1267
+00:46:34,740 --> 00:46:36,839
+more granular and say okay when a node
+
+1268
+00:46:36,839 --> 00:46:39,480
+like Ubuntu zero one has a CPU
+
+1269
+00:46:39,480 --> 00:46:42,420
+reservation over 70% then send a
+
+1270
+00:46:42,420 --> 00:46:45,150
+critical alert or now because we
+
+1271
+00:46:45,150 --> 00:46:46,799
+monitoring excuse me because we've
+
+1272
+00:46:46,799 --> 00:46:48,390
+enabled monitoring we have this
+
+1273
+00:46:48,390 --> 00:46:49,799
+functionality available
+
+1274
+00:46:49,799 --> 00:46:53,160
+I can click expression and then define a
+
+1275
+00:46:53,160 --> 00:46:56,549
+Prometheus metric or a prom ql query in
+
+1276
+00:46:56,549 --> 00:46:58,829
+here and grab any of those metrics that
+
+1277
+00:46:58,829 --> 00:47:01,019
+we are collecting from that Prometheus
+
+1278
+00:47:01,019 --> 00:47:02,880
+instance so we were talking about go
+
+1279
+00:47:02,880 --> 00:47:04,230
+routines let's see if we can search for
+
+1280
+00:47:04,230 --> 00:47:05,970
+that there go underscore go routines
+
+1281
+00:47:05,970 --> 00:47:08,089
+we've got all of our different bits here
+
+1282
+00:47:08,089 --> 00:47:10,769
+so I can select when any one of these
+
+1283
+00:47:10,769 --> 00:47:12,599
+and I can do a filter operation here
+
+1284
+00:47:12,599 --> 00:47:15,900
+like let's do service kubernetes so I
+
+1285
+00:47:15,900 --> 00:47:18,049
+could do probably service equals
+
+1286
+00:47:18,049 --> 00:47:20,849
+kubernetes and if I do that that should
+
+1287
+00:47:20,849 --> 00:47:23,279
+change and show me just endpoints that
+
+1288
+00:47:23,279 --> 00:47:26,400
+have the service of kubernetes probably
+
+1289
+00:47:26,400 --> 00:47:28,319
+could change instance and get even just
+
+1290
+00:47:28,319 --> 00:47:30,690
+one section here now if any of these
+
+1291
+00:47:30,690 --> 00:47:34,140
+values that are greater than 5,000 as an
+
+1292
+00:47:34,140 --> 00:47:35,940
+upper bound here for a five-minute
+
+1293
+00:47:35,940 --> 00:47:38,249
+period or one hour or 24 hours or
+
+1294
+00:47:38,249 --> 00:47:41,160
+whatever we will set a critical alert so
+
+1295
+00:47:41,160 --> 00:47:43,380
+right within Rancher I'm leveraging
+
+1296
+00:47:43,380 --> 00:47:45,690
+Prometheus as capability of defining
+
+1297
+00:47:45,690 --> 00:47:48,059
+these alert rules but doing it so
+
+1298
+00:47:48,059 --> 00:47:50,279
+visually and in the context of the
+
+1299
+00:47:50,279 --> 00:47:51,779
+things I'd like too much excuse me
+
+1300
+00:47:51,779 --> 00:47:54,359
+perform alerts on now again
+
+1301
+00:47:54,359 --> 00:47:57,059
+alerts in Prometheus are only one half
+
+1302
+00:47:57,059 --> 00:47:58,829
+of the equation we also need to set up
+
+1303
+00:47:58,829 --> 00:48:00,900
+receivers so Rancher has you covered
+
+1304
+00:48:00,900 --> 00:48:02,309
+there if we go under the Tools drop-down
+
+1305
+00:48:02,309 --> 00:48:06,869
+and notifiers notifiers and are sort of
+
+1306
+00:48:06,869 --> 00:48:09,210
+analogous in Prometheus two receivers
+
+1307
+00:48:09,210 --> 00:48:10,499
+somewhat there's a little hand waving
+
+1308
+00:48:10,499 --> 00:48:13,499
+I'm doing there but Rancher supports
+
+1309
+00:48:13,499 --> 00:48:16,200
+these five out of the box so slack email
+
+1310
+00:48:16,200 --> 00:48:18,749
+Pedro Duty and WeChat now note this is
+
+1311
+00:48:18,749 --> 00:48:20,940
+not the full list of receivers that are
+
+1312
+00:48:20,940 --> 00:48:22,559
+available in Prometheus these are just
+
+1313
+00:48:22,559 --> 00:48:24,119
+the five that we have available right
+
+1314
+00:48:24,119 --> 00:48:27,839
+now so let's take slack for instance if
+
+1315
+00:48:27,839 --> 00:48:31,079
+I wire up a slack notifier here put in a
+
+1316
+00:48:31,079 --> 00:48:34,230
+name the web hook URL set and able to
+
+1317
+00:48:34,230 --> 00:48:35,880
+send resolved alerts whatever and hit
+
+1318
+00:48:35,880 --> 00:48:38,190
+adds let's just throw in some garbage
+
+1319
+00:48:38,190 --> 00:48:41,099
+there doesn't matter and hit add here I
+
+1320
+00:48:41,099 --> 00:48:43,829
+can then connect one of these alerts or
+
+1321
+00:48:43,829 --> 00:48:44,069
+one of
+
+1322
+00:48:44,069 --> 00:48:46,739
+alert groups with that notifier so let's
+
+1323
+00:48:46,739 --> 00:48:49,049
+say we edit this alert group and we want
+
+1324
+00:48:49,049 --> 00:48:50,880
+to say that all of these alerts then
+
+1325
+00:48:50,880 --> 00:48:54,660
+should go to another blahblah that slack
+
+1326
+00:48:54,660 --> 00:48:56,999
+notifier in whatever channel let's say
+
+1327
+00:48:56,999 --> 00:49:00,269
+opps channel now I save that and any
+
+1328
+00:49:00,269 --> 00:49:02,219
+alerts that are generated are going to
+
+1329
+00:49:02,219 --> 00:49:05,099
+my slack notifier so that process is
+
+1330
+00:49:05,099 --> 00:49:07,049
+taken care of in hard prometheus
+
+1331
+00:49:07,049 --> 00:49:09,539
+configuration by wiring up those routes
+
+1332
+00:49:09,539 --> 00:49:12,209
+and receivers in the alert manager but
+
+1333
+00:49:12,209 --> 00:49:13,739
+here we're calling them notifiers
+
+1334
+00:49:13,739 --> 00:49:15,599
+and then connecting them to these alert
+
+1335
+00:49:15,599 --> 00:49:18,269
+rules now back under notifiers here
+
+1336
+00:49:18,269 --> 00:49:20,969
+you'll note we have four pretty generic
+
+1337
+00:49:20,969 --> 00:49:23,160
+ones slack email page duty and WeChat
+
+1338
+00:49:23,160 --> 00:49:25,079
+there's also a nice web hook option that
+
+1339
+00:49:25,079 --> 00:49:26,999
+I wanted to touch on again this is an
+
+1340
+00:49:26,999 --> 00:49:28,529
+alert manager functionality that we're
+
+1341
+00:49:28,529 --> 00:49:30,630
+just bringing into Rancher but what's
+
+1342
+00:49:30,630 --> 00:49:32,339
+nice about the alert manager excuse me
+
+1343
+00:49:32,339 --> 00:49:34,469
+about the web hook functionality is that
+
+1344
+00:49:34,469 --> 00:49:36,660
+if none of these notifiers are
+
+1345
+00:49:36,660 --> 00:49:39,029
+functional for your organization you can
+
+1346
+00:49:39,029 --> 00:49:41,009
+always define a custom web hook to
+
+1347
+00:49:41,009 --> 00:49:42,809
+receive and then manipulate that alert
+
+1348
+00:49:42,809 --> 00:49:45,539
+so for instance I've had organizations
+
+1349
+00:49:45,539 --> 00:49:47,940
+who have had like a Microsoft team's
+
+1350
+00:49:47,940 --> 00:49:50,190
+interaction for instance they were able
+
+1351
+00:49:50,190 --> 00:49:52,709
+to build a little Python flask web
+
+1352
+00:49:52,709 --> 00:49:54,989
+application that then would receive the
+
+1353
+00:49:54,989 --> 00:49:57,779
+JSON of the alert at that web hook and
+
+1354
+00:49:57,779 --> 00:50:00,509
+then forward that using teams api's and
+
+1355
+00:50:00,509 --> 00:50:03,329
+send a team's notification so that's a
+
+1356
+00:50:03,329 --> 00:50:05,579
+good example of how to wire up on ranch
+
+1357
+00:50:05,579 --> 00:50:07,650
+or really alert manager notifications
+
+1358
+00:50:07,650 --> 00:50:09,569
+with a tool that may not necessarily be
+
+1359
+00:50:09,569 --> 00:50:14,130
+in that list okay that is that Rancher
+
+1360
+00:50:14,130 --> 00:50:17,219
+demo so what we just did Rancher deploys
+
+1361
+00:50:17,219 --> 00:50:19,920
+Prometheus anchor fana for us Rancher
+
+1362
+00:50:19,920 --> 00:50:21,599
+sets up those metrics and visualizations
+
+1363
+00:50:21,599 --> 00:50:23,729
+on our behalf and we saw that when we
+
+1364
+00:50:23,729 --> 00:50:25,349
+walked through the refining interface we
+
+1365
+00:50:25,349 --> 00:50:27,269
+had all those dashboards built all those
+
+1366
+00:50:27,269 --> 00:50:29,130
+graphs and visualizations were present
+
+1367
+00:50:29,130 --> 00:50:31,170
+now those visualizations are imported
+
+1368
+00:50:31,170 --> 00:50:33,660
+into the Rancher UI and we saw how they
+
+1369
+00:50:33,660 --> 00:50:35,400
+were done at the cluster level and at
+
+1370
+00:50:35,400 --> 00:50:37,229
+the workload level so if you recall we
+
+1371
+00:50:37,229 --> 00:50:39,359
+had that cluster dashboard page showing
+
+1372
+00:50:39,359 --> 00:50:42,449
+us at CD performance I'm showing us node
+
+1373
+00:50:42,449 --> 00:50:44,910
+metrics things like that but we also had
+
+1374
+00:50:44,910 --> 00:50:47,099
+metrics imported and visualized at the
+
+1375
+00:50:47,099 --> 00:50:48,930
+workload level showing resource
+
+1376
+00:50:48,930 --> 00:50:52,140
+utilization of independent pods we can
+
+1377
+00:50:52,140 --> 00:50:53,880
+configure alerting rules and notifiers
+
+1378
+00:50:53,880 --> 00:50:56,430
+in the rancher UI an API which we just
+
+1379
+00:50:56,430 --> 00:50:57,660
+walk through with creating
+
+1380
+00:50:57,660 --> 00:50:59,339
+notifiers creating an alert rule and
+
+1381
+00:50:59,339 --> 00:51:01,109
+connecting those two things together and
+
+1382
+00:51:01,109 --> 00:51:03,869
+then finally monitoring is available
+
+1383
+00:51:03,869 --> 00:51:06,089
+both at the cluster and project context
+
+1384
+00:51:06,089 --> 00:51:08,010
+so if you set up a kubernetes cluster to
+
+1385
+00:51:08,010 --> 00:51:10,260
+be a multi-tenant environment then you
+
+1386
+00:51:10,260 --> 00:51:12,660
+can set up monitoring for both of those
+
+1387
+00:51:12,660 --> 00:51:15,780
+contexts the cluster admin or a tenant
+
+1388
+00:51:15,780 --> 00:51:19,640
+inside that cluster so what's next for
+
+1389
+00:51:19,640 --> 00:51:23,640
+Rancher monitoring it's GA now so what I
+
+1390
+00:51:23,640 --> 00:51:25,170
+just showed you was a set of
+
+1391
+00:51:25,170 --> 00:51:26,309
+functionality that we've had actually
+
+1392
+00:51:26,309 --> 00:51:27,119
+for about a year now
+
+1393
+00:51:27,119 --> 00:51:29,579
+that came out in our 2.2 version which
+
+1394
+00:51:29,579 --> 00:51:31,200
+was released I believe last April or so
+
+1395
+00:51:31,200 --> 00:51:32,819
+so we're coming up on about a year now
+
+1396
+00:51:32,819 --> 00:51:34,859
+that monitoring functionality has been
+
+1397
+00:51:34,859 --> 00:51:37,980
+GA for quite a while what's missing from
+
+1398
+00:51:37,980 --> 00:51:40,440
+it is the ability to create custom
+
+1399
+00:51:40,440 --> 00:51:43,109
+metrics and persist them so when you
+
+1400
+00:51:43,109 --> 00:51:45,420
+deploy monitoring in a rancher
+
+1401
+00:51:45,420 --> 00:51:47,789
+environment you currently don't have the
+
+1402
+00:51:47,789 --> 00:51:49,829
+ability to set up your own custom
+
+1403
+00:51:49,829 --> 00:51:51,960
+metrics and collect them from your
+
+1404
+00:51:51,960 --> 00:51:54,119
+application endpoints so for instance if
+
+1405
+00:51:54,119 --> 00:51:56,819
+I build my own application and I use a
+
+1406
+00:51:56,819 --> 00:51:59,010
+Prometheus client to export a bunch of
+
+1407
+00:51:59,010 --> 00:52:00,270
+metrics from my application
+
+1408
+00:52:00,270 --> 00:52:02,309
+you cannot currently with Rancher
+
+1409
+00:52:02,309 --> 00:52:05,430
+monitoring siphon those metrics into the
+
+1410
+00:52:05,430 --> 00:52:08,339
+deployed Rancher Prometheus instance we
+
+1411
+00:52:08,339 --> 00:52:10,200
+are working on that though so I say soon
+
+1412
+00:52:10,200 --> 00:52:12,660
+with a little TM I don't have a road map
+
+1413
+00:52:12,660 --> 00:52:14,609
+or an estimated date for this but it's
+
+1414
+00:52:14,609 --> 00:52:15,960
+something we're really actively working
+
+1415
+00:52:15,960 --> 00:52:17,579
+on because obviously that's such a
+
+1416
+00:52:17,579 --> 00:52:19,799
+crucial point to have is the ability to
+
+1417
+00:52:19,799 --> 00:52:21,900
+collect your own custom metrics so it's
+
+1418
+00:52:21,900 --> 00:52:23,609
+coming soon I put the TM on there is
+
+1419
+00:52:23,609 --> 00:52:25,770
+just a funny little disclaimer but I
+
+1420
+00:52:25,770 --> 00:52:27,329
+don't know when but we are actively
+
+1421
+00:52:27,329 --> 00:52:29,099
+iterating on this and want to have that
+
+1422
+00:52:29,099 --> 00:52:31,579
+ability into the Rancher product soon
+
+1423
+00:52:31,579 --> 00:52:34,049
+finally multi cluster monitoring I'm
+
+1424
+00:52:34,049 --> 00:52:35,819
+gonna put a little maybe and a smiley
+
+1425
+00:52:35,819 --> 00:52:38,700
+face here currently within Rancher you
+
+1426
+00:52:38,700 --> 00:52:41,279
+can deploy monitoring on a per cluster
+
+1427
+00:52:41,279 --> 00:52:43,980
+or again per project basis now that's
+
+1428
+00:52:43,980 --> 00:52:45,720
+great except if you're running 400
+
+1429
+00:52:45,720 --> 00:52:47,640
+clusters and you want to have a cohesive
+
+1430
+00:52:47,640 --> 00:52:50,700
+dashboard for all of those clusters we
+
+1431
+00:52:50,700 --> 00:52:52,440
+are working on something with this so
+
+1432
+00:52:52,440 --> 00:52:54,210
+multi cluster monitoring is a maybe I
+
+1433
+00:52:54,210 --> 00:52:56,010
+don't know if it's gonna land I don't
+
+1434
+00:52:56,010 --> 00:52:57,660
+know when or where or how it's going to
+
+1435
+00:52:57,660 --> 00:52:59,700
+land but multi cluster monitoring is
+
+1436
+00:52:59,700 --> 00:53:00,720
+something we're definitely playing
+
+1437
+00:53:00,720 --> 00:53:03,240
+around with there's some cool projects
+
+1438
+00:53:03,240 --> 00:53:04,619
+out there from Prometheus that make this
+
+1439
+00:53:04,619 --> 00:53:06,450
+possible so we're exploring those
+
+1440
+00:53:06,450 --> 00:53:09,660
+options so where do you want to where do
+
+1441
+00:53:09,660 --> 00:53:10,589
+you want to get help if you want to
+
+1442
+00:53:10,589 --> 00:53:11,490
+learn more where do you want
+
+1443
+00:53:11,490 --> 00:53:13,350
+any of those things we have the rancher
+
+1444
+00:53:13,350 --> 00:53:15,300
+user slack so please join us slack
+
+1445
+00:53:15,300 --> 00:53:18,450
+rancher die Oh hop on there myself and
+
+1446
+00:53:18,450 --> 00:53:20,280
+other fuel engineers and other actually
+
+1447
+00:53:20,280 --> 00:53:22,140
+software and direct product engineers
+
+1448
+00:53:22,140 --> 00:53:24,750
+are available in that slack channel so
+
+1449
+00:53:24,750 --> 00:53:26,610
+post inside any of the public channels
+
+1450
+00:53:26,610 --> 00:53:28,500
+get some attention from other folks
+
+1451
+00:53:28,500 --> 00:53:30,300
+inside the Rancher community and of
+
+1452
+00:53:30,300 --> 00:53:31,800
+course Rancher employees and engineers
+
+1453
+00:53:31,800 --> 00:53:34,320
+themselves Rancher also has a super
+
+1454
+00:53:34,320 --> 00:53:36,720
+active forum so this is one of the most
+
+1455
+00:53:36,720 --> 00:53:38,280
+active forums I've seen in the tech
+
+1456
+00:53:38,280 --> 00:53:40,470
+community short of like the MSDN or
+
+1457
+00:53:40,470 --> 00:53:42,780
+whatever the Microsoft TechNet forums
+
+1458
+00:53:42,780 --> 00:53:45,000
+the rancher forms are a super active
+
+1459
+00:53:45,000 --> 00:53:46,140
+place to post for help
+
+1460
+00:53:46,140 --> 00:53:47,790
+our engineers are in their daily
+
+1461
+00:53:47,790 --> 00:53:50,610
+engaging with open source consumers with
+
+1462
+00:53:50,610 --> 00:53:52,619
+enterprise customers folks who need help
+
+1463
+00:53:52,619 --> 00:53:54,060
+we're doing product announcements all
+
+1464
+00:53:54,060 --> 00:53:56,210
+sorts of stuff inside the Rancher forums
+
+1465
+00:53:56,210 --> 00:53:58,200
+finally of course check out our github
+
+1466
+00:53:58,200 --> 00:53:58,980
+repository
+
+1467
+00:53:58,980 --> 00:54:01,380
+so that's github.com slash rancher slash
+
+1468
+00:54:01,380 --> 00:54:03,360
+Rancher so again that's the Rancher
+
+1469
+00:54:03,360 --> 00:54:06,869
+organization and the Rancher project or
+
+1470
+00:54:06,869 --> 00:54:09,420
+rather repository all of our issues are
+
+1471
+00:54:09,420 --> 00:54:11,730
+tracked there so if we have a sub
+
+1472
+00:54:11,730 --> 00:54:14,010
+project like Rancher slash I don't know
+
+1473
+00:54:14,010 --> 00:54:15,840
+monitoring for instance something like
+
+1474
+00:54:15,840 --> 00:54:17,910
+that we won't track issues there we
+
+1475
+00:54:17,910 --> 00:54:19,500
+track them directly a rancher slash
+
+1476
+00:54:19,500 --> 00:54:21,330
+furniture so if you have issues if you
+
+1477
+00:54:21,330 --> 00:54:23,130
+have feedback check us out on our github
+
+1478
+00:54:23,130 --> 00:54:25,650
+repository github.com slash rancher
+
+1479
+00:54:25,650 --> 00:54:28,200
+slash Rancher so thank you all for your
+
+1480
+00:54:28,200 --> 00:54:28,650
+time
+
+1481
+00:54:28,650 --> 00:54:30,810
+you can find me on github i'm github.com
+
+1482
+00:54:30,810 --> 00:54:33,330
+/e bauman i'm doing a bunch of cool
+
+1483
+00:54:33,330 --> 00:54:35,700
+stuff a cool thing called hobby farm a
+
+1484
+00:54:35,700 --> 00:54:37,200
+couple other different interesting
+
+1485
+00:54:37,200 --> 00:54:39,119
+projects i'm developing so please come
+
+1486
+00:54:39,119 --> 00:54:40,170
+check those out come give me some
+
+1487
+00:54:40,170 --> 00:54:41,940
+feedback on those you can find me on
+
+1488
+00:54:41,940 --> 00:54:43,470
+twitter and aim and be if you have any
+
+1489
+00:54:43,470 --> 00:54:45,780
+questions about this presentation and
+
+1490
+00:54:45,780 --> 00:54:47,100
+the interactivity anything you want to
+
+1491
+00:54:47,100 --> 00:54:48,990
+poke me about on Twitter find me there
+
+1492
+00:54:48,990 --> 00:54:51,090
+at aim and be and then of course please
+
+1493
+00:54:51,090 --> 00:54:53,040
+don't find me in real life that would be
+
+1494
+00:54:53,040 --> 00:54:55,380
+weird and creepy and probably also not
+
+1495
+00:54:55,380 --> 00:54:56,280
+allowed because we're supposed to
+
+1496
+00:54:56,280 --> 00:54:57,720
+quarantine and stay six feet apart so
+
+1497
+00:54:57,720 --> 00:54:59,520
+yeah thank you all for your time I
+
+1498
+00:54:59,520 --> 00:55:01,130
+really appreciate it
+
+1499
+00:55:01,130 --> 00:55:04,500
+Eamon thank you so much as Matt Matthew
+
+1500
+00:55:04,500 --> 00:55:07,080
+heard the beginning of this presentation
+
+1501
+00:55:07,080 --> 00:55:09,210
+a man awesome jobs so much territory
+
+1502
+00:55:09,210 --> 00:55:12,060
+covered and unsurprisingly there are
+
+1503
+00:55:12,060 --> 00:55:14,190
+there are a ton of questions and there's
+
+1504
+00:55:14,190 --> 00:55:16,730
+hundreds of people watching right now so
+
+1505
+00:55:16,730 --> 00:55:18,900
+popular topic so we're gonna try to get
+
+1506
+00:55:18,900 --> 00:55:22,470
+through these as best we can just so you
+
+1507
+00:55:22,470 --> 00:55:22,920
+know
+
+1508
+00:55:22,920 --> 00:55:24,930
+yawn also joins another
+
+1509
+00:55:24,930 --> 00:55:26,250
+our field engineers he's been doing a
+
+1510
+00:55:26,250 --> 00:55:28,440
+great job answering questions in the
+
+1511
+00:55:28,440 --> 00:55:33,000
+chat yeah we're gonna need a help
+
+1512
+00:55:33,000 --> 00:55:33,930
+because there's a ton of question so
+
+1513
+00:55:33,930 --> 00:55:36,089
+let's jump in here so here's this first
+
+1514
+00:55:36,089 --> 00:55:39,240
+Michael who says would it be possible to
+
+1515
+00:55:39,240 --> 00:55:41,760
+scrape individual metrics from other
+
+1516
+00:55:41,760 --> 00:55:44,220
+deployments as well with integrated
+
+1517
+00:55:44,220 --> 00:55:46,440
+monitoring let's assume for example I
+
+1518
+00:55:46,440 --> 00:55:49,050
+install and nginx deployment and want to
+
+1519
+00:55:49,050 --> 00:55:51,000
+scrape the metrics also to this ranch
+
+1520
+00:55:51,000 --> 00:55:51,990
+remote monitoring
+
+1521
+00:55:51,990 --> 00:55:55,109
+Prometheus install is that possible so I
+
+1522
+00:55:55,109 --> 00:55:57,119
+think that question may have been asked
+
+1523
+00:55:57,119 --> 00:55:58,680
+a little bit before I covered that we
+
+1524
+00:55:58,680 --> 00:56:00,690
+don't have that ability so we're working
+
+1525
+00:56:00,690 --> 00:56:02,970
+on that actively right now we can't
+
+1526
+00:56:02,970 --> 00:56:05,760
+scrape custom metrics from application
+
+1527
+00:56:05,760 --> 00:56:07,770
+endpoints it's just from those exporters
+
+1528
+00:56:07,770 --> 00:56:09,930
+that come with our deployment so again
+
+1529
+00:56:09,930 --> 00:56:11,609
+the node exporter and cube state and
+
+1530
+00:56:11,609 --> 00:56:12,180
+things like that
+
+1531
+00:56:12,180 --> 00:56:15,329
+we are working on that you are and I say
+
+1532
+00:56:15,329 --> 00:56:16,710
+this to encourage the point not to
+
+1533
+00:56:16,710 --> 00:56:19,349
+discourage your problem for billions
+
+1534
+00:56:19,349 --> 00:56:21,210
+person to ask for it which is great and
+
+1535
+00:56:21,210 --> 00:56:22,980
+that's perfect because that means it's
+
+1536
+00:56:22,980 --> 00:56:23,910
+something that the community really
+
+1537
+00:56:23,910 --> 00:56:25,380
+needs and really wants
+
+1538
+00:56:25,380 --> 00:56:28,980
+I'm so we're doing active work okay
+
+1539
+00:56:28,980 --> 00:56:30,690
+awesome thank you all right here's the
+
+1540
+00:56:30,690 --> 00:56:33,000
+next one this is from Andres who asks is
+
+1541
+00:56:33,000 --> 00:56:35,730
+there any chance of Windows metrics
+
+1542
+00:56:35,730 --> 00:56:38,730
+support like with the WMI exporter
+
+1543
+00:56:38,730 --> 00:56:40,400
+project
+
+1544
+00:56:40,400 --> 00:56:42,320
+I definitely think there's a chance for
+
+1545
+00:56:42,320 --> 00:56:44,960
+it but I hesitate to commit to anything
+
+1546
+00:56:44,960 --> 00:56:47,540
+because windows support within Rancher
+
+1547
+00:56:47,540 --> 00:56:51,200
+is both a new and be more on the limited
+
+1548
+00:56:51,200 --> 00:56:54,050
+side so particularly with windows
+
+1549
+00:56:54,050 --> 00:56:55,880
+containers they of course have to be
+
+1550
+00:56:55,880 --> 00:56:58,340
+tied to the underlying OS version and
+
+1551
+00:56:58,340 --> 00:57:02,390
+there's challenges with different tools
+
+1552
+00:57:02,390 --> 00:57:05,000
+with having different components being
+
+1553
+00:57:05,000 --> 00:57:07,420
+able to deploy to those windows nodes I
+
+1554
+00:57:07,420 --> 00:57:09,710
+certainly think the WMI exporter is a
+
+1555
+00:57:09,710 --> 00:57:11,240
+great project and it's it's something
+
+1556
+00:57:11,240 --> 00:57:13,700
+God loved us to take on I just don't
+
+1557
+00:57:13,700 --> 00:57:15,410
+know if we'll have it anytime soon
+
+1558
+00:57:15,410 --> 00:57:17,240
+there's a lot of other stuff with
+
+1559
+00:57:17,240 --> 00:57:20,120
+networking and container stuff left us
+
+1560
+00:57:20,120 --> 00:57:24,770
+all first you know I hear some
+
+1561
+00:57:24,770 --> 00:57:25,970
+background noise not sure if that's
+
+1562
+00:57:25,970 --> 00:57:28,760
+defects your honor or whatever but just
+
+1563
+00:57:28,760 --> 00:57:34,730
+say you know there's okay alright great
+
+1564
+00:57:34,730 --> 00:57:37,700
+so uh making himself known I love it
+
+1565
+00:57:37,700 --> 00:57:39,710
+okay so even here's the next one this is
+
+1566
+00:57:39,710 --> 00:57:41,600
+from Sergio who asks can all of this
+
+1567
+00:57:41,600 --> 00:57:43,970
+work on AWS Azure I'm assuming he means
+
+1568
+00:57:43,970 --> 00:57:46,790
+for imported clusters yes
+
+1569
+00:57:46,790 --> 00:57:49,490
+um so it'll work in both scenarios if
+
+1570
+00:57:49,490 --> 00:57:52,370
+you import a cluster into Rancher so
+
+1571
+00:57:52,370 --> 00:57:53,840
+that would be you know add cluster
+
+1572
+00:57:53,840 --> 00:57:56,270
+import it'll work in that scenario and
+
+1573
+00:57:56,270 --> 00:57:57,890
+it will also work in clusters that
+
+1574
+00:57:57,890 --> 00:57:59,990
+you've built using hosted kubernetes
+
+1575
+00:57:59,990 --> 00:58:02,450
+providers so if you use Rancher to build
+
+1576
+00:58:02,450 --> 00:58:04,190
+an a chaos cluster or your user answer
+
+1577
+00:58:04,190 --> 00:58:06,350
+to build any chaos cluster you can still
+
+1578
+00:58:06,350 --> 00:58:08,120
+deploy Prometheus and go final
+
+1579
+00:58:08,120 --> 00:58:11,660
+monitoring onto those clusters awesome
+
+1580
+00:58:11,660 --> 00:58:13,970
+thank you okay here's the next one this
+
+1581
+00:58:13,970 --> 00:58:16,820
+is from raju who says gives us a
+
+1582
+00:58:16,820 --> 00:58:19,130
+scenario he says let's say I have
+
+1583
+00:58:19,130 --> 00:58:21,800
+multi-tenancy setup using kubernetes
+
+1584
+00:58:21,800 --> 00:58:25,190
+namespaces as logical separation can we
+
+1585
+00:58:25,190 --> 00:58:27,470
+set up prometheus except to separate
+
+1586
+00:58:27,470 --> 00:58:30,470
+each tenant each tenants data logs into
+
+1587
+00:58:30,470 --> 00:58:33,470
+separate storage and groups and not MIT
+
+1588
+00:58:33,470 --> 00:58:36,470
+mix the metric the metric and the app
+
+1589
+00:58:36,470 --> 00:58:39,310
+logs and data
+
+1590
+00:58:41,220 --> 00:58:43,660
+I'm gonna be honest and say I don't know
+
+1591
+00:58:43,660 --> 00:58:47,980
+so I don't want to expound on a topic
+
+1592
+00:58:47,980 --> 00:58:49,329
+and you know snow you and tell you
+
+1593
+00:58:49,329 --> 00:58:51,069
+something I don't know I'd have to
+
+1594
+00:58:51,069 --> 00:58:53,349
+explore and see if that's possible I I
+
+1595
+00:58:53,349 --> 00:58:55,329
+would guess the Prometheus has that
+
+1596
+00:58:55,329 --> 00:58:58,450
+ability in Rancher it's done on a per
+
+1597
+00:58:58,450 --> 00:59:00,460
+project basis instead of a per namespace
+
+1598
+00:59:00,460 --> 00:59:03,280
+basis so you you get isolation by virtue
+
+1599
+00:59:03,280 --> 00:59:04,990
+of having two separate Prometheus
+
+1600
+00:59:04,990 --> 00:59:07,720
+instances now if you're doing one
+
+1601
+00:59:07,720 --> 00:59:09,190
+Prometheus instance with multiple
+
+1602
+00:59:09,190 --> 00:59:11,559
+namespaces I'm not exactly sure how the
+
+1603
+00:59:11,559 --> 00:59:14,050
+isolation works especially with regard
+
+1604
+00:59:14,050 --> 00:59:16,390
+to our back so I would have to find out
+
+1605
+00:59:16,390 --> 00:59:17,680
+and get back to you I don't know off the
+
+1606
+00:59:17,680 --> 00:59:19,119
+top of my head and I'm sorry I don't
+
+1607
+00:59:19,119 --> 00:59:21,910
+have a direct answer for you yeah no
+
+1608
+00:59:21,910 --> 00:59:23,380
+problem no problem okay here we go
+
+1609
+00:59:23,380 --> 00:59:26,170
+here's the next one this is from hi Mei
+
+1610
+00:59:26,170 --> 00:59:27,940
+who says and you might have answered
+
+1611
+00:59:27,940 --> 00:59:29,950
+this way says if you have running
+
+1612
+00:59:29,950 --> 00:59:32,349
+Griffin an instance can it be integrated
+
+1613
+00:59:32,349 --> 00:59:34,660
+with ranch or in some way unfortunately
+
+1614
+00:59:34,660 --> 00:59:38,500
+not so at the current date if you have a
+
+1615
+00:59:38,500 --> 00:59:40,210
+running Griffin instance it needs to
+
+1616
+00:59:40,210 --> 00:59:42,520
+remain separate we can't sort of consume
+
+1617
+00:59:42,520 --> 00:59:44,859
+existing instances with all the wiring
+
+1618
+00:59:44,859 --> 00:59:47,349
+up that we do there's a couple different
+
+1619
+00:59:47,349 --> 00:59:51,280
+reasons so first of all rancher needs to
+
+1620
+00:59:51,280 --> 00:59:54,040
+know where everything lives easily and
+
+1621
+00:59:54,040 --> 00:59:55,390
+have control over in case there
+
+1622
+00:59:55,390 --> 00:59:57,220
+configuration changes we need to make of
+
+1623
+00:59:57,220 --> 00:59:59,319
+Griffin to get it to integrate with
+
+1624
+00:59:59,319 --> 01:00:01,450
+Rancher and not only that it just helps
+
+1625
+01:00:01,450 --> 01:00:04,119
+with support variability too because the
+
+1626
+01:00:04,119 --> 01:00:05,710
+money-making arm of Rancher really is
+
+1627
+01:00:05,710 --> 01:00:07,390
+our support environment and our in our
+
+1628
+01:00:07,390 --> 01:00:09,640
+excellent support staff and we need to
+
+1629
+01:00:09,640 --> 01:00:11,980
+make sure that those folks can walk into
+
+1630
+01:00:11,980 --> 01:00:13,809
+a known variable when they're gonna be
+
+1631
+01:00:13,809 --> 01:00:15,040
+configuring and helping someone with
+
+1632
+01:00:15,040 --> 01:00:17,049
+their monitoring deployment whereas if
+
+1633
+01:00:17,049 --> 01:00:19,030
+crow fauna is independently deployed we
+
+1634
+01:00:19,030 --> 01:00:20,950
+can't make guarantees about if being
+
+1635
+01:00:20,950 --> 01:00:22,720
+deployed in a sane way or anything not
+
+1636
+01:00:22,720 --> 01:00:23,740
+that you would screwed up or anything
+
+1637
+01:00:23,740 --> 01:00:26,230
+just that you know with that support
+
+1638
+01:00:26,230 --> 01:00:29,349
+variability we have to limit how those
+
+1639
+01:00:29,349 --> 01:00:31,150
+are set up so it's actually feasible for
+
+1640
+01:00:31,150 --> 01:00:33,270
+our support engineers to do their jobs
+
+1641
+01:00:33,270 --> 01:00:36,339
+sure okay cool thank you all right
+
+1642
+01:00:36,339 --> 01:00:38,440
+here's next one is from Lexie who asks
+
+1643
+01:00:38,440 --> 01:00:41,319
+how do you add note names instead of
+
+1644
+01:00:41,319 --> 01:00:46,299
+node IP address on dashboards so that's
+
+1645
+01:00:46,299 --> 01:00:48,220
+gonna be by virtue of the metric that's
+
+1646
+01:00:48,220 --> 01:00:50,290
+being collected you'll probably be able
+
+1647
+01:00:50,290 --> 01:00:53,350
+to do a translation sort of operation by
+
+1648
+01:00:53,350 --> 01:00:56,050
+you know if this label equals ax then
+
+1649
+01:00:56,050 --> 01:00:59,140
+display Y right but that's all done by
+
+1650
+01:00:59,140 --> 01:01:00,610
+virtue of the metric that's being
+
+1651
+01:01:00,610 --> 01:01:02,680
+exported so for instance when we were
+
+1652
+01:01:02,680 --> 01:01:04,930
+talking about those different targets
+
+1653
+01:01:04,930 --> 01:01:06,940
+for metric collection some of them were
+
+1654
+01:01:06,940 --> 01:01:08,770
+based on IP address because the node
+
+1655
+01:01:08,770 --> 01:01:13,180
+exporter exposes a node port IP excuse
+
+1656
+01:01:13,180 --> 01:01:16,210
+me a node port for that metric endpoint
+
+1657
+01:01:16,210 --> 01:01:19,060
+and we address them by IP address some
+
+1658
+01:01:19,060 --> 01:01:21,370
+of that is done by virtue of like let's
+
+1659
+01:01:21,370 --> 01:01:23,020
+say the kubernetes cube state node
+
+1660
+01:01:23,020 --> 01:01:25,090
+exporter or an exporter
+
+1661
+01:01:25,090 --> 01:01:28,030
+let me I'm losing myself here some of
+
+1662
+01:01:28,030 --> 01:01:31,360
+that is by virtue of the cube state
+
+1663
+01:01:31,360 --> 01:01:34,630
+exporter which refers to notes on a name
+
+1664
+01:01:34,630 --> 01:01:37,840
+basis so a lot of it has to do with how
+
+1665
+01:01:37,840 --> 01:01:39,880
+the metrics are getting to Prometheus
+
+1666
+01:01:39,880 --> 01:01:41,740
+but I believe there is some label
+
+1667
+01:01:41,740 --> 01:01:43,990
+translation that can be done where you
+
+1668
+01:01:43,990 --> 01:01:46,210
+say you know if X then Y for deploying
+
+1669
+01:01:46,210 --> 01:01:50,140
+that sure ok yeah this is a business a
+
+1670
+01:01:50,140 --> 01:01:51,490
+marathon so what will pace ourselves
+
+1671
+01:01:51,490 --> 01:01:55,210
+these questions here this is from hope
+
+1672
+01:01:55,210 --> 01:01:56,680
+I'm not watching your name is from the
+
+1673
+01:01:56,680 --> 01:02:00,100
+all who says how do we align logging and
+
+1674
+01:02:00,100 --> 01:02:03,940
+metrics for troubleshooting core fauna
+
+1675
+01:02:03,940 --> 01:02:07,390
+is a great way to do that it is it 8 to
+
+1676
+01:02:07,390 --> 01:02:09,040
+use the word observability because
+
+1677
+01:02:09,040 --> 01:02:11,560
+reserve ability is such a large domain
+
+1678
+01:02:11,560 --> 01:02:14,020
+of knowledge and such a different
+
+1679
+01:02:14,020 --> 01:02:15,580
+concept than what we're talking about
+
+1680
+01:02:15,580 --> 01:02:18,490
+here but with graph on a having a data
+
+1681
+01:02:18,490 --> 01:02:22,060
+source of elastic search for example I
+
+1682
+01:02:22,060 --> 01:02:25,150
+can align a query that will pull
+
+1683
+01:02:25,150 --> 01:02:27,820
+information from Prometheus and from
+
+1684
+01:02:27,820 --> 01:02:30,670
+graph on ax excuse me and from elastic
+
+1685
+01:02:30,670 --> 01:02:32,680
+search using information that's common
+
+1686
+01:02:32,680 --> 01:02:34,810
+to both of those data sources so for
+
+1687
+01:02:34,810 --> 01:02:36,570
+instance one of those could be like
+
+1688
+01:02:36,570 --> 01:02:39,040
+maybe I want to grab logs from a
+
+1689
+01:02:39,040 --> 01:02:41,020
+particular node and correspond those
+
+1690
+01:02:41,020 --> 01:02:44,140
+logs to CPU utilization on a node well
+
+1691
+01:02:44,140 --> 01:02:46,750
+my query for exists for example in graph
+
+1692
+01:02:46,750 --> 01:02:49,690
+on ax can pull Prometheus CPU
+
+1693
+01:02:49,690 --> 01:02:52,420
+utilization stats for IP address
+
+1694
+01:02:52,420 --> 01:02:55,660
+10.10.5.3 I could combine that with
+
+1695
+01:02:55,660 --> 01:02:56,920
+another dashboard
+
+1696
+01:02:56,920 --> 01:02:58,480
+excuse me another panel on a dashboard
+
+1697
+01:02:58,480 --> 01:03:01,930
+that pulls log entries from a particular
+
+1698
+01:03:01,930 --> 01:03:03,400
+elastic search index
+
+1699
+01:03:03,400 --> 01:03:06,010
+maybe that indexes like Farah log syslog
+
+1700
+01:03:06,010 --> 01:03:06,760
+and
+
+1701
+01:03:06,760 --> 01:03:08,620
+we key it based on the IP address of the
+
+1702
+01:03:08,620 --> 01:03:11,170
+node so I would query against 10.10 down
+
+1703
+01:03:11,170 --> 01:03:13,420
+11 out 30 so then my dashboard would
+
+1704
+01:03:13,420 --> 01:03:15,790
+have like I'm seeing this visually in my
+
+1705
+01:03:15,790 --> 01:03:18,430
+mind here on the left hand side CPU
+
+1706
+01:03:18,430 --> 01:03:20,320
+utilization over a period of time and on
+
+1707
+01:03:20,320 --> 01:03:22,510
+the right the log entries for a period
+
+1708
+01:03:22,510 --> 01:03:24,640
+of time then the unifying factor between
+
+1709
+01:03:24,640 --> 01:03:26,470
+those two queries even though they're
+
+1710
+01:03:26,470 --> 01:03:28,570
+from different data sources is the IP
+
+1711
+01:03:28,570 --> 01:03:33,460
+address of that node 10.10 not 11.3 okay
+
+1712
+01:03:33,460 --> 01:03:34,000
+awesome
+
+1713
+01:03:34,000 --> 01:03:36,250
+thank you okay here's here's the next
+
+1714
+01:03:36,250 --> 01:03:40,120
+one this is from Pankaj who asks can we
+
+1715
+01:03:40,120 --> 01:03:43,090
+scrape any application pod or does it
+
+1716
+01:03:43,090 --> 01:03:44,860
+depend on how the application is
+
+1717
+01:03:44,860 --> 01:03:46,990
+developed in other words is it the
+
+1718
+01:03:46,990 --> 01:03:49,390
+developer's responsibility to provide a
+
+1719
+01:03:49,390 --> 01:03:51,580
+port or link for scrape to use for
+
+1720
+01:03:51,580 --> 01:03:54,430
+scraping it's the developer's
+
+1721
+01:03:54,430 --> 01:03:57,070
+responsibility so if we ignore Rancher
+
+1722
+01:03:57,070 --> 01:03:58,390
+monitoring for a second and we just
+
+1723
+01:03:58,390 --> 01:04:02,140
+think about Prometheus as an independent
+
+1724
+01:04:02,140 --> 01:04:04,630
+tool it is the responsibility of the
+
+1725
+01:04:04,630 --> 01:04:06,340
+application developer to integrate
+
+1726
+01:04:06,340 --> 01:04:08,740
+Prometheus into their application now
+
+1727
+01:04:08,740 --> 01:04:10,600
+that is if you want to see application
+
+1728
+01:04:10,600 --> 01:04:13,600
+level metrics specifically if you just
+
+1729
+01:04:13,600 --> 01:04:15,280
+want to see performance characteristics
+
+1730
+01:04:15,280 --> 01:04:17,170
+of the app like CPU and memory and
+
+1731
+01:04:17,170 --> 01:04:17,740
+things like that
+
+1732
+01:04:17,740 --> 01:04:19,540
+of course that's tracked automatically
+
+1733
+01:04:19,540 --> 01:04:22,750
+by that cube stain exporter but if
+
+1734
+01:04:22,750 --> 01:04:24,130
+you're interested in application
+
+1735
+01:04:24,130 --> 01:04:26,890
+specific metrics the developer needs to
+
+1736
+01:04:26,890 --> 01:04:29,820
+integrate that Prometheus Client SDK
+
+1737
+01:04:29,820 --> 01:04:32,800
+into the code in order to export the
+
+1738
+01:04:32,800 --> 01:04:34,810
+metrics that you're interested in in
+
+1739
+01:04:34,810 --> 01:04:40,840
+particular okay thank you ok here's the
+
+1740
+01:04:40,840 --> 01:04:42,940
+next one in it you might not be able to
+
+1741
+01:04:42,940 --> 01:04:45,610
+answer it because it's a bit complex in
+
+1742
+01:04:45,610 --> 01:04:47,770
+the description but we'll try this is
+
+1743
+01:04:47,770 --> 01:04:51,520
+from Jack who says here's the scenario I
+
+1744
+01:04:51,520 --> 01:04:52,900
+have two deployments
+
+1745
+01:04:52,900 --> 01:04:56,320
+I have deployment a and B with only one
+
+1746
+01:04:56,320 --> 01:04:59,080
+replicas each usually each deployment
+
+1747
+01:04:59,080 --> 01:05:02,970
+resource is limited to four geez memory
+
+1748
+01:05:02,970 --> 01:05:06,160
+if load is coming in to a and a is
+
+1749
+01:05:06,160 --> 01:05:09,790
+approaching four G can we trigger a cube
+
+1750
+01:05:09,790 --> 01:05:15,070
+CTL to resize a to six gigs and reduce B
+
+1751
+01:05:15,070 --> 01:05:18,900
+to two gigs for example
+
+1752
+01:05:20,940 --> 01:05:24,550
+I'm going to say yes but I say yes
+
+1753
+01:05:24,550 --> 01:05:27,910
+simply because all of the parts exist to
+
+1754
+01:05:27,910 --> 01:05:31,090
+do that not because I have a particular
+
+1755
+01:05:31,090 --> 01:05:35,200
+ranch or solution for it so the closest
+
+1756
+01:05:35,200 --> 01:05:36,940
+thing that we have for that sort of
+
+1757
+01:05:36,940 --> 01:05:39,760
+adjustment is ranchers horizontal pod
+
+1758
+01:05:39,760 --> 01:05:40,660
+auto-scaling
+
+1759
+01:05:40,660 --> 01:05:42,730
+which isn't really what he's looking for
+
+1760
+01:05:42,730 --> 01:05:44,800
+that's just scaling up and scaling down
+
+1761
+01:05:44,800 --> 01:05:46,350
+the number of replicas in a deployment
+
+1762
+01:05:46,350 --> 01:05:48,310
+but all of the bits of information
+
+1763
+01:05:48,310 --> 01:05:50,320
+exists there to write your own
+
+1764
+01:05:50,320 --> 01:05:52,720
+integration to accomplish this so if I
+
+1765
+01:05:52,720 --> 01:05:54,220
+were to do this off top my head it would
+
+1766
+01:05:54,220 --> 01:05:56,010
+be something like a little gold
+
+1767
+01:05:56,010 --> 01:06:00,910
+application that watches for utilization
+
+1768
+01:06:00,910 --> 01:06:04,030
+against a particular pod and then using
+
+1769
+01:06:04,030 --> 01:06:06,670
+kubernetes client go can adjust a
+
+1770
+01:06:06,670 --> 01:06:09,580
+resource reservation on the two
+
+1771
+01:06:09,580 --> 01:06:11,020
+different deployments that I care about
+
+1772
+01:06:11,020 --> 01:06:12,340
+so you'd almost end up writing your own
+
+1773
+01:06:12,340 --> 01:06:15,130
+controller for kubernetes it's a little
+
+1774
+01:06:15,130 --> 01:06:17,350
+complex and if there are projects out
+
+1775
+01:06:17,350 --> 01:06:19,390
+there that do this already and I'm sure
+
+1776
+01:06:19,390 --> 01:06:21,570
+there are I'm just not aware of them
+
+1777
+01:06:21,570 --> 01:06:24,340
+they're probably just to do but
+
+1778
+01:06:24,340 --> 01:06:25,480
+otherwise you'd be writing your own
+
+1779
+01:06:25,480 --> 01:06:27,280
+kubernetes controller to accomplish this
+
+1780
+01:06:27,280 --> 01:06:29,140
+which sounds like a lot of work at the
+
+1781
+01:06:29,140 --> 01:06:31,870
+outset but actually once you understand
+
+1782
+01:06:31,870 --> 01:06:33,760
+how the controller runtime and framework
+
+1783
+01:06:33,760 --> 01:06:35,650
+work it's not the worst thing in the
+
+1784
+01:06:35,650 --> 01:06:37,570
+world to do so I think you really could
+
+1785
+01:06:37,570 --> 01:06:38,860
+accomplish that if you spend some time
+
+1786
+01:06:38,860 --> 01:06:41,500
+either with the operator pattern or with
+
+1787
+01:06:41,500 --> 01:06:43,510
+Rancher zone we have a controller
+
+1788
+01:06:43,510 --> 01:06:45,610
+library called Wrangler that could help
+
+1789
+01:06:45,610 --> 01:06:47,530
+you accomplish this and basically just
+
+1790
+01:06:47,530 --> 01:06:49,150
+piece together those different bits of
+
+1791
+01:06:49,150 --> 01:06:50,920
+information yourself and set up that
+
+1792
+01:06:50,920 --> 01:06:53,380
+automation now again if something exists
+
+1793
+01:06:53,380 --> 01:06:55,210
+to do this and I'm just kind of you know
+
+1794
+01:06:55,210 --> 01:06:57,850
+spouting here without knowing please I
+
+1795
+01:06:57,850 --> 01:06:59,110
+encourage someone to let me know if that
+
+1796
+01:06:59,110 --> 01:07:00,640
+exists cuz that's cool an interesting
+
+1797
+01:07:00,640 --> 01:07:04,270
+problem okay sweet thank you alright
+
+1798
+01:07:04,270 --> 01:07:05,770
+here's the next one
+
+1799
+01:07:05,770 --> 01:07:09,160
+how would a migration from a dedicated
+
+1800
+01:07:09,160 --> 01:07:12,730
+Prometheus and Griffin Isetta to the
+
+1801
+01:07:12,730 --> 01:07:15,990
+ranchers build look like
+
+1802
+01:07:16,980 --> 01:07:20,920
+unfortunately it really wouldn't work we
+
+1803
+01:07:20,920 --> 01:07:23,800
+don't have the facilities in place to
+
+1804
+01:07:23,800 --> 01:07:28,900
+perform such a migration you wouldn't be
+
+1805
+01:07:28,900 --> 01:07:31,240
+able to retain the metrics between the
+
+1806
+01:07:31,240 --> 01:07:32,440
+records between the Promethean
+
+1807
+01:07:32,440 --> 01:07:35,790
+instances now one thing you could do is
+
+1808
+01:07:35,790 --> 01:07:38,290
+once we have deployed the ability to
+
+1809
+01:07:38,290 --> 01:07:40,839
+collect custom metrics you could have
+
+1810
+01:07:40,839 --> 01:07:43,750
+that first Prometheus instance export
+
+1811
+01:07:43,750 --> 01:07:45,339
+those metrics and have the second to
+
+1812
+01:07:45,339 --> 01:07:47,500
+rancher Prometheus instance import them
+
+1813
+01:07:47,500 --> 01:07:49,510
+there is that ability between Prometheus
+
+1814
+01:07:49,510 --> 01:07:51,690
+instances sort of to query one another
+
+1815
+01:07:51,690 --> 01:07:54,460
+but I don't have any migration ability
+
+1816
+01:07:54,460 --> 01:07:55,930
+today it's it would have to be a fresh
+
+1817
+01:07:55,930 --> 01:07:59,109
+deployment out of Rancher sure
+
+1818
+01:07:59,109 --> 01:08:01,300
+okay no problem okay here's the next one
+
+1819
+01:08:01,300 --> 01:08:04,690
+this is from Xavier Xavier who says does
+
+1820
+01:08:04,690 --> 01:08:07,480
+Rancher have a dashboard for alerts or
+
+1821
+01:08:07,480 --> 01:08:09,579
+do you need a graph on a dashboard for
+
+1822
+01:08:09,579 --> 01:08:12,940
+alerts or can't have both I don't
+
+1823
+01:08:12,940 --> 01:08:14,650
+Rancher does not have a dashboard for
+
+1824
+01:08:14,650 --> 01:08:16,540
+alerts you would either need a graph on
+
+1825
+01:08:16,540 --> 01:08:19,000
+a dashboard if you can build such a
+
+1826
+01:08:19,000 --> 01:08:20,560
+thing I don't know if you can I I don't
+
+1827
+01:08:20,560 --> 01:08:21,819
+I literally don't know it's on my head
+
+1828
+01:08:21,819 --> 01:08:25,989
+or just rely on like a web hook to
+
+1829
+01:08:25,989 --> 01:08:28,630
+receive those and display them in a
+
+1830
+01:08:28,630 --> 01:08:30,100
+format that's convenient for you but
+
+1831
+01:08:30,100 --> 01:08:31,509
+unfortunately we don't have a dashboard
+
+1832
+01:08:31,509 --> 01:08:34,150
+that displays you know running alerts at
+
+1833
+01:08:34,150 --> 01:08:37,779
+any given time sure okay no problem
+
+1834
+01:08:37,779 --> 01:08:39,609
+alright here's the next one this and
+
+1835
+01:08:39,609 --> 01:08:42,779
+this and if you need water
+
+1836
+01:08:42,839 --> 01:08:46,960
+alright okay cool okay okay here's the
+
+1837
+01:08:46,960 --> 01:08:49,690
+next one this is from Alexi he says how
+
+1838
+01:08:49,690 --> 01:08:53,049
+would I add ingress metrics like 4x x +
+
+1839
+01:08:53,049 --> 01:08:56,830
+5 5 X X errors to grow fauna that are
+
+1840
+01:08:56,830 --> 01:08:59,440
+specific to a project if ingress is
+
+1841
+01:08:59,440 --> 01:09:03,160
+common to several projects that's a good
+
+1842
+01:09:03,160 --> 01:09:10,000
+one that is a good one huh I wonder how
+
+1843
+01:09:10,000 --> 01:09:12,930
+you could do that because you would need
+
+1844
+01:09:12,930 --> 01:09:16,630
+you might be able to do it based on the
+
+1845
+01:09:16,630 --> 01:09:19,029
+hostname it would be a custom metric for
+
+1846
+01:09:19,029 --> 01:09:21,759
+sure but you might be able to do it
+
+1847
+01:09:21,759 --> 01:09:25,299
+based on the hostname or the path of the
+
+1848
+01:09:25,299 --> 01:09:27,520
+incoming request so you probably have to
+
+1849
+01:09:27,520 --> 01:09:31,060
+set up some sort of request logging
+
+1850
+01:09:31,060 --> 01:09:33,850
+within nginx in order to get you know
+
+1851
+01:09:33,850 --> 01:09:35,830
+that incoming request path and hostname
+
+1852
+01:09:35,830 --> 01:09:37,750
+and everything but once you have that
+
+1853
+01:09:37,750 --> 01:09:40,270
+entry you probably would be able to
+
+1854
+01:09:40,270 --> 01:09:42,489
+query for entries of a particular host
+
+1855
+01:09:42,489 --> 01:09:44,410
+name and again it would be super custom
+
+1856
+01:09:44,410 --> 01:09:45,819
+and that's something that come
+
+1857
+01:09:45,819 --> 01:09:47,920
+out of the box with rancher but I think
+
+1858
+01:09:47,920 --> 01:09:49,659
+if you're able to query on a based on
+
+1859
+01:09:49,659 --> 01:09:50,319
+the hostname
+
+1860
+01:09:50,319 --> 01:09:53,380
+generated by that log entry out of nginx
+
+1861
+01:09:53,380 --> 01:09:57,610
+you could probably accomplish that okay
+
+1862
+01:09:57,610 --> 01:09:58,780
+cool cool
+
+1863
+01:09:58,780 --> 01:10:02,260
+thank you okay this is I think you
+
+1864
+01:10:02,260 --> 01:10:03,940
+answered this in your demo already but
+
+1865
+01:10:03,940 --> 01:10:07,270
+he says how is installing prometheus by
+
+1866
+01:10:07,270 --> 01:10:09,460
+hand different than enabling cluster
+
+1867
+01:10:09,460 --> 01:10:13,719
+monitoring under tools and rancher so if
+
+1868
+01:10:13,719 --> 01:10:14,889
+you're looking for a difference there
+
+1869
+01:10:14,889 --> 01:10:17,829
+isn't a lot of one Prometheus is
+
+1870
+01:10:17,829 --> 01:10:20,590
+deployed by own chart when I enable
+
+1871
+01:10:20,590 --> 01:10:22,869
+monitoring inside Rancher and I'll see a
+
+1872
+01:10:22,869 --> 01:10:24,550
+lot of the heavy lifting within
+
+1873
+01:10:24,550 --> 01:10:26,800
+Prometheus is done for us and a lot of
+
+1874
+01:10:26,800 --> 01:10:29,440
+that's done for us by virtue of the
+
+1875
+01:10:29,440 --> 01:10:31,210
+exporters that are made available and
+
+1876
+01:10:31,210 --> 01:10:33,849
+Prometheus at his own just really great
+
+1877
+01:10:33,849 --> 01:10:35,860
+auto discovery capabilities when it's
+
+1878
+01:10:35,860 --> 01:10:38,409
+deployed inside a kubernetes cluster so
+
+1879
+01:10:38,409 --> 01:10:41,320
+really when we deploy monitoring in
+
+1880
+01:10:41,320 --> 01:10:43,599
+Rancher we're not heavily customizing
+
+1881
+01:10:43,599 --> 01:10:44,949
+Prometheus or anything like that
+
+1882
+01:10:44,949 --> 01:10:47,349
+it literally is and and I can show you
+
+1883
+01:10:47,349 --> 01:10:49,570
+if you're interested in another demo it
+
+1884
+01:10:49,570 --> 01:10:51,610
+literally is deploying that prometheus
+
+1885
+01:10:51,610 --> 01:10:53,560
+helm chart and then the real heavy
+
+1886
+01:10:53,560 --> 01:10:55,329
+customization comes in with them
+
+1887
+01:10:55,329 --> 01:10:58,060
+configuring alerts and notifiers and
+
+1888
+01:10:58,060 --> 01:10:59,889
+receivers and things like that but but
+
+1889
+01:10:59,889 --> 01:11:01,090
+otherwise you're right there's not a lot
+
+1890
+01:11:01,090 --> 01:11:02,530
+of a big difference it really is just
+
+1891
+01:11:02,530 --> 01:11:06,790
+that helm chart deployment okay sweet
+
+1892
+01:11:06,790 --> 01:11:10,179
+thank you okay let's see here's the next
+
+1893
+01:11:10,179 --> 01:11:13,210
+one this is from Randall who says if you
+
+1894
+01:11:13,210 --> 01:11:15,790
+use the ranch or sto integration I
+
+1895
+01:11:15,790 --> 01:11:17,530
+noticed that you get monitoring with
+
+1896
+01:11:17,530 --> 01:11:19,469
+Prometheus and grifone as a side effect
+
+1897
+01:11:19,469 --> 01:11:22,840
+is that the payload you get along with
+
+1898
+01:11:22,840 --> 01:11:25,060
+Sto mostly the same as what you get by
+
+1899
+01:11:25,060 --> 01:11:29,409
+doing monitoring as as you demoed yes so
+
+1900
+01:11:29,409 --> 01:11:33,310
+if you enable it you know in Rancher it
+
+1901
+01:11:33,310 --> 01:11:36,159
+literally calls Rancher API to deploy
+
+1902
+01:11:36,159 --> 01:11:38,199
+monitoring so it's not that it's similar
+
+1903
+01:11:38,199 --> 01:11:40,449
+it's literally exactly the same as
+
+1904
+01:11:40,449 --> 01:11:42,579
+deploying cluster monitoring and rancher
+
+1905
+01:11:42,579 --> 01:11:46,239
+we combine those two because in order to
+
+1906
+01:11:46,239 --> 01:11:49,719
+do certain aspects of sto functionality
+
+1907
+01:11:49,719 --> 01:11:52,329
+you need Prometheus and Ravana so it
+
+1908
+01:11:52,329 --> 01:11:53,889
+just made sense to deploy our own
+
+1909
+01:11:53,889 --> 01:11:55,929
+monitoring for that but it's literally
+
+1910
+01:11:55,929 --> 01:11:57,579
+exactly the same is going to cluster
+
+1911
+01:11:57,579 --> 01:11:59,500
+level monitoring and hitting enable you
+
+1912
+01:11:59,500 --> 01:11:59,739
+to
+
+1913
+01:11:59,739 --> 01:12:04,719
+do it by virtue of okay great thank you
+
+1914
+01:12:04,719 --> 01:12:07,480
+awesome all right here's the next one
+
+1915
+01:12:07,480 --> 01:12:10,780
+what KPIs and metrics come out of the
+
+1916
+01:12:10,780 --> 01:12:13,300
+box already to find it for a rancher RK
+
+1917
+01:12:13,300 --> 01:12:15,760
+and by environment do we get a default
+
+1918
+01:12:15,760 --> 01:12:19,570
+set of dashboards for example so with
+
+1919
+01:12:19,570 --> 01:12:21,190
+the monitoring deployment you definitely
+
+1920
+01:12:21,190 --> 01:12:22,989
+get a default set of dashboards in
+
+1921
+01:12:22,989 --> 01:12:26,880
+Rancher and I encourage you to to deploy
+
+1922
+01:12:26,880 --> 01:12:28,749
+Rancher it's a single node docker
+
+1923
+01:12:28,749 --> 01:12:30,489
+container instance and then try
+
+1924
+01:12:30,489 --> 01:12:32,110
+deploying monitoring if you've got the
+
+1925
+01:12:32,110 --> 01:12:34,119
+resources available and see what those
+
+1926
+01:12:34,119 --> 01:12:36,670
+dashboards are we surface a lot of
+
+1927
+01:12:36,670 --> 01:12:38,980
+information in them some of it may not
+
+1928
+01:12:38,980 --> 01:12:40,480
+make sense for your organization but a
+
+1929
+01:12:40,480 --> 01:12:42,099
+lot of it is important stuff like on
+
+1930
+01:12:42,099 --> 01:12:46,179
+Etsy DS G RPC rates Etsy keys rat for
+
+1931
+01:12:46,179 --> 01:12:49,090
+puzzles no metrics like CPU things like
+
+1932
+01:12:49,090 --> 01:12:51,400
+that those are kind of obvious KP
+
+1933
+01:12:51,400 --> 01:12:58,150
+there's not obvious performance we have
+
+1934
+01:12:58,150 --> 01:13:01,389
+those available in core fauna when it
+
+1935
+01:13:01,389 --> 01:13:03,999
+comes to specifically so I'm kind of
+
+1936
+01:13:03,999 --> 01:13:06,489
+taking this as a two-part question when
+
+1937
+01:13:06,489 --> 01:13:07,630
+it comes to ranch or tooling
+
+1938
+01:13:07,630 --> 01:13:09,340
+specifically like rancher it's dolphin
+
+1939
+01:13:09,340 --> 01:13:13,360
+rke those tools don't have a lot of
+
+1940
+01:13:13,360 --> 01:13:15,730
+metrics exported currently they were
+
+1941
+01:13:15,730 --> 01:13:16,420
+built
+
+1942
+01:13:16,420 --> 01:13:19,599
+Rancher was built and archaea was built
+
+1943
+01:13:19,599 --> 01:13:21,999
+kind of before Prometheus had taken hold
+
+1944
+01:13:21,999 --> 01:13:25,059
+as the default in our sort of
+
+1945
+01:13:25,059 --> 01:13:27,099
+conventional way to export and collect
+
+1946
+01:13:27,099 --> 01:13:31,030
+metrics from tooling and I I don't want
+
+1947
+01:13:31,030 --> 01:13:32,409
+to gloss over but just haven't gone back
+
+1948
+01:13:32,409 --> 01:13:36,389
+and really implemented it after the fact
+
+1949
+01:13:39,269 --> 01:13:41,650
+attention more than exporting those
+
+1950
+01:13:41,650 --> 01:13:43,630
+metrics that's not to say that we won't
+
+1951
+01:13:43,630 --> 01:13:45,550
+go back and add those pieces of
+
+1952
+01:13:45,550 --> 01:13:46,659
+functionality I think that's a very
+
+1953
+01:13:46,659 --> 01:13:49,389
+valuable exercise but with the workload
+
+1954
+01:13:49,389 --> 01:13:50,769
+that we have on a lot of other stuff
+
+1955
+01:13:50,769 --> 01:13:53,469
+which haven't up till now so kind of a
+
+1956
+01:13:53,469 --> 01:13:55,269
+two-part question there you know we
+
+1957
+01:13:55,269 --> 01:13:57,159
+deploy a lot of dashboards by default
+
+1958
+01:13:57,159 --> 01:13:58,960
+with monitoring I encourage you to take
+
+1959
+01:13:58,960 --> 01:14:00,159
+a look at them because there are some
+
+1960
+01:14:00,159 --> 01:14:02,249
+pretty obvious and some not so obvious
+
+1961
+01:14:02,249 --> 01:14:04,239
+dashboards and KPIs that are being
+
+1962
+01:14:04,239 --> 01:14:06,369
+visualized there but the rancher
+
+1963
+01:14:06,369 --> 01:14:08,710
+products themselves don't export a lot
+
+1964
+01:14:08,710 --> 01:14:12,880
+of metrics okay cool thank you
+
+1965
+01:14:12,880 --> 01:14:14,050
+okay here's the next one this is from
+
+1966
+01:14:14,050 --> 01:14:16,360
+Mohammed who says I've imported a
+
+1967
+01:14:16,360 --> 01:14:18,850
+cluster to rancher that CD is not being
+
+1968
+01:14:18,850 --> 01:14:20,770
+monitored Griffin has enabled in the
+
+1969
+01:14:20,770 --> 01:14:23,020
+scheduler and controller manager but the
+
+1970
+01:14:23,020 --> 01:14:26,290
+graph has no date no data any idea what
+
+1971
+01:14:26,290 --> 01:14:31,150
+issues might be might be um I can fathom
+
+1972
+01:14:31,150 --> 01:14:34,960
+a guess and it may be that on imported
+
+1973
+01:14:34,960 --> 01:14:36,909
+clusters because we don't know how add
+
+1974
+01:14:36,909 --> 01:14:39,909
+CD was set up finding those endpoints
+
+1975
+01:14:39,909 --> 01:14:41,770
+and being able to directly monitor them
+
+1976
+01:14:41,770 --> 01:14:44,320
+isn't the easiest it sounds simple but
+
+1977
+01:14:44,320 --> 01:14:46,590
+it isn't the easiest thing in the world
+
+1978
+01:14:46,590 --> 01:14:49,330
+that may just be a feature that lacks
+
+1979
+01:14:49,330 --> 01:14:51,810
+inside imported clusters for monitoring
+
+1980
+01:14:51,810 --> 01:14:54,250
+imported clusters have the additional
+
+1981
+01:14:54,250 --> 01:14:55,960
+headache of not being able to do it CD
+
+1982
+01:14:55,960 --> 01:14:59,070
+snapshots or any of that sort of thing a
+
+1983
+01:14:59,070 --> 01:15:01,300
+lot of it also has to do with the
+
+1984
+01:15:01,300 --> 01:15:02,830
+variability in which a CD can be
+
+1985
+01:15:02,830 --> 01:15:05,320
+deployed in imported clusters like for
+
+1986
+01:15:05,320 --> 01:15:07,179
+instance a perfectly valid deployment
+
+1987
+01:15:07,179 --> 01:15:08,980
+method of kubernetes is to have a
+
+1988
+01:15:08,980 --> 01:15:12,340
+completely external at CDE data store
+
+1989
+01:15:12,340 --> 01:15:16,030
+now with our ke we deploy at CD as a set
+
+1990
+01:15:16,030 --> 01:15:18,310
+of containers on to the nodes themselves
+
+1991
+01:15:18,310 --> 01:15:20,530
+and because we have control over that we
+
+1992
+01:15:20,530 --> 01:15:22,840
+can deploy the certs necessary for it C
+
+1993
+01:15:22,840 --> 01:15:24,280
+communication and things like that
+
+1994
+01:15:24,280 --> 01:15:26,980
+we don't have access necessarily to
+
+1995
+01:15:26,980 --> 01:15:29,320
+those with an imported cluster so it's
+
+1996
+01:15:29,320 --> 01:15:34,060
+almost really hard actually to to cover
+
+1997
+01:15:34,060 --> 01:15:36,280
+all the bases in all the different ways
+
+1998
+01:15:36,280 --> 01:15:38,590
+that kubernetes could be opted up to n
+
+1999
+01:15:38,590 --> 01:15:40,690
+CD and imported clusters but I think it
+
+2000
+01:15:40,690 --> 01:15:42,940
+was easier at the time to just say no
+
+2001
+01:15:42,940 --> 01:15:45,699
+we're not gonna export at CD metrics you
+
+2002
+01:15:45,699 --> 01:15:48,090
+know and collect them with commedia s--
+
+2003
+01:15:48,090 --> 01:15:50,710
+okay okay cool
+
+2004
+01:15:50,710 --> 01:15:52,510
+all right couple more we'll take we're
+
+2005
+01:15:52,510 --> 01:15:54,850
+near the end of our scheduled time and I
+
+2006
+01:15:54,850 --> 01:15:56,949
+want to be respectful of your time Eamon
+
+2007
+01:15:56,949 --> 01:15:58,389
+so take a couple more I think we've
+
+2008
+01:15:58,389 --> 01:15:59,670
+gotten to many many of the questions
+
+2009
+01:15:59,670 --> 01:16:02,469
+John thank you so much again for jumping
+
+2010
+01:16:02,469 --> 01:16:03,969
+on here and answering some it directly
+
+2011
+01:16:03,969 --> 01:16:07,300
+in the chat thank you okay next one yeah
+
+2012
+01:16:07,300 --> 01:16:08,650
+here's the next one this is from Steve
+
+2013
+01:16:08,650 --> 01:16:11,320
+who says is another troubleshooting
+
+2014
+01:16:11,320 --> 01:16:14,560
+question he says I saw in quotes
+
+2015
+01:16:14,560 --> 01:16:17,139
+monitoring API is not ready in the top
+
+2016
+01:16:17,139 --> 01:16:20,860
+right corner on my rancher 2.3.4 so
+
+2017
+01:16:20,860 --> 01:16:23,199
+Ravana has disappeared how do I enable
+
+2018
+01:16:23,199 --> 01:16:26,670
+it monitoring API is not
+
+2019
+01:16:26,670 --> 01:16:31,200
+typically indicates an issue with either
+
+2020
+01:16:31,200 --> 01:16:33,760
+and this is the most common instance
+
+2021
+01:16:33,760 --> 01:16:36,460
+with grief is being deployed itself go
+
+2022
+01:16:36,460 --> 01:16:38,860
+into your system project inside that
+
+2023
+01:16:38,860 --> 01:16:40,990
+cluster and take a look at previous
+
+2024
+01:16:40,990 --> 01:16:43,000
+deployment I think you may find that
+
+2025
+01:16:43,000 --> 01:16:44,620
+there are issues with that deployment
+
+2026
+01:16:44,620 --> 01:16:46,720
+such that the Prometheus API isn't
+
+2027
+01:16:46,720 --> 01:16:48,700
+available and you'll probably have some
+
+2028
+01:16:48,700 --> 01:16:49,840
+things to resolve there like for
+
+2029
+01:16:49,840 --> 01:16:53,110
+instance if people persistent volumes
+
+2030
+01:16:53,110 --> 01:16:55,150
+and persistent volumes aren't aren't
+
+2031
+01:16:55,150 --> 01:16:56,890
+available in your cluster that
+
+2032
+01:16:56,890 --> 01:16:58,600
+monitoring API won't ever become ready
+
+2033
+01:16:58,600 --> 01:17:00,100
+because the Prometheus deployment is
+
+2034
+01:17:00,100 --> 01:17:02,380
+never healthy right so go into that
+
+2035
+01:17:02,380 --> 01:17:04,180
+system project take a look at that
+
+2036
+01:17:04,180 --> 01:17:05,440
+Prometheus deployment I think you might
+
+2037
+01:17:05,440 --> 01:17:10,290
+find some issues there ok sweet awesome
+
+2038
+01:17:10,290 --> 01:17:13,240
+alright let's see more questions
+
+2039
+01:17:13,240 --> 01:17:16,270
+this one is from Steven you ask what are
+
+2040
+01:17:16,270 --> 01:17:20,460
+the monitoring layers of Griffin oh I
+
+2041
+01:17:20,460 --> 01:17:24,490
+guess I'm not sure what that what that
+
+2042
+01:17:24,490 --> 01:17:27,900
+question really means monitoring layers
+
+2043
+01:17:27,900 --> 01:17:30,040
+there's a few different pieces to
+
+2044
+01:17:30,040 --> 01:17:33,910
+gravano so there's the dashboards which
+
+2045
+01:17:33,910 --> 01:17:37,240
+are collections of graphs there are
+
+2046
+01:17:37,240 --> 01:17:40,330
+graphs which are visualizations of
+
+2047
+01:17:40,330 --> 01:17:43,210
+metrics and those metrics come from
+
+2048
+01:17:43,210 --> 01:17:45,520
+different data sources and data sources
+
+2049
+01:17:45,520 --> 01:17:48,100
+are where the metrics are stored so I
+
+2050
+01:17:48,100 --> 01:17:50,110
+guess in that that layer approach and
+
+2051
+01:17:50,110 --> 01:17:53,200
+you have a cron instance and you connect
+
+2052
+01:17:53,200 --> 01:17:55,840
+Ravana to data sources and data sources
+
+2053
+01:17:55,840 --> 01:17:57,490
+will be things like of course Prometheus
+
+2054
+01:17:57,490 --> 01:17:59,890
+but then sequel and elasticsearch and
+
+2055
+01:17:59,890 --> 01:18:03,340
+things like that thank you there you can
+
+2056
+01:18:03,340 --> 01:18:06,100
+build visualizations nose then
+
+2057
+01:18:06,100 --> 01:18:09,580
+visualizations dashboards which are just
+
+2058
+01:18:09,580 --> 01:18:11,500
+collections of those visualizations and
+
+2059
+01:18:11,500 --> 01:18:13,090
+a way to display them in the griffon
+
+2060
+01:18:13,090 --> 01:18:15,520
+interface I hope that's the answer the
+
+2061
+01:18:15,520 --> 01:18:17,830
+person is looking for it was kind of
+
+2062
+01:18:17,830 --> 01:18:20,560
+hand waving my part yeah no no no
+
+2063
+01:18:20,560 --> 01:18:22,750
+problem ask us again if you if you need
+
+2064
+01:18:22,750 --> 01:18:26,140
+or jump on one slack to ask more let's
+
+2065
+01:18:26,140 --> 01:18:27,190
+see I think we'll take one more question
+
+2066
+01:18:27,190 --> 01:18:30,130
+this is from raju who says is there
+
+2067
+01:18:30,130 --> 01:18:32,260
+support and i'm assuming he means in
+
+2068
+01:18:32,260 --> 01:18:34,540
+this in this amount of monitoring i've
+
+2069
+01:18:34,540 --> 01:18:35,650
+been talking about is their support for
+
+2070
+01:18:35,650 --> 01:18:38,650
+apps running on on net core three net
+
+2071
+01:18:38,650 --> 01:18:40,849
+core three
+
+2072
+01:18:40,849 --> 01:18:44,090
+with Rancher specific monitoring that's
+
+2073
+01:18:44,090 --> 01:18:46,239
+gonna be another one of those cases were
+
+2074
+01:18:46,239 --> 01:18:50,900
+supporting custom metrics yet now does
+
+2075
+01:18:50,900 --> 01:18:52,730
+have the ability to collect metrics um
+
+2076
+01:18:52,730 --> 01:18:54,710
+and I I'm almost a hundred percent sure
+
+2077
+01:18:54,710 --> 01:18:56,210
+you know what actually I'm sharing my
+
+2078
+01:18:56,210 --> 01:18:57,800
+screen let's take a look together and
+
+2079
+01:18:57,800 --> 01:18:59,060
+find out because I believe that is the
+
+2080
+01:18:59,060 --> 01:19:04,699
+case me do to do yes it's a great
+
+2081
+01:19:04,699 --> 01:19:08,030
+tragedy monitoring system so we go Docs
+
+2082
+01:19:08,030 --> 01:19:12,409
+we go instrumenting client libraries yes
+
+2083
+01:19:12,409 --> 01:19:17,000
+so dotnet c-sharp there is a Prometheus
+
+2084
+01:19:17,000 --> 01:19:19,790
+dinette client library so we can pull
+
+2085
+01:19:19,790 --> 01:19:21,770
+metrics from within done and
+
+2086
+01:19:21,770 --> 01:19:23,750
+applications know whether this is just
+
+2087
+01:19:23,750 --> 01:19:25,909
+standard net or this is that core I
+
+2088
+01:19:25,909 --> 01:19:29,000
+can't tell you okay look at that targets
+
+2089
+01:19:29,000 --> 01:19:31,040
+down that courts before no so you would
+
+2090
+01:19:31,040 --> 01:19:32,750
+be able to collect metrics from inside
+
+2091
+01:19:32,750 --> 01:19:38,060
+your dotnet application now that's
+
+2092
+01:19:38,060 --> 01:19:40,460
+Prometheus functionality specifically
+
+2093
+01:19:40,460 --> 01:19:42,860
+Rancher again doesn't have that custom
+
+2094
+01:19:42,860 --> 01:19:45,230
+metrics option yet but what it does it
+
+2095
+01:19:45,230 --> 01:19:46,670
+will be able to take advantage of that
+
+2096
+01:19:46,670 --> 01:19:51,320
+application endpoint awesome thanks so
+
+2097
+01:19:51,320 --> 01:19:53,420
+much Tim okay well I think we'll we'll
+
+2098
+01:19:53,420 --> 01:19:56,329
+end it there because we're just we're
+
+2099
+01:19:56,329 --> 01:19:58,760
+just right at our time and there's a
+
+2100
+01:19:58,760 --> 01:19:59,989
+couple of questions that we haven't
+
+2101
+01:19:59,989 --> 01:20:01,909
+quite gotten to so please ask them come
+
+2102
+01:20:01,909 --> 01:20:03,820
+on slack reach out reach out to us there
+
+2103
+01:20:03,820 --> 01:20:07,550
+anything else you want to share with us
+
+2104
+01:20:07,550 --> 01:20:11,630
+Eamonn before we wrap up only that ranch
+
+2105
+01:20:11,630 --> 01:20:13,400
+has got a lot of other cool stuff in the
+
+2106
+01:20:13,400 --> 01:20:15,020
+pipeline and other projects that are not
+
+2107
+01:20:15,020 --> 01:20:16,790
+our core Rancher offering I mean we're
+
+2108
+01:20:16,790 --> 01:20:18,860
+we're well known of course for our
+
+2109
+01:20:18,860 --> 01:20:20,900
+namesake product you know the rancher
+
+2110
+01:20:20,900 --> 01:20:23,150
+tooling to deploy Prometheus or excuse
+
+2111
+01:20:23,150 --> 01:20:25,219
+me deploy kubernetes clusters but we
+
+2112
+01:20:25,219 --> 01:20:26,989
+also have a lot a lot a lot of other
+
+2113
+01:20:26,989 --> 01:20:29,599
+cool stuff going on projects like k3s
+
+2114
+01:20:29,599 --> 01:20:33,079
+k3o has projects like Rio we're
+
+2115
+01:20:33,079 --> 01:20:34,780
+deploying all sorts of different things
+
+2116
+01:20:34,780 --> 01:20:37,400
+in the open-source community and I
+
+2117
+01:20:37,400 --> 01:20:39,380
+really encourage you to check out the
+
+2118
+01:20:39,380 --> 01:20:41,389
+work that we're doing on our
+
+2119
+01:20:41,389 --> 01:20:44,300
+organization so github.com slash rancher
+
+2120
+01:20:44,300 --> 01:20:46,099
+there's a whole host of projects
+
+2121
+01:20:46,099 --> 01:20:48,469
+underneath there as well as different
+
+2122
+01:20:48,469 --> 01:20:49,790
+engineers in the organization are
+
+2123
+01:20:49,790 --> 01:20:51,590
+building their own open-source tooling
+
+2124
+01:20:51,590 --> 01:20:52,639
+so we are
+
+2125
+01:20:52,639 --> 01:20:55,820
+huge contributor literally 99% of the
+
+2126
+01:20:55,820 --> 01:20:57,860
+things we do are open source so check
+
+2127
+01:20:57,860 --> 01:20:59,510
+out everything to do with the rancher
+
+2128
+01:20:59,510 --> 01:21:02,869
+ecosystem awesome thanks so much hey man
+
+2129
+01:21:02,869 --> 01:21:05,269
+okay I think we'll end it there thanks
+
+2130
+01:21:05,269 --> 01:21:06,649
+again everybody thinks your
+
+2131
+01:21:06,649 --> 01:21:08,630
+participation fantastic questions keeps
+
+2132
+01:21:08,630 --> 01:21:10,669
+us on our toes and if your question did
+
+2133
+01:21:10,669 --> 01:21:12,649
+not get a there were quite a few that
+
+2134
+01:21:12,649 --> 01:21:14,899
+came in please reach out to us on slack
+
+2135
+01:21:14,899 --> 01:21:19,729
+or email we're happy to respond and you
+
+2136
+01:21:19,729 --> 01:21:21,979
+know participate however we can help you
+
+2137
+01:21:21,979 --> 01:21:25,010
+um yon thanks again as well and like I
+
+2138
+01:21:25,010 --> 01:21:26,630
+said this session was recorded so we
+
+2139
+01:21:26,630 --> 01:21:28,939
+will be posting the recording on YouTube
+
+2140
+01:21:28,939 --> 01:21:30,739
+we'll be emailing it to you as well
+
+2141
+01:21:30,739 --> 01:21:33,320
+along with the slides and any other
+
+2142
+01:21:33,320 --> 01:21:36,169
+files that Amon wants to include and and
+
+2143
+01:21:36,169 --> 01:21:37,610
+that's it thanks everybody we'll see you
+
+2144
+01:21:37,610 --> 01:21:39,469
+on the next training alright have a good
+
+2145
+01:21:39,469 --> 01:21:41,659
+week thanks everybody
+
+2146
+01:21:41,659 --> 01:21:43,959
+take care

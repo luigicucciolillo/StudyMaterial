@@ -1,0 +1,8887 @@
+1
+00:00:03,230 --> 00:00:05,840
+hey everybody welcome to today's
+
+2
+00:00:05,840 --> 00:00:08,180
+kubernetes masterclass really happy to
+
+3
+00:00:08,180 --> 00:00:10,969
+have you all joining us today kind of as
+
+4
+00:00:10,969 --> 00:00:13,219
+usual we have just a massive number of
+
+5
+00:00:13,219 --> 00:00:15,500
+people who are interested in this topic
+
+6
+00:00:15,500 --> 00:00:17,480
+and there is a lot to go over so we're
+
+7
+00:00:17,480 --> 00:00:19,699
+gonna we're gonna dive right in here but
+
+8
+00:00:19,699 --> 00:00:20,900
+while we're we're just at the beginning
+
+9
+00:00:20,900 --> 00:00:22,820
+I want you all to know that this session
+
+10
+00:00:22,820 --> 00:00:25,699
+is being recorded and you will get the
+
+11
+00:00:25,699 --> 00:00:28,279
+recording and the slides after the
+
+12
+00:00:28,279 --> 00:00:29,449
+training and we're talking about
+
+13
+00:00:29,449 --> 00:00:31,220
+understanding and implementing service
+
+14
+00:00:31,220 --> 00:00:33,140
+mesh today and there's a lot to go over
+
+15
+00:00:33,140 --> 00:00:35,090
+so let's let's jump on in as a way of
+
+16
+00:00:35,090 --> 00:00:36,440
+introduction my name is Matthew Shearer
+
+17
+00:00:36,440 --> 00:00:38,780
+marketing manager here at Rancher I
+
+18
+00:00:38,780 --> 00:00:41,570
+helped put on these advanced trainings
+
+19
+00:00:41,570 --> 00:00:44,000
+and our intro trainings as well which
+
+20
+00:00:44,000 --> 00:00:45,500
+I'll talk about a little bit more as we
+
+21
+00:00:45,500 --> 00:00:47,960
+go please use me as like a point of
+
+22
+00:00:47,960 --> 00:00:50,329
+contact a resource at Rancho I'll do my
+
+23
+00:00:50,329 --> 00:00:52,309
+absolute best to respond to everybody
+
+24
+00:00:52,309 --> 00:00:54,559
+you can reach me on the ranch or user
+
+25
+00:00:54,559 --> 00:00:56,269
+slack which I'll also talk about in a
+
+26
+00:00:56,269 --> 00:00:59,899
+moment a little bit more and on email so
+
+27
+00:00:59,899 --> 00:01:02,480
+don't hesitate to reach out but the man
+
+28
+00:01:02,480 --> 00:01:04,430
+who's really gonna be doing the heavy
+
+29
+00:01:04,430 --> 00:01:07,310
+lifting today is is Eamonn feel engineer
+
+30
+00:01:07,310 --> 00:01:09,140
+here at rancher Amon are you are you on
+
+31
+00:01:09,140 --> 00:01:11,630
+the line are you there I think I'm here
+
+32
+00:01:11,630 --> 00:01:13,490
+good morning everyone huh all right
+
+33
+00:01:13,490 --> 00:01:15,080
+awesome I'll let Amon introduce himself
+
+34
+00:01:15,080 --> 00:01:16,940
+a little bit more as we go I also want
+
+35
+00:01:16,940 --> 00:01:19,190
+to give a big shout-out to a couple
+
+36
+00:01:19,190 --> 00:01:22,640
+engineer other engineers who stepped up
+
+37
+00:01:22,640 --> 00:01:25,280
+to help us out Jason and Sheldon because
+
+38
+00:01:25,280 --> 00:01:27,590
+we have a lot of people on and we want
+
+39
+00:01:27,590 --> 00:01:29,120
+to absolutely be responsive to
+
+40
+00:01:29,120 --> 00:01:31,220
+everyone's questions make sure that you
+
+41
+00:01:31,220 --> 00:01:33,710
+all get what you came here for so on
+
+42
+00:01:33,710 --> 00:01:35,840
+that note we have you know about 75
+
+43
+00:01:35,840 --> 00:01:38,120
+minutes scheduled we might go a little
+
+44
+00:01:38,120 --> 00:01:41,000
+bit long if needed because you might
+
+45
+00:01:41,000 --> 00:01:42,670
+have questions or for whatever reason
+
+46
+00:01:42,670 --> 00:01:45,380
+again this is meant to be responsive to
+
+47
+00:01:45,380 --> 00:01:48,320
+what you all want to learn so please do
+
+48
+00:01:48,320 --> 00:01:50,810
+put your questions in the chat ask
+
+49
+00:01:50,810 --> 00:01:53,900
+passive questions that you do have we
+
+50
+00:01:53,900 --> 00:01:56,240
+just ask that you keep them to the best
+
+51
+00:01:56,240 --> 00:01:58,460
+of your ability sort of on topic if for
+
+52
+00:01:58,460 --> 00:01:59,780
+whatever reason they're a little bit
+
+53
+00:01:59,780 --> 00:02:02,690
+outside the scope of the of the training
+
+54
+00:02:02,690 --> 00:02:04,550
+then we might refer you to another
+
+55
+00:02:04,550 --> 00:02:07,850
+resource we do have you know fantastic
+
+56
+00:02:07,850 --> 00:02:10,429
+Doc's other training sessions and things
+
+57
+00:02:10,429 --> 00:02:13,310
+like that that we can point you to go to
+
+58
+00:02:13,310 --> 00:02:15,469
+webinar has a really cool chat feature
+
+59
+00:02:15,469 --> 00:02:16,940
+so just put your question
+
+60
+00:02:16,940 --> 00:02:18,680
+into that tab and we will get to them as
+
+61
+00:02:18,680 --> 00:02:21,770
+we are able to will also have a lot of
+
+62
+00:02:21,770 --> 00:02:23,660
+time scheduled at the end to just answer
+
+63
+00:02:23,660 --> 00:02:26,030
+you know all the questions aloud for
+
+64
+00:02:26,030 --> 00:02:28,160
+everybody's benefit so on that note if
+
+65
+00:02:28,160 --> 00:02:29,960
+for whatever reason you want your
+
+66
+00:02:29,960 --> 00:02:32,480
+question to be private just let us know
+
+67
+00:02:32,480 --> 00:02:34,550
+otherwise we will we will answer it
+
+68
+00:02:34,550 --> 00:02:36,590
+aloud for everyone's benefit because
+
+69
+00:02:36,590 --> 00:02:39,680
+this is educational as I said in the
+
+70
+00:02:39,680 --> 00:02:40,960
+beginning this session is being recorded
+
+71
+00:02:40,960 --> 00:02:44,150
+we put all of our sessions all of our
+
+72
+00:02:44,150 --> 00:02:46,370
+trainings on YouTube so you can check
+
+73
+00:02:46,370 --> 00:02:48,020
+them out there on the rancher youtube's
+
+74
+00:02:48,020 --> 00:02:50,270
+channel we go have trainings that go
+
+75
+00:02:50,270 --> 00:02:52,400
+back you know a couple years we put our
+
+76
+00:02:52,400 --> 00:02:53,870
+online meetups and our intro trainings
+
+77
+00:02:53,870 --> 00:02:56,630
+there so there is just a ton of learning
+
+78
+00:02:56,630 --> 00:03:00,080
+available and as I mentioned there is a
+
+79
+00:03:00,080 --> 00:03:02,510
+slack channel just for these master
+
+80
+00:03:02,510 --> 00:03:04,790
+classes where we can post slides or you
+
+81
+00:03:04,790 --> 00:03:06,220
+know answer some additional questions
+
+82
+00:03:06,220 --> 00:03:09,620
+later on but rancher user slack is a
+
+83
+00:03:09,620 --> 00:03:12,260
+huge huge community there are thousands
+
+84
+00:03:12,260 --> 00:03:15,170
+of members and hundreds of people asking
+
+85
+00:03:15,170 --> 00:03:16,760
+and answering questions every day our
+
+86
+00:03:16,760 --> 00:03:18,920
+engineers are on there as well so if
+
+87
+00:03:18,920 --> 00:03:20,000
+you're not you know part of the
+
+88
+00:03:20,000 --> 00:03:21,350
+community I think many of the people
+
+89
+00:03:21,350 --> 00:03:23,300
+here already are but if you're not
+
+90
+00:03:23,300 --> 00:03:26,209
+highly recommend joining and answering
+
+91
+00:03:26,209 --> 00:03:27,440
+and asking your questions they aren't
+
+92
+00:03:27,440 --> 00:03:30,440
+just getting plugged in and finally
+
+93
+00:03:30,440 --> 00:03:32,060
+there are a lot of other fantastic
+
+94
+00:03:32,060 --> 00:03:34,250
+classes coming up our monthly online
+
+95
+00:03:34,250 --> 00:03:36,380
+meetup is next week which should be
+
+96
+00:03:36,380 --> 00:03:38,750
+super exciting because we just drop
+
+97
+00:03:38,750 --> 00:03:43,280
+Rancher 2.4 and it has a ton of awesome
+
+98
+00:03:43,280 --> 00:03:45,200
+features a lot of a lot of stuff is
+
+99
+00:03:45,200 --> 00:03:48,380
+going on there and Shannon Williams who
+
+100
+00:03:48,380 --> 00:03:49,940
+is the president and co-founder of
+
+101
+00:03:49,940 --> 00:03:51,709
+rancher and Darren Shepherd who is the
+
+102
+00:03:51,709 --> 00:03:53,540
+chief technology officer I'd be leading
+
+103
+00:03:53,540 --> 00:03:55,160
+that one so it's gonna be super super
+
+104
+00:03:55,160 --> 00:03:57,170
+interesting a lot of Engineers will be
+
+105
+00:03:57,170 --> 00:03:59,480
+on there asking and answering questions
+
+106
+00:03:59,480 --> 00:04:02,330
+as well and then we have a master class
+
+107
+00:04:02,330 --> 00:04:04,160
+the following week and I also put here
+
+108
+00:04:04,160 --> 00:04:06,739
+the the intro to rancher and kubernetes
+
+109
+00:04:06,739 --> 00:04:09,500
+training which happens every week so
+
+110
+00:04:09,500 --> 00:04:11,269
+please do check that out if you are new
+
+111
+00:04:11,269 --> 00:04:13,070
+to kubernetes if you're new to rancher
+
+112
+00:04:13,070 --> 00:04:14,720
+if you want to understand you know how
+
+113
+00:04:14,720 --> 00:04:17,330
+Kublai's works architecture components
+
+114
+00:04:17,330 --> 00:04:19,459
+things like that that is a fantastic
+
+115
+00:04:19,459 --> 00:04:22,160
+resource and it is free and happens
+
+116
+00:04:22,160 --> 00:04:24,979
+every Thursday so again I'm gonna turn
+
+117
+00:04:24,979 --> 00:04:26,539
+this over to Eamon and just remember
+
+118
+00:04:26,539 --> 00:04:29,240
+that if you do have questions please do
+
+119
+00:04:29,240 --> 00:04:30,320
+put them in the chat
+
+120
+00:04:30,320 --> 00:04:31,550
+we have some engineers who might help
+
+121
+00:04:31,550 --> 00:04:34,490
+answer there and we'll take a couple
+
+122
+00:04:34,490 --> 00:04:36,320
+pauses during during the presentation
+
+123
+00:04:36,320 --> 00:04:37,970
+and mainly at the very end to answer
+
+124
+00:04:37,970 --> 00:04:40,130
+your questions so without further ado
+
+125
+00:04:40,130 --> 00:04:43,280
+Amon I'm gonna pass this off to you tell
+
+126
+00:04:43,280 --> 00:04:52,940
+me so see here all right let me go ahead
+
+127
+00:04:52,940 --> 00:04:56,120
+and share alright perfect do we have my
+
+128
+00:04:56,120 --> 00:04:59,300
+screen yep you're good to go excellent
+
+129
+00:04:59,300 --> 00:05:02,000
+so thank you for the introduction Matt
+
+130
+00:05:02,000 --> 00:05:03,320
+and getting everything you know set up
+
+131
+00:05:03,320 --> 00:05:05,450
+and set the stage there my name is Eamon
+
+132
+00:05:05,450 --> 00:05:07,070
+Bauman I'm a fuel engineer here at
+
+133
+00:05:07,070 --> 00:05:09,290
+Rancher labs and today we're going to go
+
+134
+00:05:09,290 --> 00:05:11,060
+through understanding and implementing a
+
+135
+00:05:11,060 --> 00:05:14,510
+service match so jumping right in
+
+136
+00:05:14,510 --> 00:05:16,700
+without too much talking to do here
+
+137
+00:05:16,700 --> 00:05:19,130
+understanding service match we've got an
+
+138
+00:05:19,130 --> 00:05:20,870
+agenda here the first thing we're gonna
+
+139
+00:05:20,870 --> 00:05:22,580
+do actually it's right in the title of
+
+140
+00:05:22,580 --> 00:05:24,110
+the presentation is to understand
+
+141
+00:05:24,110 --> 00:05:27,380
+service mesh talk about what it is why
+
+142
+00:05:27,380 --> 00:05:29,570
+we may need it in certain situations
+
+143
+00:05:29,570 --> 00:05:31,730
+what problems the service mesh solves
+
+144
+00:05:31,730 --> 00:05:33,440
+things like that we're gonna go over
+
+145
+00:05:33,440 --> 00:05:36,290
+some basic service mesh concepts as
+
+146
+00:05:36,290 --> 00:05:38,030
+probably most of the audience knows
+
+147
+00:05:38,030 --> 00:05:39,530
+there are a large number of service
+
+148
+00:05:39,530 --> 00:05:40,880
+meshes out there so I'm gonna try and
+
+149
+00:05:40,880 --> 00:05:42,620
+touch on points that are common to all
+
+150
+00:05:42,620 --> 00:05:45,580
+or at least most service meshes
+
+151
+00:05:45,580 --> 00:05:47,690
+specifically SDO is the one that we're
+
+152
+00:05:47,690 --> 00:05:49,070
+gonna spend a bunch of time with today
+
+153
+00:05:49,070 --> 00:05:51,110
+because that's the one that the ranch
+
+154
+00:05:51,110 --> 00:05:53,900
+42.3 product and we're now on 2.4 so
+
+155
+00:05:53,900 --> 00:05:55,130
+it's been out there for a little while
+
+156
+00:05:55,130 --> 00:05:57,620
+now that's what the rancher product
+
+157
+00:05:57,620 --> 00:06:00,440
+integrates is is do during our demo
+
+158
+00:06:00,440 --> 00:06:01,520
+we're actually going to set up and
+
+159
+00:06:01,520 --> 00:06:04,310
+configure sto using Rancher so we will
+
+160
+00:06:04,310 --> 00:06:06,290
+walk through live and unscripted and
+
+161
+00:06:06,290 --> 00:06:08,720
+installation of this do into a rancher
+
+162
+00:06:08,720 --> 00:06:10,700
+provision kubernetes cluster will do a
+
+163
+00:06:10,700 --> 00:06:12,680
+bunch of setup and talk about how the
+
+164
+00:06:12,680 --> 00:06:14,690
+integrations work within Rancher and
+
+165
+00:06:14,690 --> 00:06:16,040
+then I've got some final points and wrap
+
+166
+00:06:16,040 --> 00:06:17,810
+up you know some next steps and things
+
+167
+00:06:17,810 --> 00:06:21,230
+to talk about there so jumping in let's
+
+168
+00:06:21,230 --> 00:06:24,590
+understand service mesh we're gonna go
+
+169
+00:06:24,590 --> 00:06:26,660
+through a brief timeline here so if we
+
+170
+00:06:26,660 --> 00:06:30,500
+put on our you know Dolby surround sound
+
+171
+00:06:30,500 --> 00:06:33,950
+theater voice in the beginning there
+
+172
+00:06:33,950 --> 00:06:38,510
+were monolithic applications and then
+
+173
+00:06:38,510 --> 00:06:40,100
+there's a big picture of this giant
+
+174
+00:06:40,100 --> 00:06:42,169
+monolith and the weird little people
+
+175
+00:06:42,169 --> 00:06:43,669
+down in the corner who I'm assuming have
+
+176
+00:06:43,669 --> 00:06:44,060
+now
+
+177
+00:06:44,060 --> 00:06:46,610
+discovered this magic monolith but
+
+178
+00:06:46,610 --> 00:06:49,460
+unfortunately to their demise the
+
+179
+00:06:49,460 --> 00:06:51,620
+monolith runs on Java no I'm kidding
+
+180
+00:06:51,620 --> 00:06:53,570
+Java was a perfectly fine language had
+
+181
+00:06:53,570 --> 00:06:55,750
+to drop in the joke there anyways
+
+182
+00:06:55,750 --> 00:06:58,610
+monolithic applications so whenever I
+
+183
+00:06:58,610 --> 00:07:00,440
+think of a monolith I always kind of
+
+184
+00:07:00,440 --> 00:07:01,660
+think of the Washington Monument
+
+185
+00:07:01,660 --> 00:07:04,760
+honestly I always think of that that
+
+186
+00:07:04,760 --> 00:07:06,020
+well I mean there's the picture right
+
+187
+00:07:06,020 --> 00:07:07,370
+there on the previous slide right this
+
+188
+00:07:07,370 --> 00:07:10,970
+giant sort of towering thing of stone
+
+189
+00:07:10,970 --> 00:07:12,740
+rising up into the clouds right so I
+
+190
+00:07:12,740 --> 00:07:14,620
+always think of the Washington Monument
+
+191
+00:07:14,620 --> 00:07:17,120
+in software engineering though a
+
+192
+00:07:17,120 --> 00:07:19,639
+monolith is a and this is a quote from
+
+193
+00:07:19,639 --> 00:07:21,380
+Wikipedia just so you know I did my
+
+194
+00:07:21,380 --> 00:07:23,510
+absolute best high school research here
+
+195
+00:07:23,510 --> 00:07:26,360
+a monolith is a single tiered software
+
+196
+00:07:26,360 --> 00:07:28,310
+application in which the user interface
+
+197
+00:07:28,310 --> 00:07:30,440
+and data access code are combined into a
+
+198
+00:07:30,440 --> 00:07:33,070
+single program from a single platform in
+
+199
+00:07:33,070 --> 00:07:36,020
+typical Wikipedia fashion that is a long
+
+200
+00:07:36,020 --> 00:07:37,760
+explanation with a lot of words to it
+
+201
+00:07:37,760 --> 00:07:39,800
+I'm a much simpler person than that
+
+202
+00:07:39,800 --> 00:07:42,500
+so it's an all-in-one piece of software
+
+203
+00:07:42,500 --> 00:07:45,979
+a monolithic application is one code
+
+204
+00:07:45,979 --> 00:07:49,100
+base for everything in your app so the
+
+205
+00:07:49,100 --> 00:07:51,650
+user interface the data access layer the
+
+206
+00:07:51,650 --> 00:07:55,130
+datastore itself and sometimes you can
+
+207
+00:07:55,130 --> 00:07:57,950
+get a little fungible with those those
+
+208
+00:07:57,950 --> 00:08:00,380
+concepts so maybe not there's a user
+
+209
+00:08:00,380 --> 00:08:01,700
+interface because you may have like a
+
+210
+00:08:01,700 --> 00:08:03,850
+web application for instance right and
+
+211
+00:08:03,850 --> 00:08:06,350
+your back-end side of that web
+
+212
+00:08:06,350 --> 00:08:08,720
+application has the business logic and
+
+213
+00:08:08,720 --> 00:08:12,110
+the data access layer that in itself is
+
+214
+00:08:12,110 --> 00:08:14,030
+a monolith even though the user
+
+215
+00:08:14,030 --> 00:08:15,770
+interface is separate right so a
+
+216
+00:08:15,770 --> 00:08:18,020
+monolith is a single tiered software
+
+217
+00:08:18,020 --> 00:08:20,120
+application or like a one to two tier I
+
+218
+00:08:20,120 --> 00:08:21,410
+guess it's kind of what I'm gonna add as
+
+219
+00:08:21,410 --> 00:08:23,620
+a wishy-washy bit of definition there
+
+220
+00:08:23,620 --> 00:08:27,680
+there's a great link that Chris Nova put
+
+221
+00:08:27,680 --> 00:08:30,380
+together back in the original FTO days
+
+222
+00:08:30,380 --> 00:08:32,719
+before they were acquired by VMware and
+
+223
+00:08:32,719 --> 00:08:35,690
+this blog post has an awesome what is a
+
+224
+00:08:35,690 --> 00:08:38,510
+monolithic application diagram and
+
+225
+00:08:38,510 --> 00:08:41,120
+explanation that shows you how different
+
+226
+00:08:41,120 --> 00:08:43,490
+pieces fit together into a model list
+
+227
+00:08:43,490 --> 00:08:44,510
+you could kind of understand exactly
+
+228
+00:08:44,510 --> 00:08:47,750
+what that monolithic thing is now this
+
+229
+00:08:47,750 --> 00:08:49,670
+is how folks have written applications
+
+230
+00:08:49,670 --> 00:08:52,040
+for years and years and years and years
+
+231
+00:08:52,040 --> 00:08:54,620
+and years and decades and for so on you
+
+232
+00:08:54,620 --> 00:08:56,150
+know until the beginning of time right
+
+233
+00:08:56,150 --> 00:08:58,160
+that we have built tradition
+
+234
+00:08:58,160 --> 00:09:01,069
+the applications to be all part of one
+
+235
+00:09:01,069 --> 00:09:04,399
+cohesive unit one stack one however you
+
+236
+00:09:04,399 --> 00:09:06,290
+want to describe the collection of those
+
+237
+00:09:06,290 --> 00:09:10,040
+things so if we've done that and if
+
+238
+00:09:10,040 --> 00:09:11,870
+we've been building our applications
+
+239
+00:09:11,870 --> 00:09:14,379
+that way for so long what's the problem
+
+240
+00:09:14,379 --> 00:09:17,600
+well it turns out the problem kind of
+
+241
+00:09:17,600 --> 00:09:20,480
+depends on who you ask so issues with
+
+242
+00:09:20,480 --> 00:09:23,000
+monolithic applications become apparent
+
+243
+00:09:23,000 --> 00:09:25,220
+typically as the application and I don't
+
+244
+00:09:25,220 --> 00:09:28,100
+have it here in notes or is the
+
+245
+00:09:28,100 --> 00:09:30,920
+organization scales so you're really
+
+246
+00:09:30,920 --> 00:09:32,810
+going to start to see issues when you're
+
+247
+00:09:32,810 --> 00:09:35,170
+scaling up a monolithic application and
+
+248
+00:09:35,170 --> 00:09:37,819
+typically these issues arise if the
+
+249
+00:09:37,819 --> 00:09:40,699
+monolith isn't prepared for that scaling
+
+250
+00:09:40,699 --> 00:09:43,279
+or isn't capable of it natively the
+
+251
+00:09:43,279 --> 00:09:44,779
+first point really is vertical versus
+
+252
+00:09:44,779 --> 00:09:46,970
+horizontal scaling so if we've set up
+
+253
+00:09:46,970 --> 00:09:50,899
+our application to be a monolith a lot
+
+254
+00:09:50,899 --> 00:09:53,750
+of those monolithic applications are not
+
+255
+00:09:53,750 --> 00:09:55,629
+set up to be scaled horizontally
+
+256
+00:09:55,629 --> 00:09:57,620
+vertically then is usually the first
+
+257
+00:09:57,620 --> 00:09:59,629
+option that organizations take when we
+
+258
+00:09:59,629 --> 00:10:01,310
+start talking about scaling a monolith
+
+259
+00:10:01,310 --> 00:10:04,130
+so instead of adding more instances of
+
+260
+00:10:04,130 --> 00:10:06,230
+this monolithic application we're going
+
+261
+00:10:06,230 --> 00:10:08,839
+to toss more resources at the server or
+
+262
+00:10:08,839 --> 00:10:10,730
+whatever is running this model it's
+
+263
+00:10:10,730 --> 00:10:12,470
+right so we're gonna scale up CPU we're
+
+264
+00:10:12,470 --> 00:10:14,389
+going to scale up memory maybe we'll add
+
+265
+00:10:14,389 --> 00:10:15,829
+more bandwidth for traffic to that
+
+266
+00:10:15,829 --> 00:10:18,829
+single node but we're still scaling you
+
+267
+00:10:18,829 --> 00:10:20,660
+know a single instance of the monolith
+
+268
+00:10:20,660 --> 00:10:22,730
+because a lot of those are not prepared
+
+269
+00:10:22,730 --> 00:10:24,709
+to be scaled horizontally right
+
+270
+00:10:24,709 --> 00:10:27,170
+horizontal scaling often requires
+
+271
+00:10:27,170 --> 00:10:29,240
+changes to the application to make it
+
+272
+00:10:29,240 --> 00:10:31,430
+horizontally aware the reason I say that
+
+273
+00:10:31,430 --> 00:10:33,680
+is that a lot of monolithic applications
+
+274
+00:10:33,680 --> 00:10:36,529
+are not stateless horizontal scaling and
+
+275
+00:10:36,529 --> 00:10:38,180
+kubernetes if you're familiar and if
+
+276
+00:10:38,180 --> 00:10:39,680
+you're looking at service much probably
+
+277
+00:10:39,680 --> 00:10:42,620
+you are are a lot of those applications
+
+278
+00:10:42,620 --> 00:10:44,420
+that are stateless are very easy to
+
+279
+00:10:44,420 --> 00:10:45,920
+horizontally scale there's no state that
+
+280
+00:10:45,920 --> 00:10:48,110
+needs to be shared amongst the different
+
+281
+00:10:48,110 --> 00:10:50,540
+instances I can scale out one two three
+
+282
+00:10:50,540 --> 00:10:52,850
+five hundred and instances in my
+
+283
+00:10:52,850 --> 00:10:55,309
+application to get the scale that I need
+
+284
+00:10:55,309 --> 00:10:58,009
+because I don't typically need to you
+
+285
+00:10:58,009 --> 00:10:59,420
+know share that state between the
+
+286
+00:10:59,420 --> 00:11:02,000
+instances monolithic applications and
+
+287
+00:11:02,000 --> 00:11:03,589
+and sometimes you can also include a
+
+288
+00:11:03,589 --> 00:11:06,050
+legacy definition in there as well are
+
+289
+00:11:06,050 --> 00:11:09,829
+not horizontally scaling aware scaling
+
+290
+00:11:09,829 --> 00:11:11,690
+vertically then is the best
+
+291
+00:11:11,690 --> 00:11:12,860
+and usually the first option
+
+292
+00:11:12,860 --> 00:11:14,810
+organizations take but you hit a limit
+
+293
+00:11:14,810 --> 00:11:18,050
+where it starts to get expensive or may
+
+294
+00:11:18,050 --> 00:11:20,240
+not solve the problems you need we're
+
+295
+00:11:20,240 --> 00:11:23,210
+adding more resources to the single
+
+296
+00:11:23,210 --> 00:11:25,190
+instance may not be feasibly because of
+
+297
+00:11:25,190 --> 00:11:26,780
+some other constraints like you're
+
+298
+00:11:26,780 --> 00:11:28,820
+hitting a bottleneck at the database or
+
+299
+00:11:28,820 --> 00:11:30,260
+you're hitting a bottle back in the
+
+300
+00:11:30,260 --> 00:11:31,670
+number of threads and there's no more
+
+301
+00:11:31,670 --> 00:11:34,760
+CPU you can add right where you have to
+
+302
+00:11:34,760 --> 00:11:37,210
+horizontally scale so that's one issue
+
+303
+00:11:37,210 --> 00:11:39,290
+another issue you may run into his
+
+304
+00:11:39,290 --> 00:11:42,950
+deployment velocity so as mano lists are
+
+305
+00:11:42,950 --> 00:11:44,300
+getting bigger and remember that all
+
+306
+00:11:44,300 --> 00:11:45,920
+these issues are as the application
+
+307
+00:11:45,920 --> 00:11:48,290
+scales so as your monolith is getting
+
+308
+00:11:48,290 --> 00:11:50,390
+bigger your time to release for features
+
+309
+00:11:50,390 --> 00:11:52,100
+can slow down and that can be an issue
+
+310
+00:11:52,100 --> 00:11:54,410
+for an organization where if you are
+
+311
+00:11:54,410 --> 00:11:56,150
+expected to be nimble with this
+
+312
+00:11:56,150 --> 00:11:59,420
+application and respond to changing
+
+313
+00:11:59,420 --> 00:12:00,860
+market trends which sounds like such a
+
+314
+00:12:00,860 --> 00:12:03,500
+marketing thing you're gonna have
+
+315
+00:12:03,500 --> 00:12:04,820
+challenges with that as a model that
+
+316
+00:12:04,820 --> 00:12:06,980
+gets bigger some of these challenges are
+
+317
+00:12:06,980 --> 00:12:08,540
+technical right like it could be a
+
+318
+00:12:08,540 --> 00:12:10,880
+compile time where your application
+
+319
+00:12:10,880 --> 00:12:12,560
+because of its size and because of its
+
+320
+00:12:12,560 --> 00:12:15,200
+code base takes 30 or 40 minutes to
+
+321
+00:12:15,200 --> 00:12:16,970
+compile a full set of the application
+
+322
+00:12:16,970 --> 00:12:19,730
+that's possible but oftentimes it can be
+
+323
+00:12:19,730 --> 00:12:21,320
+organizational policies and play to
+
+324
+00:12:21,320 --> 00:12:23,440
+where any changes to the application
+
+325
+00:12:23,440 --> 00:12:26,210
+require a full change control board
+
+326
+00:12:26,210 --> 00:12:29,060
+review require you know a sprint to be
+
+327
+00:12:29,060 --> 00:12:30,980
+set up and all these things where your
+
+328
+00:12:30,980 --> 00:12:33,050
+velocity is sort of dampened when you're
+
+329
+00:12:33,050 --> 00:12:35,450
+trying to be nimble with new feature
+
+330
+00:12:35,450 --> 00:12:37,790
+deployment because the organization has
+
+331
+00:12:37,790 --> 00:12:39,740
+put different things in place and and
+
+332
+00:12:39,740 --> 00:12:42,050
+and rightfully so with the scale that
+
+333
+00:12:42,050 --> 00:12:44,930
+you're seeing another issue as the
+
+334
+00:12:44,930 --> 00:12:46,340
+application scales is a choice of
+
+335
+00:12:46,340 --> 00:12:49,100
+tooling so a monolith almost by
+
+336
+00:12:49,100 --> 00:12:50,930
+definition is built on a single
+
+337
+00:12:50,930 --> 00:12:54,140
+technology so we had in our picture
+
+338
+00:12:54,140 --> 00:12:56,660
+there just before that Java logo you
+
+339
+00:12:56,660 --> 00:12:59,270
+know a Java EE application it could be a
+
+340
+00:12:59,270 --> 00:13:02,150
+dotnet application could be C++ whole
+
+341
+00:13:02,150 --> 00:13:04,490
+bunch of different things but almost by
+
+342
+00:13:04,490 --> 00:13:06,140
+definition your monolith is going to be
+
+343
+00:13:06,140 --> 00:13:08,330
+built on that single technology the
+
+344
+00:13:08,330 --> 00:13:10,550
+challenge there is that there's only one
+
+345
+00:13:10,550 --> 00:13:13,010
+toolset to lean on it's also a strength
+
+346
+00:13:13,010 --> 00:13:14,600
+because then there's only one toolset to
+
+347
+00:13:14,600 --> 00:13:16,670
+learn but if you remove that are there's
+
+348
+00:13:16,670 --> 00:13:19,100
+only one toolset to lean on so you can't
+
+349
+00:13:19,100 --> 00:13:20,480
+use the right tool for the job
+
+350
+00:13:20,480 --> 00:13:22,700
+where if you have a new feature you want
+
+351
+00:13:22,700 --> 00:13:24,860
+to add or have some sort of optimization
+
+352
+00:13:24,860 --> 00:13:25,279
+you
+
+353
+00:13:25,279 --> 00:13:27,350
+want to do that some other language or
+
+354
+00:13:27,350 --> 00:13:29,329
+some other technology may be well-versed
+
+355
+00:13:29,329 --> 00:13:31,879
+for you have to sort of wedge that in
+
+356
+00:13:31,879 --> 00:13:34,189
+using whatever technology or monolith is
+
+357
+00:13:34,189 --> 00:13:36,050
+built in so that can be a real challenge
+
+358
+00:13:36,050 --> 00:13:38,689
+and the final point is developer
+
+359
+00:13:38,689 --> 00:13:41,420
+understanding so really just this can be
+
+360
+00:13:41,420 --> 00:13:44,180
+summarized as the bigger the application
+
+361
+00:13:44,180 --> 00:13:47,019
+the more difficult it is to grasp so
+
+362
+00:13:47,019 --> 00:13:49,279
+grasping the entire application is
+
+363
+00:13:49,279 --> 00:13:50,499
+something that can be necessary
+
+364
+00:13:50,499 --> 00:13:52,790
+especially as developer gets up to speed
+
+365
+00:13:52,790 --> 00:13:54,889
+and they want to start making changes
+
+366
+00:13:54,889 --> 00:13:57,050
+but they don't understand how those
+
+367
+00:13:57,050 --> 00:13:58,879
+changes are going to impact other areas
+
+368
+00:13:58,879 --> 00:14:01,249
+of the application and the bigger the
+
+369
+00:14:01,249 --> 00:14:02,870
+monolith gets the more difficult it's
+
+370
+00:14:02,870 --> 00:14:05,600
+going to be to ramp up developers in
+
+371
+00:14:05,600 --> 00:14:07,069
+order to be productive and understand
+
+372
+00:14:07,069 --> 00:14:09,889
+all areas of that application it may
+
+373
+00:14:09,889 --> 00:14:11,480
+even be impossible at some point where
+
+374
+00:14:11,480 --> 00:14:13,370
+you just have to start limiting the
+
+375
+00:14:13,370 --> 00:14:15,139
+amount of impact that new developers can
+
+376
+00:14:15,139 --> 00:14:17,779
+have on your application so that's one
+
+377
+00:14:17,779 --> 00:14:19,249
+of the challenges are actually rarely
+
+378
+00:14:19,249 --> 00:14:21,529
+for the challenges with monolithic
+
+379
+00:14:21,529 --> 00:14:23,689
+applications and again these all become
+
+380
+00:14:23,689 --> 00:14:25,999
+apparent as the application or the
+
+381
+00:14:25,999 --> 00:14:29,480
+organization scales what I'm going to
+
+382
+00:14:29,480 --> 00:14:30,800
+introduce to you now is a sample
+
+383
+00:14:30,800 --> 00:14:33,529
+monolithic application and the reason
+
+384
+00:14:33,529 --> 00:14:34,550
+I'm doing it here has become this this
+
+385
+00:14:34,550 --> 00:14:37,279
+is gonna help illustrate what we're
+
+386
+00:14:37,279 --> 00:14:39,019
+talking about when it comes to micro
+
+387
+00:14:39,019 --> 00:14:41,540
+services and how we're going to break up
+
+388
+00:14:41,540 --> 00:14:43,819
+a monolith and how some of this is going
+
+389
+00:14:43,819 --> 00:14:45,439
+to impact the service mesh discussion
+
+390
+00:14:45,439 --> 00:14:46,160
+we're having later
+
+391
+00:14:46,160 --> 00:14:48,829
+so our first application that we're
+
+392
+00:14:48,829 --> 00:14:49,759
+introduced in this monolithic
+
+393
+00:14:49,759 --> 00:14:52,389
+application is a book information
+
+394
+00:14:52,389 --> 00:14:55,459
+application now if you've ever messed
+
+395
+00:14:55,459 --> 00:14:57,019
+around with this do or deployed it or
+
+396
+00:14:57,019 --> 00:14:59,059
+done anything like that this is probably
+
+397
+00:14:59,059 --> 00:15:01,000
+pretty familiar but in case you haven't
+
+398
+00:15:01,000 --> 00:15:04,670
+booked info is the ISTE Oh introduction
+
+399
+00:15:04,670 --> 00:15:07,009
+basically to service mesh so what I've
+
+400
+00:15:07,009 --> 00:15:08,600
+done here is sort of abuse that example
+
+401
+00:15:08,600 --> 00:15:10,250
+and turned it into our monolithic
+
+402
+00:15:10,250 --> 00:15:14,089
+application the book info app has
+
+403
+00:15:14,089 --> 00:15:16,069
+several components the first of which is
+
+404
+00:15:16,069 --> 00:15:18,379
+a product page the product page is the
+
+405
+00:15:18,379 --> 00:15:20,329
+user interface that grabs information
+
+406
+00:15:20,329 --> 00:15:21,910
+from a bunch of different data sources
+
+407
+00:15:21,910 --> 00:15:25,910
+those data sources are detail data I
+
+408
+00:15:25,910 --> 00:15:29,149
+should I should back up and explain book
+
+409
+00:15:29,149 --> 00:15:31,490
+information is a simple application that
+
+410
+00:15:31,490 --> 00:15:37,339
+shows a review and ratings of a book so
+
+411
+00:15:37,339 --> 00:15:38,720
+if you go in your web browser and you
+
+412
+00:15:38,720 --> 00:15:39,139
+open a
+
+413
+00:15:39,139 --> 00:15:41,059
+the product page I get to see the name
+
+414
+00:15:41,059 --> 00:15:44,329
+of a book its author its ISBN number all
+
+415
+00:15:44,329 --> 00:15:46,579
+that kind of stuff I get to see details
+
+416
+00:15:46,579 --> 00:15:48,920
+about the book I get to see reviews and
+
+417
+00:15:48,920 --> 00:15:50,540
+ratings about the book that's our
+
+418
+00:15:50,540 --> 00:15:53,029
+example application so all of those
+
+419
+00:15:53,029 --> 00:15:55,129
+pieces of functionality are brought into
+
+420
+00:15:55,129 --> 00:15:57,739
+our monolith here so I have the book
+
+421
+00:15:57,739 --> 00:15:59,660
+info with its product page I have
+
+422
+00:15:59,660 --> 00:16:01,429
+detailed data so the product page will
+
+423
+00:16:01,429 --> 00:16:03,379
+pull in details about the book like the
+
+424
+00:16:03,379 --> 00:16:06,199
+author and the ISBN number and stuff the
+
+425
+00:16:06,199 --> 00:16:07,279
+product page will pull in information
+
+426
+00:16:07,279 --> 00:16:09,919
+from review data so how did someone like
+
+427
+00:16:09,919 --> 00:16:11,600
+this book they've given it a review we
+
+428
+00:16:11,600 --> 00:16:13,879
+can view that information in the UI and
+
+429
+00:16:13,879 --> 00:16:16,790
+then finally ratings data so if a user
+
+430
+00:16:16,790 --> 00:16:19,129
+leaves a rating how many stars out of
+
+431
+00:16:19,129 --> 00:16:22,970
+five did a particular book get so again
+
+432
+00:16:22,970 --> 00:16:24,470
+we're displaying information about the
+
+433
+00:16:24,470 --> 00:16:27,259
+books this is the data access and logic
+
+434
+00:16:27,259 --> 00:16:28,959
+layer for getting details about our book
+
+435
+00:16:28,959 --> 00:16:31,549
+this is data access and logic layer for
+
+436
+00:16:31,549 --> 00:16:33,709
+getting reviews about the book and this
+
+437
+00:16:33,709 --> 00:16:35,480
+is data access and logic layer for
+
+438
+00:16:35,480 --> 00:16:38,449
+ratings about the book so let's talk
+
+439
+00:16:38,449 --> 00:16:39,889
+microservices we have our sample
+
+440
+00:16:39,889 --> 00:16:41,449
+application and might I'll back up one
+
+441
+00:16:41,449 --> 00:16:43,549
+last I we have our sample monolithic
+
+442
+00:16:43,549 --> 00:16:45,850
+application in mind so let's talk about
+
+443
+00:16:45,850 --> 00:16:48,290
+micro services and why they may make
+
+444
+00:16:48,290 --> 00:16:51,739
+sense the goal of micro services is to
+
+445
+00:16:51,739 --> 00:16:54,110
+build an application as a suite of
+
+446
+00:16:54,110 --> 00:16:57,339
+services hence the name micro services
+
+447
+00:16:57,339 --> 00:17:00,049
+services are independently independently
+
+448
+00:17:00,049 --> 00:17:03,319
+excuse-me deployable and scalable the
+
+449
+00:17:03,319 --> 00:17:06,139
+goal being that in a micro service
+
+450
+00:17:06,139 --> 00:17:09,620
+architecture each service because the
+
+451
+00:17:09,620 --> 00:17:11,899
+services are separate is going to form a
+
+452
+00:17:11,899 --> 00:17:14,779
+boundary with the other services that
+
+453
+00:17:14,779 --> 00:17:18,439
+boundary is typically the form of an API
+
+454
+00:17:18,439 --> 00:17:21,350
+that each service offers so typically
+
+455
+00:17:21,350 --> 00:17:22,939
+though not always services are
+
+456
+00:17:22,939 --> 00:17:24,730
+accompanied by an independent codebase
+
+457
+00:17:24,730 --> 00:17:27,500
+sometimes you can do a mono codebase a
+
+458
+00:17:27,500 --> 00:17:29,000
+model if the codebase I think is what
+
+459
+00:17:29,000 --> 00:17:31,669
+they refer to it as but typically there
+
+460
+00:17:31,669 --> 00:17:33,470
+are separate code bases for these micro
+
+461
+00:17:33,470 --> 00:17:36,440
+services the process of converting a
+
+462
+00:17:36,440 --> 00:17:38,299
+monolith to a set of micro services is
+
+463
+00:17:38,299 --> 00:17:40,809
+called quote breaking up the monolith
+
+464
+00:17:40,809 --> 00:17:44,059
+with a suite of micro services what
+
+465
+00:17:44,059 --> 00:17:45,529
+we're really doing is taking the
+
+466
+00:17:45,529 --> 00:17:47,570
+different functions of what was a
+
+467
+00:17:47,570 --> 00:17:50,570
+monolithic application distributing them
+
+468
+00:17:50,570 --> 00:17:52,790
+amongst tiny little applications
+
+469
+00:17:52,790 --> 00:17:54,470
+I mean each one itself you could
+
+470
+00:17:54,470 --> 00:17:55,760
+consider it if it was a full application
+
+471
+00:17:55,760 --> 00:17:58,190
+to be a monolith but really it's just a
+
+472
+00:17:58,190 --> 00:18:01,000
+component of a distributed application
+
+473
+00:18:01,000 --> 00:18:03,590
+now each one of these services then is
+
+474
+00:18:03,590 --> 00:18:05,600
+going to offer
+
+475
+00:18:05,600 --> 00:18:09,200
+well a service or a function right the
+
+476
+00:18:09,200 --> 00:18:10,430
+boundary that's formed with the other
+
+477
+00:18:10,430 --> 00:18:12,710
+services are rather the contract that's
+
+478
+00:18:12,710 --> 00:18:14,330
+executed between these services is
+
+479
+00:18:14,330 --> 00:18:16,700
+typically the form of an API so it could
+
+480
+00:18:16,700 --> 00:18:19,220
+be a REST API we may be talking G RPC
+
+481
+00:18:19,220 --> 00:18:22,090
+something like that but the services are
+
+482
+00:18:22,090 --> 00:18:25,070
+meant to almost by definition of Micra
+
+483
+00:18:25,070 --> 00:18:27,800
+services to act independently of each
+
+484
+00:18:27,800 --> 00:18:30,440
+other so let's take a look at what's
+
+485
+00:18:30,440 --> 00:18:31,970
+splitting up this model if we look like
+
+486
+00:18:31,970 --> 00:18:34,640
+so we have our book information monolith
+
+487
+00:18:34,640 --> 00:18:35,840
+over here I've got the product page
+
+488
+00:18:35,840 --> 00:18:38,090
+detail review and ratings data on the
+
+489
+00:18:38,090 --> 00:18:40,190
+Left all as components of this
+
+490
+00:18:40,190 --> 00:18:42,890
+application if we split this up we're
+
+491
+00:18:42,890 --> 00:18:45,200
+going to move the product page out into
+
+492
+00:18:45,200 --> 00:18:47,540
+its own component so we may take that
+
+493
+00:18:47,540 --> 00:18:49,070
+set of functionalities for the user
+
+494
+00:18:49,070 --> 00:18:51,350
+interface split it into its own code
+
+495
+00:18:51,350 --> 00:18:54,320
+base and then offer it as an API maybe
+
+496
+00:18:54,320 --> 00:18:56,090
+this is just the browser arriving at
+
+497
+00:18:56,090 --> 00:18:58,730
+this UI and the UI we'll make other API
+
+498
+00:18:58,730 --> 00:19:01,460
+calls to other micro services well by
+
+499
+00:19:01,460 --> 00:19:03,470
+doing so and by moving this component
+
+500
+00:19:03,470 --> 00:19:05,060
+out of that monolith we've built our
+
+501
+00:19:05,060 --> 00:19:07,190
+first micro service which is the product
+
+502
+00:19:07,190 --> 00:19:11,720
+page let's take our business logic and
+
+503
+00:19:11,720 --> 00:19:13,670
+our data access layer for book detail
+
+504
+00:19:13,670 --> 00:19:16,010
+information we'll move that out into its
+
+505
+00:19:16,010 --> 00:19:18,200
+own code base now the product page is
+
+506
+00:19:18,200 --> 00:19:19,780
+going to be able to query for
+
+507
+00:19:19,780 --> 00:19:22,220
+information about books from that
+
+508
+00:19:22,220 --> 00:19:24,620
+detailed data micro service so then
+
+509
+00:19:24,620 --> 00:19:27,010
+we've built our second micro service
+
+510
+00:19:27,010 --> 00:19:29,360
+we'll do the same thing with review data
+
+511
+00:19:29,360 --> 00:19:31,130
+we'll move it out into its own code base
+
+512
+00:19:31,130 --> 00:19:33,110
+and we'll build a micro service around
+
+513
+00:19:33,110 --> 00:19:35,480
+it same with ratings data out into its
+
+514
+00:19:35,480 --> 00:19:37,640
+own code base and now we have a micro
+
+515
+00:19:37,640 --> 00:19:40,220
+service built around it so what we've
+
+516
+00:19:40,220 --> 00:19:41,810
+done here is we've taken our monolith
+
+517
+00:19:41,810 --> 00:19:43,160
+and we've taken the different areas of
+
+518
+00:19:43,160 --> 00:19:45,440
+functionality in this monolith we've
+
+519
+00:19:45,440 --> 00:19:47,990
+moved them out into their own code bases
+
+520
+00:19:47,990 --> 00:19:50,180
+and again that's typically what you do
+
+521
+00:19:50,180 --> 00:19:52,550
+but you can have one code base of deploy
+
+522
+00:19:52,550 --> 00:19:54,520
+micro services from them it is an option
+
+523
+00:19:54,520 --> 00:19:57,200
+but we've moved all of these out into
+
+524
+00:19:57,200 --> 00:19:59,030
+their own instances and created micro
+
+525
+00:19:59,030 --> 00:20:01,850
+services from them thus our book
+
+526
+00:20:01,850 --> 00:20:04,280
+information application ceases to be
+
+527
+00:20:04,280 --> 00:20:06,620
+that monolith on the left and actually
+
+528
+00:20:06,620 --> 00:20:08,690
+is the collection of all of these
+
+529
+00:20:08,690 --> 00:20:11,120
+micro-services so now we have a
+
+530
+00:20:11,120 --> 00:20:13,250
+distributed application where each one
+
+531
+00:20:13,250 --> 00:20:14,660
+of these micro services can be
+
+532
+00:20:14,660 --> 00:20:18,559
+independently deployed distributed built
+
+533
+00:20:18,559 --> 00:20:23,000
+scaled they all have their own velocity
+
+534
+00:20:23,000 --> 00:20:25,250
+of deployment you know kind of searching
+
+535
+00:20:25,250 --> 00:20:27,020
+for four different examples to tie into
+
+536
+00:20:27,020 --> 00:20:28,760
+right so if I go let's step back here a
+
+537
+00:20:28,760 --> 00:20:32,120
+bunch of slides now that we have there
+
+538
+00:20:32,120 --> 00:20:33,860
+are a lot of animations to slide back
+
+539
+00:20:33,860 --> 00:20:36,200
+through here we go so now if we have
+
+540
+00:20:36,200 --> 00:20:38,690
+each one of these feature sets in its
+
+541
+00:20:38,690 --> 00:20:40,460
+own bucket a bucket being its
+
+542
+00:20:40,460 --> 00:20:42,590
+micro-service now our vertical and
+
+543
+00:20:42,590 --> 00:20:44,150
+horizontal scaling issue is solved
+
+544
+00:20:44,150 --> 00:20:47,450
+because we can take one instance of that
+
+545
+00:20:47,450 --> 00:20:49,700
+micro-service and horizontally scale it
+
+546
+00:20:49,700 --> 00:20:52,250
+out or vertically scale each one of
+
+547
+00:20:52,250 --> 00:20:54,860
+those instances so we have easier
+
+548
+00:20:54,860 --> 00:20:57,500
+ability to to scale that piece of
+
+549
+00:20:57,500 --> 00:20:59,630
+functionality of our application our
+
+550
+00:20:59,630 --> 00:21:01,490
+deployment velocity is accelerated
+
+551
+00:21:01,490 --> 00:21:04,520
+because now areas of functionality can
+
+552
+00:21:04,520 --> 00:21:06,200
+be rapidly iterated on without
+
+553
+00:21:06,200 --> 00:21:07,910
+necessarily impacting other areas of the
+
+554
+00:21:07,910 --> 00:21:10,160
+application where if we're going to do
+
+555
+00:21:10,160 --> 00:21:12,380
+work now let me slide over here if we're
+
+556
+00:21:12,380 --> 00:21:15,830
+going to do work come on just on like
+
+557
+00:21:15,830 --> 00:21:18,230
+the ratings data section here if that's
+
+558
+00:21:18,230 --> 00:21:20,030
+split out into a micro service we're not
+
+559
+00:21:20,030 --> 00:21:21,800
+going to affect review data or detail
+
+560
+00:21:21,800 --> 00:21:23,990
+data or the project page by making
+
+561
+00:21:23,990 --> 00:21:26,420
+changes to that micro service so we sort
+
+562
+00:21:26,420 --> 00:21:28,070
+of insulated different areas of the
+
+563
+00:21:28,070 --> 00:21:30,200
+application from changes from one
+
+564
+00:21:30,200 --> 00:21:33,590
+another so long as we adhere to that
+
+565
+00:21:33,590 --> 00:21:36,110
+contractor that API that we have as a
+
+566
+00:21:36,110 --> 00:21:38,120
+boundary between the micro services then
+
+567
+00:21:38,120 --> 00:21:40,610
+we're safe our choice of tooling now is
+
+568
+00:21:40,610 --> 00:21:44,000
+open so if we have our areas of the
+
+569
+00:21:44,000 --> 00:21:45,350
+application split out into micro
+
+570
+00:21:45,350 --> 00:21:47,960
+services I can write one piece of
+
+571
+00:21:47,960 --> 00:21:50,059
+functionality in Python I can write one
+
+572
+00:21:50,059 --> 00:21:52,190
+piece of functionality and dotnet I can
+
+573
+00:21:52,190 --> 00:21:54,380
+write another in golang whatever works
+
+574
+00:21:54,380 --> 00:21:57,980
+best for that specific approach we've
+
+575
+00:21:57,980 --> 00:21:59,750
+also now added developer understanding
+
+576
+00:21:59,750 --> 00:22:03,220
+because a developer may want to know
+
+577
+00:22:03,220 --> 00:22:05,990
+sort of abstractly how the entire
+
+578
+00:22:05,990 --> 00:22:08,240
+application fits together but concretely
+
+579
+00:22:08,240 --> 00:22:10,970
+they only need to know the micro service
+
+580
+00:22:10,970 --> 00:22:13,390
+that they're working on and you can now
+
+581
+00:22:13,390 --> 00:22:16,490
+accelerate a developers I guess you know
+
+582
+00:22:16,490 --> 00:22:18,470
+mean time to production if you will I
+
+583
+00:22:18,470 --> 00:22:20,260
+mean time to productivity
+
+584
+00:22:20,260 --> 00:22:22,030
+allowing them to just have that abstract
+
+585
+00:22:22,030 --> 00:22:23,530
+concept of how the application fits
+
+586
+00:22:23,530 --> 00:22:25,720
+together but the concrete knowledge can
+
+587
+00:22:25,720 --> 00:22:27,820
+be slowly introduced through allowing
+
+588
+00:22:27,820 --> 00:22:29,500
+them to work on different micro-services
+
+589
+00:22:29,500 --> 00:22:32,020
+and they can remain productive even if
+
+590
+00:22:32,020 --> 00:22:33,310
+they only have sort of a brief
+
+591
+00:22:33,310 --> 00:22:34,870
+understanding of the application as a
+
+592
+00:22:34,870 --> 00:22:37,570
+whole so let's jump ahead back so we
+
+593
+00:22:37,570 --> 00:22:39,580
+split up our monolith got our different
+
+594
+00:22:39,580 --> 00:22:42,700
+micro-services here so if we've got all
+
+595
+00:22:42,700 --> 00:22:45,490
+these micro-services where does a
+
+596
+00:22:45,490 --> 00:22:48,790
+service mesh come in or quote why do I
+
+597
+00:22:48,790 --> 00:22:52,300
+need this thing this slide and and what
+
+598
+00:22:52,300 --> 00:22:54,370
+we've gone through so far have been okay
+
+599
+00:22:54,370 --> 00:22:56,710
+monoliths are great what's the problem
+
+600
+00:22:56,710 --> 00:22:58,530
+with them why do I need microservices
+
+601
+00:22:58,530 --> 00:23:01,930
+service mesh why do I need that enough I
+
+602
+00:23:01,930 --> 00:23:04,360
+have micro services if micro services
+
+603
+00:23:04,360 --> 00:23:06,520
+are an approach to solving monolith
+
+604
+00:23:06,520 --> 00:23:08,860
+problems at scale a service mesh then is
+
+605
+00:23:08,860 --> 00:23:10,540
+approach to problem excuse me an
+
+606
+00:23:10,540 --> 00:23:12,670
+approach to solving micro service issues
+
+607
+00:23:12,670 --> 00:23:15,520
+at scale one of the micro service issues
+
+608
+00:23:15,520 --> 00:23:17,050
+we're going to run into is routing and
+
+609
+00:23:17,050 --> 00:23:20,050
+terminating traffic so as we distribute
+
+610
+00:23:20,050 --> 00:23:21,880
+different areas of our application into
+
+611
+00:23:21,880 --> 00:23:24,100
+micro services we need to make routing
+
+612
+00:23:24,100 --> 00:23:26,410
+decisions across things like versions
+
+613
+00:23:26,410 --> 00:23:28,210
+for instance or if I'm deploying
+
+614
+00:23:28,210 --> 00:23:30,370
+different versions of a micro service if
+
+615
+00:23:30,370 --> 00:23:33,310
+my details version has V 1 V 2 V 3 V
+
+616
+00:23:33,310 --> 00:23:36,460
+whatever I'm going need a way to make
+
+617
+00:23:36,460 --> 00:23:38,110
+routing decisions across different
+
+618
+00:23:38,110 --> 00:23:40,540
+versions of that micro service because
+
+619
+00:23:40,540 --> 00:23:42,070
+maybe some of my clients still need to
+
+620
+00:23:42,070 --> 00:23:44,650
+use V 1 functionality maybe we want to
+
+621
+00:23:44,650 --> 00:23:46,600
+do you know sort of a sample deployment
+
+622
+00:23:46,600 --> 00:23:48,790
+of V 2 functionality I need to make
+
+623
+00:23:48,790 --> 00:23:50,980
+those determinations based on different
+
+624
+00:23:50,980 --> 00:23:53,350
+criteria we also may need to terminate
+
+625
+00:23:53,350 --> 00:23:55,690
+different things like TLS certificates
+
+626
+00:23:55,690 --> 00:23:58,120
+so what happens if my micro services are
+
+627
+00:23:58,120 --> 00:24:00,070
+expected to be hosted for different
+
+628
+00:24:00,070 --> 00:24:01,690
+tenants maybe I need to do TLS
+
+629
+00:24:01,690 --> 00:24:04,210
+termination across different host names
+
+630
+00:24:04,210 --> 00:24:06,550
+so that's another option we also may
+
+631
+00:24:06,550 --> 00:24:08,500
+want to enable features like weighted
+
+632
+00:24:08,500 --> 00:24:11,020
+deployments canary blue-green deploying
+
+633
+00:24:11,020 --> 00:24:14,050
+things like that we need a way to be
+
+634
+00:24:14,050 --> 00:24:16,180
+able to split separate and route that
+
+635
+00:24:16,180 --> 00:24:17,680
+traffic between our different
+
+636
+00:24:17,680 --> 00:24:20,620
+micro-services another issue that
+
+637
+00:24:20,620 --> 00:24:22,870
+happens when micro-services sort of ramp
+
+638
+00:24:22,870 --> 00:24:24,430
+up an end and we're scaling
+
+639
+00:24:24,430 --> 00:24:27,100
+micro-services is load balancing it's
+
+640
+00:24:27,100 --> 00:24:29,890
+essential to load balance micro-services
+
+641
+00:24:29,890 --> 00:24:31,870
+now there's a whole definition in the
+
+642
+00:24:31,870 --> 00:24:33,550
+whole site about how micro services are
+
+643
+00:24:33,550 --> 00:24:33,940
+built
+
+644
+00:24:33,940 --> 00:24:38,019
+many sites actually and a lot of how you
+
+645
+00:24:38,019 --> 00:24:40,509
+build a micro service is to remove state
+
+646
+00:24:40,509 --> 00:24:42,610
+from that micro service so you want to
+
+647
+00:24:42,610 --> 00:24:44,230
+give your micro service the ability to
+
+648
+00:24:44,230 --> 00:24:47,470
+scale horizontally well as you start to
+
+649
+00:24:47,470 --> 00:24:49,269
+enter the world of scaling horizontally
+
+650
+00:24:49,269 --> 00:24:50,919
+you need to load balance your traffic
+
+651
+00:24:50,919 --> 00:24:54,039
+between instances of micro services so
+
+652
+00:24:54,039 --> 00:24:55,840
+load balancing becomes really an
+
+653
+00:24:55,840 --> 00:24:57,669
+essential operation as we're
+
+654
+00:24:57,669 --> 00:24:59,590
+horizontally scaling different instances
+
+655
+00:24:59,590 --> 00:25:02,350
+of these micro services so as part and
+
+656
+00:25:02,350 --> 00:25:04,419
+parcel of load balancing we're going to
+
+657
+00:25:04,419 --> 00:25:06,549
+need to understand that architecture but
+
+658
+00:25:06,549 --> 00:25:08,080
+not only understand it we need to know
+
+659
+00:25:08,080 --> 00:25:10,029
+how to implement so doing things like
+
+660
+00:25:10,029 --> 00:25:13,139
+round-robin load balancing least weight
+
+661
+00:25:13,139 --> 00:25:16,179
+equal weighted that kind of thing we
+
+662
+00:25:16,179 --> 00:25:18,190
+need to set up those sorts of approaches
+
+663
+00:25:18,190 --> 00:25:20,559
+for load balancing we also may need to
+
+664
+00:25:20,559 --> 00:25:22,659
+do something like circuit breaking so as
+
+665
+00:25:22,659 --> 00:25:25,090
+applications become distributed it's
+
+666
+00:25:25,090 --> 00:25:26,649
+really important to prevent cascading
+
+667
+00:25:26,649 --> 00:25:28,929
+failures this is easier to do in a
+
+668
+00:25:28,929 --> 00:25:30,940
+monolith because your business logic is
+
+669
+00:25:30,940 --> 00:25:33,190
+so tightly tied together that you can
+
+670
+00:25:33,190 --> 00:25:35,830
+sort of write in logic where if this
+
+671
+00:25:35,830 --> 00:25:38,769
+error happens then you know return right
+
+672
+00:25:38,769 --> 00:25:41,740
+and and your your control flow of a
+
+673
+00:25:41,740 --> 00:25:43,899
+request through to response can be
+
+674
+00:25:43,899 --> 00:25:46,029
+broken by that simple return from the
+
+675
+00:25:46,029 --> 00:25:48,669
+execution before another handler accepts
+
+676
+00:25:48,669 --> 00:25:50,440
+that that flow of traffic through the
+
+677
+00:25:50,440 --> 00:25:52,570
+application with micro services and
+
+678
+00:25:52,570 --> 00:25:54,759
+that's not so often the case so a micro
+
+679
+00:25:54,759 --> 00:25:57,580
+service each independent section may not
+
+680
+00:25:57,580 --> 00:25:59,860
+be aware of failures in a prior section
+
+681
+00:25:59,860 --> 00:26:02,649
+so if bad data comes from a prior micro
+
+682
+00:26:02,649 --> 00:26:04,779
+service as part of your your flow of a
+
+683
+00:26:04,779 --> 00:26:08,889
+request your instance of a function here
+
+684
+00:26:08,889 --> 00:26:10,690
+may not know that it was bad data from
+
+685
+00:26:10,690 --> 00:26:13,600
+that prior micro service call so a
+
+686
+00:26:13,600 --> 00:26:15,340
+circuit breaking functionality needs to
+
+687
+00:26:15,340 --> 00:26:17,950
+take place where you can then stop
+
+688
+00:26:17,950 --> 00:26:20,169
+cascading failures in your application
+
+689
+00:26:20,169 --> 00:26:22,809
+and and and basically have that return
+
+690
+00:26:22,809 --> 00:26:24,549
+function that says up sorry our
+
+691
+00:26:24,549 --> 00:26:27,100
+applications unavailable right now so
+
+692
+00:26:27,100 --> 00:26:28,509
+circuit braking really prevents these
+
+693
+00:26:28,509 --> 00:26:30,730
+cascading failures by shutting down
+
+694
+00:26:30,730 --> 00:26:32,860
+portions of an application depending on
+
+695
+00:26:32,860 --> 00:26:34,509
+certain criteria and this could be
+
+696
+00:26:34,509 --> 00:26:37,000
+things like 500 errors this could be
+
+697
+00:26:37,000 --> 00:26:39,009
+things like bad output bad data things
+
+698
+00:26:39,009 --> 00:26:40,870
+like that there's a whole bunch of
+
+699
+00:26:40,870 --> 00:26:41,919
+different options but but searching
+
+700
+00:26:41,919 --> 00:26:43,419
+great circuit breaking really prevents
+
+701
+00:26:43,419 --> 00:26:46,330
+those cascading failures the other part
+
+702
+00:26:46,330 --> 00:26:47,770
+that can be really important
+
+703
+00:26:47,770 --> 00:26:49,679
+in service meshes mutual authentication
+
+704
+00:26:49,679 --> 00:26:52,870
+now when we have a bunch of different
+
+705
+00:26:52,870 --> 00:26:55,149
+services at play it's really important
+
+706
+00:26:55,149 --> 00:26:56,529
+to verify that both sides of a
+
+707
+00:26:56,529 --> 00:26:58,330
+conversation are who they say they are
+
+708
+00:26:58,330 --> 00:27:01,210
+and that can really certainly have
+
+709
+00:27:01,210 --> 00:27:03,190
+security implications because I want to
+
+710
+00:27:03,190 --> 00:27:04,809
+know and ensure that there are no
+
+711
+00:27:04,809 --> 00:27:07,000
+malicious actors you know that everybody
+
+712
+00:27:07,000 --> 00:27:09,159
+is who they say they are so I'm talking
+
+713
+00:27:09,159 --> 00:27:11,470
+in a secured manner with folks but it
+
+714
+00:27:11,470 --> 00:27:13,330
+also can be part of authorization
+
+715
+00:27:13,330 --> 00:27:15,820
+authentication as well we're mutual TLS
+
+716
+00:27:15,820 --> 00:27:18,730
+can't say I verify that this person is
+
+717
+00:27:18,730 --> 00:27:20,260
+who they say they are so they are
+
+718
+00:27:20,260 --> 00:27:22,720
+allowed to take these actions right so
+
+719
+00:27:22,720 --> 00:27:25,360
+mutual authentication or EMM TLS can it
+
+720
+00:27:25,360 --> 00:27:27,309
+can really check a couple of boxes in
+
+721
+00:27:27,309 --> 00:27:29,470
+that security thing I can make sure that
+
+722
+00:27:29,470 --> 00:27:31,299
+there is security between the
+
+723
+00:27:31,299 --> 00:27:33,190
+conversation of multiple micro services
+
+724
+00:27:33,190 --> 00:27:35,020
+but then that authentication and
+
+725
+00:27:35,020 --> 00:27:36,490
+authorization can also come into play
+
+726
+00:27:36,490 --> 00:27:38,710
+and make sure that different folks are
+
+727
+00:27:38,710 --> 00:27:41,740
+allowed to perform different actions so
+
+728
+00:27:41,740 --> 00:27:43,990
+let's jump in all those things can be
+
+729
+00:27:43,990 --> 00:27:46,720
+done without a service mesh that's the
+
+730
+00:27:46,720 --> 00:27:47,919
+kind of the part that's missing here
+
+731
+00:27:47,919 --> 00:27:49,899
+so routing a terminating traffic load
+
+732
+00:27:49,899 --> 00:27:52,570
+balancing circuit breaking em TLS all
+
+733
+00:27:52,570 --> 00:27:54,940
+these things can be done without using a
+
+734
+00:27:54,940 --> 00:27:57,250
+service mesh a service mission I forgot
+
+735
+00:27:57,250 --> 00:27:59,830
+to animate this the service mesh
+
+736
+00:27:59,830 --> 00:28:02,230
+infrastructure Eliza's these things i've
+
+737
+00:28:02,230 --> 00:28:04,600
+coined that word that's my word you have
+
+738
+00:28:04,600 --> 00:28:06,370
+to use it now the service mesh
+
+739
+00:28:06,370 --> 00:28:09,100
+infrastructure Eliza's these different
+
+740
+00:28:09,100 --> 00:28:11,289
+concepts so instead of a developer
+
+741
+00:28:11,289 --> 00:28:13,779
+having to independently or team of
+
+742
+00:28:13,779 --> 00:28:15,340
+developers having to work together to
+
+743
+00:28:15,340 --> 00:28:18,820
+implement routing you know and traffic
+
+744
+00:28:18,820 --> 00:28:20,559
+termination to implement circuit braking
+
+745
+00:28:20,559 --> 00:28:21,909
+temperament all these different things a
+
+746
+00:28:21,909 --> 00:28:24,370
+service mesh takes these components and
+
+747
+00:28:24,370 --> 00:28:25,960
+makes them part of the underlying
+
+748
+00:28:25,960 --> 00:28:28,480
+infrastructure layer the goal then is
+
+749
+00:28:28,480 --> 00:28:31,059
+that the application developer does not
+
+750
+00:28:31,059 --> 00:28:33,039
+need to spend cycles on building these
+
+751
+00:28:33,039 --> 00:28:34,960
+things for their micro services that
+
+752
+00:28:34,960 --> 00:28:37,270
+they need only to configure the mesh to
+
+753
+00:28:37,270 --> 00:28:39,820
+provide this functionality for their
+
+754
+00:28:39,820 --> 00:28:42,399
+micro services so I've got a next slide
+
+755
+00:28:42,399 --> 00:28:44,830
+here this is a caveat and this is that
+
+756
+00:28:44,830 --> 00:28:48,909
+quote-unquote who you ask part there are
+
+757
+00:28:48,909 --> 00:28:50,860
+exceptions to all the rules so
+
+758
+00:28:50,860 --> 00:28:52,480
+everything this is the throw everything
+
+759
+00:28:52,480 --> 00:28:53,980
+out the window that I've just said slide
+
+760
+00:28:53,980 --> 00:28:56,770
+there are exceptions to all rules so
+
+761
+00:28:56,770 --> 00:28:58,299
+don't believe that just because your
+
+762
+00:28:58,299 --> 00:29:00,279
+application is getting bigger that it
+
+763
+00:29:00,279 --> 00:29:01,600
+needs to be broken up
+
+764
+00:29:01,600 --> 00:29:03,310
+in other words just because you have a
+
+765
+00:29:03,310 --> 00:29:05,650
+monolith doesn't mean you need
+
+766
+00:29:05,650 --> 00:29:08,050
+microservices in that same vein just
+
+767
+00:29:08,050 --> 00:29:10,540
+because you have microservices doesn't
+
+768
+00:29:10,540 --> 00:29:13,180
+mean you need a service mesh monoliths
+
+769
+00:29:13,180 --> 00:29:16,060
+have existed for years decades without
+
+770
+00:29:16,060 --> 00:29:19,540
+issue micro services are great and and
+
+771
+00:29:19,540 --> 00:29:21,940
+really this applies to service mesh as
+
+772
+00:29:21,940 --> 00:29:24,760
+well it's great if you meet the use case
+
+773
+00:29:24,760 --> 00:29:26,800
+both technically and for your
+
+774
+00:29:26,800 --> 00:29:29,290
+organization so these are technologies
+
+775
+00:29:29,290 --> 00:29:33,070
+to solve a problem like so many other
+
+776
+00:29:33,070 --> 00:29:35,590
+technologies they're an investment they
+
+777
+00:29:35,590 --> 00:29:38,260
+require care they require feeding they
+
+778
+00:29:38,260 --> 00:29:40,450
+require talent devoted to working on
+
+779
+00:29:40,450 --> 00:29:42,250
+these technologies it's like bringing
+
+780
+00:29:42,250 --> 00:29:44,380
+kubernetes into an organization it's
+
+781
+00:29:44,380 --> 00:29:46,210
+like bringing a virtualization tech it's
+
+782
+00:29:46,210 --> 00:29:48,010
+like bringing a new software stack it's
+
+783
+00:29:48,010 --> 00:29:50,470
+like anything right you should not use
+
+784
+00:29:50,470 --> 00:29:53,410
+any of these things just because just
+
+785
+00:29:53,410 --> 00:29:54,970
+because this is shiny and pretty and I
+
+786
+00:29:54,970 --> 00:29:56,770
+want to and mess around with it that's
+
+787
+00:29:56,770 --> 00:29:59,200
+fine if you want to do that at home but
+
+788
+00:29:59,200 --> 00:30:01,150
+if you want to use these make sure that
+
+789
+00:30:01,150 --> 00:30:02,770
+you meet the use case both technically
+
+790
+00:30:02,770 --> 00:30:05,170
+and for your organization so don't use
+
+791
+00:30:05,170 --> 00:30:08,470
+this just because because service mesh
+
+792
+00:30:08,470 --> 00:30:10,990
+adds such another layer of complexity to
+
+793
+00:30:10,990 --> 00:30:13,180
+your infrastructure that you may run
+
+794
+00:30:13,180 --> 00:30:14,650
+into issues if your organization is not
+
+795
+00:30:14,650 --> 00:30:17,950
+prepared for it okay that's my last
+
+796
+00:30:17,950 --> 00:30:19,810
+slide where I talk about like a teacher
+
+797
+00:30:19,810 --> 00:30:21,670
+and take to the teachers office here so
+
+798
+00:30:21,670 --> 00:30:23,910
+let's talk about service mesh concepts
+
+799
+00:30:23,910 --> 00:30:27,550
+there are a lot of service meshes out
+
+800
+00:30:27,550 --> 00:30:29,980
+there I've got a few on this slide so
+
+801
+00:30:29,980 --> 00:30:33,790
+we've got sto linker D I don't know how
+
+802
+00:30:33,790 --> 00:30:35,620
+to pronounce this that's mesh or Maish
+
+803
+00:30:35,620 --> 00:30:37,690
+because I never learned if traffic was
+
+804
+00:30:37,690 --> 00:30:39,880
+traffic or traffic but it's something
+
+805
+00:30:39,880 --> 00:30:42,160
+it's mesh or mash one of the two there's
+
+806
+00:30:42,160 --> 00:30:44,320
+consul and there's kuma at least now
+
+807
+00:30:44,320 --> 00:30:46,780
+these I of course lifted shamelessly
+
+808
+00:30:46,780 --> 00:30:48,850
+from the CN CF landscape on service
+
+809
+00:30:48,850 --> 00:30:50,350
+meshes but there are a lot of other ones
+
+810
+00:30:50,350 --> 00:30:53,710
+out there netflix has built some
+
+811
+00:30:53,710 --> 00:30:55,480
+Facebook I think has some there's a
+
+812
+00:30:55,480 --> 00:30:57,940
+whole ton of them out there what we're
+
+813
+00:30:57,940 --> 00:31:00,280
+going to be talking about in common
+
+814
+00:31:00,280 --> 00:31:02,350
+concepts for the service mesh are things
+
+815
+00:31:02,350 --> 00:31:04,150
+that most of these service meshes
+
+816
+00:31:04,150 --> 00:31:06,640
+implement so I say most in in little
+
+817
+00:31:06,640 --> 00:31:08,200
+stars or little quotation marks there
+
+818
+00:31:08,200 --> 00:31:10,750
+because some of these service meshes may
+
+819
+00:31:10,750 --> 00:31:12,820
+not have exactly every concept I'm about
+
+820
+00:31:12,820 --> 00:31:15,490
+to share but most of them
+
+821
+00:31:15,490 --> 00:31:16,950
+to the things that we're talking about
+
+822
+00:31:16,950 --> 00:31:19,539
+the first one is traffic management so
+
+823
+00:31:19,539 --> 00:31:21,399
+back on that that microservice issue
+
+824
+00:31:21,399 --> 00:31:23,950
+slide traffic management is one of the
+
+825
+00:31:23,950 --> 00:31:25,870
+big things that a service mesh brings to
+
+826
+00:31:25,870 --> 00:31:28,750
+the table with a service mesh we're
+
+827
+00:31:28,750 --> 00:31:30,610
+going to infrastructural eyes again
+
+828
+00:31:30,610 --> 00:31:32,470
+there's that word I've defined we're
+
+829
+00:31:32,470 --> 00:31:33,880
+going to infrastructural eyes the
+
+830
+00:31:33,880 --> 00:31:36,429
+concepts of routing load balancing and
+
+831
+00:31:36,429 --> 00:31:38,740
+ingress I've listed egress as a
+
+832
+00:31:38,740 --> 00:31:40,210
+sometimes there because that's again one
+
+833
+00:31:40,210 --> 00:31:42,039
+of those features that some meshes
+
+834
+00:31:42,039 --> 00:31:44,860
+implement some don't but routing in load
+
+835
+00:31:44,860 --> 00:31:47,260
+balancing ingress these are concepts
+
+836
+00:31:47,260 --> 00:31:49,240
+that almost all service meshes are going
+
+837
+00:31:49,240 --> 00:31:51,460
+to implement egress is the concept of
+
+838
+00:31:51,460 --> 00:31:54,640
+taking traffic and having it leave a
+
+839
+00:31:54,640 --> 00:31:57,669
+mesh from a predetermined node so having
+
+840
+00:31:57,669 --> 00:31:59,559
+that as a functionality can allow you to
+
+841
+00:31:59,559 --> 00:32:01,330
+make interesting security decisions like
+
+842
+00:32:01,330 --> 00:32:03,340
+all traffic from this node should or
+
+843
+00:32:03,340 --> 00:32:05,049
+should not be denied or and it's it's
+
+844
+00:32:05,049 --> 00:32:06,909
+mostly a firewall and sort of outside
+
+845
+00:32:06,909 --> 00:32:10,539
+the mesh security concept most meshes
+
+846
+00:32:10,539 --> 00:32:12,429
+are going to implement some level of
+
+847
+00:32:12,429 --> 00:32:14,140
+security so we're certainly going to
+
+848
+00:32:14,140 --> 00:32:15,450
+have authentication authorization
+
+849
+00:32:15,450 --> 00:32:18,130
+probably as a part of a mesh so making
+
+850
+00:32:18,130 --> 00:32:20,529
+policy decisions based on who and why
+
+851
+00:32:20,529 --> 00:32:22,390
+and then most meshes are going to
+
+852
+00:32:22,390 --> 00:32:24,010
+implement some sort of mutual security
+
+853
+00:32:24,010 --> 00:32:26,260
+which typically takes the form of M TLS
+
+854
+00:32:26,260 --> 00:32:28,179
+so verifying that you know both parties
+
+855
+00:32:28,179 --> 00:32:29,860
+in a conversation are who they say they
+
+856
+00:32:29,860 --> 00:32:32,320
+are client verifies the server and the
+
+857
+00:32:32,320 --> 00:32:35,080
+server verifies the client the third
+
+858
+00:32:35,080 --> 00:32:36,700
+pillar of these common concepts is
+
+859
+00:32:36,700 --> 00:32:39,070
+observability so in a service mesh we
+
+860
+00:32:39,070 --> 00:32:41,830
+want the ability to monitor to log and
+
+861
+00:32:41,830 --> 00:32:44,950
+to instrument our micro services now
+
+862
+00:32:44,950 --> 00:32:46,690
+again there's that term infrastructural
+
+863
+00:32:46,690 --> 00:32:49,029
+eyes we can monitor our applications
+
+864
+00:32:49,029 --> 00:32:50,440
+outside of the mesh because we could
+
+865
+00:32:50,440 --> 00:32:52,659
+just tie in you know Prometheus exported
+
+866
+00:32:52,659 --> 00:32:54,789
+metrics or with logging I can just grab
+
+867
+00:32:54,789 --> 00:32:56,200
+standard out and standard error from
+
+868
+00:32:56,200 --> 00:32:57,850
+some container running an application
+
+869
+00:32:57,850 --> 00:33:00,190
+that's fine but observability
+
+870
+00:33:00,190 --> 00:33:02,049
+infrastructure realizes this and says
+
+871
+00:33:02,049 --> 00:33:05,140
+okay let's monitor our applications as
+
+872
+00:33:05,140 --> 00:33:06,880
+part of the infrastructure let's let's
+
+873
+00:33:06,880 --> 00:33:08,500
+instrument them and do distributed
+
+874
+00:33:08,500 --> 00:33:11,260
+tracing across the infrastructure for
+
+875
+00:33:11,260 --> 00:33:14,020
+all these different micro services so if
+
+876
+00:33:14,020 --> 00:33:15,520
+we break down traffic management
+
+877
+00:33:15,520 --> 00:33:18,220
+the first one is routing so we want to
+
+878
+00:33:18,220 --> 00:33:19,539
+make sure that we have the ability in a
+
+879
+00:33:19,539 --> 00:33:21,700
+service mesh to get traffic from service
+
+880
+00:33:21,700 --> 00:33:24,639
+a to service B so this is the intra mesh
+
+881
+00:33:24,639 --> 00:33:26,559
+traffic so we're going to make
+
+882
+00:33:26,559 --> 00:33:28,149
+determinations on where to send the
+
+883
+00:33:28,149 --> 00:33:29,080
+traffic these will
+
+884
+00:33:29,080 --> 00:33:31,450
+routing decisions that we can base on
+
+885
+00:33:31,450 --> 00:33:34,300
+things like HTTP headers that we can
+
+886
+00:33:34,300 --> 00:33:36,850
+base on things like TCP ports and TCP
+
+887
+00:33:36,850 --> 00:33:39,670
+destinations and sources then we can
+
+888
+00:33:39,670 --> 00:33:41,730
+base on really any number of criteria
+
+889
+00:33:41,730 --> 00:33:44,260
+but the core is that we're sending the
+
+890
+00:33:44,260 --> 00:33:46,090
+traffic from one place to another so
+
+891
+00:33:46,090 --> 00:33:48,850
+we're making a routing decision also
+
+892
+00:33:48,850 --> 00:33:50,380
+part of traffic management is load
+
+893
+00:33:50,380 --> 00:33:53,230
+balancing so when I use a service mesh I
+
+894
+00:33:53,230 --> 00:33:54,730
+want to have the ability to do
+
+895
+00:33:54,730 --> 00:33:57,130
+round-robin weighted least traffic
+
+896
+00:33:57,130 --> 00:33:59,050
+different kinds of load balancing for
+
+897
+00:33:59,050 --> 00:34:01,510
+our micro services if a development team
+
+898
+00:34:01,510 --> 00:34:02,950
+implemented those pieces of
+
+899
+00:34:02,950 --> 00:34:04,960
+functionality independently they maybe
+
+900
+00:34:04,960 --> 00:34:08,050
+into the application itself integrating
+
+901
+00:34:08,050 --> 00:34:10,120
+load balancing concepts you know
+
+902
+00:34:10,120 --> 00:34:11,860
+integrating health checks things like
+
+903
+00:34:11,860 --> 00:34:13,930
+that where if we infrastructural eyes
+
+904
+00:34:13,930 --> 00:34:16,060
+these things we can have the service
+
+905
+00:34:16,060 --> 00:34:18,130
+mesh load balance for us we can have the
+
+906
+00:34:18,130 --> 00:34:19,570
+service mesh in the case of least
+
+907
+00:34:19,570 --> 00:34:22,360
+traffic determine which instance in a
+
+908
+00:34:22,360 --> 00:34:24,640
+micro service set is receiving the least
+
+909
+00:34:24,640 --> 00:34:26,170
+amount of traffic so I don't I don't
+
+910
+00:34:26,170 --> 00:34:27,640
+need to build these concepts into my
+
+911
+00:34:27,640 --> 00:34:30,580
+application the ingress resource this
+
+912
+00:34:30,580 --> 00:34:32,800
+would be bringing non mesh traffic into
+
+913
+00:34:32,800 --> 00:34:34,800
+the mesh so this is how do I get
+
+914
+00:34:34,800 --> 00:34:37,860
+requests from end users how do I get
+
+915
+00:34:37,860 --> 00:34:40,960
+traffic from outside external services
+
+916
+00:34:40,960 --> 00:34:43,240
+into this mesh we have this concept of
+
+917
+00:34:43,240 --> 00:34:45,370
+ingress if you've used kubernetes this
+
+918
+00:34:45,370 --> 00:34:47,350
+is a very similar concept because
+
+919
+00:34:47,350 --> 00:34:49,480
+there's the HTTP ingress in a lot of
+
+920
+00:34:49,480 --> 00:34:51,070
+kubernetes clusters and that's bringing
+
+921
+00:34:51,070 --> 00:34:54,880
+non cluster traffic into the cluster so
+
+922
+00:34:54,880 --> 00:34:55,930
+it's the same kind of thing with the
+
+923
+00:34:55,930 --> 00:34:57,490
+mesh ingress is bringing non mesh
+
+924
+00:34:57,490 --> 00:35:00,460
+traffic into the mesh then sometimes we
+
+925
+00:35:00,460 --> 00:35:02,380
+also have the concept of egress so we
+
+926
+00:35:02,380 --> 00:35:04,300
+want to send traffic out from this mesh
+
+927
+00:35:04,300 --> 00:35:06,340
+through predetermined nodes and again
+
+928
+00:35:06,340 --> 00:35:08,920
+that's typically a security piece of
+
+929
+00:35:08,920 --> 00:35:10,380
+functionality but it also may be
+
+930
+00:35:10,380 --> 00:35:13,030
+something for end user usability right
+
+931
+00:35:13,030 --> 00:35:15,580
+where let's say in our fantasy world
+
+932
+00:35:15,580 --> 00:35:17,860
+that we have a service mesh that spans
+
+933
+00:35:17,860 --> 00:35:20,710
+the globe I may want to dedicate egress
+
+934
+00:35:20,710 --> 00:35:23,260
+nodes force excuse me for certain bits
+
+935
+00:35:23,260 --> 00:35:25,960
+of traffic that send that traffic out
+
+936
+00:35:25,960 --> 00:35:29,080
+through exit nodes that are close to my
+
+937
+00:35:29,080 --> 00:35:32,110
+end user so we can do like geo-located
+
+938
+00:35:32,110 --> 00:35:33,730
+egress nodes where someone may send
+
+939
+00:35:33,730 --> 00:35:35,500
+their traffic in or a server may send
+
+940
+00:35:35,500 --> 00:35:37,000
+its traffic in in California
+
+941
+00:35:37,000 --> 00:35:39,460
+but it may aggress the mesh in Germany
+
+942
+00:35:39,460 --> 00:35:41,380
+close to a user right so that could be
+
+943
+00:35:41,380 --> 00:35:42,900
+one of the use case
+
+944
+00:35:42,900 --> 00:35:45,910
+under security for a service mesh often
+
+945
+00:35:45,910 --> 00:35:47,500
+is really the first concept and this is
+
+946
+00:35:47,500 --> 00:35:50,110
+who are you who am i who is this thing
+
+947
+00:35:50,110 --> 00:35:53,710
+usually it's service based so instead of
+
+948
+00:35:53,710 --> 00:35:56,020
+it being this is an independent person
+
+949
+00:35:56,020 --> 00:35:59,050
+who's with the mesh it's typically this
+
+950
+00:35:59,050 --> 00:36:02,110
+is a service so often takes the form of
+
+951
+00:36:02,110 --> 00:36:05,350
+setting up that this service is who they
+
+952
+00:36:05,350 --> 00:36:06,670
+say they are when they are communicating
+
+953
+00:36:06,670 --> 00:36:10,180
+on the mesh now that ties directly into
+
+954
+00:36:10,180 --> 00:36:12,550
+our Xia our authorization piece which is
+
+955
+00:36:12,550 --> 00:36:14,440
+why or what are they doing so I guess
+
+956
+00:36:14,440 --> 00:36:17,260
+it's kind of what and why again this is
+
+957
+00:36:17,260 --> 00:36:19,510
+usually service based thing so now if
+
+958
+00:36:19,510 --> 00:36:21,670
+we've completed our authentication and a
+
+959
+00:36:21,670 --> 00:36:23,440
+service when talking on the mesh can say
+
+960
+00:36:23,440 --> 00:36:26,050
+I am service a then the mesh can
+
+961
+00:36:26,050 --> 00:36:28,030
+implement authorization and say ok
+
+962
+00:36:28,030 --> 00:36:30,450
+service say you're allowed to do XYZ
+
+963
+00:36:30,450 --> 00:36:34,270
+actions right so authentication is who
+
+964
+00:36:34,270 --> 00:36:34,810
+are they
+
+965
+00:36:34,810 --> 00:36:36,550
+authorization than in a service mesh
+
+966
+00:36:36,550 --> 00:36:40,060
+what and why mutual TLS then services
+
+967
+00:36:40,060 --> 00:36:41,890
+mutually verifying each other
+
+968
+00:36:41,890 --> 00:36:43,810
+typically this happens via common CA
+
+969
+00:36:43,810 --> 00:36:46,780
+where the certificate is issued for the
+
+970
+00:36:46,780 --> 00:36:49,030
+client and the server is sourced to a
+
+971
+00:36:49,030 --> 00:36:51,610
+common certificate authority thus the
+
+972
+00:36:51,610 --> 00:36:52,990
+server and the client have a common
+
+973
+00:36:52,990 --> 00:36:55,770
+reference point to verify each other
+
+974
+00:36:55,770 --> 00:36:58,960
+that's kind of glossing over em TLS
+
+975
+00:36:58,960 --> 00:37:00,730
+that's a little deep for what we're
+
+976
+00:37:00,730 --> 00:37:02,620
+doing today but know that a lot of
+
+977
+00:37:02,620 --> 00:37:03,970
+service much does have that
+
+978
+00:37:03,970 --> 00:37:05,320
+functionality and it's something worth
+
+979
+00:37:05,320 --> 00:37:07,990
+exploring more the final pillar that
+
+980
+00:37:07,990 --> 00:37:09,640
+we're talking about is observability now
+
+981
+00:37:09,640 --> 00:37:13,020
+this slide with apologies to the whole
+
+982
+00:37:13,020 --> 00:37:15,820
+observability industry is going to kind
+
+983
+00:37:15,820 --> 00:37:19,930
+of abuse the term there's a great line
+
+984
+00:37:19,930 --> 00:37:23,350
+from honeycomb their website honeycomb
+
+985
+00:37:23,350 --> 00:37:25,180
+dot IO and there are an observer ability
+
+986
+00:37:25,180 --> 00:37:27,940
+organization and they say in the world
+
+987
+00:37:27,940 --> 00:37:29,730
+of software products and services
+
+988
+00:37:29,730 --> 00:37:31,900
+observability means you can answer any
+
+989
+00:37:31,900 --> 00:37:33,610
+questions about what's happening on the
+
+990
+00:37:33,610 --> 00:37:35,770
+inside of the system just by observing
+
+991
+00:37:35,770 --> 00:37:38,710
+the outside of the system without having
+
+992
+00:37:38,710 --> 00:37:41,760
+to ship new code to answer new questions
+
+993
+00:37:41,760 --> 00:37:43,660
+observability is what we need our tools
+
+994
+00:37:43,660 --> 00:37:46,150
+to deliver now that system complexity is
+
+995
+00:37:46,150 --> 00:37:48,670
+outpacing our ability to predict what's
+
+996
+00:37:48,670 --> 00:37:50,800
+going to break that's a whole great
+
+997
+00:37:50,800 --> 00:37:54,010
+paragraph and and I'm about to abuse the
+
+998
+00:37:54,010 --> 00:37:56,160
+term observability like I said again
+
+999
+00:37:56,160 --> 00:37:58,749
+observability is a discipline unto
+
+1000
+00:37:58,749 --> 00:37:59,319
+itself
+
+1001
+00:37:59,319 --> 00:38:02,079
+it is observing the outside of a system
+
+1002
+00:38:02,079 --> 00:38:03,819
+without adding anything new to that
+
+1003
+00:38:03,819 --> 00:38:07,029
+system in this case our observability in
+
+1004
+00:38:07,029 --> 00:38:09,459
+the terms of service mesh is we can add
+
+1005
+00:38:09,459 --> 00:38:11,679
+in monitoring so we're gonna take a look
+
+1006
+00:38:11,679 --> 00:38:13,689
+at metrics about our traffic flows we
+
+1007
+00:38:13,689 --> 00:38:16,179
+can monitor different incoming requests
+
+1008
+00:38:16,179 --> 00:38:18,519
+outgoing requests take a look at the
+
+1009
+00:38:18,519 --> 00:38:20,170
+return codes for those and start
+
+1010
+00:38:20,170 --> 00:38:22,209
+building metrics about the performance
+
+1011
+00:38:22,209 --> 00:38:24,369
+of our application simply based on the
+
+1012
+00:38:24,369 --> 00:38:26,279
+traffic flow so instead of monitoring
+
+1013
+00:38:26,279 --> 00:38:28,539
+application instances themselves which
+
+1014
+00:38:28,539 --> 00:38:30,939
+you also should do you now have the
+
+1015
+00:38:30,939 --> 00:38:33,130
+added ability to monitor the traffic
+
+1016
+00:38:33,130 --> 00:38:35,709
+flow under logging we can capture
+
+1017
+00:38:35,709 --> 00:38:38,019
+traffic logs as a sampling of the
+
+1018
+00:38:38,019 --> 00:38:40,150
+traffic flow instead of app based
+
+1019
+00:38:40,150 --> 00:38:41,739
+logging or actually that instead should
+
+1020
+00:38:41,739 --> 00:38:44,229
+be in addition to so capturing traffic
+
+1021
+00:38:44,229 --> 00:38:47,049
+logs now we can capture when a request
+
+1022
+00:38:47,049 --> 00:38:49,539
+comes in where is that request destined
+
+1023
+00:38:49,539 --> 00:38:52,179
+what is the request ID if we want to do
+
+1024
+00:38:52,179 --> 00:38:54,429
+things like distributed tracing what is
+
+1025
+00:38:54,429 --> 00:38:56,469
+the content of the request so if
+
+1026
+00:38:56,469 --> 00:38:58,569
+something goes wrong in our application
+
+1027
+00:38:58,569 --> 00:39:00,549
+or in our micro service we don't have to
+
+1028
+00:39:00,549 --> 00:39:02,469
+rely on that micro Service working well
+
+1029
+00:39:02,469 --> 00:39:04,809
+enough to output a log we can see that
+
+1030
+00:39:04,809 --> 00:39:06,759
+traffic arrived at that micro service
+
+1031
+00:39:06,759 --> 00:39:08,769
+and something went wrong so it gives us
+
+1032
+00:39:08,769 --> 00:39:11,079
+sort of an enhanced visibility into the
+
+1033
+00:39:11,079 --> 00:39:12,179
+traffic flow
+
+1034
+00:39:12,179 --> 00:39:14,709
+finally instrumentation is the third
+
+1035
+00:39:14,709 --> 00:39:16,150
+idea under observability so we can
+
+1036
+00:39:16,150 --> 00:39:18,219
+perform distributed tracing that the
+
+1037
+00:39:18,219 --> 00:39:19,959
+service mesh will link together for us
+
+1038
+00:39:19,959 --> 00:39:21,969
+now what we're saying is in the service
+
+1039
+00:39:21,969 --> 00:39:24,400
+mesh if I have a request that starts at
+
+1040
+00:39:24,400 --> 00:39:26,109
+one micro service and bounces to another
+
+1041
+00:39:26,109 --> 00:39:27,789
+and bounces to another and bounces to
+
+1042
+00:39:27,789 --> 00:39:31,029
+another before returning to the end user
+
+1043
+00:39:31,029 --> 00:39:34,239
+I can tie all of those requests across
+
+1044
+00:39:34,239 --> 00:39:36,189
+the mesh together and perform
+
+1045
+00:39:36,189 --> 00:39:39,279
+distributed tracing so in a monolith
+
+1046
+00:39:39,279 --> 00:39:42,009
+this would just typically be a normal
+
+1047
+00:39:42,009 --> 00:39:44,049
+tracing action a normal debugging action
+
+1048
+00:39:44,049 --> 00:39:45,999
+where you would trace the flow through
+
+1049
+00:39:45,999 --> 00:39:47,229
+different functions that are being
+
+1050
+00:39:47,229 --> 00:39:49,119
+called in the app there's direct
+
+1051
+00:39:49,119 --> 00:39:51,039
+handoffs of function calls and returns
+
+1052
+00:39:51,039 --> 00:39:53,709
+and you can see all of that within your
+
+1053
+00:39:53,709 --> 00:39:56,319
+software when you are working in a
+
+1054
+00:39:56,319 --> 00:39:57,969
+distributed application in a micro
+
+1055
+00:39:57,969 --> 00:40:00,789
+services world it's not as easy because
+
+1056
+00:40:00,789 --> 00:40:02,890
+you cannot directly debug one
+
+1057
+00:40:02,890 --> 00:40:05,259
+application and have introspection into
+
+1058
+00:40:05,259 --> 00:40:07,299
+a completely different application when
+
+1059
+00:40:07,299 --> 00:40:09,160
+your micro service is finished executing
+
+1060
+00:40:09,160 --> 00:40:11,410
+so having this ability to do distributed
+
+1061
+00:40:11,410 --> 00:40:13,420
+tracing and tie together these requests
+
+1062
+00:40:13,420 --> 00:40:15,400
+as they float around the mesh is a
+
+1063
+00:40:15,400 --> 00:40:17,920
+really powerful technology that really
+
+1064
+00:40:17,920 --> 00:40:20,200
+enhances your ability to know and really
+
+1065
+00:40:20,200 --> 00:40:23,369
+observe what's going on inside this mesh
+
+1066
+00:40:23,369 --> 00:40:25,569
+okay pause for just one second I'm gonna
+
+1067
+00:40:25,569 --> 00:40:27,099
+take a drink of coffee because I've been
+
+1068
+00:40:27,099 --> 00:40:30,130
+talking a lot okay I'm sorry you had to
+
+1069
+00:40:30,130 --> 00:40:30,609
+hear that
+
+1070
+00:40:30,609 --> 00:40:34,030
+now it's tio concepts so we spent all of
+
+1071
+00:40:34,030 --> 00:40:36,700
+our time so far talking about monoliths
+
+1072
+00:40:36,700 --> 00:40:38,380
+and micro services and what is the
+
+1073
+00:40:38,380 --> 00:40:40,030
+service mesh let's actually take a look
+
+1074
+00:40:40,030 --> 00:40:43,180
+at what is a service measure what is is
+
+1075
+00:40:43,180 --> 00:40:46,059
+tio how does this tio work there's a
+
+1076
+00:40:46,059 --> 00:40:47,950
+bunch of core components to sto we're
+
+1077
+00:40:47,950 --> 00:40:49,299
+going to deploy them today you're gonna
+
+1078
+00:40:49,299 --> 00:40:51,940
+see them in action the first section is
+
+1079
+00:40:51,940 --> 00:40:54,910
+the data plane in this do sto is built
+
+1080
+00:40:54,910 --> 00:40:56,770
+like a lot of different service meshes
+
+1081
+00:40:56,770 --> 00:41:01,059
+on envoy envoy is a proxy server it is
+
+1082
+00:41:01,059 --> 00:41:03,640
+build independently of all these service
+
+1083
+00:41:03,640 --> 00:41:05,890
+meshes so sto didn't build envoy envoy I
+
+1084
+00:41:05,890 --> 00:41:07,480
+think was actually built by lyft if I
+
+1085
+00:41:07,480 --> 00:41:11,049
+recall correctly envoy is a proxy server
+
+1086
+00:41:11,049 --> 00:41:13,930
+that is controlled in this instance by
+
+1087
+00:41:13,930 --> 00:41:16,720
+Sto so envoy is this proxy server runs
+
+1088
+00:41:16,720 --> 00:41:19,119
+is a sidecar to service containers in
+
+1089
+00:41:19,119 --> 00:41:22,000
+kubernetes so when you deploy a pod Sto
+
+1090
+00:41:22,000 --> 00:41:25,180
+injects envoy as a proxy into your
+
+1091
+00:41:25,180 --> 00:41:27,730
+deployed pods and then sto controls
+
+1092
+00:41:27,730 --> 00:41:29,980
+envoy which in turn helps you route
+
+1093
+00:41:29,980 --> 00:41:33,579
+traffic and so on the control plane is
+
+1094
+00:41:33,579 --> 00:41:36,819
+collectively what controls Sto so in
+
+1095
+00:41:36,819 --> 00:41:38,970
+this control plane here we have pilot
+
+1096
+00:41:38,970 --> 00:41:42,609
+pilot is coordinating service discovery
+
+1097
+00:41:42,609 --> 00:41:44,859
+traffic management and resiliency
+
+1098
+00:41:44,859 --> 00:41:48,069
+features so pilot is sort of one of the
+
+1099
+00:41:48,069 --> 00:41:50,470
+big core components of ISTE au which
+
+1100
+00:41:50,470 --> 00:41:53,200
+helps you do all of the traffic and
+
+1101
+00:41:53,200 --> 00:41:55,319
+routing decisions within your mesh if
+
+1102
+00:41:55,319 --> 00:41:57,700
+that handles all the traffic and routing
+
+1103
+00:41:57,700 --> 00:42:00,819
+then Citadel handles the security so
+
+1104
+00:42:00,819 --> 00:42:02,380
+Citadel is the security component for
+
+1105
+00:42:02,380 --> 00:42:04,869
+sto that we be used for mutual TLS we
+
+1106
+00:42:04,869 --> 00:42:07,119
+use it for encryption and credential and
+
+1107
+00:42:07,119 --> 00:42:09,160
+policy management so Citadel is the
+
+1108
+00:42:09,160 --> 00:42:10,930
+control plan component responsible for
+
+1109
+00:42:10,930 --> 00:42:14,230
+implementing auth end of the mutual to
+
+1110
+00:42:14,230 --> 00:42:15,609
+LS things like that that we've talked
+
+1111
+00:42:15,609 --> 00:42:18,640
+about so far galley is the final
+
+1112
+00:42:18,640 --> 00:42:20,799
+component of ST O's control plane and
+
+1113
+00:42:20,799 --> 00:42:23,089
+that's a configuration
+
+1114
+00:42:23,089 --> 00:42:25,729
+Lading processing and validating layer
+
+1115
+00:42:25,729 --> 00:42:28,609
+the goal of gali and this is actually
+
+1116
+00:42:28,609 --> 00:42:30,019
+lifted directly from the SEO Doc's
+
+1117
+00:42:30,019 --> 00:42:34,849
+the goal of gali is to isolate sto from
+
+1118
+00:42:34,849 --> 00:42:37,249
+the layer that it's running on or from
+
+1119
+00:42:37,249 --> 00:42:38,660
+the infrastructure that it's running on
+
+1120
+00:42:38,660 --> 00:42:41,660
+so sto shouldn't have to be vulnerable
+
+1121
+00:42:41,660 --> 00:42:44,089
+to any particular Mis configuration in
+
+1122
+00:42:44,089 --> 00:42:46,940
+kubernetes gali is going to ensure that
+
+1123
+00:42:46,940 --> 00:42:49,880
+any configuration passed into is do by
+
+1124
+00:42:49,880 --> 00:42:51,049
+way of kubernetes
+
+1125
+00:42:51,049 --> 00:42:53,630
+is valid that that configuration is
+
+1126
+00:42:53,630 --> 00:42:55,339
+translated into internal sto
+
+1127
+00:42:55,339 --> 00:42:57,650
+configuration where in kubernetes it may
+
+1128
+00:42:57,650 --> 00:42:59,690
+just be you know a yam a manifest or a
+
+1129
+00:42:59,690 --> 00:43:01,670
+custom resource definition right so
+
+1130
+00:43:01,670 --> 00:43:03,799
+Galle is a processing validation
+
+1131
+00:43:03,799 --> 00:43:06,829
+translating layer that that isolates the
+
+1132
+00:43:06,829 --> 00:43:09,739
+underlying infrastructure from isolates
+
+1133
+00:43:09,739 --> 00:43:10,759
+this do rather from the underlying
+
+1134
+00:43:10,759 --> 00:43:13,369
+infrastructure and translates user
+
+1135
+00:43:13,369 --> 00:43:16,279
+configuration the final component on
+
+1136
+00:43:16,279 --> 00:43:18,979
+this page that that's not really an sto
+
+1137
+00:43:18,979 --> 00:43:21,140
+component but it's really valuable is
+
+1138
+00:43:21,140 --> 00:43:23,539
+something called key Olly so key ally is
+
+1139
+00:43:23,539 --> 00:43:25,400
+it's not a true as to your component
+
+1140
+00:43:25,400 --> 00:43:27,799
+it's a third party integration and what
+
+1141
+00:43:27,799 --> 00:43:29,569
+it gives us is visibility for the
+
+1142
+00:43:29,569 --> 00:43:32,029
+management of this do so Kyoya is an
+
+1143
+00:43:32,029 --> 00:43:33,769
+awesome tool that allows us to see
+
+1144
+00:43:33,769 --> 00:43:36,859
+traffic flows in sto so seeing what goes
+
+1145
+00:43:36,859 --> 00:43:38,930
+where it allows us to configure
+
+1146
+00:43:38,930 --> 00:43:41,239
+different pieces of functionality to you
+
+1147
+00:43:41,239 --> 00:43:43,579
+know track metrics if we have for me FES
+
+1148
+00:43:43,579 --> 00:43:45,769
+and Griffin and enabled Cal is just this
+
+1149
+00:43:45,769 --> 00:43:49,969
+great tool to manage sto ok so if those
+
+1150
+00:43:49,969 --> 00:43:51,950
+are the core components of this do what
+
+1151
+00:43:51,950 --> 00:43:53,960
+are the building blocks then well the
+
+1152
+00:43:53,960 --> 00:43:55,400
+first building block is a virtual
+
+1153
+00:43:55,400 --> 00:43:59,329
+service a virtual service is a thing it
+
+1154
+00:43:59,329 --> 00:44:01,759
+is a a concept is an item that defines
+
+1155
+00:44:01,759 --> 00:44:04,009
+how requests are routed to a service so
+
+1156
+00:44:04,009 --> 00:44:05,630
+as you see in parentheses what goes
+
+1157
+00:44:05,630 --> 00:44:07,969
+where when we talk about virtual
+
+1158
+00:44:07,969 --> 00:44:09,559
+services what I really want folks to
+
+1159
+00:44:09,559 --> 00:44:11,979
+focus on is the concept of virtual an
+
+1160
+00:44:11,979 --> 00:44:15,319
+sto virtual services not a real service
+
+1161
+00:44:15,319 --> 00:44:18,049
+so a real service for example there is
+
+1162
+00:44:18,049 --> 00:44:19,609
+something that answers requests a
+
+1163
+00:44:19,609 --> 00:44:22,789
+virtual service it's an abstraction that
+
+1164
+00:44:22,789 --> 00:44:25,609
+helps us define routing policies we'll
+
+1165
+00:44:25,609 --> 00:44:28,279
+get to in a second how we actually get a
+
+1166
+00:44:28,279 --> 00:44:31,789
+request to a real service endpoint but a
+
+1167
+00:44:31,789 --> 00:44:33,880
+virtual service is the first stop that
+
+1168
+00:44:33,880 --> 00:44:36,109
+abstraction allows is if I'm going to
+
+1169
+00:44:36,109 --> 00:44:36,730
+keep
+
+1170
+00:44:36,730 --> 00:44:39,640
+new words today abstractions is a
+
+1171
+00:44:39,640 --> 00:44:44,530
+service a destination rule then is what
+
+1172
+00:44:44,530 --> 00:44:46,210
+happens when we want to connect to a
+
+1173
+00:44:46,210 --> 00:44:48,910
+real service endpoint so a destination
+
+1174
+00:44:48,910 --> 00:44:50,830
+rule defines what happens to requests
+
+1175
+00:44:50,830 --> 00:44:53,890
+when they arrive at a virtual service so
+
+1176
+00:44:53,890 --> 00:44:56,260
+if we compare a destination to rule to a
+
+1177
+00:44:56,260 --> 00:44:58,510
+virtual service DRS are used against
+
+1178
+00:44:58,510 --> 00:45:01,150
+real service endpoints so a destination
+
+1179
+00:45:01,150 --> 00:45:03,460
+rule is going to define things like load
+
+1180
+00:45:03,460 --> 00:45:06,460
+balancing for instance where if I send
+
+1181
+00:45:06,460 --> 00:45:09,010
+traffic to a virtual service when that
+
+1182
+00:45:09,010 --> 00:45:10,870
+traffic arrives at a virtual service the
+
+1183
+00:45:10,870 --> 00:45:12,970
+destination rule determines how the
+
+1184
+00:45:12,970 --> 00:45:15,610
+traffic is load balanced across actual
+
+1185
+00:45:15,610 --> 00:45:18,550
+real services that are providing you
+
+1186
+00:45:18,550 --> 00:45:20,770
+know well a service it's kind of an
+
+1187
+00:45:20,770 --> 00:45:22,810
+overloaded term but that are providing a
+
+1188
+00:45:22,810 --> 00:45:25,750
+function right so a destination rule is
+
+1189
+00:45:25,750 --> 00:45:28,360
+real implementation against real service
+
+1190
+00:45:28,360 --> 00:45:30,520
+end points where a virtual service is
+
+1191
+00:45:30,520 --> 00:45:35,140
+how do I get traffic to a service we
+
+1192
+00:45:35,140 --> 00:45:37,000
+have a third cup or excuse me a third
+
+1193
+00:45:37,000 --> 00:45:39,280
+component which is a gateway a gateway
+
+1194
+00:45:39,280 --> 00:45:41,680
+manages how traffic enters which is an
+
+1195
+00:45:41,680 --> 00:45:43,390
+ingress and how traffic leaves or egress
+
+1196
+00:45:43,390 --> 00:45:46,450
+is the mesh we have service entries
+
+1197
+00:45:46,450 --> 00:45:49,840
+service entries are a method or a thing
+
+1198
+00:45:49,840 --> 00:45:52,120
+by which you can add endpoints to the
+
+1199
+00:45:52,120 --> 00:45:54,490
+service mesh that exists outside the
+
+1200
+00:45:54,490 --> 00:45:57,340
+mesh so this is important especially so
+
+1201
+00:45:57,340 --> 00:45:59,440
+I have an example there databases let's
+
+1202
+00:45:59,440 --> 00:46:00,940
+say we're running inside of a service
+
+1203
+00:46:00,940 --> 00:46:02,860
+mesh we have our micro service and that
+
+1204
+00:46:02,860 --> 00:46:04,840
+micro service needs to call a database
+
+1205
+00:46:04,840 --> 00:46:07,120
+that maybe it's a legacy database or a
+
+1206
+00:46:07,120 --> 00:46:09,280
+third party it doesn't exist within our
+
+1207
+00:46:09,280 --> 00:46:11,680
+service mesh the service entry
+
+1208
+00:46:11,680 --> 00:46:13,810
+functionality allows me to add endpoints
+
+1209
+00:46:13,810 --> 00:46:15,910
+to the service mesh so that my traffic
+
+1210
+00:46:15,910 --> 00:46:17,920
+can traverse the mesh and egress to that
+
+1211
+00:46:17,920 --> 00:46:22,540
+database without having to well not take
+
+1212
+00:46:22,540 --> 00:46:23,830
+advantage of any of the surface mesh
+
+1213
+00:46:23,830 --> 00:46:27,250
+concepts finally often and off see
+
+1214
+00:46:27,250 --> 00:46:30,520
+policies so these are who do what and
+
+1215
+00:46:30,520 --> 00:46:33,580
+where in a service mesh so Austin and
+
+1216
+00:46:33,580 --> 00:46:36,250
+Ozzie inis do is what allows us to
+
+1217
+00:46:36,250 --> 00:46:39,730
+define who can do what things in the SEO
+
+1218
+00:46:39,730 --> 00:46:42,430
+service mesh we're gonna take a look at
+
+1219
+00:46:42,430 --> 00:46:45,400
+book info as Anna Steele example here so
+
+1220
+00:46:45,400 --> 00:46:47,650
+I'll show that a picture again this is
+
+1221
+00:46:47,650 --> 00:46:50,690
+our micro service application that we've
+
+1222
+00:46:50,690 --> 00:46:52,250
+up again remember we went from a
+
+1223
+00:46:52,250 --> 00:46:54,079
+monolith to a microservice we moved all
+
+1224
+00:46:54,079 --> 00:46:55,339
+of our functionality out into these
+
+1225
+00:46:55,339 --> 00:46:58,700
+micro-services book info is SEO sort of
+
+1226
+00:46:58,700 --> 00:47:01,880
+hello world example application we're
+
+1227
+00:47:01,880 --> 00:47:04,010
+going to deploy book info into SEO and
+
+1228
+00:47:04,010 --> 00:47:06,920
+SEO itself will be deployed by Rancher
+
+1229
+00:47:06,920 --> 00:47:08,810
+so as you're gonna see here Rancher
+
+1230
+00:47:08,810 --> 00:47:11,000
+makes it super easy to deploy sto and
+
+1231
+00:47:11,000 --> 00:47:13,369
+manage its capabilities um if you've
+
+1232
+00:47:13,369 --> 00:47:15,260
+ever done the book info deployment
+
+1233
+00:47:15,260 --> 00:47:17,030
+through is do you know that deploying a
+
+1234
+00:47:17,030 --> 00:47:18,710
+steel can be a little challenging you
+
+1235
+00:47:18,710 --> 00:47:20,329
+know that deploying the book intro
+
+1236
+00:47:20,329 --> 00:47:21,650
+application and setting up all that
+
+1237
+00:47:21,650 --> 00:47:24,079
+stuff is typically done by manipulating
+
+1238
+00:47:24,079 --> 00:47:25,730
+Yambol manifests and doing a bunch of
+
+1239
+00:47:25,730 --> 00:47:28,220
+cube control execution Rancher has a
+
+1240
+00:47:28,220 --> 00:47:29,810
+bunch of helpers that are going to make
+
+1241
+00:47:29,810 --> 00:47:33,050
+this easier for us one word of caution
+
+1242
+00:47:33,050 --> 00:47:34,760
+here is that this is not going to be an
+
+1243
+00:47:34,760 --> 00:47:37,310
+exhaustive demonstration of book info so
+
+1244
+00:47:37,310 --> 00:47:38,480
+I'm not going to go through any of the
+
+1245
+00:47:38,480 --> 00:47:40,190
+advanced concepts in book info because
+
+1246
+00:47:40,190 --> 00:47:42,290
+there are a lot of different steps in
+
+1247
+00:47:42,290 --> 00:47:44,480
+the sto documentation on how to set this
+
+1248
+00:47:44,480 --> 00:47:46,310
+up and and use different pieces of
+
+1249
+00:47:46,310 --> 00:47:48,380
+Ischia functionality but really what
+
+1250
+00:47:48,380 --> 00:47:50,690
+this is is helping us understand how
+
+1251
+00:47:50,690 --> 00:47:52,369
+Rancher implements this do and how
+
+1252
+00:47:52,369 --> 00:47:55,160
+Rancher can help manage the sto service
+
+1253
+00:47:55,160 --> 00:47:56,869
+mesh so we're really only going to go
+
+1254
+00:47:56,869 --> 00:47:59,000
+through a couple of examples here so
+
+1255
+00:47:59,000 --> 00:48:00,230
+it's not going to be an exhaustive
+
+1256
+00:48:00,230 --> 00:48:02,660
+demonstration okay I've bored you enough
+
+1257
+00:48:02,660 --> 00:48:04,480
+with slides so now it's time for a demo
+
+1258
+00:48:04,480 --> 00:48:07,819
+as with all of my webinar demos I'm
+
+1259
+00:48:07,819 --> 00:48:09,619
+going to need everybody to raise their
+
+1260
+00:48:09,619 --> 00:48:11,599
+right hand so you're all sitting at home
+
+1261
+00:48:11,599 --> 00:48:13,880
+all in quarantine maybe enjoying a
+
+1262
+00:48:13,880 --> 00:48:15,230
+quarantine II that would be nice maybe
+
+1263
+00:48:15,230 --> 00:48:16,880
+I'll have one later raise your right
+
+1264
+00:48:16,880 --> 00:48:18,230
+hand and repeat after me
+
+1265
+00:48:18,230 --> 00:48:23,690
+i webinar attendee do solemnly swear
+
+1266
+00:48:23,690 --> 00:48:26,540
+not to hold a man bow man responsible
+
+1267
+00:48:26,540 --> 00:48:29,480
+for any mishaps that occur during this
+
+1268
+00:48:29,480 --> 00:48:33,829
+live demo so help me kubernetes okay now
+
+1269
+00:48:33,829 --> 00:48:35,270
+that everybody has sworn that othon it
+
+1270
+00:48:35,270 --> 00:48:36,829
+is legally binding just don't ask a
+
+1271
+00:48:36,829 --> 00:48:38,990
+lawyer we will actually go through and
+
+1272
+00:48:38,990 --> 00:48:42,260
+do our demo so let me move my slides out
+
+1273
+00:48:42,260 --> 00:48:45,380
+of the way here and we have our let me
+
+1274
+00:48:45,380 --> 00:48:49,220
+log back in here instance of rancher
+
+1275
+00:48:49,220 --> 00:48:52,339
+let's go ahead and get this set up so
+
+1276
+00:48:52,339 --> 00:48:54,079
+I'm going to click on my aim and ISTE ol
+
+1277
+00:48:54,079 --> 00:48:55,940
+earning cluster here and this is a
+
+1278
+00:48:55,940 --> 00:48:58,160
+sample cluster that I have set up and
+
+1279
+00:48:58,160 --> 00:49:01,099
+this is running kubernetes 117 for it's
+
+1280
+00:49:01,099 --> 00:49:03,440
+a little ec2 application that I've
+
+1281
+00:49:03,440 --> 00:49:04,730
+deployed
+
+1282
+00:49:04,730 --> 00:49:06,980
+straight forward a little you see to
+
+1283
+00:49:06,980 --> 00:49:08,180
+cluster I should say that I've deployed
+
+1284
+00:49:08,180 --> 00:49:10,070
+pretty straightforward not much to it
+
+1285
+00:49:10,070 --> 00:49:12,590
+it's got one control plane one Etsy node
+
+1286
+00:49:12,590 --> 00:49:14,920
+for worker nodes as you can see here
+
+1287
+00:49:14,920 --> 00:49:18,680
+just a basic simple cluster what we're
+
+1288
+00:49:18,680 --> 00:49:21,230
+going to do now is deploy SDO into this
+
+1289
+00:49:21,230 --> 00:49:24,020
+cluster so this is using rancher too far
+
+1290
+00:49:24,020 --> 00:49:25,670
+to which is our latest release of
+
+1291
+00:49:25,670 --> 00:49:27,890
+rancher if I go under the Tools
+
+1292
+00:49:27,890 --> 00:49:29,720
+drop-down here at the top I can go to
+
+1293
+00:49:29,720 --> 00:49:32,810
+ISTE oh when I click on SDO we have a
+
+1294
+00:49:32,810 --> 00:49:34,220
+bunch of different configuration options
+
+1295
+00:49:34,220 --> 00:49:36,920
+for deploying sto into this cluster
+
+1296
+00:49:36,920 --> 00:49:38,990
+first of all we're going to a need to
+
+1297
+00:49:38,990 --> 00:49:41,870
+enable monitoring monitoring will deploy
+
+1298
+00:49:41,870 --> 00:49:44,210
+as a rancher feature Prometheus Angra
+
+1299
+00:49:44,210 --> 00:49:46,370
+fauna there was a great masterclass by
+
+1300
+00:49:46,370 --> 00:49:49,670
+some person last week on monitoring so
+
+1301
+00:49:49,670 --> 00:49:50,690
+go ahead and check that out if you'd
+
+1302
+00:49:50,690 --> 00:49:52,280
+like to what we're gonna do here is
+
+1303
+00:49:52,280 --> 00:49:54,320
+enable monitoring and then we have
+
+1304
+00:49:54,320 --> 00:49:55,910
+different configuration options for
+
+1305
+00:49:55,910 --> 00:49:58,250
+deploying the different components of
+
+1306
+00:49:58,250 --> 00:50:01,130
+Sto I'm gonna scroll down here to this
+
+1307
+00:50:01,130 --> 00:50:04,010
+ingress gateway by default ingress
+
+1308
+00:50:04,010 --> 00:50:05,930
+gateway has not turned on when deploying
+
+1309
+00:50:05,930 --> 00:50:08,180
+is do through Rancher so we're going to
+
+1310
+00:50:08,180 --> 00:50:08,960
+enable that
+
+1311
+00:50:08,960 --> 00:50:11,660
+now this cluster does not have the
+
+1312
+00:50:11,660 --> 00:50:13,790
+capability of setting up load balancers
+
+1313
+00:50:13,790 --> 00:50:15,170
+so we're going to fall back to our node
+
+1314
+00:50:15,170 --> 00:50:17,300
+port functionality here and we'll send
+
+1315
+00:50:17,300 --> 00:50:20,240
+HTTP and HTTPS traffic through on three
+
+1316
+00:50:20,240 --> 00:50:21,740
+one three eighty and three one three
+
+1317
+00:50:21,740 --> 00:50:24,050
+ninety so now that I've enabled that and
+
+1318
+00:50:24,050 --> 00:50:26,150
+set it to node part we can hit enable
+
+1319
+00:50:26,150 --> 00:50:28,550
+here and Rancher will go through and
+
+1320
+00:50:28,550 --> 00:50:31,250
+install this do for us so let's take a
+
+1321
+00:50:31,250 --> 00:50:33,410
+look and see what's happening jump to
+
+1322
+00:50:33,410 --> 00:50:34,760
+our cluster drop down here and we'll go
+
+1323
+00:50:34,760 --> 00:50:38,030
+to the system project inside the system
+
+1324
+00:50:38,030 --> 00:50:40,430
+project then we can see first of all the
+
+1325
+00:50:40,430 --> 00:50:42,020
+cattle Prometheus namespace has been
+
+1326
+00:50:42,020 --> 00:50:44,150
+created and all of these monitoring
+
+1327
+00:50:44,150 --> 00:50:45,410
+components are being set up
+
+1328
+00:50:45,410 --> 00:50:47,540
+so Prometheus and Gravano right off the
+
+1329
+00:50:47,540 --> 00:50:49,370
+bat are being deployed on my behalf
+
+1330
+00:50:49,370 --> 00:50:51,410
+just by clicking that enable for iste ió
+
+1331
+00:50:51,410 --> 00:50:53,990
+functionality so I'll wait for a second
+
+1332
+00:50:53,990 --> 00:50:55,940
+for those to deploy but while those are
+
+1333
+00:50:55,940 --> 00:50:57,230
+playing I can scroll down and see
+
+1334
+00:50:57,230 --> 00:50:59,690
+there's an sto system namespace that's
+
+1335
+00:50:59,690 --> 00:51:01,460
+been created here so all the different
+
+1336
+00:51:01,460 --> 00:51:03,980
+sto components like Citadel and gallium
+
+1337
+00:51:03,980 --> 00:51:05,090
+pile of things that we talked about
+
+1338
+00:51:05,090 --> 00:51:07,670
+those are being deployed into this sto -
+
+1339
+00:51:07,670 --> 00:51:10,610
+system namespace so we'll give those a
+
+1340
+00:51:10,610 --> 00:51:12,710
+second to deploy but once everything is
+
+1341
+00:51:12,710 --> 00:51:14,330
+completed we will have a fully
+
+1342
+00:51:14,330 --> 00:51:16,520
+functional sto service mesh installed
+
+1343
+00:51:16,520 --> 00:51:18,260
+into our cluster just
+
+1344
+00:51:18,260 --> 00:51:21,440
+by hitting enable pretty cool so wait
+
+1345
+00:51:21,440 --> 00:51:23,270
+for those to become healthy scroll up
+
+1346
+00:51:23,270 --> 00:51:24,920
+let's take a look and make sure I don't
+
+1347
+00:51:24,920 --> 00:51:26,860
+think that will go healthy because of a
+
+1348
+00:51:26,860 --> 00:51:29,570
+what's saying oh no it's just not ready
+
+1349
+00:51:29,570 --> 00:51:31,460
+that's all so we'll wait for that to
+
+1350
+00:51:31,460 --> 00:51:34,910
+become ready scroll down here wait for
+
+1351
+00:51:34,910 --> 00:51:37,250
+this STL piece to become ready so then
+
+1352
+00:51:37,250 --> 00:51:38,960
+once that's set to go we'll be able to
+
+1353
+00:51:38,960 --> 00:51:41,210
+deploy our book info application and do
+
+1354
+00:51:41,210 --> 00:51:43,310
+some basic configuration steps cool so I
+
+1355
+00:51:43,310 --> 00:51:44,330
+have three one three eighty and three
+
+1356
+00:51:44,330 --> 00:51:46,310
+one three ninety as my node ports that
+
+1357
+00:51:46,310 --> 00:51:48,920
+have been deployed here and that should
+
+1358
+00:51:48,920 --> 00:51:50,600
+become ready in just a second so we'll
+
+1359
+00:51:50,600 --> 00:51:53,720
+let that go now let's jump back into our
+
+1360
+00:51:53,720 --> 00:51:55,460
+default the echos jump back into our
+
+1361
+00:51:55,460 --> 00:51:57,890
+default project here and the first thing
+
+1362
+00:51:57,890 --> 00:51:59,740
+we're going to need to do when we deploy
+
+1363
+00:51:59,740 --> 00:52:02,150
+the book info application is make sure
+
+1364
+00:52:02,150 --> 00:52:04,760
+that our default namespace is ready for
+
+1365
+00:52:04,760 --> 00:52:07,580
+sidecar injection it already has been so
+
+1366
+00:52:07,580 --> 00:52:08,810
+I'm gonna just disable it for the time
+
+1367
+00:52:08,810 --> 00:52:12,050
+being what this takes the form of is in
+
+1368
+00:52:12,050 --> 00:52:14,600
+the background in the sto instructions
+
+1369
+00:52:14,600 --> 00:52:18,050
+it asks you to label a namespace and and
+
+1370
+00:52:18,050 --> 00:52:21,410
+you add sto - injection enabled as a
+
+1371
+00:52:21,410 --> 00:52:24,080
+label to the namespace with in Rancher
+
+1372
+00:52:24,080 --> 00:52:25,790
+we've made that just a button click so
+
+1373
+00:52:25,790 --> 00:52:28,640
+you can enable sto auto injection so by
+
+1374
+00:52:28,640 --> 00:52:31,190
+doing so we get a little sailboat icon
+
+1375
+00:52:31,190 --> 00:52:33,230
+that shows up there so now our default
+
+1376
+00:52:33,230 --> 00:52:34,850
+namespace is ready for is do to
+
+1377
+00:52:34,850 --> 00:52:38,240
+automatically inject sidecars now that
+
+1378
+00:52:38,240 --> 00:52:39,950
+we've done that let's actually go and
+
+1379
+00:52:39,950 --> 00:52:43,910
+deploy our book info application let me
+
+1380
+00:52:43,910 --> 00:52:47,020
+grab that workload here real quick just
+
+1381
+00:52:47,020 --> 00:52:50,630
+you know and grab our book info yeah Mel
+
+1382
+00:52:50,630 --> 00:52:52,040
+this is the only portion that I'm
+
+1383
+00:52:52,040 --> 00:52:54,410
+basically gonna use cube control for so
+
+1384
+00:52:54,410 --> 00:52:56,450
+we'll open a cube control so I can get
+
+1385
+00:52:56,450 --> 00:52:59,180
+nodes we've got our running STR cluster
+
+1386
+00:52:59,180 --> 00:53:02,630
+so let's K apply - f and then this
+
+1387
+00:53:02,630 --> 00:53:06,290
+manifest so this is from is Tio's actual
+
+1388
+00:53:06,290 --> 00:53:08,060
+instructions for installing book info
+
+1389
+00:53:08,060 --> 00:53:10,070
+and it's a Yambol manifest that sets up
+
+1390
+00:53:10,070 --> 00:53:12,290
+the services and deployments for our
+
+1391
+00:53:12,290 --> 00:53:15,740
+book info application so I will apply -
+
+1392
+00:53:15,740 --> 00:53:17,870
+after this and all these different
+
+1393
+00:53:17,870 --> 00:53:20,540
+things will get created when I close we
+
+1394
+00:53:20,540 --> 00:53:22,520
+can visualize in Rancher that all of my
+
+1395
+00:53:22,520 --> 00:53:23,840
+different micro services have been
+
+1396
+00:53:23,840 --> 00:53:25,760
+generated so that's our picture of our
+
+1397
+00:53:25,760 --> 00:53:27,170
+micro services right here's our product
+
+1398
+00:53:27,170 --> 00:53:28,340
+page functionality
+
+1399
+00:53:28,340 --> 00:53:31,370
+here's ratings details reviews v1 v2 and
+
+1400
+00:53:31,370 --> 00:53:32,210
+v3
+
+1401
+00:53:32,210 --> 00:53:33,980
+these are all microservices that
+
+1402
+00:53:33,980 --> 00:53:36,079
+together are providing our book info
+
+1403
+00:53:36,079 --> 00:53:38,690
+application so we'll wait for that to
+
+1404
+00:53:38,690 --> 00:53:41,539
+come up now because we have deployed
+
+1405
+00:53:41,539 --> 00:53:43,819
+this using no port I should be able to
+
+1406
+00:53:43,819 --> 00:53:46,039
+actually browse to that node port and
+
+1407
+00:53:46,039 --> 00:53:48,650
+see our product page so let's go to our
+
+1408
+00:53:48,650 --> 00:53:51,770
+system cluster our system project here
+
+1409
+00:53:51,770 --> 00:53:54,740
+scroll down into Sto and we can see I've
+
+1410
+00:53:54,740 --> 00:53:56,809
+got my ingress gateway running on part
+
+1411
+00:53:56,809 --> 00:53:58,309
+three one 380 so if I click on that
+
+1412
+00:53:58,309 --> 00:54:01,789
+here's part 3 1 380 let's go to product
+
+1413
+00:54:01,789 --> 00:54:04,490
+page and is this using HTTP because it
+
+1414
+00:54:04,490 --> 00:54:07,900
+should be what cluster is that what
+
+1415
+00:54:07,900 --> 00:54:09,980
+that's running on that one why is not
+
+1416
+00:54:09,980 --> 00:54:13,849
+loading 3 1 3 83 1 380 that should be
+
+1417
+00:54:13,849 --> 00:54:16,490
+loading a thing interesting flash
+
+1418
+00:54:16,490 --> 00:54:19,880
+product page come on let's take a look
+
+1419
+00:54:19,880 --> 00:54:21,140
+at the logs and see what's going on here
+
+1420
+00:54:21,140 --> 00:54:24,670
+we have a few seconds to poke around a
+
+1421
+00:54:24,670 --> 00:54:26,930
+bunch of warnings bunch of things let's
+
+1422
+00:54:26,930 --> 00:54:29,450
+just kick it I'll delete it we'll kick
+
+1423
+00:54:29,450 --> 00:54:32,240
+it we'll set up a new instance deploys
+
+1424
+00:54:32,240 --> 00:54:35,029
+on the same post I was nice so I'll copy
+
+1425
+00:54:35,029 --> 00:54:39,950
+that and see if that interesting that
+
+1426
+00:54:39,950 --> 00:54:42,260
+should have worked on that maybe we can
+
+1427
+00:54:42,260 --> 00:54:44,140
+schedule it on different node real quick
+
+1428
+00:54:44,140 --> 00:54:47,390
+this is why I have everybody swear the
+
+1429
+00:54:47,390 --> 00:54:48,740
+live demos that won't blame me for
+
+1430
+00:54:48,740 --> 00:54:51,460
+things that go wrong because things that
+
+1431
+00:54:51,460 --> 00:54:55,160
+googly do go wrong so we'll run all pods
+
+1432
+00:54:55,160 --> 00:54:56,990
+on a specific node we'll run them on
+
+1433
+00:54:56,990 --> 00:55:02,900
+worker 3 save that and that'll restart
+
+1434
+00:55:02,900 --> 00:55:04,460
+that ingress gateway run it on a
+
+1435
+00:55:04,460 --> 00:55:06,230
+completely different node so we'll copy
+
+1436
+00:55:06,230 --> 00:55:11,240
+that so our node port 3 1 380 doesn't
+
+1437
+00:55:11,240 --> 00:55:13,299
+work excellent
+
+1438
+00:55:13,299 --> 00:55:16,069
+what about 3:1 390 what about HTTPS
+
+1439
+00:55:16,069 --> 00:55:18,460
+let's see if that works
+
+1440
+00:55:18,460 --> 00:55:22,730
+HTTPS interesting totally doesn't work
+
+1441
+00:55:22,730 --> 00:55:24,109
+that's not cool
+
+1442
+00:55:24,109 --> 00:55:26,420
+give me just one second I'll keep
+
+1443
+00:55:26,420 --> 00:55:30,770
+messing with this may have to just
+
+1444
+00:55:30,770 --> 00:55:32,660
+redeploy a couple things in this geo
+
+1445
+00:55:32,660 --> 00:55:35,390
+here to get this working let's take a
+
+1446
+00:55:35,390 --> 00:55:37,849
+look at our services here so under
+
+1447
+00:55:37,849 --> 00:55:41,690
+workloads what a service discovery this
+
+1448
+00:55:41,690 --> 00:55:45,070
+do ingress gateway 3 1 3
+
+1449
+00:55:45,070 --> 00:55:49,690
+let me refresh that hard refresh and see
+
+1450
+00:55:49,690 --> 00:55:54,430
+that note port updated still on that
+
+1451
+00:55:54,430 --> 00:55:59,050
+same endpoint weird okay I am going to
+
+1452
+00:55:59,050 --> 00:56:02,350
+redeploy that workload so let's check
+
+1453
+00:56:02,350 --> 00:56:05,950
+and redeploy see if that updates that
+
+1454
+00:56:05,950 --> 00:56:08,190
+node port functionality
+
+1455
+00:56:08,190 --> 00:56:12,820
+what's that upgrade whew this might be a
+
+1456
+00:56:12,820 --> 00:56:17,040
+CPU utilization thing interesting oh
+
+1457
+00:56:18,570 --> 00:56:21,700
+that is not good let's see if we can
+
+1458
+00:56:21,700 --> 00:56:24,480
+jump into a different cluster that has
+
+1459
+00:56:24,480 --> 00:56:26,920
+sto enable I think we have another one
+
+1460
+00:56:26,920 --> 00:56:29,230
+as a helper here so ec2 cluster let's
+
+1461
+00:56:29,230 --> 00:56:33,040
+take a look yes do is enabled okay cool
+
+1462
+00:56:33,040 --> 00:56:34,480
+let's go to our system project I think
+
+1463
+00:56:34,480 --> 00:56:35,680
+we can still get away with doing this
+
+1464
+00:56:35,680 --> 00:56:40,540
+here system project that is not deployed
+
+1465
+00:56:40,540 --> 00:56:43,540
+darn that is really unfortunate see if
+
+1466
+00:56:43,540 --> 00:56:46,810
+we can fix this one then just you
+
+1467
+00:56:46,810 --> 00:56:50,010
+learning background of the system
+
+1468
+00:56:50,040 --> 00:56:53,800
+doo-doo-doo-doo in grass gateway still a
+
+1469
+00:56:53,800 --> 00:56:55,480
+bunch of failed pods okay let's delete
+
+1470
+00:56:55,480 --> 00:57:00,240
+those huh get rid of all that garbage
+
+1471
+00:57:00,240 --> 00:57:02,380
+see if we can scale that down and get
+
+1472
+00:57:02,380 --> 00:57:12,770
+those running down this was work
+
+1473
+00:57:12,770 --> 00:57:17,270
+little bit of God's unfortunate let me
+
+1474
+00:57:17,270 --> 00:57:18,500
+see if there's any other workloads that
+
+1475
+00:57:18,500 --> 00:57:23,690
+are using too much CPU okay that looks
+
+1476
+00:57:23,690 --> 00:57:27,590
+right back under systems or anything
+
+1477
+00:57:27,590 --> 00:57:31,250
+that's taking up too much I really would
+
+1478
+00:57:31,250 --> 00:57:32,480
+like to get this do you work for you
+
+1479
+00:57:32,480 --> 00:57:37,100
+folks here must just be a bad cluster I
+
+1480
+00:57:37,100 --> 00:57:39,020
+was messing around with it a bunch today
+
+1481
+00:57:39,020 --> 00:57:43,250
+I must uh those are going away we have
+
+1482
+00:57:43,250 --> 00:57:44,660
+that one running okay where's that
+
+1483
+00:57:44,660 --> 00:57:47,990
+running on let's change our node
+
+1484
+00:57:47,990 --> 00:57:52,930
+scheduling and allow it to float here
+
+1485
+00:57:52,930 --> 00:57:56,300
+pick node scheduling rules save that
+
+1486
+00:57:56,300 --> 00:57:57,620
+will allow it to float somewhere else
+
+1487
+00:57:57,620 --> 00:58:14,030
+you can get this working okay that one's
+
+1488
+00:58:14,030 --> 00:58:15,650
+running on that IP so let's go there
+
+1489
+00:58:15,650 --> 00:58:18,380
+call on through and three eighty still
+
+1490
+00:58:18,380 --> 00:58:21,290
+unloading make sure the right part maybe
+
+1491
+00:58:21,290 --> 00:58:23,630
+I'm using the wrong port here tools sto
+
+1492
+00:58:23,630 --> 00:58:27,230
+scroll down and grass gateway three one
+
+1493
+00:58:27,230 --> 00:58:28,760
+three eighty that should be the right
+
+1494
+00:58:28,760 --> 00:58:33,920
+port slash product page no-go
+
+1495
+00:58:33,920 --> 00:58:37,340
+interesting that is unfortunate I wish
+
+1496
+00:58:37,340 --> 00:58:39,350
+that was working let's disable sto I'm
+
+1497
+00:58:39,350 --> 00:58:41,330
+going to try one last-ditch effort to
+
+1498
+00:58:41,330 --> 00:58:42,920
+get this working so let's disable a sto
+
+1499
+00:58:42,920 --> 00:58:44,420
+and monitoring and will redeploy here
+
+1500
+00:58:44,420 --> 00:58:47,960
+real quick so I'd love to be able to
+
+1501
+00:58:47,960 --> 00:58:51,040
+show you folks this this is a cool demo
+
+1502
+00:58:51,040 --> 00:58:53,960
+let's let everything unda ploy here
+
+1503
+00:58:53,960 --> 00:58:57,800
+remove that sto gateway go into our
+
+1504
+00:58:57,800 --> 00:58:59,150
+default project
+
+1505
+00:58:59,150 --> 00:59:00,800
+our workloads can stay deployed that's
+
+1506
+00:59:00,800 --> 00:59:02,930
+totally fine our namespace can stay with
+
+1507
+00:59:02,930 --> 00:59:05,360
+the injection that's totally fine will
+
+1508
+00:59:05,360 --> 00:59:09,670
+redeploy is do here so removing that
+
+1509
+00:59:15,340 --> 00:59:18,170
+okay so the namespace should be gone now
+
+1510
+00:59:18,170 --> 00:59:25,520
+almost that namespace get rid of the
+
+1511
+00:59:25,520 --> 00:59:28,490
+finalizar on that name spell namespace
+
+1512
+00:59:28,490 --> 00:59:34,460
+yes do - system oh gone perfect okay
+
+1513
+00:59:34,460 --> 00:59:39,080
+let's redeploy this teo tools sto go
+
+1514
+00:59:39,080 --> 00:59:41,210
+down here ingress great way enable that
+
+1515
+00:59:41,210 --> 00:59:43,820
+use node port let's change the node for
+
+1516
+00:59:43,820 --> 00:59:50,600
+it 3-3 380 all right three two zero
+
+1517
+00:59:50,600 --> 00:59:54,650
+eight zero cool three two zero nine zero
+
+1518
+00:59:54,650 --> 00:59:56,780
+okay let's try that will enable those
+
+1519
+00:59:56,780 --> 01:00:00,740
+different ports we will go back and let
+
+1520
+01:00:00,740 --> 01:00:04,420
+sto redeploy into our system project
+
+1521
+01:00:04,600 --> 01:00:06,980
+resources and workload scroll down here
+
+1522
+01:00:06,980 --> 01:00:09,830
+and wait for that to deploy there's
+
+1523
+01:00:09,830 --> 01:00:13,370
+monitoring Cal Prometheus and we should
+
+1524
+01:00:13,370 --> 01:00:17,900
+see us do up here a second amps you can
+
+1525
+01:00:17,900 --> 01:00:19,190
+see under apps there's this do being
+
+1526
+01:00:19,190 --> 01:00:20,720
+deployed there's cluster monitoring
+
+1527
+01:00:20,720 --> 01:00:22,160
+being deployed so they actually are just
+
+1528
+01:00:22,160 --> 01:00:26,450
+installed as chart applications back
+
+1529
+01:00:26,450 --> 01:00:28,160
+under workloads there's this do coming
+
+1530
+01:00:28,160 --> 01:00:29,480
+up swole wait for the ingress gateway to
+
+1531
+01:00:29,480 --> 01:00:31,040
+come up and all that related tooling
+
+1532
+01:00:31,040 --> 01:00:33,710
+when we go to that URL we should see our
+
+1533
+01:00:33,710 --> 01:00:35,450
+product page so the ingress gateway
+
+1534
+01:00:35,450 --> 01:00:37,130
+should take care of routing that traffic
+
+1535
+01:00:37,130 --> 01:00:41,330
+on to our page so we'll wait for that to
+
+1536
+01:00:41,330 --> 01:00:43,460
+get set up if I go back under default
+
+1537
+01:00:43,460 --> 01:00:45,650
+here we've got details we've got our
+
+1538
+01:00:45,650 --> 01:00:46,880
+project page we've got all that stuff
+
+1539
+01:00:46,880 --> 01:00:48,710
+I'm going to redeploy this stuff real
+
+1540
+01:00:48,710 --> 01:00:51,470
+quick so we will use our URL to delete
+
+1541
+01:00:51,470 --> 01:00:54,170
+and redeploy so okay delete that chef
+
+1542
+01:00:54,170 --> 01:00:56,390
+and there's our URL we'll get rid of all
+
+1543
+01:00:56,390 --> 01:00:57,890
+those deployments and services so that
+
+1544
+01:00:57,890 --> 01:01:00,320
+we can redeploy fresh so we'll wait for
+
+1545
+01:01:00,320 --> 01:01:03,590
+sto to come back up and be healthy back
+
+1546
+01:01:03,590 --> 01:01:06,920
+under system ok looks like SDO is up if
+
+1547
+01:01:06,920 --> 01:01:09,440
+I go to 3 208 oh I still get that but
+
+1548
+01:01:09,440 --> 01:01:10,910
+let's still deploy those workloads and
+
+1549
+01:01:10,910 --> 01:01:12,050
+see if that makes a difference maybe I
+
+1550
+01:01:12,050 --> 01:01:13,870
+deployed too
+
+1551
+01:01:13,870 --> 01:01:17,240
+okay so let's deploy this so okay apply
+
+1552
+01:01:17,240 --> 01:01:20,690
+- F and then our book and foot IMO we'll
+
+1553
+01:01:20,690 --> 01:01:25,070
+deploy this so now that we've deployed
+
+1554
+01:01:25,070 --> 01:01:28,670
+that we should be able to reach our
+
+1555
+01:01:28,670 --> 01:01:32,750
+instance so we've got product page
+
+1556
+01:01:32,750 --> 01:01:35,630
+running here okay if I click on the
+
+1557
+01:01:35,630 --> 01:01:37,460
+product page we see ISTE oh there's the
+
+1558
+01:01:37,460 --> 01:01:38,870
+proxy that's been injected so that
+
+1559
+01:01:38,870 --> 01:01:40,250
+sidecar injection has occurred as
+
+1560
+01:01:40,250 --> 01:01:43,670
+expected if I go under my drop-down
+
+1561
+01:01:43,670 --> 01:01:45,110
+where in the system project here let's
+
+1562
+01:01:45,110 --> 01:01:47,720
+grab three 208 oh can I go to slash
+
+1563
+01:01:47,720 --> 01:01:50,210
+product page No
+
+1564
+01:01:50,210 --> 01:01:52,760
+that is disappointing I apologize
+
+1565
+01:01:52,760 --> 01:01:55,580
+everyone that had been working the seven
+
+1566
+01:01:55,580 --> 01:01:57,380
+times I tried it prior to just now but
+
+1567
+01:01:57,380 --> 01:01:59,180
+unfortunately it didn't let me walk you
+
+1568
+01:01:59,180 --> 01:02:00,530
+through what we would have been able to
+
+1569
+01:02:00,530 --> 01:02:04,040
+do so if that had worked what I would
+
+1570
+01:02:04,040 --> 01:02:05,420
+have walked you through here is back
+
+1571
+01:02:05,420 --> 01:02:07,610
+under the default project we would have
+
+1572
+01:02:07,610 --> 01:02:09,380
+deployed our workloads here as you can
+
+1573
+01:02:09,380 --> 01:02:11,270
+see so we have our book info application
+
+1574
+01:02:11,270 --> 01:02:13,610
+when book info is successfully deployed
+
+1575
+01:02:13,610 --> 01:02:16,280
+you get this web interface that shows
+
+1576
+01:02:16,280 --> 01:02:18,770
+you information about the book it shows
+
+1577
+01:02:18,770 --> 01:02:20,600
+your reviews it shows you ratings
+
+1578
+01:02:20,600 --> 01:02:23,540
+details all that kind of stuff what the
+
+1579
+01:02:23,540 --> 01:02:26,330
+book info tutorial has you do through
+
+1580
+01:02:26,330 --> 01:02:28,820
+the ISTE Oh instructions is set up on
+
+1581
+01:02:28,820 --> 01:02:30,590
+the first thing is set up traffic
+
+1582
+01:02:30,590 --> 01:02:32,690
+management so we configure request
+
+1583
+01:02:32,690 --> 01:02:35,780
+routing to say when someone logs into
+
+1584
+01:02:35,780 --> 01:02:38,120
+the book info application show them
+
+1585
+01:02:38,120 --> 01:02:40,370
+rating information when they don't log
+
+1586
+01:02:40,370 --> 01:02:42,050
+into it don't show them rating
+
+1587
+01:02:42,050 --> 01:02:44,570
+information what we can do is under the
+
+1588
+01:02:44,570 --> 01:02:47,360
+resources drop down an sto we can
+
+1589
+01:02:47,360 --> 01:02:49,970
+configure destination rules and virtual
+
+1590
+01:02:49,970 --> 01:02:52,220
+services to set things things excuse me
+
+1591
+01:02:52,220 --> 01:02:53,450
+these things up there no virtual serve
+
+1592
+01:02:53,450 --> 01:02:54,170
+that's weird
+
+1593
+01:02:54,170 --> 01:02:57,050
+I wonder if that's what's going on hang
+
+1594
+01:02:57,050 --> 01:02:58,610
+on one second let's deploy the virtual
+
+1595
+01:02:58,610 --> 01:03:01,880
+services could that be it I thought they
+
+1596
+01:03:01,880 --> 01:03:07,450
+deployed with that okay resources work
+
+1597
+01:03:07,450 --> 01:03:09,990
+if this works I'm gonna kick myself
+
+1598
+01:03:09,990 --> 01:03:15,040
+scroll down my on the right cluster yes
+
+1599
+01:03:15,040 --> 01:03:20,830
+system 3 208 Oh TCP product page I was
+
+1600
+01:03:20,830 --> 01:03:22,600
+hoping that was the case okay so anyways
+
+1601
+01:03:22,600 --> 01:03:24,900
+back in the default project under is do
+
+1602
+01:03:24,900 --> 01:03:28,000
+you would be able to manage creating
+
+1603
+01:03:28,000 --> 01:03:29,920
+these virtual services so again the
+
+1604
+01:03:29,920 --> 01:03:33,280
+virtual service is where does or let's
+
+1605
+01:03:33,280 --> 01:03:36,130
+define abstractly a service so we have
+
+1606
+01:03:36,130 --> 01:03:37,930
+our four services details product page
+
+1607
+01:03:37,930 --> 01:03:40,120
+ratings and reviews and while I created
+
+1608
+01:03:40,120 --> 01:03:42,640
+those through Yambol just there we can
+
+1609
+01:03:42,640 --> 01:03:44,470
+add a virtual service using ranchers
+
+1610
+01:03:44,470 --> 01:03:46,540
+interface so I can define in my virtual
+
+1611
+01:03:46,540 --> 01:03:49,030
+service well let's pick a host to send
+
+1612
+01:03:49,030 --> 01:03:50,950
+this traffic to and now we can make
+
+1613
+01:03:50,950 --> 01:03:53,740
+routing rules based on incoming headers
+
+1614
+01:03:53,740 --> 01:03:56,560
+or the method or the URI or even the
+
+1615
+01:03:56,560 --> 01:03:59,050
+scheme here if I want to to send traffic
+
+1616
+01:03:59,050 --> 01:04:02,650
+to different subsets like v1 v2 v3 of
+
+1617
+01:04:02,650 --> 01:04:08,680
+this rating service so I can configure
+
+1618
+01:04:08,680 --> 01:04:11,050
+that application so now under
+
+1619
+01:04:11,050 --> 01:04:15,310
+destination rules I can change and add
+
+1620
+01:04:15,310 --> 01:04:16,840
+things about destination rules which
+
+1621
+01:04:16,840 --> 01:04:19,090
+allow me to define where I want to send
+
+1622
+01:04:19,090 --> 01:04:20,680
+the traffic to a particular service
+
+1623
+01:04:20,680 --> 01:04:23,290
+endpoint so if I want to say that I
+
+1624
+01:04:23,290 --> 01:04:25,330
+wanted to find a subset there's my v1 as
+
+1625
+01:04:25,330 --> 01:04:27,220
+defined in the virtual service how do I
+
+1626
+01:04:27,220 --> 01:04:28,840
+want that traffic to end up at a
+
+1627
+01:04:28,840 --> 01:04:30,580
+particular destination well under the
+
+1628
+01:04:30,580 --> 01:04:32,800
+ratings here I can add subsets and
+
+1629
+01:04:32,800 --> 01:04:35,790
+define different versions for this
+
+1630
+01:04:35,790 --> 01:04:38,950
+destination rule I can also add gateways
+
+1631
+01:04:38,950 --> 01:04:41,050
+so if I want to add an ingress gateway
+
+1632
+01:04:41,050 --> 01:04:43,450
+here or an egress gateway I have that
+
+1633
+01:04:43,450 --> 01:04:45,730
+option through is Gio's functionality
+
+1634
+01:04:45,730 --> 01:04:48,760
+and Rancher here traffic metrics and
+
+1635
+01:04:48,760 --> 01:04:50,320
+draffa graphs are functionality that's
+
+1636
+01:04:50,320 --> 01:04:53,080
+imported from key Olli so we're this to
+
+1637
+01:04:53,080 --> 01:04:54,340
+be a healthy cluster and again I
+
+1638
+01:04:54,340 --> 01:04:56,620
+apologize I wish it were were this to be
+
+1639
+01:04:56,620 --> 01:04:58,480
+a healthy cluster the metrics and
+
+1640
+01:04:58,480 --> 01:04:59,940
+traffic graphs would show up here
+
+1641
+01:04:59,940 --> 01:05:02,290
+imported from Cali so we could see those
+
+1642
+01:05:02,290 --> 01:05:04,270
+pieces of functionality so here's that
+
+1643
+01:05:04,270 --> 01:05:05,110
+graph showing up
+
+1644
+01:05:05,110 --> 01:05:06,910
+there's my different services that I've
+
+1645
+01:05:06,910 --> 01:05:08,500
+deployed so there's if I scroll in
+
+1646
+01:05:08,500 --> 01:05:10,720
+there's my details virtual service my
+
+1647
+01:05:10,720 --> 01:05:12,730
+product page ratings and reviews all
+
+1648
+01:05:12,730 --> 01:05:14,620
+that kind of thing those show up here
+
+1649
+01:05:14,620 --> 01:05:16,420
+inside Rancher so you don't need to
+
+1650
+01:05:16,420 --> 01:05:18,250
+necessarily go out to that ISTE or
+
+1651
+01:05:18,250 --> 01:05:20,290
+excuse me that key alley instance
+
+1652
+01:05:20,290 --> 01:05:23,350
+troubleshoot those things okay since
+
+1653
+01:05:23,350 --> 01:05:24,700
+there's not a lot else I can do here
+
+1654
+01:05:24,700 --> 01:05:25,690
+without history of working I'm gonna
+
+1655
+01:05:25,690 --> 01:05:27,310
+jump back to the slides I again I
+
+1656
+01:05:27,310 --> 01:05:29,140
+apologize folks I wish that had worked
+
+1657
+01:05:29,140 --> 01:05:32,230
+in it and it did you know those 300
+
+1658
+01:05:32,230 --> 01:05:34,270
+times I've tried this before so I run
+
+1659
+01:05:34,270 --> 01:05:37,420
+that wrap up in summary so we deployed a
+
+1660
+01:05:37,420 --> 01:05:39,010
+steamer using Rancher we certainly did
+
+1661
+01:05:39,010 --> 01:05:41,650
+do that so in the cluster tools and sto
+
+1662
+01:05:41,650 --> 01:05:42,850
+at the cluster level is how you would
+
+1663
+01:05:42,850 --> 01:05:45,900
+deploy sto into your kubernetes cluster
+
+1664
+01:05:45,900 --> 01:05:48,250
+Rancher will deploy and manage those sto
+
+1665
+01:05:48,250 --> 01:05:51,250
+components for us so we installed sto as
+
+1666
+01:05:51,250 --> 01:05:53,170
+a helm chart under that system project
+
+1667
+01:05:53,170 --> 01:05:55,690
+and now we can configure basic as to
+
+1668
+01:05:55,690 --> 01:05:58,030
+your resources using Rancher so as you
+
+1669
+01:05:58,030 --> 01:05:59,800
+can see under the resources and sto
+
+1670
+01:05:59,800 --> 01:06:02,260
+drop-down Rancher has manageability of
+
+1671
+01:06:02,260 --> 01:06:04,120
+gateways destination rules and virtual
+
+1672
+01:06:04,120 --> 01:06:06,070
+services so the first portion of the
+
+1673
+01:06:06,070 --> 01:06:08,020
+book info tutorial within isseo is
+
+1674
+01:06:08,020 --> 01:06:10,300
+deploying gateways destination rules and
+
+1675
+01:06:10,300 --> 01:06:12,750
+virtual services and we're our demo and
+
+1676
+01:06:12,750 --> 01:06:15,430
+was our demo had to have worked we would
+
+1677
+01:06:15,430 --> 01:06:16,750
+have been able to set up those different
+
+1678
+01:06:16,750 --> 01:06:18,810
+resources directly from within Rancher
+
+1679
+01:06:18,810 --> 01:06:21,100
+Rancher then we'll import traffic graphs
+
+1680
+01:06:21,100 --> 01:06:22,900
+and metrics from key ally so we can
+
+1681
+01:06:22,900 --> 01:06:25,780
+visualize those things advanced topics
+
+1682
+01:06:25,780 --> 01:06:27,040
+that we didn't get to cover well really
+
+1683
+01:06:27,040 --> 01:06:28,600
+any topics we didn't get to cover on
+
+1684
+01:06:28,600 --> 01:06:30,490
+circuit braking is something that ISTE
+
+1685
+01:06:30,490 --> 01:06:32,740
+offers we would have been able to stop
+
+1686
+01:06:32,740 --> 01:06:34,930
+traffic or even redirect it when certain
+
+1687
+01:06:34,930 --> 01:06:36,850
+situations occurred so this would have
+
+1688
+01:06:36,850 --> 01:06:40,030
+been things like if we had too many 500
+
+1689
+01:06:40,030 --> 01:06:41,170
+errors that were showing up over a
+
+1690
+01:06:41,170 --> 01:06:43,150
+period of time if there was a specific
+
+1691
+01:06:43,150 --> 01:06:45,160
+response from some kind of health check
+
+1692
+01:06:45,160 --> 01:06:47,260
+on a service something like that we can
+
+1693
+01:06:47,260 --> 01:06:49,180
+define different criteria by which we
+
+1694
+01:06:49,180 --> 01:06:52,210
+would like to break the circuit yes he
+
+1695
+01:06:52,210 --> 01:06:53,710
+also gives us the ability to do fault
+
+1696
+01:06:53,710 --> 01:06:55,540
+injection so if I wanted to inject
+
+1697
+01:06:55,540 --> 01:06:57,520
+faults into the traffic flow to
+
+1698
+01:06:57,520 --> 01:06:59,590
+troubleshoot and prepare for any issue
+
+1699
+01:06:59,590 --> 01:07:01,780
+should they happen if she allows us to
+
+1700
+01:07:01,780 --> 01:07:04,150
+do that so if I want to say hey let's
+
+1701
+01:07:04,150 --> 01:07:07,320
+test what happens when 50 percent of my
+
+1702
+01:07:07,320 --> 01:07:10,990
+requests yield 500 errors yes you will
+
+1703
+01:07:10,990 --> 01:07:12,940
+inject those 500 errors and we can test
+
+1704
+01:07:12,940 --> 01:07:14,910
+what happens when our application fails
+
+1705
+01:07:14,910 --> 01:07:16,810
+then another thing we wouldn't have
+
+1706
+01:07:16,810 --> 01:07:17,980
+gotten a chance to look at what about
+
+1707
+01:07:17,980 --> 01:07:20,530
+observability so disturbin tracing via
+
+1708
+01:07:20,530 --> 01:07:22,630
+Jaeger would help us uncover complex
+
+1709
+01:07:22,630 --> 01:07:24,400
+service to service issues and again
+
+1710
+01:07:24,400 --> 01:07:26,020
+that's that functionality where I'd be
+
+1711
+01:07:26,020 --> 01:07:28,150
+able to see a request as it flows
+
+1712
+01:07:28,150 --> 01:07:30,460
+between different services in my mesh
+
+1713
+01:07:30,460 --> 01:07:32,410
+and be able to trace that request from
+
+1714
+01:07:32,410 --> 01:07:33,839
+point A to point B
+
+1715
+01:07:33,839 --> 01:07:35,999
+finally mutual TLS would be able to
+
+1716
+01:07:35,999 --> 01:07:37,769
+verify both client and server are who
+
+1717
+01:07:37,769 --> 01:07:40,349
+they say they are so where would we have
+
+1718
+01:07:40,349 --> 01:07:42,779
+gone with the demo have worked on SEO
+
+1719
+01:07:42,779 --> 01:07:44,279
+has a great set of documentation on
+
+1720
+01:07:44,279 --> 01:07:46,049
+their website so sto Denio that's where
+
+1721
+01:07:46,049 --> 01:07:47,640
+I've spent a bunch of time doing more
+
+1722
+01:07:47,640 --> 01:07:49,890
+research and learning about it there are
+
+1723
+01:07:49,890 --> 01:07:51,359
+plenty of other service meshes in this
+
+1724
+01:07:51,359 --> 01:07:53,670
+category so if you check out the CNCs
+
+1725
+01:07:53,670 --> 01:07:55,680
+landscape you can see all the different
+
+1726
+01:07:55,680 --> 01:07:58,049
+service meshes that CN CF has on they're
+
+1727
+01:07:58,049 --> 01:08:00,479
+well on their landscape and then finally
+
+1728
+01:08:00,479 --> 01:08:02,849
+ranchers sto functionality is available
+
+1729
+01:08:02,849 --> 01:08:05,219
+in our documentation sotius Rancher comm
+
+1730
+01:08:05,219 --> 01:08:07,049
+slash Docs and then on that website if
+
+1731
+01:08:07,049 --> 01:08:08,670
+you go into our ranch or 2x
+
+1732
+01:08:08,670 --> 01:08:11,009
+documentation and look under the cluster
+
+1733
+01:08:11,009 --> 01:08:12,749
+admin section you can find information
+
+1734
+01:08:12,749 --> 01:08:15,660
+on this deal for whoops didn't mean to
+
+1735
+01:08:15,660 --> 01:08:18,389
+click on that for rancher itself let me
+
+1736
+01:08:18,389 --> 01:08:20,369
+go back here where do you want to learn
+
+1737
+01:08:20,369 --> 01:08:22,139
+more and get more help with the rancher
+
+1738
+01:08:22,139 --> 01:08:22,889
+user slack
+
+1739
+01:08:22,889 --> 01:08:24,389
+so check out slack dot Rancher at i/o
+
+1740
+01:08:24,389 --> 01:08:26,130
+I'm on there so if you want to come
+
+1741
+01:08:26,130 --> 01:08:27,150
+badgering me about this not working
+
+1742
+01:08:27,150 --> 01:08:28,859
+you're more than welcome to find me and
+
+1743
+01:08:28,859 --> 01:08:31,500
+yell at me rancher forums this is one of
+
+1744
+01:08:31,500 --> 01:08:33,420
+the most active forums I have seen in
+
+1745
+01:08:33,420 --> 01:08:35,339
+the technological community at least in
+
+1746
+01:08:35,339 --> 01:08:37,259
+the cloud Native community we are
+
+1747
+01:08:37,259 --> 01:08:39,839
+constantly posting help topics issue
+
+1748
+01:08:39,839 --> 01:08:42,239
+resolution with clients with open source
+
+1749
+01:08:42,239 --> 01:08:45,270
+users new product announcements forums
+
+1750
+01:08:45,270 --> 01:08:46,949
+features all that kind of thing those
+
+1751
+01:08:46,949 --> 01:08:50,549
+are available forums Rancher com finally
+
+1752
+01:08:50,549 --> 01:08:52,139
+we have a github repo github become
+
+1753
+01:08:52,139 --> 01:08:54,869
+slash Rancher slash Rancher that is
+
+1754
+01:08:54,869 --> 01:08:56,400
+where all of our application code lives
+
+1755
+01:08:56,400 --> 01:08:58,049
+everything the rancher does is
+
+1756
+01:08:58,049 --> 01:09:00,509
+completely open-source so please come
+
+1757
+01:09:00,509 --> 01:09:02,699
+check out our code file issues file
+
+1758
+01:09:02,699 --> 01:09:04,349
+requests for assistance anything you
+
+1759
+01:09:04,349 --> 01:09:04,679
+want
+
+1760
+01:09:04,679 --> 01:09:07,170
+check it out github calm slash ranch or
+
+1761
+01:09:07,170 --> 01:09:09,630
+slash Rancher so thank you again I
+
+1762
+01:09:09,630 --> 01:09:11,579
+apologize I wish that demo had gone as
+
+1763
+01:09:11,579 --> 01:09:13,380
+you know prepared maybe I'll put a video
+
+1764
+01:09:13,380 --> 01:09:15,659
+together for the next time I do this but
+
+1765
+01:09:15,659 --> 01:09:17,219
+find me on github if you want I'm Eve
+
+1766
+01:09:17,219 --> 01:09:18,989
+almond on github you can find me on
+
+1767
+01:09:18,989 --> 01:09:21,960
+Twitter and aim and be or don't find me
+
+1768
+01:09:21,960 --> 01:09:23,699
+in real life and I mean that even
+
+1769
+01:09:23,699 --> 01:09:25,650
+without the quarantine so thank you I
+
+1770
+01:09:25,650 --> 01:09:27,929
+guess Matt I'll I'll answer questions if
+
+1771
+01:09:27,929 --> 01:09:30,210
+they're already yeah there are there are
+
+1772
+01:09:30,210 --> 01:09:32,429
+a lot of questions Amon and thank you so
+
+1773
+01:09:32,429 --> 01:09:33,989
+much for going through all that is
+
+1774
+01:09:33,989 --> 01:09:36,089
+bummer that demo didn't work but you
+
+1775
+01:09:36,089 --> 01:09:38,460
+know that's life so it's live approves
+
+1776
+01:09:38,460 --> 01:09:42,389
+that it is live for everyone yep so and
+
+1777
+01:09:42,389 --> 01:09:44,549
+thanks Jason and Sheldon for answering
+
+1778
+01:09:44,549 --> 01:09:45,869
+so many questions in the chat even
+
+1779
+01:09:45,869 --> 01:09:47,739
+awesome so
+
+1780
+01:09:47,739 --> 01:09:50,130
+let's let's start going through here um
+
+1781
+01:09:50,130 --> 01:09:55,480
+let's see let's do this one is from Jew
+
+1782
+01:09:55,480 --> 01:09:59,679
+who says what do we know what do we need
+
+1783
+01:09:59,679 --> 01:10:01,599
+to know that we should deploy and use is
+
+1784
+01:10:01,599 --> 01:10:03,219
+geo and our micro service environments
+
+1785
+01:10:03,219 --> 01:10:05,289
+how do we know we need service mesh in
+
+1786
+01:10:05,289 --> 01:10:08,409
+our system you're typically going to
+
+1787
+01:10:08,409 --> 01:10:09,909
+know you need service mesh when you
+
+1788
+01:10:09,909 --> 01:10:13,420
+start running into either repeated work
+
+1789
+01:10:13,420 --> 01:10:16,780
+or issues with doing sort of the things
+
+1790
+01:10:16,780 --> 01:10:18,579
+that I listed on that so let me actually
+
+1791
+01:10:18,579 --> 01:10:20,139
+scroll up and find where's that that
+
+1792
+01:10:20,139 --> 01:10:22,929
+slide here we have a great slide so
+
+1793
+01:10:22,929 --> 01:10:24,579
+where does service mesh come in let me
+
+1794
+01:10:24,579 --> 01:10:27,280
+get my notes out of the way so if you're
+
+1795
+01:10:27,280 --> 01:10:29,409
+starting to as you deploy your service
+
+1796
+01:10:29,409 --> 01:10:32,170
+mesh do a bunch of repeated work for
+
+1797
+01:10:32,170 --> 01:10:33,820
+setting up load balancing doing a bunch
+
+1798
+01:10:33,820 --> 01:10:35,199
+of repeated work for routing and
+
+1799
+01:10:35,199 --> 01:10:37,150
+terminating traffic really that there's
+
+1800
+01:10:37,150 --> 01:10:39,010
+a lot of toil you know and not
+
+1801
+01:10:39,010 --> 01:10:41,230
+meaningful work being done a service
+
+1802
+01:10:41,230 --> 01:10:42,880
+mesh can really help take care of all
+
+1803
+01:10:42,880 --> 01:10:44,289
+that so you don't have to do it
+
+1804
+01:10:44,289 --> 01:10:45,360
+yourselves
+
+1805
+01:10:45,360 --> 01:10:47,260
+another thing is where maybe you're
+
+1806
+01:10:47,260 --> 01:10:48,849
+starting to have issues with doing this
+
+1807
+01:10:48,849 --> 01:10:50,800
+and and issues as sort of this broad
+
+1808
+01:10:50,800 --> 01:10:52,480
+term because it could mean really any
+
+1809
+01:10:52,480 --> 01:10:55,210
+problem top to bottom right but if like
+
+1810
+01:10:55,210 --> 01:10:56,320
+for instance you're having issues
+
+1811
+01:10:56,320 --> 01:10:58,809
+bringing up you know new devs and
+
+1812
+01:10:58,809 --> 01:11:00,639
+getting them used to the idea of setting
+
+1813
+01:11:00,639 --> 01:11:02,769
+up routing and terminating traffic maybe
+
+1814
+01:11:02,769 --> 01:11:04,960
+take that out of your new developer
+
+1815
+01:11:04,960 --> 01:11:06,159
+training and make it part of the
+
+1816
+01:11:06,159 --> 01:11:07,840
+infrastructure or if you're really
+
+1817
+01:11:07,840 --> 01:11:09,070
+running into a challenge with how to
+
+1818
+01:11:09,070 --> 01:11:10,719
+appropriately implement something like
+
+1819
+01:11:10,719 --> 01:11:12,730
+circuit breaking in your application or
+
+1820
+01:11:12,730 --> 01:11:15,099
+mutual authentication instead of having
+
+1821
+01:11:15,099 --> 01:11:18,010
+to actually do that work yourselves at
+
+1822
+01:11:18,010 --> 01:11:21,099
+scale again let the service mesh handle
+
+1823
+01:11:21,099 --> 01:11:23,260
+that now this is all fine stuff I think
+
+1824
+01:11:23,260 --> 01:11:25,449
+to learn and to implement at a small
+
+1825
+01:11:25,449 --> 01:11:26,650
+scale right like if you've distributed
+
+1826
+01:11:26,650 --> 01:11:28,749
+your monolith and you've broken it up
+
+1827
+01:11:28,749 --> 01:11:30,699
+into micro services you're going to do a
+
+1828
+01:11:30,699 --> 01:11:32,380
+lot of this by hand and that's totally
+
+1829
+01:11:32,380 --> 01:11:34,630
+fine because that may be all you need to
+
+1830
+01:11:34,630 --> 01:11:36,400
+do right like if you have one monolith
+
+1831
+01:11:36,400 --> 01:11:37,869
+and you break it up into micro services
+
+1832
+01:11:37,869 --> 01:11:40,300
+and you implement routing and
+
+1833
+01:11:40,300 --> 01:11:41,260
+terminating you implement circuit
+
+1834
+01:11:41,260 --> 01:11:42,219
+breaking you implement all the stuff
+
+1835
+01:11:42,219 --> 01:11:44,289
+independently and then you don't have to
+
+1836
+01:11:44,289 --> 01:11:45,550
+do it again you just scale your
+
+1837
+01:11:45,550 --> 01:11:47,380
+application you may not necessarily need
+
+1838
+01:11:47,380 --> 01:11:48,909
+a service mesh right like it adds so
+
+1839
+01:11:48,909 --> 01:11:51,099
+much more overhead for work that you've
+
+1840
+01:11:51,099 --> 01:11:52,929
+already done but if you're adding new
+
+1841
+01:11:52,929 --> 01:11:55,659
+micro services you're constantly sort of
+
+1842
+01:11:55,659 --> 01:11:57,340
+reinventing the wheel every time micro
+
+1843
+01:11:57,340 --> 01:11:58,840
+service comes out or you're doing this
+
+1844
+01:11:58,840 --> 01:12:00,550
+work over and over again that's where a
+
+1845
+01:12:00,550 --> 01:12:01,679
+service mesh can
+
+1846
+01:12:01,679 --> 01:12:06,090
+help awesome and a kind of a follow-up
+
+1847
+01:12:06,090 --> 01:12:07,650
+question I think you sort of at and
+
+1848
+01:12:07,650 --> 01:12:08,880
+answered this but just answer it
+
+1849
+01:12:08,880 --> 01:12:11,039
+directly so Oladipo and several others
+
+1850
+01:12:11,039 --> 01:12:13,619
+have asked you know can't he basically
+
+1851
+01:12:13,619 --> 01:12:15,840
+says can't kubernetes do the things
+
+1852
+01:12:15,840 --> 01:12:18,119
+service mesh solves like load balancing
+
+1853
+01:12:18,119 --> 01:12:20,189
+using services and self-signed
+
+1854
+01:12:20,189 --> 01:12:23,999
+certificates it can yes and in fact
+
+1855
+01:12:23,999 --> 01:12:27,749
+there's a great presentation by Tim
+
+1856
+01:12:27,749 --> 01:12:31,349
+Hakan who says that kubernetes is the OG
+
+1857
+01:12:31,349 --> 01:12:33,869
+or the original service mesh right there
+
+1858
+01:12:33,869 --> 01:12:35,610
+are a lot of these pieces of
+
+1859
+01:12:35,610 --> 01:12:38,130
+functionality that already exist within
+
+1860
+01:12:38,130 --> 01:12:40,769
+kubernetes but there's also a lot of
+
+1861
+01:12:40,769 --> 01:12:42,239
+pieces that don't exist within
+
+1862
+01:12:42,239 --> 01:12:44,880
+kubernetes so like circuit breaking is
+
+1863
+01:12:44,880 --> 01:12:46,349
+not a functionality that kubernetes
+
+1864
+01:12:46,349 --> 01:12:47,939
+offers out of the box while it may offer
+
+1865
+01:12:47,939 --> 01:12:50,510
+load balancing and decisions like that
+
+1866
+01:12:50,510 --> 01:12:53,010
+advanced traffic routing doesn't
+
+1867
+01:12:53,010 --> 01:12:54,659
+necessarily exist within kubernetes
+
+1868
+01:12:54,659 --> 01:12:57,030
+because with like HTTP traffic for
+
+1869
+01:12:57,030 --> 01:12:58,949
+instance I have ingress options for
+
+1870
+01:12:58,949 --> 01:13:00,570
+sending my traffic based on a host or a
+
+1871
+01:13:00,570 --> 01:13:03,539
+path name but when I'm inside my my
+
+1872
+01:13:03,539 --> 01:13:05,729
+measure inside my cluster right I don't
+
+1873
+01:13:05,729 --> 01:13:07,380
+necessarily have that same option unless
+
+1874
+01:13:07,380 --> 01:13:08,699
+I'm integrating it directly into the
+
+1875
+01:13:08,699 --> 01:13:11,880
+application so yes kubernetes does do a
+
+1876
+01:13:11,880 --> 01:13:14,369
+lot of this stuff but it also doesn't do
+
+1877
+01:13:14,369 --> 01:13:17,729
+a lot of this stuff - cool ok makes
+
+1878
+01:13:17,729 --> 01:13:18,300
+sense all right
+
+1879
+01:13:18,300 --> 01:13:21,510
+more questions on implementing service
+
+1880
+01:13:21,510 --> 01:13:23,159
+mess mesh when you decide that you do
+
+1881
+01:13:23,159 --> 01:13:24,809
+want to use it so this is from Sammy who
+
+1882
+01:13:24,809 --> 01:13:27,719
+asks should we enter the service mesh
+
+1883
+01:13:27,719 --> 01:13:30,030
+directly via the ingress controller or
+
+1884
+01:13:30,030 --> 01:13:31,979
+is it more recommended to enter the
+
+1885
+01:13:31,979 --> 01:13:35,340
+cluster using ingress like nginx in
+
+1886
+01:13:35,340 --> 01:13:39,019
+route to the isseo ingress
+
+1887
+01:13:39,040 --> 01:13:42,950
+I've seen it done both ways honestly in
+
+1888
+01:13:42,950 --> 01:13:44,810
+my opinion I would just do it on the
+
+1889
+01:13:44,810 --> 01:13:46,880
+service mesh ingress and hop on the mesh
+
+1890
+01:13:46,880 --> 01:13:50,270
+as as quick as possible because you you
+
+1891
+01:13:50,270 --> 01:13:53,510
+sort of get all the features of the mesh
+
+1892
+01:13:53,510 --> 01:13:55,370
+like the observability and the logging
+
+1893
+01:13:55,370 --> 01:13:56,960
+the second you get on there and if
+
+1894
+01:13:56,960 --> 01:13:58,220
+something's going wrong on a layer
+
+1895
+01:13:58,220 --> 01:14:00,620
+before that mesh you'll lose those
+
+1896
+01:14:00,620 --> 01:14:03,320
+troubleshooting features it also just
+
+1897
+01:14:03,320 --> 01:14:05,390
+helps from a simplicity sake where if as
+
+1898
+01:14:05,390 --> 01:14:06,980
+soon as I enter the cluster I'm also
+
+1899
+01:14:06,980 --> 01:14:08,780
+entering the mesh I don't have other
+
+1900
+01:14:08,780 --> 01:14:10,310
+things to troubleshoot and other things
+
+1901
+01:14:10,310 --> 01:14:12,050
+to worry about
+
+1902
+01:14:12,050 --> 01:14:14,660
+you can also declutter if I and this is
+
+1903
+01:14:14,660 --> 01:14:17,090
+again inventing a word declutter if I
+
+1904
+01:14:17,090 --> 01:14:20,510
+your ingress resources just by allowing
+
+1905
+01:14:20,510 --> 01:14:22,730
+the service mesh ingress to take care of
+
+1906
+01:14:22,730 --> 01:14:24,110
+it where you may have other applications
+
+1907
+01:14:24,110 --> 01:14:26,990
+using ingress that are not serviced mesh
+
+1908
+01:14:26,990 --> 01:14:29,780
+aware so you can sort of simplify that
+
+1909
+01:14:29,780 --> 01:14:31,910
+configuration it's a little hand wavy
+
+1910
+01:14:31,910 --> 01:14:34,370
+there but I would try and get the
+
+1911
+01:14:34,370 --> 01:14:35,930
+traffic on to the mesh as quick as
+
+1912
+01:14:35,930 --> 01:14:37,400
+possible but everybody's gonna have
+
+1913
+01:14:37,400 --> 01:14:39,980
+different needs yeah next time thank you
+
+1914
+01:14:39,980 --> 01:14:41,720
+okay here's the next one and a few
+
+1915
+01:14:41,720 --> 01:14:43,370
+people have asked this you know what's
+
+1916
+01:14:43,370 --> 01:14:45,410
+your opinion if you could compare and
+
+1917
+01:14:45,410 --> 01:14:49,970
+contrast this do versus one dirty sto is
+
+1918
+01:14:49,970 --> 01:14:52,550
+more mature and linker D is lighter
+
+1919
+01:14:52,550 --> 01:14:56,060
+weight so SEO has a lot of features that
+
+1920
+01:14:56,060 --> 01:14:59,390
+linker D doesn't necessarily have yet so
+
+1921
+01:14:59,390 --> 01:15:01,460
+linker D is gonna be newer but liquor D
+
+1922
+01:15:01,460 --> 01:15:03,410
+is also a lighter weight implementation
+
+1923
+01:15:03,410 --> 01:15:05,390
+of a service mesh um it's the reason we
+
+1924
+01:15:05,390 --> 01:15:08,000
+used it for our reo application because
+
+1925
+01:15:08,000 --> 01:15:09,920
+REO itself was designed to be a
+
+1926
+01:15:09,920 --> 01:15:12,140
+lightweight thing and n SEO has a lot of
+
+1927
+01:15:12,140 --> 01:15:15,440
+components that need to be installed in
+
+1928
+01:15:15,440 --> 01:15:16,850
+order to make us your work where where
+
+1929
+01:15:16,850 --> 01:15:18,890
+liquor D doesn't necessarily have the
+
+1930
+01:15:18,890 --> 01:15:20,960
+concepts of pilot and Citadel and galley
+
+1931
+01:15:20,960 --> 01:15:22,010
+and all those things that's just a
+
+1932
+01:15:22,010 --> 01:15:23,450
+lighter weight like a link or D
+
+1933
+01:15:23,450 --> 01:15:26,960
+basically they're runs um in terms of
+
+1934
+01:15:26,960 --> 01:15:28,130
+feature completeness
+
+1935
+01:15:28,130 --> 01:15:31,040
+you know linker D is going to give you
+
+1936
+01:15:31,040 --> 01:15:33,290
+sort of everything that I showed on this
+
+1937
+01:15:33,290 --> 01:15:36,470
+common concepts may be - like egress and
+
+1938
+01:15:36,470 --> 01:15:38,210
+MPLS I had though I don't remember if
+
+1939
+01:15:38,210 --> 01:15:40,430
+this linker D has that it has most of
+
+1940
+01:15:40,430 --> 01:15:43,190
+everything else here SEO has some other
+
+1941
+01:15:43,190 --> 01:15:45,200
+advanced concepts that aren't listed on
+
+1942
+01:15:45,200 --> 01:15:46,970
+this page and the SEO Doc's have all
+
+1943
+01:15:46,970 --> 01:15:49,550
+those details so it really is just a
+
+1944
+01:15:49,550 --> 01:15:51,530
+maturity versus lightweight comparison
+
+1945
+01:15:51,530 --> 01:15:52,400
+at this point
+
+1946
+01:15:52,400 --> 01:15:56,330
+though now in each one of those favor
+
+1947
+01:15:56,330 --> 01:15:59,060
+sto is being rewritten for sto to which
+
+1948
+01:15:59,060 --> 01:16:00,409
+they're going in a much more lightweight
+
+1949
+01:16:00,409 --> 01:16:01,429
+direction I think they're actually
+
+1950
+01:16:01,429 --> 01:16:03,230
+taking the ISTE o components and
+
+1951
+01:16:03,230 --> 01:16:05,750
+monolith the sizing them again I keep
+
+1952
+01:16:05,750 --> 01:16:07,340
+inventing words today they're there
+
+1953
+01:16:07,340 --> 01:16:09,469
+they're sort of D breaking up they're
+
+1954
+01:16:09,469 --> 01:16:11,270
+there they're distributed approach for
+
+1955
+01:16:11,270 --> 01:16:12,500
+their service mission they're making sto
+
+1956
+01:16:12,500 --> 01:16:14,300
+D as a single monolith which will
+
+1957
+01:16:14,300 --> 01:16:16,250
+hopefully be able to take advantage of a
+
+1958
+01:16:16,250 --> 01:16:17,949
+bunch of performance improvements and
+
+1959
+01:16:17,949 --> 01:16:21,050
+linker D because the velocity of that
+
+1960
+01:16:21,050 --> 01:16:23,380
+software is going to certainly mature
+
+1961
+01:16:23,380 --> 01:16:26,300
+rapidly as time goes on and become more
+
+1962
+01:16:26,300 --> 01:16:28,699
+feature complete so I think you're gonna
+
+1963
+01:16:28,699 --> 01:16:30,440
+have answers to both of those comparison
+
+1964
+01:16:30,440 --> 01:16:31,850
+points where it should be an interesting
+
+1965
+01:16:31,850 --> 01:16:33,650
+horse race kind of in the next year so
+
+1966
+01:16:33,650 --> 01:16:36,460
+to see who's going to be better at what
+
+1967
+01:16:36,460 --> 01:16:39,170
+makes sense okay cool thank you all
+
+1968
+01:16:39,170 --> 01:16:40,880
+right here's next one and I'm probably
+
+1969
+01:16:40,880 --> 01:16:43,040
+gonna butcher your name sorry oh yeah so
+
+1970
+01:16:43,040 --> 01:16:45,100
+while it goes from Jehosaphat who says
+
+1971
+01:16:45,100 --> 01:16:48,080
+what's the performance impacts if we use
+
+1972
+01:16:48,080 --> 01:16:51,350
+sto MT OS with authorization and
+
+1973
+01:16:51,350 --> 01:16:54,679
+authentication I'm gonna be perfectly
+
+1974
+01:16:54,679 --> 01:16:56,719
+honest and say that I don't know
+
+1975
+01:16:56,719 --> 01:16:59,420
+I have not implemented that in one of my
+
+1976
+01:16:59,420 --> 01:17:01,940
+applications I would imagine that it's
+
+1977
+01:17:01,940 --> 01:17:04,850
+non-trivial mainly I'm saying that based
+
+1978
+01:17:04,850 --> 01:17:07,820
+on the fact that sto itself that impact
+
+1979
+01:17:07,820 --> 01:17:11,179
+is non-trivial I don't know the specific
+
+1980
+01:17:11,179 --> 01:17:13,159
+performance implications of enabling M
+
+1981
+01:17:13,159 --> 01:17:15,500
+TLS though I would be very interested to
+
+1982
+01:17:15,500 --> 01:17:17,810
+see graphs and comparisons you know
+
+1983
+01:17:17,810 --> 01:17:19,580
+against some sort of baseline to
+
+1984
+01:17:19,580 --> 01:17:21,380
+determine what that is so unfortunately
+
+1985
+01:17:21,380 --> 01:17:22,730
+I don't have a direct answer for you but
+
+1986
+01:17:22,730 --> 01:17:24,650
+I again I'm gonna kind of hand wave and
+
+1987
+01:17:24,650 --> 01:17:28,239
+say non-trivial but I'd like to see more
+
+1988
+01:17:28,239 --> 01:17:30,050
+okay cool
+
+1989
+01:17:30,050 --> 01:17:32,690
+sort of related this is from Nikolas who
+
+1990
+01:17:32,690 --> 01:17:35,420
+asks and it's kind of this is a kind of
+
+1991
+01:17:35,420 --> 01:17:37,130
+a coup grantees compute resourcing
+
+1992
+01:17:37,130 --> 01:17:39,739
+question he says do we see minimal
+
+1993
+01:17:39,739 --> 01:17:41,830
+footprint in terms of computerization
+
+1994
+01:17:41,830 --> 01:17:45,140
+relative to a non SEO deployment you
+
+1995
+01:17:45,140 --> 01:17:48,580
+know versus an SEO deployment
+
+1996
+01:17:49,540 --> 01:17:51,460
+can you read the question to me one more
+
+1997
+01:17:51,460 --> 01:17:52,540
+time I'm sorry I think I lost the
+
+1998
+01:17:52,540 --> 01:17:55,120
+trainer yeah no problem and there's
+
+1999
+01:17:55,120 --> 01:17:56,500
+other people who have asked asked a
+
+2000
+01:17:56,500 --> 01:17:57,760
+similar question I think so I might try
+
+2001
+01:17:57,760 --> 01:18:00,460
+to find another phrasing he says do we
+
+2002
+01:18:00,460 --> 01:18:03,940
+see minimal footprint in terms of
+
+2003
+01:18:03,940 --> 01:18:09,040
+compute utilization for a non sto versus
+
+2004
+01:18:09,040 --> 01:18:11,350
+sto deployment I think he's maybe he's
+
+2005
+01:18:11,350 --> 01:18:12,760
+asking like what is the computer
+
+2006
+01:18:12,760 --> 01:18:14,740
+utilization of using sto versus not
+
+2007
+01:18:14,740 --> 01:18:18,910
+using um each one of the components has
+
+2008
+01:18:18,910 --> 01:18:24,600
+a document I think - they're they're
+
+2009
+01:18:24,600 --> 01:18:27,880
+compute utilization I'm gonna say it's
+
+2010
+01:18:27,880 --> 01:18:29,710
+heavy and I'll actually show you inside
+
+2011
+01:18:29,710 --> 01:18:33,670
+here inside Rancher so if I go to the
+
+2012
+01:18:33,670 --> 01:18:36,330
+sto learning and I go under sto here
+
+2013
+01:18:36,330 --> 01:18:41,200
+like if I look at pilot we've got like
+
+2014
+01:18:41,200 --> 01:18:44,350
+one CPU and four gigs of RAM as a
+
+2015
+01:18:44,350 --> 01:18:47,110
+limitation for pilot and these
+
+2016
+01:18:47,110 --> 01:18:49,000
+limitations I think we're really born
+
+2017
+01:18:49,000 --> 01:18:51,400
+out of a moderate usage level so I don't
+
+2018
+01:18:51,400 --> 01:18:53,740
+have an exact minimal amount but just to
+
+2019
+01:18:53,740 --> 01:18:56,320
+say that we're limiting it one by four
+
+2020
+01:18:56,320 --> 01:18:58,690
+which is almost the size of like a t2
+
+2021
+01:18:58,690 --> 01:19:00,070
+not small right I think it's like to my
+
+2022
+01:19:00,070 --> 01:19:02,530
+4 is it teacher dot small so pilot takes
+
+2023
+01:19:02,530 --> 01:19:05,530
+up a lot of resources mixer is sort of
+
+2024
+01:19:05,530 --> 01:19:07,350
+an older technology they've they've
+
+2025
+01:19:07,350 --> 01:19:09,940
+deprecated the use of it I think in
+
+2026
+01:19:09,940 --> 01:19:12,660
+favor of galley but the mixer telemetry
+
+2027
+01:19:12,660 --> 01:19:16,840
+here we're limiting at four by four so
+
+2028
+01:19:16,840 --> 01:19:18,970
+these components are actually really
+
+2029
+01:19:18,970 --> 01:19:21,670
+heavy and if we deploy all these and
+
+2030
+01:19:21,670 --> 01:19:23,320
+let's say they use up to their limit
+
+2031
+01:19:23,320 --> 01:19:25,180
+that we're in a heavy configured thing
+
+2032
+01:19:25,180 --> 01:19:27,580
+we've got a one by four of pilot a four
+
+2033
+01:19:27,580 --> 01:19:30,340
+by four of mixer and distributed tracing
+
+2034
+01:19:30,340 --> 01:19:33,250
+we've got a half by one and then I
+
+2035
+01:19:33,250 --> 01:19:34,510
+didn't even talk about out of the
+
+2036
+01:19:34,510 --> 01:19:36,820
+galleys listed in there so almost we're
+
+2037
+01:19:36,820 --> 01:19:38,920
+talking probably about five or six CPU
+
+2038
+01:19:38,920 --> 01:19:41,710
+by what what I'm guessing would be by
+
+2039
+01:19:41,710 --> 01:19:45,190
+five or six gigs of RAM which in bigger
+
+2040
+01:19:45,190 --> 01:19:47,470
+clusters probably not the end of the
+
+2041
+01:19:47,470 --> 01:19:48,760
+world but then again in bigger clusters
+
+2042
+01:19:48,760 --> 01:19:50,590
+you're gonna see scaling up of those
+
+2043
+01:19:50,590 --> 01:19:53,260
+components so really take a look at what
+
+2044
+01:19:53,260 --> 01:19:55,600
+is Tio's documentation has in terms of
+
+2045
+01:19:55,600 --> 01:19:56,740
+scaling but it's going to be heavier
+
+2046
+01:19:56,740 --> 01:19:59,620
+than you think awesome
+
+2047
+01:19:59,620 --> 01:20:01,840
+very helpful and um since I think you
+
+2048
+01:20:01,840 --> 01:20:03,250
+might have just answered this with with
+
+2049
+01:20:03,250 --> 01:20:06,580
+five to six gigs but David says I've
+
+2050
+01:20:06,580 --> 01:20:09,160
+been testing monitoring sto and logging
+
+2051
+01:20:09,160 --> 01:20:11,350
+on my clusters but I keep running into
+
+2052
+01:20:11,350 --> 01:20:14,740
+memory or CPU limits what is the
+
+2053
+01:20:14,740 --> 01:20:19,780
+recommended cluster size cluster I will
+
+2054
+01:20:19,780 --> 01:20:22,450
+say that that largely depends on other
+
+2055
+01:20:22,450 --> 01:20:24,730
+workloads if you're installing just
+
+2056
+01:20:24,730 --> 01:20:28,510
+monitoring and just sto into the cluster
+
+2057
+01:20:28,510 --> 01:20:31,630
+I think that what I've developed here is
+
+2058
+01:20:31,630 --> 01:20:34,060
+probably the baseline because we've had
+
+2059
+01:20:34,060 --> 01:20:37,000
+issues with this one and this is a four
+
+2060
+01:20:37,000 --> 01:20:39,850
+node each with two by eight that we've
+
+2061
+01:20:39,850 --> 01:20:40,960
+been running into pretty heavy
+
+2062
+01:20:40,960 --> 01:20:43,690
+utilization on so you could maybe go a
+
+2063
+01:20:43,690 --> 01:20:44,830
+little smaller than this I could maybe
+
+2064
+01:20:44,830 --> 01:20:46,510
+do a three node of to buy a these are
+
+2065
+01:20:46,510 --> 01:20:48,910
+all teacher Don larges you could maybe
+
+2066
+01:20:48,910 --> 01:20:51,480
+do a three node you know of two by eight
+
+2067
+01:20:51,480 --> 01:20:54,220
+nodes here but I certainly wouldn't go
+
+2068
+01:20:54,220 --> 01:20:55,840
+much smaller than that so you could
+
+2069
+01:20:55,840 --> 01:20:57,130
+probably establish a pretty simple
+
+2070
+01:20:57,130 --> 01:20:59,740
+baseline of worker nodes as at least six
+
+2071
+01:20:59,740 --> 01:21:02,590
+core and what's three times eight 24
+
+2072
+01:21:02,590 --> 01:21:04,240
+yeah
+
+2073
+01:21:04,240 --> 01:21:07,240
+24 gigs of ram which is pretty heavy
+
+2074
+01:21:07,240 --> 01:21:09,910
+when I think about it yeah cool thank
+
+2075
+01:21:09,910 --> 01:21:12,550
+you okay there's there's several more
+
+2076
+01:21:12,550 --> 01:21:14,320
+questions and I know we have gone over
+
+2077
+01:21:14,320 --> 01:21:16,090
+kind of our schedule tiny'mon are you
+
+2078
+01:21:16,090 --> 01:21:18,100
+able to stay on a few more minutes and a
+
+2079
+01:21:18,100 --> 01:21:20,950
+couple more markets okay cool okay well
+
+2080
+01:21:20,950 --> 01:21:22,720
+we'll wrap up let's find couple more um
+
+2081
+01:21:22,720 --> 01:21:25,480
+this last one is from Jude says can we
+
+2082
+01:21:25,480 --> 01:21:28,720
+run elastic search in is teos in service
+
+2083
+01:21:28,720 --> 01:21:32,050
+mesh is to your service mesh I don't see
+
+2084
+01:21:32,050 --> 01:21:32,500
+why not
+
+2085
+01:21:32,500 --> 01:21:34,870
+though that's such an elastic search
+
+2086
+01:21:34,870 --> 01:21:37,030
+specific question I'm not qualified to
+
+2087
+01:21:37,030 --> 01:21:39,910
+answer it um my understanding is that
+
+2088
+01:21:39,910 --> 01:21:43,660
+you would be able to so long as you're
+
+2089
+01:21:43,660 --> 01:21:46,000
+logged collectors are able to hop on to
+
+2090
+01:21:46,000 --> 01:21:47,680
+the service mesh and you know insert
+
+2091
+01:21:47,680 --> 01:21:49,930
+their traffic into elastic search so as
+
+2092
+01:21:49,930 --> 01:21:51,750
+long as that traffic can occur because
+
+2093
+01:21:51,750 --> 01:21:54,220
+elastic search from my understanding
+
+2094
+01:21:54,220 --> 01:21:57,820
+speaks mostly HTTP for the log trans for
+
+2095
+01:21:57,820 --> 01:21:59,830
+the log transiting um that it should
+
+2096
+01:21:59,830 --> 01:22:02,110
+work but again your mileage may vary and
+
+2097
+01:22:02,110 --> 01:22:04,150
+I am far from knowledgeable about
+
+2098
+01:22:04,150 --> 01:22:08,440
+elastic search okay cool all right here
+
+2099
+01:22:08,440 --> 01:22:10,090
+what will have this be the last question
+
+2100
+01:22:10,090 --> 01:22:12,130
+naman this is from since you have to go
+
+2101
+01:22:12,130 --> 01:22:13,010
+this is from
+
+2102
+01:22:13,010 --> 01:22:17,120
+who says I'm still a bit lost on the
+
+2103
+01:22:17,120 --> 01:22:19,700
+application example itself what do I do
+
+2104
+01:22:19,700 --> 01:22:22,130
+and how do I route to the service is
+
+2105
+01:22:22,130 --> 01:22:23,989
+there anything to do on the application
+
+2106
+01:22:23,989 --> 01:22:28,160
+code itself yes so let me go back to my
+
+2107
+01:22:28,160 --> 01:22:31,070
+screen here and that's one thing I I
+
+2108
+01:22:31,070 --> 01:22:32,690
+definitely could have explained a little
+
+2109
+01:22:32,690 --> 01:22:34,940
+better so splitting up the monolith
+
+2110
+01:22:34,940 --> 01:22:36,890
+we've got this picture over here on the
+
+2111
+01:22:36,890 --> 01:22:39,650
+right what would happen typically in
+
+2112
+01:22:39,650 --> 01:22:42,350
+this case is that your micro service for
+
+2113
+01:22:42,350 --> 01:22:45,470
+the product page would went broken out
+
+2114
+01:22:45,470 --> 01:22:48,710
+from the monolith be basically rewritten
+
+2115
+01:22:48,710 --> 01:22:49,670
+from the ground up
+
+2116
+01:22:49,670 --> 01:22:51,500
+so you'd probably reuse some of the code
+
+2117
+01:22:51,500 --> 01:22:53,570
+and certainly the logic from the product
+
+2118
+01:22:53,570 --> 01:22:55,700
+page but you would rewrite it so that
+
+2119
+01:22:55,700 --> 01:22:57,500
+instead of having a direct dependency on
+
+2120
+01:22:57,500 --> 01:23:00,739
+calling like a a details function like
+
+2121
+01:23:00,739 --> 01:23:02,690
+maybe you have a details class that has
+
+2122
+01:23:02,690 --> 01:23:03,800
+a bunch of different things and then
+
+2123
+01:23:03,800 --> 01:23:05,660
+there's a method you can call on some
+
+2124
+01:23:05,660 --> 01:23:07,940
+details class and the product page calls
+
+2125
+01:23:07,940 --> 01:23:10,850
+that method to get information instead
+
+2126
+01:23:10,850 --> 01:23:13,160
+you would have the product page call out
+
+2127
+01:23:13,160 --> 01:23:16,820
+externally to some sort of details micro
+
+2128
+01:23:16,820 --> 01:23:18,650
+service and this is where the mesh
+
+2129
+01:23:18,650 --> 01:23:20,750
+really helps and this is and I think
+
+2130
+01:23:20,750 --> 01:23:21,800
+this is great this is what I should
+
+2131
+01:23:21,800 --> 01:23:23,330
+change these slides up to explain a bit
+
+2132
+01:23:23,330 --> 01:23:25,910
+more the product page micro service
+
+2133
+01:23:25,910 --> 01:23:28,910
+should call out to some generic detail
+
+2134
+01:23:28,910 --> 01:23:30,920
+service it shouldn't have any idea of
+
+2135
+01:23:30,920 --> 01:23:32,989
+the existence of a specific micro
+
+2136
+01:23:32,989 --> 01:23:35,180
+service it should just know that
+
+2137
+01:23:35,180 --> 01:23:37,610
+somewhere out there being outside of
+
+2138
+01:23:37,610 --> 01:23:39,170
+itself somewhere externally to the
+
+2139
+01:23:39,170 --> 01:23:41,930
+product page there exists a detailed
+
+2140
+01:23:41,930 --> 01:23:43,940
+service so the product page simply
+
+2141
+01:23:43,940 --> 01:23:46,820
+queries service at some predefined API
+
+2142
+01:23:46,820 --> 01:23:49,250
+endpoint now that may be G RPC that
+
+2143
+01:23:49,250 --> 01:23:51,140
+could be just some kind of you know REST
+
+2144
+01:23:51,140 --> 01:23:53,930
+API whatever you want but the product
+
+2145
+01:23:53,930 --> 01:23:56,450
+page makes an external Network call to
+
+2146
+01:23:56,450 --> 01:23:59,030
+get something from a detail service so
+
+2147
+01:23:59,030 --> 01:24:00,739
+the act of making that call is what
+
+2148
+01:24:00,739 --> 01:24:02,930
+service mesh concerns itself with where
+
+2149
+01:24:02,930 --> 01:24:05,660
+the mesh will be able to say okay a call
+
+2150
+01:24:05,660 --> 01:24:07,250
+from the product page to the detail
+
+2151
+01:24:07,250 --> 01:24:09,470
+service should go to this virtual
+
+2152
+01:24:09,470 --> 01:24:13,010
+service in terms of this do or we're
+
+2153
+01:24:13,010 --> 01:24:15,260
+going to be routing some amount of that
+
+2154
+01:24:15,260 --> 01:24:17,330
+network traffic from the product page to
+
+2155
+01:24:17,330 --> 01:24:20,030
+the detail service to a new instance of
+
+2156
+01:24:20,030 --> 01:24:21,200
+our service so that would be where like
+
+2157
+01:24:21,200 --> 01:24:22,880
+the traffic management component would
+
+2158
+01:24:22,880 --> 01:24:25,670
+come in so yeah basically every micro
+
+2159
+01:24:25,670 --> 01:24:26,760
+service here should
+
+2160
+01:24:26,760 --> 01:24:28,220
+be making Network calls to other
+
+2161
+01:24:28,220 --> 01:24:30,690
+microservices depending you know
+
+2162
+01:24:30,690 --> 01:24:33,420
+completely on protocol on things to
+
+2163
+01:24:33,420 --> 01:24:35,220
+retrieve the information now that would
+
+2164
+01:24:35,220 --> 01:24:37,530
+be compared in a monolith to making like
+
+2165
+01:24:37,530 --> 01:24:39,780
+a direct method or a function call I'm
+
+2166
+01:24:39,780 --> 01:24:41,610
+in a different area of that monoliths
+
+2167
+01:24:41,610 --> 01:24:45,270
+application code okay
+
+2168
+01:24:45,270 --> 01:24:48,120
+awesome thank you okay I think since
+
+2169
+01:24:48,120 --> 01:24:49,520
+we're you know since we're over time
+
+2170
+01:24:49,520 --> 01:24:52,110
+we'll end it there there are some more
+
+2171
+01:24:52,110 --> 01:24:54,210
+questions in the chat we've gotten to
+
+2172
+01:24:54,210 --> 01:24:56,160
+many many of them if you didn't get your
+
+2173
+01:24:56,160 --> 01:24:58,800
+question answer then please join us on
+
+2174
+01:24:58,800 --> 01:25:00,270
+on the user slack on the Masterclass
+
+2175
+01:25:00,270 --> 01:25:01,980
+channel and we can we can follow the
+
+2176
+01:25:01,980 --> 01:25:05,370
+follow up with you and afterward but I
+
+2177
+01:25:05,370 --> 01:25:06,540
+think we will over there is there is
+
+2178
+01:25:06,540 --> 01:25:08,250
+there anything else you want to leave us
+
+2179
+01:25:08,250 --> 01:25:12,510
+with Eamonn before other than to say go
+
+2180
+01:25:12,510 --> 01:25:14,760
+out install Rancher on your own and try
+
+2181
+01:25:14,760 --> 01:25:17,430
+this obviously the live demo failed and
+
+2182
+01:25:17,430 --> 01:25:20,400
+that wasn't great but it does work it
+
+2183
+01:25:20,400 --> 01:25:22,080
+did work for me last night it did work
+
+2184
+01:25:22,080 --> 01:25:23,880
+for me this weekend so please go through
+
+2185
+01:25:23,880 --> 01:25:25,650
+try and set up the book intro tutorial
+
+2186
+01:25:25,650 --> 01:25:27,930
+on sto don't let this failure shy you
+
+2187
+01:25:27,930 --> 01:25:30,270
+away from the functionality that we have
+
+2188
+01:25:30,270 --> 01:25:32,160
+this was just some sort of transient
+
+2189
+01:25:32,160 --> 01:25:34,080
+thing that got messed up sorry I really
+
+2190
+01:25:34,080 --> 01:25:36,210
+encourage everybody go try this on your
+
+2191
+01:25:36,210 --> 01:25:38,150
+own you're gonna have a cool experience
+
+2192
+01:25:38,150 --> 01:25:39,480
+awesome
+
+2193
+01:25:39,480 --> 01:25:43,290
+yeah I agree and we do a intro to
+
+2194
+01:25:43,290 --> 01:25:45,360
+kubernetes in Rancher class every
+
+2195
+01:25:45,360 --> 01:25:46,890
+Thursday so this is a great opportunity
+
+2196
+01:25:46,890 --> 01:25:49,500
+to join one of those we'll talk a little
+
+2197
+01:25:49,500 --> 01:25:51,630
+bit more about server smash there so
+
+2198
+01:25:51,630 --> 01:25:54,090
+that's a that's a good next step next
+
+2199
+01:25:54,090 --> 01:25:57,840
+week also is the 2.4 online meet up with
+
+2200
+01:25:57,840 --> 01:25:59,460
+a walkthrough Darin Shepherd or chief
+
+2201
+01:25:59,460 --> 01:26:01,080
+technology officer is gonna be on there
+
+2202
+01:26:01,080 --> 01:26:02,700
+and Shannon Williams as president of
+
+2203
+01:26:02,700 --> 01:26:04,710
+Rancher will be on they're both kind of
+
+2204
+01:26:04,710 --> 01:26:07,140
+leading the way explaining 2.0 or 2.4
+
+2205
+01:26:07,140 --> 01:26:09,780
+there were quite a few questions about
+
+2206
+01:26:09,780 --> 01:26:11,580
+you know whether 2.4 is production-ready
+
+2207
+01:26:11,580 --> 01:26:14,040
+in it and all that that is the place to
+
+2208
+01:26:14,040 --> 01:26:15,210
+get those questions answered
+
+2209
+01:26:15,210 --> 01:26:17,990
+this is 2.4 just dropped this past week
+
+2210
+01:26:17,990 --> 01:26:20,430
+otherwise thank you all so much
+
+2211
+01:26:20,430 --> 01:26:21,780
+Eamonn thank you for your hard work
+
+2212
+01:26:21,780 --> 01:26:23,550
+really appreciate it and Jason and
+
+2213
+01:26:23,550 --> 01:26:25,350
+Sheldon great job answering questions in
+
+2214
+01:26:25,350 --> 01:26:28,560
+the chat too so we could save a man's
+
+2215
+01:26:28,560 --> 01:26:31,650
+voice box a little bit here and we will
+
+2216
+01:26:31,650 --> 01:26:34,140
+be posting the recording on YouTube and
+
+2217
+01:26:34,140 --> 01:26:36,390
+sending out the slides to everyone so
+
+2218
+01:26:36,390 --> 01:26:38,700
+don't worry you'll get all that later on
+
+2219
+01:26:38,700 --> 01:26:40,500
+today alright everybody have a
+
+2220
+01:26:40,500 --> 01:26:41,970
+rest of your week talk to you soon
+
+2221
+01:26:41,970 --> 01:26:44,490
+thanks Amon thanks everyone
+
+2222
+01:26:44,490 --> 01:26:46,700
+bye

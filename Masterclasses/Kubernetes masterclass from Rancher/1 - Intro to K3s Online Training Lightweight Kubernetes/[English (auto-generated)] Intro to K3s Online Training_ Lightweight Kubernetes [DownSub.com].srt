@@ -1,0 +1,5951 @@
+1
+00:00:03,190 --> 00:00:06,979
+hey everybody welcome to today's online
+
+2
+00:00:06,979 --> 00:00:11,390
+training intro to k3s we have quite a
+
+3
+00:00:11,390 --> 00:00:13,550
+few people joining the line so I just
+
+4
+00:00:13,550 --> 00:00:16,580
+want to take a moment while while people
+
+5
+00:00:16,580 --> 00:00:18,710
+are joining to let everybody know that
+
+6
+00:00:18,710 --> 00:00:22,009
+this session is being recorded we'll go
+
+7
+00:00:22,009 --> 00:00:23,929
+about an hour we have an hour and a half
+
+8
+00:00:23,929 --> 00:00:26,449
+scheduled we have plenty of time for Q&A
+
+9
+00:00:26,449 --> 00:00:28,009
+and all that but if you do need a drop
+
+10
+00:00:28,009 --> 00:00:29,179
+don't worry about it
+
+11
+00:00:29,179 --> 00:00:31,220
+this session is being recorded and we
+
+12
+00:00:31,220 --> 00:00:34,190
+will send you the recording and the
+
+13
+00:00:34,190 --> 00:00:38,480
+slides after the training so Wow now
+
+14
+00:00:38,480 --> 00:00:40,340
+that people would join line go ahead and
+
+15
+00:00:40,340 --> 00:00:41,840
+get us started we have a lot to cover
+
+16
+00:00:41,840 --> 00:00:44,660
+just as a way of introduction my name is
+
+17
+00:00:44,660 --> 00:00:46,370
+Matthew Shearer mark the marketing
+
+18
+00:00:46,370 --> 00:00:48,109
+manager here and sure I help host a lot
+
+19
+00:00:48,109 --> 00:00:50,269
+of these training sessions we have more
+
+20
+00:00:50,269 --> 00:00:52,609
+on the calendar I'll talk about that in
+
+21
+00:00:52,609 --> 00:00:53,690
+a bit
+
+22
+00:00:53,690 --> 00:00:55,780
+and I also included my contact info
+
+23
+00:00:55,780 --> 00:00:58,730
+email Matthew at Rancho comm and on the
+
+24
+00:00:58,730 --> 00:01:01,339
+ranch for user slack I am at Matthew
+
+25
+00:01:01,339 --> 00:01:03,530
+please reach out to me I'm happy to be
+
+26
+00:01:03,530 --> 00:01:04,909
+your point of contact if you're looking
+
+27
+00:01:04,909 --> 00:01:07,010
+for resources you have questions or you
+
+28
+00:01:07,010 --> 00:01:08,300
+know the recording doesn't get your way
+
+29
+00:01:08,300 --> 00:01:10,550
+or something like that and I'd also love
+
+30
+00:01:10,550 --> 00:01:12,890
+to hear from you if you are using
+
+31
+00:01:12,890 --> 00:01:14,690
+rancher if you are using any of the
+
+32
+00:01:14,690 --> 00:01:16,640
+software if you're having trouble or
+
+33
+00:01:16,640 --> 00:01:18,710
+you're doing something really cool we
+
+34
+00:01:18,710 --> 00:01:20,570
+would so love to hear your stories and
+
+35
+00:01:20,570 --> 00:01:22,550
+know what what you guys are all doing
+
+36
+00:01:22,550 --> 00:01:24,890
+with this stuff since it is open source
+
+37
+00:01:24,890 --> 00:01:27,350
+and it is just out there in the wild so
+
+38
+00:01:27,350 --> 00:01:29,870
+so feel free to reach out to me I'd love
+
+39
+00:01:29,870 --> 00:01:31,970
+to chat but the person who's really
+
+40
+00:01:31,970 --> 00:01:34,790
+doing the heavy lifting today is going
+
+41
+00:01:34,790 --> 00:01:37,280
+to be Mark Abraham's I feel that
+
+42
+00:01:37,280 --> 00:01:38,840
+engineer mark are you there
+
+43
+00:01:38,840 --> 00:01:44,330
+okay I'm here hello everybody I'll let
+
+44
+00:01:44,330 --> 00:01:46,220
+mark introduce himself a little bit more
+
+45
+00:01:46,220 --> 00:01:49,220
+as we get going just a couple other
+
+46
+00:01:49,220 --> 00:01:51,890
+ground keeping items sort of house rules
+
+47
+00:01:51,890 --> 00:01:55,160
+you know this is a k3s intro training we
+
+48
+00:01:55,160 --> 00:01:58,100
+are trying to keep this to an hour you
+
+49
+00:01:58,100 --> 00:02:00,770
+know but we can go along if need be we
+
+50
+00:02:00,770 --> 00:02:03,230
+do our absolute best to respond to every
+
+51
+00:02:03,230 --> 00:02:06,740
+single question that you all may have if
+
+52
+00:02:06,740 --> 00:02:08,420
+for whatever reason you want your
+
+53
+00:02:08,420 --> 00:02:11,050
+question to be private just let us know
+
+54
+00:02:11,050 --> 00:02:13,670
+GoToWebinar has a cool a chat feature so
+
+55
+00:02:13,670 --> 00:02:15,900
+just enter your question in the chat
+
+56
+00:02:15,900 --> 00:02:18,000
+and I will see them will take me a
+
+57
+00:02:18,000 --> 00:02:19,950
+couple pauses here and there during the
+
+58
+00:02:19,950 --> 00:02:22,410
+training for questions then leave a lot
+
+59
+00:02:22,410 --> 00:02:25,290
+of room and time at the end for just
+
+60
+00:02:25,290 --> 00:02:30,390
+extended Q&A we oh I like I said at the
+
+61
+00:02:30,390 --> 00:02:31,800
+beginning this session is recorded it
+
+62
+00:02:31,800 --> 00:02:33,750
+will be posted on YouTube we have a ton
+
+63
+00:02:33,750 --> 00:02:36,239
+of other training sessions on YouTube as
+
+64
+00:02:36,239 --> 00:02:38,790
+well everything is there for you all to
+
+65
+00:02:38,790 --> 00:02:41,400
+enjoy so check so do check that out if
+
+66
+00:02:41,400 --> 00:02:43,260
+for whatever reason you don't see it on
+
+67
+00:02:43,260 --> 00:02:44,459
+your email or you want to look up a
+
+68
+00:02:44,459 --> 00:02:46,860
+different topic and more resources
+
+69
+00:02:46,860 --> 00:02:48,989
+probably a lot of you are already using
+
+70
+00:02:48,989 --> 00:02:51,630
+these but if you're not I highly
+
+71
+00:02:51,630 --> 00:02:54,299
+recommend you join it's all totally free
+
+72
+00:02:54,299 --> 00:02:57,900
+our ranch or user slack so slack ranch I
+
+73
+00:02:57,900 --> 00:03:01,019
+owe thousands of members hundreds of
+
+74
+00:03:01,019 --> 00:03:02,640
+people every day asking and answering
+
+75
+00:03:02,640 --> 00:03:03,480
+questions
+
+76
+00:03:03,480 --> 00:03:06,840
+our engineers are on there too checking
+
+77
+00:03:06,840 --> 00:03:08,510
+those out and escalating questions
+
+78
+00:03:08,510 --> 00:03:11,819
+internally as needed there is a k3s
+
+79
+00:03:11,819 --> 00:03:15,420
+channel just pound k3s specifically for
+
+80
+00:03:15,420 --> 00:03:19,940
+k3s discussion and then longer form
+
+81
+00:03:19,940 --> 00:03:22,109
+announcements and posts are on our
+
+82
+00:03:22,109 --> 00:03:25,440
+forums so forums rancher comm again just
+
+83
+00:03:25,440 --> 00:03:27,450
+just great free resources for the
+
+84
+00:03:27,450 --> 00:03:30,480
+community and finally there are a lot of
+
+85
+00:03:30,480 --> 00:03:32,760
+other upcoming classes and trainings
+
+86
+00:03:32,760 --> 00:03:34,889
+that we offer if you are brand new to
+
+87
+00:03:34,889 --> 00:03:37,079
+rancher I highly recommend tomorrow's
+
+88
+00:03:37,079 --> 00:03:40,170
+session it is free it is just live and
+
+89
+00:03:40,170 --> 00:03:42,599
+there'll be live Q&A and that is on an
+
+90
+00:03:42,599 --> 00:03:45,060
+intro to kubernetes Rancher and then
+
+91
+00:03:45,060 --> 00:03:47,549
+every month we do an online meet the up
+
+92
+00:03:47,549 --> 00:03:49,079
+work sort of a whole community gets
+
+93
+00:03:49,079 --> 00:03:50,970
+together there you know usually hundreds
+
+94
+00:03:50,970 --> 00:03:52,380
+of people on and just tons of questions
+
+95
+00:03:52,380 --> 00:03:55,079
+we talk about the latest and greatest in
+
+96
+00:03:55,079 --> 00:03:55,620
+rancher
+
+97
+00:03:55,620 --> 00:03:58,109
+you know and what's going on around the
+
+98
+00:03:58,109 --> 00:04:00,660
+cloud native landscape so that's January
+
+99
+00:04:00,660 --> 00:04:03,359
+22nd please check that out and then
+
+100
+00:04:03,359 --> 00:04:05,430
+after that the next week we'll just
+
+101
+00:04:05,430 --> 00:04:08,040
+continue to focus on security with a
+
+102
+00:04:08,040 --> 00:04:09,870
+master class by one of our principal
+
+103
+00:04:09,870 --> 00:04:12,120
+software engineers Prachi it should be
+
+104
+00:04:12,120 --> 00:04:14,720
+really good so check all those out this
+
+105
+00:04:14,720 --> 00:04:17,549
+slide this this deck will be sent to you
+
+106
+00:04:17,549 --> 00:04:19,620
+all so you'll have the links and you can
+
+107
+00:04:19,620 --> 00:04:21,989
+you can sign up as what all right now
+
+108
+00:04:21,989 --> 00:04:24,630
+that all of that is out of the way I'm
+
+109
+00:04:24,630 --> 00:04:26,909
+gonna pass this over to you mark make
+
+110
+00:04:26,909 --> 00:04:29,490
+you the presenter so that you can
+
+111
+00:04:29,490 --> 00:04:33,000
+is going great all right I'm making you
+
+112
+00:04:33,000 --> 00:04:36,900
+presenter all right let's see can you
+
+113
+00:04:36,900 --> 00:04:40,410
+see my interest your slide you're good
+
+114
+00:04:40,410 --> 00:04:46,080
+to go okay so for today's masterclass
+
+115
+00:04:46,080 --> 00:04:49,740
+we're going to do an intro to k3s I'll
+
+116
+00:04:49,740 --> 00:04:52,520
+go over some of the fundamentals of k3s
+
+117
+00:04:52,520 --> 00:04:55,979
+we'll have a demo of k3s on a single
+
+118
+00:04:55,979 --> 00:04:59,220
+node and then we'll get into high
+
+119
+00:04:59,220 --> 00:05:02,910
+availability and I'll do an H a a demo
+
+120
+00:05:02,910 --> 00:05:08,490
+of kts in H a mode as well and then I'll
+
+121
+00:05:08,490 --> 00:05:10,190
+take some time to talk about use cases
+
+122
+00:05:10,190 --> 00:05:14,099
+now if we have time we'll get to the
+
+123
+00:05:14,099 --> 00:05:18,210
+multi cluster management and we can view
+
+124
+00:05:18,210 --> 00:05:21,300
+you know view clusters multiple clusters
+
+125
+00:05:21,300 --> 00:05:24,509
+in us from a single pane of glass that
+
+126
+00:05:24,509 --> 00:05:27,690
+is ranch or I will I'll do that if we
+
+127
+00:05:27,690 --> 00:05:33,360
+have time again my name is Mark Abrams
+
+128
+00:05:33,360 --> 00:05:35,550
+and I'm a field engineer with rancher
+
+129
+00:05:35,550 --> 00:05:36,539
+labs
+
+130
+00:05:36,539 --> 00:05:39,330
+I have been with rancher for almost a
+
+131
+00:05:39,330 --> 00:05:42,360
+year and a half now doing doing field
+
+132
+00:05:42,360 --> 00:05:43,669
+work work with a lot of different
+
+133
+00:05:43,669 --> 00:05:48,210
+customers in all areas all all areas of
+
+134
+00:05:48,210 --> 00:05:51,770
+business get to learn lots of
+
+135
+00:05:51,770 --> 00:05:54,389
+interesting things that people are doing
+
+136
+00:05:54,389 --> 00:05:55,620
+with it trying to do with it
+
+137
+00:05:55,620 --> 00:05:59,580
+out in the community I present various
+
+138
+00:05:59,580 --> 00:06:02,250
+events last year I was at the open
+
+139
+00:06:02,250 --> 00:06:05,610
+source summit and that the the armed
+
+140
+00:06:05,610 --> 00:06:09,900
+tech con as well as some local regional
+
+141
+00:06:09,900 --> 00:06:14,699
+stuff as well so with that let's jump
+
+142
+00:06:14,699 --> 00:06:17,150
+right into some of the fundamentals of
+
+143
+00:06:17,150 --> 00:06:21,630
+k3s and let's talk about let's start
+
+144
+00:06:21,630 --> 00:06:24,750
+with the kubernetes architecture right
+
+145
+00:06:24,750 --> 00:06:28,530
+because k3s is lightweight kubernetes so
+
+146
+00:06:28,530 --> 00:06:30,449
+we have to look at what what is
+
+147
+00:06:30,449 --> 00:06:35,360
+kubernetes and how did we get to k3s
+
+148
+00:06:35,360 --> 00:06:38,699
+this is a diagram that that comes right
+
+149
+00:06:38,699 --> 00:06:42,630
+off of the kubernetes i/o site and it
+
+150
+00:06:42,630 --> 00:06:43,320
+shows that
+
+151
+00:06:43,320 --> 00:06:47,430
+component parts of kubernetes and and
+
+152
+00:06:47,430 --> 00:06:49,430
+what it takes to run kubernetes
+
+153
+00:06:49,430 --> 00:06:51,600
+basically breaking it up into what
+
+154
+00:06:51,600 --> 00:06:55,580
+kubernetes caused masters and the nodes
+
+155
+00:06:55,580 --> 00:06:59,820
+the masters typically have the control
+
+156
+00:06:59,820 --> 00:07:01,560
+plane and the data plane you may have
+
+157
+00:07:01,560 --> 00:07:04,500
+seen installations where these are even
+
+158
+00:07:04,500 --> 00:07:07,170
+separated out into different different
+
+159
+00:07:07,170 --> 00:07:09,990
+worker into different servers but this
+
+160
+00:07:09,990 --> 00:07:12,450
+is the general architecture that
+
+161
+00:07:12,450 --> 00:07:17,160
+kubernetes shares with us so the you
+
+162
+00:07:17,160 --> 00:07:20,400
+know the the components here are really
+
+163
+00:07:20,400 --> 00:07:22,830
+I think everybody knows these but I'll
+
+164
+00:07:22,830 --> 00:07:24,000
+just go through them real quick because
+
+165
+00:07:24,000 --> 00:07:27,990
+the this is sort of what what really
+
+166
+00:07:27,990 --> 00:07:28,980
+gets interesting
+
+167
+00:07:28,980 --> 00:07:35,040
+with k3s is how k3s manages what we did
+
+168
+00:07:35,040 --> 00:07:37,470
+with these component parts so the API
+
+169
+00:07:37,470 --> 00:07:39,900
+server of course is the front-end for
+
+170
+00:07:39,900 --> 00:07:43,880
+the control plane @cd is the datastore
+
+171
+00:07:43,880 --> 00:07:47,720
+for the cluster the coop scheduler
+
+172
+00:07:47,720 --> 00:07:51,720
+selects nodes for newly created pods to
+
+173
+00:07:51,720 --> 00:07:54,900
+run on so based on hardware software
+
+174
+00:07:54,900 --> 00:07:57,810
+policy constraints the scheduler is
+
+175
+00:07:57,810 --> 00:07:59,340
+going to figure out where to put the
+
+176
+00:07:59,340 --> 00:08:04,380
+pods the controller manager is actually
+
+177
+00:08:04,380 --> 00:08:09,660
+a single process of multiple controllers
+
+178
+00:08:09,660 --> 00:08:11,610
+so it's the default controllers that you
+
+179
+00:08:11,610 --> 00:08:13,230
+get with kubernetes you can of course
+
+180
+00:08:13,230 --> 00:08:16,700
+create your own as well and then the
+
+181
+00:08:16,700 --> 00:08:19,080
+cloud controller manager is actually
+
+182
+00:08:19,080 --> 00:08:21,210
+cloud specific it's loud provider
+
+183
+00:08:21,210 --> 00:08:24,690
+specific control loops that are that are
+
+184
+00:08:24,690 --> 00:08:28,410
+in the cloud controller manager and then
+
+185
+00:08:28,410 --> 00:08:31,860
+over on the right-hand side you see the
+
+186
+00:08:31,860 --> 00:08:34,380
+node components and that includes the
+
+187
+00:08:34,380 --> 00:08:37,919
+kulit where the which is basically a
+
+188
+00:08:37,919 --> 00:08:40,590
+node agent that ensures that containers
+
+189
+00:08:40,590 --> 00:08:43,830
+run inside a pod so so if you know
+
+190
+00:08:43,830 --> 00:08:45,090
+making sure the pod has all the
+
+191
+00:08:45,090 --> 00:08:46,950
+containers it should have the pot of
+
+192
+00:08:46,950 --> 00:08:49,080
+course is not on this picture but it's
+
+193
+00:08:49,080 --> 00:08:51,780
+the smallest appliable unit that can be
+
+194
+00:08:51,780 --> 00:08:54,720
+created and managed in kubernetes and
+
+195
+00:08:54,720 --> 00:08:57,330
+then there's the coop proxy which
+
+196
+00:08:57,330 --> 00:08:59,730
+basically maintains the network rules on
+
+197
+00:08:59,730 --> 00:09:03,690
+the node implementing a part of the
+
+198
+00:09:03,690 --> 00:09:06,480
+kubernetes service concept as you know
+
+199
+00:09:06,480 --> 00:09:09,450
+you can also create you know CNI a
+
+200
+00:09:09,450 --> 00:09:12,149
+software-defined network you can add
+
+201
+00:09:12,149 --> 00:09:16,560
+that on as well and create the pod
+
+202
+00:09:16,560 --> 00:09:19,170
+networks through that and then of course
+
+203
+00:09:19,170 --> 00:09:22,680
+what you don't see here is the container
+
+204
+00:09:22,680 --> 00:09:25,980
+runtime underneath all of these things
+
+205
+00:09:25,980 --> 00:09:28,680
+the Kubla makuu proxy we require some
+
+206
+00:09:28,680 --> 00:09:31,140
+sort of a container runtime and the
+
+207
+00:09:31,140 --> 00:09:33,990
+defaults with kubernetes with many
+
+208
+00:09:33,990 --> 00:09:36,209
+kubernetes installations as docker but
+
+209
+00:09:36,209 --> 00:09:39,959
+it's not required so with that let's
+
+210
+00:09:39,959 --> 00:09:41,730
+let's take a look at the k3s
+
+211
+00:09:41,730 --> 00:09:45,959
+architecture which has many of the same
+
+212
+00:09:45,959 --> 00:09:49,380
+components but it's it's different in a
+
+213
+00:09:49,380 --> 00:09:49,980
+lot of ways
+
+214
+00:09:49,980 --> 00:09:52,500
+now we break out these component parts
+
+215
+00:09:52,500 --> 00:09:56,720
+into the k3s server and the k3s agent
+
+216
+00:09:56,720 --> 00:10:00,660
+these are similar to the master and the
+
+217
+00:10:00,660 --> 00:10:04,980
+node that the kubernetes refers to and
+
+218
+00:10:04,980 --> 00:10:07,050
+you can see that there are many of the
+
+219
+00:10:07,050 --> 00:10:09,000
+same component parts we have the API
+
+220
+00:10:09,000 --> 00:10:10,829
+server the scheduler the controller
+
+221
+00:10:10,829 --> 00:10:14,880
+manager and and then and that's in the
+
+222
+00:10:14,880 --> 00:10:17,490
+caitria server you'll notice that CD is
+
+223
+00:10:17,490 --> 00:10:19,829
+not on the server so that's something
+
+224
+00:10:19,829 --> 00:10:22,290
+we'll talk about and then on the agent
+
+225
+00:10:22,290 --> 00:10:24,690
+on those nodes you'll notice that we've
+
+226
+00:10:24,690 --> 00:10:27,930
+got the Kubla the coop proxy and a
+
+227
+00:10:27,930 --> 00:10:30,209
+container run time we're using container
+
+228
+00:10:30,209 --> 00:10:35,310
+D here so let's talk about the so so
+
+229
+00:10:35,310 --> 00:10:36,600
+each of these can run in their own
+
+230
+00:10:36,600 --> 00:10:38,370
+process and that's something a little
+
+231
+00:10:38,370 --> 00:10:42,450
+bit different than we have in the
+
+232
+00:10:42,450 --> 00:10:46,680
+straight-up kubernetes so in in whoops
+
+233
+00:10:46,680 --> 00:10:51,110
+let's go back one page so in kubernetes
+
+234
+00:10:51,110 --> 00:10:53,940
+we we run each of these things in
+
+235
+00:10:53,940 --> 00:10:56,940
+independent processes that Kubb api
+
+236
+00:10:56,940 --> 00:10:58,589
+server the code scheduler the couplet
+
+237
+00:10:58,589 --> 00:11:00,990
+and so k3s is doing something different
+
+238
+00:11:00,990 --> 00:11:03,329
+here because it's running this single
+
+239
+00:11:03,329 --> 00:11:05,190
+process that runs all those components
+
+240
+00:11:05,190 --> 00:11:08,520
+in fact you can run a single node k3s
+
+241
+00:11:08,520 --> 00:11:10,500
+that has both a server and agent
+
+242
+00:11:10,500 --> 00:11:11,110
+component
+
+243
+00:11:11,110 --> 00:11:13,900
+combined together and these two
+
+244
+00:11:13,900 --> 00:11:16,450
+processes actually will be run in a
+
+245
+00:11:16,450 --> 00:11:21,850
+single process so so what did we do to
+
+246
+00:11:21,850 --> 00:11:24,430
+get kubernetes into such a small
+
+247
+00:11:24,430 --> 00:11:27,880
+footprint one of the things is we
+
+248
+00:11:27,880 --> 00:11:34,180
+removed the the dependency on EDD and
+
+249
+00:11:34,180 --> 00:11:35,560
+you can see that here where we have
+
+250
+00:11:35,560 --> 00:11:39,280
+sequel Lite so the dependency on on at
+
+251
+00:11:39,280 --> 00:11:46,180
+CD allowed us to run a single node by
+
+252
+00:11:46,180 --> 00:11:48,460
+having a sequel database instead but we
+
+253
+00:11:48,460 --> 00:11:49,690
+did some other things and I'll talk
+
+254
+00:11:49,690 --> 00:11:53,440
+about those later why the sequel works
+
+255
+00:11:53,440 --> 00:11:57,090
+in this scenario and and how we did it
+
+256
+00:11:57,090 --> 00:12:01,350
+in addition so so out of the box are the
+
+257
+00:12:01,350 --> 00:12:04,390
+initial version of lightweight
+
+258
+00:12:04,390 --> 00:12:07,780
+kubernetes k3s had a low memory
+
+259
+00:12:07,780 --> 00:12:10,060
+footprint could run in less than 512 Meg
+
+260
+00:12:10,060 --> 00:12:13,000
+of RAM all the components were in a
+
+261
+00:12:13,000 --> 00:12:15,810
+single binary we deployed it with us
+
+262
+00:12:15,810 --> 00:12:19,360
+multiple architectures it was important
+
+263
+00:12:19,360 --> 00:12:23,380
+based on the landscape and the interest
+
+264
+00:12:23,380 --> 00:12:26,050
+for a lightweight kubernetes that we
+
+265
+00:12:26,050 --> 00:12:30,030
+were deploying to both arm d7 and rb8
+
+266
+00:12:30,030 --> 00:12:36,760
+and as well as x86 and and we deployed
+
+267
+00:12:36,760 --> 00:12:38,200
+out of the box with an ingress
+
+268
+00:12:38,200 --> 00:12:41,290
+controller we removed the dependency on
+
+269
+00:12:41,290 --> 00:12:45,280
+docker as you saw we have container D
+
+270
+00:12:45,280 --> 00:12:49,210
+instead of docker and then we removed
+
+271
+00:12:49,210 --> 00:12:52,060
+the dependency on Etsy D which is where
+
+272
+00:12:52,060 --> 00:12:54,580
+we we put in the sequel Lite instead of
+
+273
+00:12:54,580 --> 00:12:58,060
+at CD overall we removed about three
+
+274
+00:12:58,060 --> 00:13:00,400
+million lines probably about a million
+
+275
+00:13:00,400 --> 00:13:05,680
+lines of code and that included entry
+
+276
+00:13:05,680 --> 00:13:08,040
+storage providers entry cloud providers
+
+277
+00:13:08,040 --> 00:13:10,930
+alpha features legacy and non default
+
+278
+00:13:10,930 --> 00:13:14,020
+features and so part of how we got here
+
+279
+00:13:14,020 --> 00:13:15,460
+is we were working on another project
+
+280
+00:13:15,460 --> 00:13:19,360
+and and in that project the developer
+
+281
+00:13:19,360 --> 00:13:21,220
+was was kind of frustrated with the
+
+282
+00:13:21,220 --> 00:13:23,410
+complexity of kubernetes and really just
+
+283
+00:13:23,410 --> 00:13:24,670
+wanted
+
+284
+00:13:24,670 --> 00:13:27,610
+the kubernetes the the fundamentals
+
+285
+00:13:27,610 --> 00:13:29,079
+right he wasn't he didn't need cloud
+
+286
+00:13:29,079 --> 00:13:30,370
+providers he didn't need storage
+
+287
+00:13:30,370 --> 00:13:33,070
+providers out of the box and those
+
+288
+00:13:33,070 --> 00:13:36,160
+things are in the source tree but
+
+289
+00:13:36,160 --> 00:13:39,880
+initially we stripped those out so I'm
+
+290
+00:13:39,880 --> 00:13:42,279
+going to show you now what this looks
+
+291
+00:13:42,279 --> 00:13:45,970
+like when we run it just as a sync node
+
+292
+00:13:45,970 --> 00:13:49,269
+so so I'm just going to download the
+
+293
+00:13:49,269 --> 00:13:51,040
+binary we'll run it it's actually kind
+
+294
+00:13:51,040 --> 00:13:55,600
+of boring it's very simple so let's see
+
+295
+00:13:55,600 --> 00:13:59,380
+we're gonna we're going to do curl
+
+296
+00:13:59,380 --> 00:14:01,870
+command and we'll get go ahead and get
+
+297
+00:14:01,870 --> 00:14:08,529
+this from from the web and actually I
+
+298
+00:14:08,529 --> 00:14:14,320
+can show you let's see so this is the
+
+299
+00:14:14,320 --> 00:14:19,149
+case vs site on github and if you go
+
+300
+00:14:19,149 --> 00:14:23,190
+into the releases page you can see that
+
+301
+00:14:23,190 --> 00:14:27,550
+version 1.1 seven release is the latest
+
+302
+00:14:27,550 --> 00:14:31,570
+release right and if we scroll down here
+
+303
+00:14:31,570 --> 00:14:33,130
+you can see that we've released it for
+
+304
+00:14:33,130 --> 00:14:37,630
+Army chaff that's arm v7 arm eight v8 as
+
+305
+00:14:37,630 --> 00:14:43,930
+well as the amd64 and the the x86
+
+306
+00:14:43,930 --> 00:14:47,140
+packages essentially which is this is
+
+307
+00:14:47,140 --> 00:14:52,240
+the x86 package right here k3f so i'm
+
+308
+00:14:52,240 --> 00:14:54,279
+gonna run this let's take a look at what
+
+309
+00:14:54,279 --> 00:14:56,110
+is this so everything I'm running today
+
+310
+00:14:56,110 --> 00:14:58,930
+is arch 64 it's it's all a bunch of
+
+311
+00:14:58,930 --> 00:15:03,670
+raspberry PI's I have so this is a PI 4
+
+312
+00:15:03,670 --> 00:15:09,810
+B+ and you can see it
+
+313
+00:15:09,810 --> 00:15:13,519
+it's our 64 so it's running 64-bit Linux
+
+314
+00:15:13,519 --> 00:15:21,480
+and if we do cat at CE OS releases you
+
+315
+00:15:21,480 --> 00:15:24,060
+can see I'm running Debian Buster
+
+316
+00:15:24,060 --> 00:15:27,709
+essentially this is a raspbian version
+
+317
+00:15:27,709 --> 00:15:32,730
+buster okay so I am going to run this
+
+318
+00:15:32,730 --> 00:15:35,819
+command it's a curl command and I'm
+
+319
+00:15:35,819 --> 00:15:38,730
+going to just basically download that's
+
+320
+00:15:38,730 --> 00:15:41,639
+the link if we if we go here and we you
+
+321
+00:15:41,639 --> 00:15:46,170
+know get get the link address this is
+
+322
+00:15:46,170 --> 00:15:49,920
+what it'll be I've added so the the L
+
+323
+00:15:49,920 --> 00:15:52,170
+command says follow links so if there
+
+324
+00:15:52,170 --> 00:15:56,790
+were any 301 that redirect me to
+
+325
+00:15:56,790 --> 00:15:59,309
+someplace else to download it that'll
+
+326
+00:15:59,309 --> 00:15:59,999
+take me there
+
+327
+00:15:59,999 --> 00:16:04,199
+the - oh says download it as k3s so
+
+328
+00:16:04,199 --> 00:16:08,100
+before I do that me oh and I'm going to
+
+329
+00:16:08,100 --> 00:16:11,579
+turn on my key caster so you can see
+
+330
+00:16:11,579 --> 00:16:13,439
+what Keys I'm hating as we go through
+
+331
+00:16:13,439 --> 00:16:17,339
+here so so you can see this is just a
+
+332
+00:16:17,339 --> 00:16:19,559
+straight up it's actually a Raspberry Pi
+
+333
+00:16:19,559 --> 00:16:23,850
+desktop it's not even light I've got a
+
+334
+00:16:23,850 --> 00:16:27,329
+TFT display attached to this thing and
+
+335
+00:16:27,329 --> 00:16:31,800
+so I have nothing here and we'll put
+
+336
+00:16:31,800 --> 00:16:39,980
+this back in and we'll just download k3s
+
+337
+00:16:43,279 --> 00:16:45,280
+pull that down I'm
+
+338
+00:16:45,280 --> 00:16:48,070
+why key caster is not casting right now
+
+339
+00:16:48,070 --> 00:16:49,990
+I don't see the keys coming up okay so
+
+340
+00:16:49,990 --> 00:16:54,420
+we have it great so now I'm going to
+
+341
+00:16:54,420 --> 00:16:56,460
+[Music]
+
+342
+00:16:56,460 --> 00:17:04,480
+write so I'm going to look at it's it's
+
+343
+00:17:04,480 --> 00:17:06,730
+not an executable so I'm going to change
+
+344
+00:17:06,730 --> 00:17:15,220
+the mode to executable and then we're
+
+345
+00:17:15,220 --> 00:17:18,130
+going to run it using sudo we'll run the
+
+346
+00:17:18,130 --> 00:17:21,339
+server there are ton of options that you
+
+347
+00:17:21,339 --> 00:17:25,689
+can run will create a log a log file of
+
+348
+00:17:25,689 --> 00:17:27,790
+the output and will run in a background
+
+349
+00:17:27,790 --> 00:17:31,150
+mode so that's now running and now I can
+
+350
+00:17:31,150 --> 00:17:36,850
+run k3s coop CTL get node run any cube
+
+351
+00:17:36,850 --> 00:17:39,730
+CTL commands and it might take a minute
+
+352
+00:17:39,730 --> 00:17:42,580
+for that to come up there we go so I
+
+353
+00:17:42,580 --> 00:17:50,980
+have a single node and it's kids like
+
+354
+00:17:50,980 --> 00:17:53,350
+keys are not what's going on here
+
+355
+00:17:53,350 --> 00:17:58,420
+I seem to have lost access to that
+
+356
+00:17:58,420 --> 00:18:01,870
+device obvious on my commands are not
+
+357
+00:18:01,870 --> 00:18:05,770
+kidding entered so fortunately we can
+
+358
+00:18:05,770 --> 00:18:07,930
+see that we did a coop CTL get node and
+
+359
+00:18:07,930 --> 00:18:11,710
+it works so let's go back and take a
+
+360
+00:18:11,710 --> 00:18:14,350
+look at where we're going to go next so
+
+361
+00:18:14,350 --> 00:18:15,970
+that that was like I said it's very
+
+362
+00:18:15,970 --> 00:18:18,400
+simple you might be saying to yourself
+
+363
+00:18:18,400 --> 00:18:20,860
+well why would I do that instead of
+
+364
+00:18:20,860 --> 00:18:25,030
+running micro Cades or mini Kubb or
+
+365
+00:18:25,030 --> 00:18:27,430
+something like that and the reason is
+
+366
+00:18:27,430 --> 00:18:28,390
+that
+
+367
+00:18:28,390 --> 00:18:31,870
+well k3s is designed for production we
+
+368
+00:18:31,870 --> 00:18:34,380
+our intention was to build this as
+
+369
+00:18:34,380 --> 00:18:39,960
+production kubernetes micro Cades and
+
+370
+00:18:39,960 --> 00:18:43,000
+mini Kubb are really designed for the
+
+371
+00:18:43,000 --> 00:18:44,620
+developer you can run a single node
+
+372
+00:18:44,620 --> 00:18:46,930
+kubernetes cluster which is basically
+
+373
+00:18:46,930 --> 00:18:48,340
+what we just did but we want to go
+
+374
+00:18:48,340 --> 00:18:51,430
+beyond that and I could I could connect
+
+375
+00:18:51,430 --> 00:18:55,150
+nodes to that cluster that I just stood
+
+376
+00:18:55,150 --> 00:18:56,650
+up on that single node I could attach
+
+377
+00:18:56,650 --> 00:18:59,260
+worker nodes but we might even want
+
+378
+00:18:59,260 --> 00:19:03,190
+a highly available you know at CD type
+
+379
+00:19:03,190 --> 00:19:05,830
+data store it won't be at CD in the kts
+
+380
+00:19:05,830 --> 00:19:07,180
+case although it could be we allow that
+
+381
+00:19:07,180 --> 00:19:12,400
+too so we're very flexible so what we
+
+382
+00:19:12,400 --> 00:19:15,580
+did when we did GA our version 1 release
+
+383
+00:19:15,580 --> 00:19:20,830
+was around coop con last year and it had
+
+384
+00:19:20,830 --> 00:19:22,360
+all the things that we just talked about
+
+385
+00:19:22,360 --> 00:19:24,670
+the low memory footprint the multi
+
+386
+00:19:24,670 --> 00:19:29,220
+architecture distribution but we added
+
+387
+00:19:29,220 --> 00:19:31,840
+out-of-the-box helm controller so you
+
+388
+00:19:31,840 --> 00:19:35,500
+can drop in into a directory with the
+
+389
+00:19:35,500 --> 00:19:37,840
+deployment you can drop in a help chart
+
+390
+00:19:37,840 --> 00:19:39,490
+and it'll automatically install that
+
+391
+00:19:39,490 --> 00:19:42,190
+chart we deployed a service load
+
+392
+00:19:42,190 --> 00:19:44,920
+balancer as I said we took out some of
+
+393
+00:19:44,920 --> 00:19:48,520
+the cloud entry cloud provider stuff but
+
+394
+00:19:48,520 --> 00:19:50,530
+the really important thing here was you
+
+395
+00:19:50,530 --> 00:19:52,330
+know load balancing that that was what
+
+396
+00:19:52,330 --> 00:19:57,100
+was that was the key piece and then the
+
+397
+00:19:57,100 --> 00:19:59,560
+other thing was the adding a local
+
+398
+00:19:59,560 --> 00:20:02,110
+storage provider so you can actually set
+
+399
+00:20:02,110 --> 00:20:05,080
+up local storage it actually by default
+
+400
+00:20:05,080 --> 00:20:06,640
+sets up a local storage provider in
+
+401
+00:20:06,640 --> 00:20:08,440
+every node you can disable that all
+
+402
+00:20:08,440 --> 00:20:10,450
+these things can be disabled by the you
+
+403
+00:20:10,450 --> 00:20:12,100
+know if you don't want them by default
+
+404
+00:20:12,100 --> 00:20:15,040
+but the local storage provider gives you
+
+405
+00:20:15,040 --> 00:20:17,980
+local storage out-of-the-box so you have
+
+406
+00:20:17,980 --> 00:20:21,880
+PVCs they can pick up the default volume
+
+407
+00:20:21,880 --> 00:20:24,760
+from local storage obviously you need a
+
+408
+00:20:24,760 --> 00:20:28,450
+pretty good sized system to do that we
+
+409
+00:20:28,450 --> 00:20:30,700
+also expanded the datastore option so we
+
+410
+00:20:30,700 --> 00:20:31,600
+had embedded
+
+411
+00:20:31,600 --> 00:20:35,790
+sequel Lite and that's how we were able
+
+412
+00:20:35,790 --> 00:20:39,310
+to get rid of Etsy and get rid of the
+
+413
+00:20:39,310 --> 00:20:43,330
+need for 3 nodes but we of course wanted
+
+414
+00:20:43,330 --> 00:20:46,420
+to have something highly available what
+
+415
+00:20:46,420 --> 00:20:49,600
+we really did was it was a process so so
+
+416
+00:20:49,600 --> 00:20:52,750
+we we weren't just getting rid of SED we
+
+417
+00:20:52,750 --> 00:20:56,410
+were remapping the interface for ED CD
+
+418
+00:20:56,410 --> 00:21:00,130
+and remapping it to sequel back-end so
+
+419
+00:21:00,130 --> 00:21:04,270
+we built something called kind ki and he
+
+420
+00:21:04,270 --> 00:21:08,880
+kind is not at CD and we we map that
+
+421
+00:21:08,880 --> 00:21:13,180
+interface the API to other data
+
+422
+00:21:13,180 --> 00:21:16,500
+so in theory kind could be mapped to any
+
+423
+00:21:16,500 --> 00:21:21,010
+data store and now you have that Etsy D
+
+424
+00:21:21,010 --> 00:21:23,950
+interface for kubernetes which
+
+425
+00:21:23,950 --> 00:21:27,340
+kubernetes requires but instead of
+
+426
+00:21:27,340 --> 00:21:29,410
+talking to you in that CD data store is
+
+427
+00:21:29,410 --> 00:21:31,420
+talking to a sequel datastore and in
+
+428
+00:21:31,420 --> 00:21:33,310
+doing that we were then able to slip in
+
+429
+00:21:33,310 --> 00:21:36,970
+any external database as the backend we
+
+430
+00:21:36,970 --> 00:21:39,040
+started with my sequel and Postgres
+
+431
+00:21:39,040 --> 00:21:42,790
+sequel so we'll take a look today with
+
+432
+00:21:42,790 --> 00:21:46,450
+my sequel as an external datastore for H
+
+433
+00:21:46,450 --> 00:21:49,900
+a and then we added some documentation
+
+434
+00:21:49,900 --> 00:21:52,960
+around how to do air-gap installation so
+
+435
+00:21:52,960 --> 00:21:56,710
+as well as giving you the capability
+
+436
+00:21:56,710 --> 00:22:01,420
+through basically text files that
+
+437
+00:22:01,420 --> 00:22:04,810
+contain the content of what needs to be
+
+438
+00:22:04,810 --> 00:22:09,010
+pulled down into your air-gap pre polled
+
+439
+00:22:09,010 --> 00:22:10,840
+so that when you actually do the
+
+440
+00:22:10,840 --> 00:22:13,540
+installation the images are available
+
+441
+00:22:13,540 --> 00:22:17,020
+and there so let's take a look let's
+
+442
+00:22:17,020 --> 00:22:19,720
+move on to what the architecture looks
+
+443
+00:22:19,720 --> 00:22:21,610
+like with the high availability mode
+
+444
+00:22:21,610 --> 00:22:23,890
+you've seen this slide this is this is
+
+445
+00:22:23,890 --> 00:22:25,300
+the slide I showed you before with
+
+446
+00:22:25,300 --> 00:22:28,240
+sequel Lite but then when we went into
+
+447
+00:22:28,240 --> 00:22:31,750
+an H a version we actually said okay
+
+448
+00:22:31,750 --> 00:22:34,030
+well let's let's pull that external
+
+449
+00:22:34,030 --> 00:22:36,370
+sequel database out everything else
+
+450
+00:22:36,370 --> 00:22:39,220
+stays the same one thing that I forgot
+
+451
+00:22:39,220 --> 00:22:42,840
+to mention here is this tunnel proxy so
+
+452
+00:22:42,840 --> 00:22:45,730
+kubernetes that the KU proxy talks to
+
+453
+00:22:45,730 --> 00:22:48,250
+the API server and you could have your
+
+454
+00:22:48,250 --> 00:22:49,870
+gonna have an external client to talk to
+
+455
+00:22:49,870 --> 00:22:54,100
+the API server as well but the when the
+
+456
+00:22:54,100 --> 00:22:56,590
+coup proxy talks to it they actually use
+
+457
+00:22:56,590 --> 00:22:59,950
+a number of ports for communication in a
+
+458
+00:22:59,950 --> 00:23:03,520
+pure kubernetes cluster and so what we
+
+459
+00:23:03,520 --> 00:23:05,500
+did is we built this tunnel proxy so
+
+460
+00:23:05,500 --> 00:23:09,700
+that there's this initial one
+
+461
+00:23:09,700 --> 00:23:12,550
+directional communication from the KU
+
+462
+00:23:12,550 --> 00:23:17,020
+proxy to the API server once the so the
+
+463
+00:23:17,020 --> 00:23:19,210
+KU proxy reaches out through this tunnel
+
+464
+00:23:19,210 --> 00:23:23,610
+proxy proxy to API server once the
+
+465
+00:23:23,610 --> 00:23:25,990
+communication is established they can
+
+466
+00:23:25,990 --> 00:23:26,590
+talk
+
+467
+00:23:26,590 --> 00:23:29,700
+and have bi-directional communication
+
+468
+00:23:29,700 --> 00:23:32,470
+but it requires then only one part be
+
+469
+00:23:32,470 --> 00:23:37,299
+open so it reduces the footprint and and
+
+470
+00:23:37,299 --> 00:23:40,389
+basically reduces the security
+
+471
+00:23:40,389 --> 00:23:43,529
+it increases security by reducing
+
+472
+00:23:43,529 --> 00:23:47,549
+accessible ports on a k3s installation
+
+473
+00:23:47,549 --> 00:23:50,409
+okay so here we have the external
+
+474
+00:23:50,409 --> 00:23:53,379
+database but in a che mode but what we'd
+
+475
+00:23:53,379 --> 00:23:54,970
+really like to do is keep the simplicity
+
+476
+00:23:54,970 --> 00:23:57,159
+right so this requires that I manage an
+
+477
+00:23:57,159 --> 00:23:59,590
+external database and we'll talk about
+
+478
+00:23:59,590 --> 00:24:01,740
+that a little more in the use cases but
+
+479
+00:24:01,740 --> 00:24:04,659
+what we also want it to be able to do
+
+480
+00:24:04,659 --> 00:24:07,389
+was do an AJ mode with an embedded
+
+481
+00:24:07,389 --> 00:24:10,929
+database so we started looking at equal
+
+482
+00:24:10,929 --> 00:24:14,519
+light which is distributed sequel light
+
+483
+00:24:14,519 --> 00:24:18,639
+and we're pulling that back in right now
+
+484
+00:24:18,639 --> 00:24:20,830
+you can actually try this out it's
+
+485
+00:24:20,830 --> 00:24:24,539
+experimental on our on the k3s site
+
+486
+00:24:24,539 --> 00:24:28,570
+there is instruction and the docs on how
+
+487
+00:24:28,570 --> 00:24:32,679
+to use it we're gonna eventually get to
+
+488
+00:24:32,679 --> 00:24:35,950
+a point where we we release with equal
+
+489
+00:24:35,950 --> 00:24:38,799
+light as part of it so what's the
+
+490
+00:24:38,799 --> 00:24:42,940
+difference between equal light and an
+
+491
+00:24:42,940 --> 00:24:45,789
+external data store the difference is
+
+492
+00:24:45,789 --> 00:24:50,999
+that with an external data store you
+
+493
+00:24:50,999 --> 00:24:54,039
+only need two nodes because you're
+
+494
+00:24:54,039 --> 00:24:57,999
+talking to a single database and those
+
+495
+00:24:57,999 --> 00:25:04,990
+two nodes would constitute H a state the
+
+496
+00:25:04,990 --> 00:25:07,929
+the thing with equal light is that we're
+
+497
+00:25:07,929 --> 00:25:11,070
+actually using we're still using the
+
+498
+00:25:11,070 --> 00:25:15,669
+capabilities that Ed CD had that allowed
+
+499
+00:25:15,669 --> 00:25:19,029
+it to be highly available and in doing
+
+500
+00:25:19,029 --> 00:25:20,980
+so it requires that you actually have
+
+501
+00:25:20,980 --> 00:25:22,749
+three nodes so for the embedded equal
+
+502
+00:25:22,749 --> 00:25:24,159
+light you'll actually need three nodes
+
+503
+00:25:24,159 --> 00:25:28,269
+to have an H a installation so all these
+
+504
+00:25:28,269 --> 00:25:31,480
+options now easy to install but
+
+505
+00:25:31,480 --> 00:25:33,940
+depending on your use case that'll
+
+506
+00:25:33,940 --> 00:25:37,149
+dictate which one you choose and how it
+
+507
+00:25:37,149 --> 00:25:40,790
+drives what you're going to do with KPS
+
+508
+00:25:40,790 --> 00:25:44,050
+so some of the requirements for running
+
+509
+00:25:44,050 --> 00:25:48,860
+k3s in a che you need unique host names
+
+510
+00:25:48,860 --> 00:25:51,080
+if you don't have unity coast names
+
+511
+00:25:51,080 --> 00:25:54,770
+let's say you have a bunch of raspberry
+
+512
+00:25:54,770 --> 00:25:57,260
+PI's you have an SD card image and you
+
+513
+00:25:57,260 --> 00:25:59,060
+don't change the host name on those you
+
+514
+00:25:59,060 --> 00:26:02,120
+could still run this of course you're
+
+515
+00:26:02,120 --> 00:26:03,380
+going to be addressing those with IP
+
+516
+00:26:03,380 --> 00:26:06,530
+address to shell into them for SSH but
+
+517
+00:26:06,530 --> 00:26:09,050
+if you add the dash dash node name flag
+
+518
+00:26:09,050 --> 00:26:12,740
+or the environment variable k3s node
+
+519
+00:26:12,740 --> 00:26:15,980
+name you can actually get k3s working
+
+520
+00:26:15,980 --> 00:26:17,390
+even though they don't have unique host
+
+521
+00:26:17,390 --> 00:26:20,770
+names in your environment in addition
+
+522
+00:26:20,770 --> 00:26:26,630
+that we're testing on Ubuntu 1604 1804
+
+523
+00:26:26,630 --> 00:26:32,000
+and raspbian buster as you can see I'm
+
+524
+00:26:32,000 --> 00:26:36,290
+running on arm 64 it's not in our test
+
+525
+00:26:36,290 --> 00:26:39,140
+suite if you're looking for support and
+
+526
+00:26:39,140 --> 00:26:41,390
+it's something you really need talk to
+
+527
+00:26:41,390 --> 00:26:44,480
+us we can we can provide we can talk
+
+528
+00:26:44,480 --> 00:26:46,730
+about providing that I you know I'm sure
+
+529
+00:26:46,730 --> 00:26:49,040
+we can we can figure something out to
+
+530
+00:26:49,040 --> 00:26:52,460
+get arm 64 into the matrix the test
+
+531
+00:26:52,460 --> 00:26:58,660
+matrix so k3 sha requirements continued
+
+532
+00:26:58,660 --> 00:27:01,760
+hardware again it's still a minimum of
+
+533
+00:27:01,760 --> 00:27:07,360
+512 mega RAM 1 CPU and then we recommend
+
+534
+00:27:07,360 --> 00:27:13,720
+SSDs and just like SCD the high I ops is
+
+535
+00:27:13,720 --> 00:27:15,860
+gonna have you give you better
+
+536
+00:27:15,860 --> 00:27:18,430
+performance of your kubernetes
+
+537
+00:27:18,430 --> 00:27:21,890
+installation kubernetes cluster in terms
+
+538
+00:27:21,890 --> 00:27:25,130
+of networking we need six four four
+
+539
+00:27:25,130 --> 00:27:28,130
+three open if you're using flannel out
+
+540
+00:27:28,130 --> 00:27:30,290
+of the box we have flannel if you're
+
+541
+00:27:30,290 --> 00:27:33,920
+using it you need 8472 open if you're
+
+542
+00:27:33,920 --> 00:27:37,280
+using the metrics api you need 10 to 50
+
+543
+00:27:37,280 --> 00:27:42,200
+open and you know that's pretty much the
+
+544
+00:27:42,200 --> 00:27:43,940
+the basics of the requirements you can
+
+545
+00:27:43,940 --> 00:27:45,860
+of course go and and look at the full
+
+546
+00:27:45,860 --> 00:27:50,410
+requirements on the docs page as well so
+
+547
+00:27:50,410 --> 00:27:53,630
+here's k3 sha with a two
+
+548
+00:27:53,630 --> 00:27:57,190
+in an external database pretty simple
+
+549
+00:27:57,190 --> 00:28:00,350
+that's what it looks like in this in
+
+550
+00:28:00,350 --> 00:28:03,340
+this scenario what I'm showing here is
+
+551
+00:28:03,340 --> 00:28:06,710
+two node kubernetes installation that's
+
+552
+00:28:06,710 --> 00:28:09,350
+highly available where we're using an
+
+553
+00:28:09,350 --> 00:28:11,419
+external database all nodes have all
+
+554
+00:28:11,419 --> 00:28:13,549
+components they have the data playing
+
+555
+00:28:13,549 --> 00:28:20,450
+the control plane and the worker role we
+
+556
+00:28:20,450 --> 00:28:22,760
+can also do the separate masters right
+
+557
+00:28:22,760 --> 00:28:24,440
+and so this this is a little bit more
+
+558
+00:28:24,440 --> 00:28:26,330
+like that yellow diagram where I've
+
+559
+00:28:26,330 --> 00:28:32,330
+isolated the k3s agents from the k3s
+
+560
+00:28:32,330 --> 00:28:34,700
+masters the servers and workers in this
+
+561
+00:28:34,700 --> 00:28:38,960
+case you'll notice that not only do I
+
+562
+00:28:38,960 --> 00:28:41,299
+have an external database for the
+
+563
+00:28:41,299 --> 00:28:43,309
+server's to store the kubernetes cluster
+
+564
+00:28:43,309 --> 00:28:46,520
+data but I've got a fixed registration
+
+565
+00:28:46,520 --> 00:28:51,200
+address server in today's demo I won't
+
+566
+00:28:51,200 --> 00:28:55,580
+I won't set one up this will add a layer
+
+567
+00:28:55,580 --> 00:28:58,190
+of complexity that it may or may not be
+
+568
+00:28:58,190 --> 00:29:02,870
+necessary so I can I can point my
+
+569
+00:29:02,870 --> 00:29:05,330
+workers so what I need is for my workers
+
+570
+00:29:05,330 --> 00:29:07,970
+to initially register with the cluster
+
+571
+00:29:07,970 --> 00:29:10,669
+in some way I could point to the IP
+
+572
+00:29:10,669 --> 00:29:13,159
+address of one of the servers or or to
+
+573
+00:29:13,159 --> 00:29:16,760
+the host address they have the host name
+
+574
+00:29:16,760 --> 00:29:21,200
+of one of the servers the fqdn
+
+575
+00:29:21,200 --> 00:29:23,750
+or I could have this front-end server
+
+576
+00:29:23,750 --> 00:29:26,059
+that that has a fixed registration
+
+577
+00:29:26,059 --> 00:29:29,770
+address maybe maybe it's spans all three
+
+578
+00:29:29,770 --> 00:29:33,080
+some sort of reverse proxy or load
+
+579
+00:29:33,080 --> 00:29:35,690
+balancer but then I need to make sure
+
+580
+00:29:35,690 --> 00:29:38,740
+that my fixed registration server is
+
+581
+00:29:38,740 --> 00:29:40,940
+available at the time when I'm trying to
+
+582
+00:29:40,940 --> 00:29:43,400
+register workers so it might also need
+
+583
+00:29:43,400 --> 00:29:47,030
+to be written in some H a mode so that's
+
+584
+00:29:47,030 --> 00:29:51,559
+why I say it adds complexity but you can
+
+585
+00:29:51,559 --> 00:29:54,880
+use you can do that if you want to
+
+586
+00:29:54,880 --> 00:29:57,799
+alright so let's get down to business
+
+587
+00:29:57,799 --> 00:30:03,580
+here let's do a demo of highly available
+
+588
+00:30:03,580 --> 00:30:05,299
+kts
+
+589
+00:30:05,299 --> 00:30:08,619
+and what that looks like
+
+590
+00:30:13,909 --> 00:30:18,909
+alright so here I have my pain split up
+
+591
+00:30:18,909 --> 00:30:23,470
+let's take a look at what I've got here
+
+592
+00:30:29,200 --> 00:30:31,999
+so you can see I've got another arch 64
+
+593
+00:30:31,999 --> 00:30:34,759
+system and in this case I've got a
+
+594
+00:30:34,759 --> 00:30:40,879
+fedora 30 installation the next
+
+595
+00:30:40,879 --> 00:30:45,109
+installation both so this is master one
+
+596
+00:30:45,109 --> 00:30:46,909
+you can see right below it is master to
+
+597
+00:30:46,909 --> 00:30:49,070
+both my master nodes are running Fedora
+
+598
+00:30:49,070 --> 00:30:54,590
+there's no there's no significant reason
+
+599
+00:30:54,590 --> 00:30:58,190
+why I'm doing this I had originally when
+
+600
+00:30:58,190 --> 00:31:01,659
+I was trying to work on getting arch 64
+
+601
+00:31:01,659 --> 00:31:05,539
+working I initially started with fedora
+
+602
+00:31:05,539 --> 00:31:09,889
+image and so I had a couple of Fedora
+
+603
+00:31:09,889 --> 00:31:12,049
+images already available and and just
+
+604
+00:31:12,049 --> 00:31:14,450
+kept using them but there's there's no
+
+605
+00:31:14,450 --> 00:31:17,450
+other reason than that it's it's not you
+
+606
+00:31:17,450 --> 00:31:21,590
+know it could also run on the Debian
+
+607
+00:31:21,590 --> 00:31:25,100
+images as well as I showed in the single
+
+608
+00:31:25,100 --> 00:31:30,710
+node now on the other one so so those
+
+609
+00:31:30,710 --> 00:31:38,749
+two nodes are raspberry pi 3 B plus and
+
+610
+00:31:38,749 --> 00:31:41,419
+actually let's go back up and we'll do
+
+611
+00:31:41,419 --> 00:31:44,419
+an H top on these to install a chap I
+
+612
+00:31:44,419 --> 00:31:49,340
+did so you can see that in this case
+
+613
+00:31:49,340 --> 00:31:54,580
+I've got oh it's not showing how much
+
+614
+00:31:54,580 --> 00:32:00,470
+memory I have available interesting so
+
+615
+00:32:00,470 --> 00:32:02,809
+these have one gig of memory and if I
+
+616
+00:32:02,809 --> 00:32:04,879
+recall that this used to shows the
+
+617
+00:32:04,879 --> 00:32:07,340
+amount of memory I'm not sure what
+
+618
+00:32:07,340 --> 00:32:11,480
+changed here but anyways so so you can
+
+619
+00:32:11,480 --> 00:32:14,059
+see that I have four cores I do have a
+
+620
+00:32:14,059 --> 00:32:19,000
+gig of memory swap is turned off
+
+621
+00:32:19,000 --> 00:32:23,650
+and basically in the memory I don't know
+
+622
+00:32:23,650 --> 00:32:27,190
+if you can distinguish colors as this
+
+623
+00:32:27,190 --> 00:32:28,870
+comes across to your screen but there's
+
+624
+00:32:28,870 --> 00:32:32,500
+there's a about eight green bar so to be
+
+625
+00:32:32,500 --> 00:32:35,230
+at the beginning that's used memory and
+
+626
+00:32:35,230 --> 00:32:38,200
+then the the blue is buffers and the
+
+627
+00:32:38,200 --> 00:32:40,390
+yellow is cash so you can see even with
+
+628
+00:32:40,390 --> 00:32:42,700
+cache memory not a lot is going on on
+
+629
+00:32:42,700 --> 00:32:47,050
+this system right now let's get out of
+
+630
+00:32:47,050 --> 00:32:47,500
+there
+
+631
+00:32:47,500 --> 00:32:49,330
+and we'll go down and we'll take a look
+
+632
+00:32:49,330 --> 00:32:53,140
+at the beef plus so I've got a 4b plus
+
+633
+00:32:53,140 --> 00:33:04,960
+here again running our 64 and running
+
+634
+00:33:04,960 --> 00:33:10,360
+raspberry but raspy and Buster and you
+
+635
+00:33:10,360 --> 00:33:17,080
+can see again not much going on a lot
+
+636
+00:33:17,080 --> 00:33:20,920
+less usage this is a four gig device so
+
+637
+00:33:20,920 --> 00:33:25,780
+so much bigger device and then finally
+
+638
+00:33:25,780 --> 00:33:28,510
+let's go down here and we'll just run a
+
+639
+00:33:28,510 --> 00:33:33,940
+CH top this is also our 64 also raspbian
+
+640
+00:33:33,940 --> 00:33:38,140
+buster and in this case this is actually
+
+641
+00:33:38,140 --> 00:33:41,700
+512 mega RAM this is a Raspberry Pi 3d
+
+642
+00:33:41,700 --> 00:33:45,940
+A+ so it's very small device and and a
+
+643
+00:33:45,940 --> 00:33:48,220
+lot smaller form factor than the other
+
+644
+00:33:48,220 --> 00:33:50,440
+ones but I'm gonna I'm gonna pull these
+
+645
+00:33:50,440 --> 00:33:51,820
+all together and make a kubernetes
+
+646
+00:33:51,820 --> 00:33:55,810
+cluster out of these so let's do that so
+
+647
+00:33:55,810 --> 00:34:00,940
+I'm going to start with installing just
+
+648
+00:34:00,940 --> 00:34:05,560
+the the server component on each of
+
+649
+00:34:05,560 --> 00:34:09,330
+these master nodes
+
+650
+00:34:18,640 --> 00:34:22,100
+so here's a long command that I copied
+
+651
+00:34:22,100 --> 00:34:26,510
+and pasted out in my notes I'm pulling
+
+652
+00:34:26,510 --> 00:34:31,790
+down the get k3s script and if you just
+
+653
+00:34:31,790 --> 00:34:34,520
+pull this and and you can read it but
+
+654
+00:34:34,520 --> 00:34:37,910
+I'm gonna pipe it through shell and I'm
+
+655
+00:34:37,910 --> 00:34:40,580
+going to add some environment variables
+
+656
+00:34:40,580 --> 00:34:45,400
+along the way so this is curl be silent
+
+657
+00:34:45,400 --> 00:34:52,610
+and fail on errors and follow links and
+
+658
+00:34:52,610 --> 00:34:55,400
+then I pipe it into shell but then I
+
+659
+00:34:55,400 --> 00:34:57,470
+create before I do that I create this
+
+660
+00:34:57,470 --> 00:34:59,780
+environment variable called install k3s
+
+661
+00:34:59,780 --> 00:35:03,650
+exact I set one called write code config
+
+662
+00:35:03,650 --> 00:35:06,920
+mode you know if you recall when I
+
+663
+00:35:06,920 --> 00:35:09,950
+installed when I did the yes we lost
+
+664
+00:35:09,950 --> 00:35:11,480
+connection here I don't know if we'll
+
+665
+00:35:11,480 --> 00:35:14,110
+get it back but when I initially did
+
+666
+00:35:14,110 --> 00:35:17,720
+cube CTL on this single node I did it
+
+667
+00:35:17,720 --> 00:35:23,210
+with sudo and I did that because I can't
+
+668
+00:35:23,210 --> 00:35:26,330
+access the yellow file the way I ran it
+
+669
+00:35:26,330 --> 00:35:29,060
+but there are command-line arguments and
+
+670
+00:35:29,060 --> 00:35:31,700
+this is a command-line argument for k3s
+
+671
+00:35:31,700 --> 00:35:34,640
+that allows me to set the coop config
+
+672
+00:35:34,640 --> 00:35:38,690
+mode when I create it actually 644 is is
+
+673
+00:35:38,690 --> 00:35:42,620
+actually not a good mode that's the
+
+674
+00:35:42,620 --> 00:35:44,060
+wrong mode to set it to because that's
+
+675
+00:35:44,060 --> 00:35:47,180
+gonna make it world's readable and
+
+676
+00:35:47,180 --> 00:35:50,870
+that's actually not what I want right so
+
+677
+00:35:50,870 --> 00:35:56,240
+that that's the wrong mode the because
+
+678
+00:35:56,240 --> 00:35:58,610
+this is a security file right but but
+
+679
+00:35:58,610 --> 00:36:00,860
+anyways the point is you can write the
+
+680
+00:36:00,860 --> 00:36:02,480
+coop config mode and that allow me not
+
+681
+00:36:02,480 --> 00:36:04,460
+to have to run sudo every time as this
+
+682
+00:36:04,460 --> 00:36:08,140
+user when I when I run this then I
+
+683
+00:36:08,140 --> 00:36:12,380
+actually I'm gonna go ahead and start
+
+684
+00:36:12,380 --> 00:36:15,920
+this and I'm on the next one and then
+
+685
+00:36:15,920 --> 00:36:18,590
+we'll take a look at it while it's
+
+686
+00:36:18,590 --> 00:36:21,050
+starting to install well we'll continue
+
+687
+00:36:21,050 --> 00:36:22,670
+to discuss what we're running so I'm
+
+688
+00:36:22,670 --> 00:36:25,690
+running in our master two
+
+689
+00:36:29,990 --> 00:36:34,109
+and I'm master one will continue talking
+
+690
+00:36:34,109 --> 00:36:35,809
+about what what else I have here I
+
+691
+00:36:35,809 --> 00:36:38,670
+specify a data store endpoint so I've
+
+692
+00:36:38,670 --> 00:36:42,210
+created a external database I have a my
+
+693
+00:36:42,210 --> 00:36:45,450
+sequel running in a container on this
+
+694
+00:36:45,450 --> 00:36:48,900
+Mac laptop actually that I'm running so
+
+695
+00:36:48,900 --> 00:36:50,700
+they're all in the same network space
+
+696
+00:36:50,700 --> 00:36:55,349
+and so my data store endpoint here is my
+
+697
+00:36:55,349 --> 00:36:58,109
+sequel k3s Adnan and and then I'm giving
+
+698
+00:36:58,109 --> 00:37:00,960
+the parameters for password and end user
+
+699
+00:37:00,960 --> 00:37:08,130
+in that and the database name is k3s DB
+
+700
+00:37:08,130 --> 00:37:10,140
+so that's what I'm creating I'm creating
+
+701
+00:37:10,140 --> 00:37:13,650
+a secret - T is is the agent secret and
+
+702
+00:37:13,650 --> 00:37:15,119
+that's the secret that I'm going to use
+
+703
+00:37:15,119 --> 00:37:18,720
+with my agents - to connect to this so
+
+704
+00:37:18,720 --> 00:37:20,250
+we're gonna have this shared secret
+
+705
+00:37:20,250 --> 00:37:23,130
+you'll obviously want that to be secret
+
+706
+00:37:23,130 --> 00:37:26,759
+and not shared with 30 other people in a
+
+707
+00:37:26,759 --> 00:37:31,950
+in a demo and then the TLS on I'm
+
+708
+00:37:31,950 --> 00:37:34,410
+actually saying in my cert make sure
+
+709
+00:37:34,410 --> 00:37:37,799
+that oh and it's actually a little bit
+
+710
+00:37:37,799 --> 00:37:41,279
+this this TLS on is not going to help me
+
+711
+00:37:41,279 --> 00:37:44,670
+too much because that was when I had a
+
+712
+00:37:44,670 --> 00:37:48,559
+registration server so this is an old
+
+713
+00:37:48,740 --> 00:37:54,390
+master o1 it's going to be wrong in the
+
+714
+00:37:54,390 --> 00:37:57,480
+other one but basically that's going to
+
+715
+00:37:57,480 --> 00:38:01,950
+add to the cert the and I'm since this
+
+716
+00:38:01,950 --> 00:38:03,750
+gets stored in the database we may have
+
+717
+00:38:03,750 --> 00:38:09,359
+to go with what we had before not sure
+
+718
+00:38:09,359 --> 00:38:10,319
+how that's going to work that's
+
+719
+00:38:10,319 --> 00:38:12,839
+something I should test out the node
+
+720
+00:38:12,839 --> 00:38:16,200
+taint so I'm saying taint this node to
+
+721
+00:38:16,200 --> 00:38:20,519
+be just part of the control plane so no
+
+722
+00:38:20,519 --> 00:38:20,789
+acts
+
+723
+00:38:20,789 --> 00:38:22,950
+nothing can execute here so it's not
+
+724
+00:38:22,950 --> 00:38:25,700
+schedulable in the kubernetes parlance
+
+725
+00:38:25,700 --> 00:38:30,960
+meaning i don't want any worker i don't
+
+726
+00:38:30,960 --> 00:38:33,720
+want any any pods deployed here right
+
+727
+00:38:33,720 --> 00:38:36,059
+and then finally my last environment
+
+728
+00:38:36,059 --> 00:38:37,859
+variable is the version of k3s that i'm
+
+729
+00:38:37,859 --> 00:38:39,630
+gonna install so we're going to go ahead
+
+730
+00:38:39,630 --> 00:38:42,859
+and run that here as well
+
+731
+00:38:45,530 --> 00:38:49,710
+and we'll come down and do a coop CTL
+
+732
+00:38:49,710 --> 00:38:52,740
+notice no sudo and no k3s the other
+
+733
+00:38:52,740 --> 00:38:55,170
+thing I did in that that original one is
+
+734
+00:38:55,170 --> 00:38:58,049
+you'll notice I ran coop CTL as an
+
+735
+00:38:58,049 --> 00:39:01,579
+argument to k3s the difference here is
+
+736
+00:39:01,579 --> 00:39:05,490
+on this single node I downloaded k3s and
+
+737
+00:39:05,490 --> 00:39:08,280
+I ran k3s directly and I could create a
+
+738
+00:39:08,280 --> 00:39:16,500
+sim link a link a local link to k3s like
+
+739
+00:39:16,500 --> 00:39:20,460
+an alias to k3 s cube CTL for the coop
+
+740
+00:39:20,460 --> 00:39:27,450
+CTL command or or a linked file but
+
+741
+00:39:27,450 --> 00:39:30,720
+basically it's embedded in KPS right
+
+742
+00:39:30,720 --> 00:39:33,200
+that's that's the whole single process
+
+743
+00:39:33,200 --> 00:39:35,700
+whereas here I'm running coop CTL
+
+744
+00:39:35,700 --> 00:39:37,980
+independently and I'm going to do a coop
+
+745
+00:39:37,980 --> 00:39:40,799
+CTL get node and that's going to show me
+
+746
+00:39:40,799 --> 00:39:42,869
+the nodes attached it should just be one
+
+747
+00:39:42,869 --> 00:39:47,670
+now do a watch on this and we can watch
+
+748
+00:39:47,670 --> 00:39:49,220
+these as they come up
+
+749
+00:39:49,220 --> 00:39:51,869
+okay so we have one node and it's more
+
+750
+00:39:51,869 --> 00:39:56,040
+nodes join we'll see additional nodes so
+
+751
+00:39:56,040 --> 00:39:57,299
+the next thing I want to do is actually
+
+752
+00:39:57,299 --> 00:40:01,490
+join in my worker nodes
+
+753
+00:40:13,999 --> 00:40:16,769
+so I'm going to run it on the four
+
+754
+00:40:16,769 --> 00:40:21,239
+b-plus first and then I'll explain it
+
+755
+00:40:21,239 --> 00:40:23,369
+down here again you see pulling this
+
+756
+00:40:23,369 --> 00:40:26,309
+it's the exact same script but this time
+
+757
+00:40:26,309 --> 00:40:28,979
+my environment variable is agent instead
+
+758
+00:40:28,979 --> 00:40:32,599
+of server I'm using that same secret
+
+759
+00:40:32,599 --> 00:40:35,519
+agent secret right
+
+760
+00:40:35,519 --> 00:40:38,519
+and then I'm specifying in this case I'm
+
+761
+00:40:38,519 --> 00:40:41,039
+specifying master to has the server this
+
+762
+00:40:41,039 --> 00:40:43,619
+would be my registration server in this
+
+763
+00:40:43,619 --> 00:40:46,979
+case I'm just specifying this server
+
+764
+00:40:46,979 --> 00:40:49,859
+here I'll look that second that that
+
+765
+00:40:49,859 --> 00:40:51,929
+node came up so I now have a worker node
+
+766
+00:40:51,929 --> 00:40:54,179
+that's joined as well it doesn't specify
+
+767
+00:40:54,179 --> 00:40:55,739
+the role you actually have to label
+
+768
+00:40:55,739 --> 00:40:57,599
+those if you want those labeled there
+
+769
+00:40:57,599 --> 00:41:00,539
+comes master one as well so now I have
+
+770
+00:41:00,539 --> 00:41:04,979
+two masters and one worker let's get
+
+771
+00:41:04,979 --> 00:41:07,259
+this other worker installed the final
+
+772
+00:41:07,259 --> 00:41:10,679
+thing is the k3s version and again I'm
+
+773
+00:41:10,679 --> 00:41:16,619
+installing the the latest k3s version so
+
+774
+00:41:16,619 --> 00:41:19,140
+we'll get all those nodes come up and
+
+775
+00:41:19,140 --> 00:41:21,019
+[Music]
+
+776
+00:41:21,019 --> 00:41:28,079
+let's do a quick take a look at what
+
+777
+00:41:28,079 --> 00:41:30,739
+pods are there
+
+778
+00:41:50,590 --> 00:41:58,580
+all right so we've got all four nodes
+
+779
+00:41:58,580 --> 00:42:00,560
+are in now so I now have a kubernetes
+
+780
+00:42:00,560 --> 00:42:09,770
+cluster and you can see that the we've
+
+781
+00:42:09,770 --> 00:42:12,560
+installed traffic we've installed core
+
+782
+00:42:12,560 --> 00:42:14,180
+DNS we've installed a metric server
+
+783
+00:42:14,180 --> 00:42:18,220
+there's the local path provisioner and
+
+784
+00:42:18,220 --> 00:42:20,360
+some of those things have not actually
+
+785
+00:42:20,360 --> 00:42:21,470
+come up yet
+
+786
+00:42:21,470 --> 00:42:29,360
+let's do actually - Oh wide and see what
+
+787
+00:42:29,360 --> 00:42:39,890
+node those are running on everything's
+
+788
+00:42:39,890 --> 00:42:44,450
+running on the 4 for B+ which is the
+
+789
+00:42:44,450 --> 00:42:47,030
+node with with lots of memory right so
+
+790
+00:42:47,030 --> 00:42:48,800
+kubernetes is kind of doing its thing
+
+791
+00:42:48,800 --> 00:42:51,260
+looks like traffic is having some errors
+
+792
+00:42:51,260 --> 00:42:54,020
+coming out but kubernetes is is doing
+
+793
+00:42:54,020 --> 00:42:55,580
+its thing right it's looking at the the
+
+794
+00:42:55,580 --> 00:42:56,960
+resource pools and it's going hey this
+
+795
+00:42:56,960 --> 00:42:58,640
+node has a lot of resources
+
+796
+00:42:58,640 --> 00:43:06,920
+let's run everything there all right
+
+797
+00:43:06,920 --> 00:43:13,930
+let's um let's get back into the deck so
+
+798
+00:43:13,930 --> 00:43:17,030
+here again and I did this just so you
+
+799
+00:43:17,030 --> 00:43:18,980
+have this when Matthew sends out the
+
+800
+00:43:18,980 --> 00:43:20,090
+deck
+
+801
+00:43:20,090 --> 00:43:22,550
+so here's setting up the master without
+
+802
+00:43:22,550 --> 00:43:27,260
+the agent please refer to the github
+
+803
+00:43:27,260 --> 00:43:30,800
+page and the docs for all of the things
+
+804
+00:43:30,800 --> 00:43:34,910
+all of the things you can do with k3s
+
+805
+00:43:34,910 --> 00:43:36,710
+all the flags and the parameters and
+
+806
+00:43:36,710 --> 00:43:37,360
+things like that
+
+807
+00:43:37,360 --> 00:43:43,570
+that's the server this is the agent
+
+808
+00:43:44,260 --> 00:43:48,380
+basically then the other thing is this
+
+809
+00:43:48,380 --> 00:43:51,080
+is the the setup the configuration right
+
+810
+00:43:51,080 --> 00:43:54,590
+so this is what it looks like on my lab
+
+811
+00:43:54,590 --> 00:44:00,400
+top I've got that sequel container and
+
+812
+00:44:01,720 --> 00:44:04,880
+I've got my two masters which are Fedora
+
+813
+00:44:04,880 --> 00:44:10,280
+the three B+ pies I'm doing registration
+
+814
+00:44:10,280 --> 00:44:11,660
+I'm not going through a registration
+
+815
+00:44:11,660 --> 00:44:14,570
+server but I have to do registration and
+
+816
+00:44:14,570 --> 00:44:16,610
+then kind of what this doesn't show is
+
+817
+00:44:16,610 --> 00:44:19,130
+that that proxy server that opens up
+
+818
+00:44:19,130 --> 00:44:21,410
+once registration has done the the
+
+819
+00:44:21,410 --> 00:44:23,180
+communication after this initial
+
+820
+00:44:23,180 --> 00:44:26,060
+registration goes through that proxy
+
+821
+00:44:26,060 --> 00:44:29,690
+server and then I've got my my two
+
+822
+00:44:29,690 --> 00:44:34,550
+workers in this case I we often get the
+
+823
+00:44:34,550 --> 00:44:40,880
+question you know can I run both can I
+
+824
+00:44:40,880 --> 00:44:46,550
+run are me x86 and arm simultaneously in
+
+825
+00:44:46,550 --> 00:44:49,580
+the same cluster absolutely kubernetes
+
+826
+00:44:49,580 --> 00:44:52,040
+doesn't care it doesn't really know it's
+
+827
+00:44:52,040 --> 00:44:53,750
+just that your workloads need to be
+
+828
+00:44:53,750 --> 00:44:55,790
+configured for the resource type that
+
+829
+00:44:55,790 --> 00:44:58,190
+that you you have available right so if
+
+830
+00:44:58,190 --> 00:45:02,210
+you have an architecture your containers
+
+831
+00:45:02,210 --> 00:45:05,120
+have to be built for that architecture I
+
+832
+00:45:05,120 --> 00:45:09,740
+want to get into some use cases and show
+
+833
+00:45:09,740 --> 00:45:12,080
+you a little bit about what what are
+
+834
+00:45:12,080 --> 00:45:18,410
+people using k3s for so people are using
+
+835
+00:45:18,410 --> 00:45:21,830
+them you know as you might imagine edge
+
+836
+00:45:21,830 --> 00:45:25,430
+devices an arm that's partly why a lot
+
+837
+00:45:25,430 --> 00:45:29,270
+of my demos aren't arm the edge is the
+
+838
+00:45:29,270 --> 00:45:31,760
+majority of edge what we call edge now
+
+839
+00:45:31,760 --> 00:45:37,310
+is arm devices see ICD we're seeing k3s
+
+840
+00:45:37,310 --> 00:45:38,990
+actually in the cloud and data center as
+
+841
+00:45:38,990 --> 00:45:41,990
+well as well as on the developer desktop
+
+842
+00:45:41,990 --> 00:45:44,480
+let's drill down into each of these so
+
+843
+00:45:44,480 --> 00:45:48,110
+for edge and arm we're seeing edge
+
+844
+00:45:48,110 --> 00:45:51,910
+weights so software developer network
+
+845
+00:45:51,910 --> 00:45:58,640
+compositions so also machine learning
+
+846
+00:45:58,640 --> 00:46:02,490
+before the cloud so right now these the
+
+847
+00:46:02,490 --> 00:46:06,420
+the edge compute has been done in the
+
+848
+00:46:06,420 --> 00:46:08,490
+cloud and the the gateways been used to
+
+849
+00:46:08,490 --> 00:46:12,570
+just do a protocol translation so going
+
+850
+00:46:12,570 --> 00:46:14,940
+from whatever protocol the edge nodes
+
+851
+00:46:14,940 --> 00:46:18,210
+are speaking to http sending things up
+
+852
+00:46:18,210 --> 00:46:19,890
+to the cloud where data can be processed
+
+853
+00:46:19,890 --> 00:46:23,099
+it's actually onerous it's very
+
+854
+00:46:23,099 --> 00:46:25,920
+heavyweight it's there's a lot of push
+
+855
+00:46:25,920 --> 00:46:29,820
+to move that the the process the the
+
+856
+00:46:29,820 --> 00:46:33,480
+actual data analysis down into the edge
+
+857
+00:46:33,480 --> 00:46:36,359
+right now we're seeing it at edge
+
+858
+00:46:36,359 --> 00:46:40,040
+gateways we will likely see it actually
+
+859
+00:46:40,040 --> 00:46:43,380
+deeper into the edge as well as those
+
+860
+00:46:43,380 --> 00:46:47,940
+devices get more compute as FPGAs become
+
+861
+00:46:47,940 --> 00:46:52,470
+more prevalent as you know the the
+
+862
+00:46:52,470 --> 00:46:56,690
+ecosystem is changing we're also seeing
+
+863
+00:46:56,690 --> 00:47:01,820
+k3s in branch management servers so in
+
+864
+00:47:01,820 --> 00:47:06,480
+you know stores retail outlets where you
+
+865
+00:47:06,480 --> 00:47:09,150
+may have multiple retail outlets tens or
+
+866
+00:47:09,150 --> 00:47:12,200
+hundreds of stores that need the same
+
+867
+00:47:12,200 --> 00:47:16,080
+product but they all have some somewhat
+
+868
+00:47:16,080 --> 00:47:19,640
+different configurations so they're
+
+869
+00:47:19,640 --> 00:47:22,140
+creating the you know k3s provides an
+
+870
+00:47:22,140 --> 00:47:24,089
+environment for turnkey operations where
+
+871
+00:47:24,089 --> 00:47:26,910
+i can just send this to the store flip
+
+872
+00:47:26,910 --> 00:47:28,200
+us you know plug it in and flip a switch
+
+873
+00:47:28,200 --> 00:47:32,190
+turn it on go to a website that hosts
+
+874
+00:47:32,190 --> 00:47:34,080
+enter my code and it will pull down
+
+875
+00:47:34,080 --> 00:47:36,089
+whatever configuration i need it will
+
+876
+00:47:36,089 --> 00:47:39,990
+auto configure the system now the the
+
+877
+00:47:39,990 --> 00:47:43,619
+home office now has telemetry into these
+
+878
+00:47:43,619 --> 00:47:46,680
+multiple branches they can now introduce
+
+879
+00:47:46,680 --> 00:47:49,440
+a chains in places where they had single
+
+880
+00:47:49,440 --> 00:47:53,630
+servers running you know file servers
+
+881
+00:47:53,630 --> 00:48:00,330
+applications for processing POS data and
+
+882
+00:48:00,330 --> 00:48:02,369
+stuff like that can all be done now
+
+883
+00:48:02,369 --> 00:48:05,040
+through containers and and sort of I
+
+884
+00:48:05,040 --> 00:48:06,660
+think one of the common themes across
+
+885
+00:48:06,660 --> 00:48:10,530
+all of these things is the consistency
+
+886
+00:48:10,530 --> 00:48:12,900
+of development so now if you're
+
+887
+00:48:12,900 --> 00:48:15,030
+developing for cloud you can have a
+
+888
+00:48:15,030 --> 00:48:16,310
+process for
+
+889
+00:48:16,310 --> 00:48:18,950
+in containers and the same goes for edge
+
+890
+00:48:18,950 --> 00:48:21,110
+you can now deploy to edge in the same
+
+891
+00:48:21,110 --> 00:48:25,490
+way the far edge maybe we're still
+
+892
+00:48:25,490 --> 00:48:28,370
+seeing from where updates and that sort
+
+893
+00:48:28,370 --> 00:48:32,440
+of thing but even there in far edge on
+
+894
+00:48:32,440 --> 00:48:37,130
+for example windmills which are you know
+
+895
+00:48:37,130 --> 00:48:40,070
+little micro data centers really they're
+
+896
+00:48:40,070 --> 00:48:43,220
+they're doing containers and data
+
+897
+00:48:43,220 --> 00:48:46,720
+processing there for you know on-site
+
+898
+00:48:46,720 --> 00:48:50,630
+data processing and then field operation
+
+899
+00:48:50,630 --> 00:48:52,640
+data center so we're seeing mobile AI
+
+900
+00:48:52,640 --> 00:48:56,180
+units in military applications where
+
+901
+00:48:56,180 --> 00:48:58,970
+they need to process data
+
+902
+00:48:58,970 --> 00:49:04,000
+you know they strip a laptop from some
+
+903
+00:49:04,000 --> 00:49:06,680
+operative and they need to process it
+
+904
+00:49:06,680 --> 00:49:07,490
+right away
+
+905
+00:49:07,490 --> 00:49:11,990
+energy remote operations you know they
+
+906
+00:49:11,990 --> 00:49:17,260
+need to do do location geosphere
+
+907
+00:49:18,430 --> 00:49:20,540
+positioning all sorts of interesting
+
+908
+00:49:20,540 --> 00:49:22,520
+things and they have little data centers
+
+909
+00:49:22,520 --> 00:49:25,010
+operating in these in these rigs as well
+
+910
+00:49:25,010 --> 00:49:28,820
+and then in you know shipping and you
+
+911
+00:49:28,820 --> 00:49:32,840
+know in actual physical chips have data
+
+912
+00:49:32,840 --> 00:49:34,550
+centers as well
+
+913
+00:49:34,550 --> 00:49:36,440
+so those are some of the sort of the
+
+914
+00:49:36,440 --> 00:49:39,350
+edge locations and types of use cases
+
+915
+00:49:39,350 --> 00:49:44,510
+we're seeing and then from the CI CD
+
+916
+00:49:44,510 --> 00:49:48,890
+perspective for CI pipelines you know
+
+917
+00:49:48,890 --> 00:49:50,390
+really just being able to automate
+
+918
+00:49:50,390 --> 00:49:53,450
+environment up down just for the the
+
+919
+00:49:53,450 --> 00:49:55,730
+purpose of integration and testing
+
+920
+00:49:55,730 --> 00:49:58,330
+environments load testing scale testing
+
+921
+00:49:58,330 --> 00:50:01,460
+you know basically it's really mostly
+
+922
+00:50:01,460 --> 00:50:05,600
+the CI aspect at this this point we're
+
+923
+00:50:05,600 --> 00:50:09,170
+obviously CD is is delivery into your
+
+924
+00:50:09,170 --> 00:50:15,470
+production systems the cloud and data
+
+925
+00:50:15,470 --> 00:50:18,560
+center we're seeing a lot of just
+
+926
+00:50:18,560 --> 00:50:20,450
+generally simplified installation of
+
+927
+00:50:20,450 --> 00:50:26,330
+kubernetes where you know the its
+
+928
+00:50:26,330 --> 00:50:29,780
+kubernetes right so so
+
+929
+00:50:29,780 --> 00:50:31,880
+you need full-blown installations you
+
+930
+00:50:31,880 --> 00:50:33,740
+might you might still want to do that we
+
+931
+00:50:33,740 --> 00:50:35,980
+still have a distribution called rke
+
+932
+00:50:35,980 --> 00:50:41,600
+that is the most used distribution I
+
+933
+00:50:41,600 --> 00:50:44,060
+think it's the most used distribution it
+
+934
+00:50:44,060 --> 00:50:46,900
+could be round bye-bye rancher certainly
+
+935
+00:50:46,900 --> 00:50:49,730
+it's you know used by the rancher
+
+936
+00:50:49,730 --> 00:50:53,360
+management server and many rancher
+
+937
+00:50:53,360 --> 00:50:57,560
+customers but k3s provides simplified
+
+938
+00:50:57,560 --> 00:50:59,660
+management and clouded cloud and data
+
+939
+00:50:59,660 --> 00:51:03,620
+center part of that is that you don't
+
+940
+00:51:03,620 --> 00:51:06,380
+have the overhead of @cd and so this
+
+941
+00:51:06,380 --> 00:51:08,900
+this third bullet about relational
+
+942
+00:51:08,900 --> 00:51:11,470
+database solutions being well understood
+
+943
+00:51:11,470 --> 00:51:14,420
+now you can basically say well I've
+
+944
+00:51:14,420 --> 00:51:18,410
+already got you know I have licenses for
+
+945
+00:51:18,410 --> 00:51:19,730
+relational databases
+
+946
+00:51:19,730 --> 00:51:22,550
+I have staff who understand how to use
+
+947
+00:51:22,550 --> 00:51:25,940
+them how to create failover I know how
+
+948
+00:51:25,940 --> 00:51:28,580
+to do encryption at rest you know I have
+
+949
+00:51:28,580 --> 00:51:32,210
+DBA is that know are DB and then the
+
+950
+00:51:32,210 --> 00:51:33,830
+other thing is just generally many small
+
+951
+00:51:33,830 --> 00:51:36,560
+clusters and and sort of how easy it is
+
+952
+00:51:36,560 --> 00:51:39,710
+to to make ephemeral clusters with a
+
+953
+00:51:39,710 --> 00:51:46,670
+solution like k3s and finally for the
+
+954
+00:51:46,670 --> 00:51:49,760
+developer desktop okay now you know
+
+955
+00:51:49,760 --> 00:51:51,710
+again coming back to the micro Kate's
+
+956
+00:51:51,710 --> 00:51:57,800
+and and and mini cube you know as a
+
+957
+00:51:57,800 --> 00:52:00,350
+single node kubernetes you couldn't
+
+958
+00:52:00,350 --> 00:52:02,240
+really do true kubernetes orchestration
+
+959
+00:52:02,240 --> 00:52:04,700
+between nodes right nice with k3s
+
+960
+00:52:04,700 --> 00:52:06,970
+developers can really actually do that
+
+961
+00:52:06,970 --> 00:52:10,310
+you really get this sort of easy to up
+
+962
+00:52:10,310 --> 00:52:14,450
+and down kubernetes cluster with things
+
+963
+00:52:14,450 --> 00:52:17,540
+like role based access control if you're
+
+964
+00:52:17,540 --> 00:52:19,430
+developing C RDS or you're developing
+
+965
+00:52:19,430 --> 00:52:22,820
+helm charts you you actually have a
+
+966
+00:52:22,820 --> 00:52:25,310
+place to do this that's not a public
+
+967
+00:52:25,310 --> 00:52:27,130
+kubernetes cluster or you know in
+
+968
+00:52:27,130 --> 00:52:30,020
+private one in your enterprise but where
+
+969
+00:52:30,020 --> 00:52:32,360
+other people are using it so you can
+
+970
+00:52:32,360 --> 00:52:35,740
+really take it to its limits with with
+
+971
+00:52:35,740 --> 00:52:43,220
+k3s so we are let's see we're which
+
+972
+00:52:43,220 --> 00:52:45,410
+a little bit of time so I think what I'd
+
+973
+00:52:45,410 --> 00:52:50,660
+like to do is we we could open up for
+
+974
+00:52:50,660 --> 00:52:52,940
+questions I don't know Matt how many
+
+975
+00:52:52,940 --> 00:52:54,670
+questions we have outstanding right now
+
+976
+00:52:54,670 --> 00:52:57,740
+and then I can come back and sort of
+
+977
+00:52:57,740 --> 00:53:02,300
+demonstrate the using this with Rancher
+
+978
+00:53:02,300 --> 00:53:04,819
+and the the you know multi cluster
+
+979
+00:53:04,819 --> 00:53:08,569
+management capability yeah cool thanks
+
+980
+00:53:08,569 --> 00:53:11,510
+mark um so there's about ten questions
+
+981
+00:53:11,510 --> 00:53:13,490
+asked at this point maybe list let's go
+
+982
+00:53:13,490 --> 00:53:16,310
+through those and then we can do a
+
+983
+00:53:16,310 --> 00:53:18,859
+little bit more demo okay sounds good
+
+984
+00:53:18,859 --> 00:53:23,240
+yeah okay cool so I'll just do the first
+
+985
+00:53:23,240 --> 00:53:26,420
+asked first so this is from meta I hope
+
+986
+00:53:26,420 --> 00:53:28,760
+I sure butchering your name but he asks
+
+987
+00:53:28,760 --> 00:53:32,079
+could you elaborate on how k3s is
+
+988
+00:53:32,079 --> 00:53:34,640
+different two recent projects by the
+
+989
+00:53:34,640 --> 00:53:38,089
+Linux Foundation like LF edge and
+
+990
+00:53:38,089 --> 00:53:39,099
+project Eve
+
+991
+00:53:39,099 --> 00:53:46,990
+or e ve yeah that's a great question so
+
+992
+00:53:46,990 --> 00:53:50,780
+the the LF edge
+
+993
+00:53:50,780 --> 00:53:53,780
+I don't so I I'm not sure I know project
+
+994
+00:53:53,780 --> 00:53:55,569
+EBE
+
+995
+00:53:55,569 --> 00:53:59,810
+the and the it's been a while since I've
+
+996
+00:53:59,810 --> 00:54:01,930
+looked at LF edge
+
+997
+00:54:01,930 --> 00:54:06,530
+okay so k3s is a kubernetes distribution
+
+998
+00:54:06,530 --> 00:54:09,530
+and and i know that some of the the
+
+999
+00:54:09,530 --> 00:54:12,740
+projects within the LF edge space a
+
+1000
+00:54:12,740 --> 00:54:16,670
+really designed around process and in
+
+1001
+00:54:16,670 --> 00:54:22,430
+sort of if i am you know if i am going
+
+1002
+00:54:22,430 --> 00:54:25,130
+to build an edge gateway what what is
+
+1003
+00:54:25,130 --> 00:54:28,119
+the template for building that and and
+
+1004
+00:54:28,119 --> 00:54:31,869
+i'm afraid i don't recall which which
+
+1005
+00:54:31,869 --> 00:54:34,760
+product is which within Aleph edge so
+
+1006
+00:54:34,760 --> 00:54:38,240
+the the best thing i can say is that k3s
+
+1007
+00:54:38,240 --> 00:54:42,109
+is a kubernetes distribution like to be
+
+1008
+00:54:42,109 --> 00:54:46,730
+a DM cube spray rke and and so when
+
+1009
+00:54:46,730 --> 00:54:48,230
+you're looking at those other projects
+
+1010
+00:54:48,230 --> 00:54:51,859
+most of them use a you know they are
+
+1011
+00:54:51,859 --> 00:54:55,640
+using a kubernetes distribution but they
+
+1012
+00:54:55,640 --> 00:54:56,690
+are not them
+
+1013
+00:54:56,690 --> 00:55:00,470
+kubernetes distributions right makes
+
+1014
+00:55:00,470 --> 00:55:02,690
+sense thank you okay here's the next one
+
+1015
+00:55:02,690 --> 00:55:06,079
+this is from sorem who asked us when you
+
+1016
+00:55:06,079 --> 00:55:08,540
+were doing the k3s install near the
+
+1017
+00:55:08,540 --> 00:55:11,300
+beginning and he says he said why do we
+
+1018
+00:55:11,300 --> 00:55:21,010
+need sudo well so I I started k3s with
+
+1019
+00:55:21,010 --> 00:55:24,470
+sudo because I needed elevated
+
+1020
+00:55:24,470 --> 00:55:34,430
+permissions to to run k3s but if you so
+
+1021
+00:55:34,430 --> 00:55:36,170
+when I when I installed it so when I
+
+1022
+00:55:36,170 --> 00:55:38,119
+installed it through this process
+
+1023
+00:55:38,119 --> 00:55:39,890
+through through the single node I
+
+1024
+00:55:39,890 --> 00:55:42,950
+installed it with sudo but I didn't do
+
+1025
+00:55:42,950 --> 00:55:44,990
+anything to give myself access to the
+
+1026
+00:55:44,990 --> 00:55:50,510
+CTL to the coop config file so so I
+
+1027
+00:55:50,510 --> 00:55:53,030
+could run k3 asks let's see if I can log
+
+1028
+00:55:53,030 --> 00:55:54,680
+back into this device it may not have
+
+1029
+00:55:54,680 --> 00:55:56,270
+some backup I probably have to restart
+
+1030
+00:55:56,270 --> 00:56:02,329
+it so I could run k3s sort of with it
+
+1031
+00:56:02,329 --> 00:56:06,200
+without sudo but because I started it
+
+1032
+00:56:06,200 --> 00:56:09,170
+with sudo I I needed pseudo to run the
+
+1033
+00:56:09,170 --> 00:56:11,420
+other operations you'll notice over here
+
+1034
+00:56:11,420 --> 00:56:17,829
+I did not run k3s with sudo right so so
+
+1035
+00:56:17,829 --> 00:56:20,960
+but under the hood we are getting
+
+1036
+00:56:20,960 --> 00:56:23,839
+elevated permissions to to install some
+
+1037
+00:56:23,839 --> 00:56:26,690
+components like into system D you can
+
+1038
+00:56:26,690 --> 00:56:30,200
+see here we actually installed a system
+
+1039
+00:56:30,200 --> 00:56:36,740
+D service and so you know I would need
+
+1040
+00:56:36,740 --> 00:56:40,700
+sudo to start and stop k3s but for just
+
+1041
+00:56:40,700 --> 00:56:42,500
+running like coups TL commands
+
+1042
+00:56:42,500 --> 00:56:45,500
+I just need permission to use the config
+
+1043
+00:56:45,500 --> 00:56:48,440
+I could generate using our back I could
+
+1044
+00:56:48,440 --> 00:56:53,000
+generate coop config for you know a user
+
+1045
+00:56:53,000 --> 00:56:56,000
+and then that user would have the
+
+1046
+00:56:56,000 --> 00:56:59,869
+standard kubernetes permissions awesome
+
+1047
+00:56:59,869 --> 00:57:01,339
+okay thank you
+
+1048
+00:57:01,339 --> 00:57:03,050
+all right here's the next one this is
+
+1049
+00:57:03,050 --> 00:57:07,220
+from Hans who asks how do I upgrade k3s
+
+1050
+00:57:07,220 --> 00:57:08,280
+to a new version
+
+1051
+00:57:08,280 --> 00:57:11,880
+from 1.16 to 1.17 for example are there
+
+1052
+00:57:11,880 --> 00:57:17,190
+any risks mmm there might be risks
+
+1053
+00:57:17,190 --> 00:57:20,550
+depending on what you know what version
+
+1054
+00:57:20,550 --> 00:57:25,410
+you are starting with I know that we are
+
+1055
+00:57:25,410 --> 00:57:27,510
+trying at this point now that is it's
+
+1056
+00:57:27,510 --> 00:57:31,230
+been G a G aid we are trying to ensure
+
+1057
+00:57:31,230 --> 00:57:36,600
+that the releases are at least one
+
+1058
+00:57:36,600 --> 00:57:39,750
+version backwards compatible so for
+
+1059
+00:57:39,750 --> 00:57:45,030
+example if I was running a 116 cluster
+
+1060
+00:57:45,030 --> 00:57:47,970
+and I had four nodes running on 116 I
+
+1061
+00:57:47,970 --> 00:57:50,970
+need to upgrade both my masters and my
+
+1062
+00:57:50,970 --> 00:57:53,670
+worker nodes and I need to upgrade them
+
+1063
+00:57:53,670 --> 00:57:55,800
+one at a time the the upgrade is
+
+1064
+00:57:55,800 --> 00:57:57,830
+actually very simple
+
+1065
+00:57:57,830 --> 00:58:00,780
+the the upgrade let's see if I can get
+
+1066
+00:58:00,780 --> 00:58:02,940
+into this now so I don't know if I'll
+
+1067
+00:58:02,940 --> 00:58:07,560
+see ya so I'm not even seeing the the
+
+1068
+00:58:07,560 --> 00:58:10,320
+install command let's go back to the
+
+1069
+00:58:10,320 --> 00:58:12,840
+slide presentation we'll go back a
+
+1070
+00:58:12,840 --> 00:58:17,400
+couple of pages hang on just a moment
+
+1071
+00:58:17,400 --> 00:58:28,740
+here let's see here we go okay so here I
+
+1072
+00:58:28,740 --> 00:58:32,070
+did this environment variable installed
+
+1073
+00:58:32,070 --> 00:58:34,860
+k3 s version so you can you can upgrade
+
+1074
+00:58:34,860 --> 00:58:36,810
+to the next version just by changing
+
+1075
+00:58:36,810 --> 00:58:40,470
+that environment variable or using the
+
+1076
+00:58:40,470 --> 00:58:44,400
+flag on the command line when you run k3
+
+1077
+00:58:44,400 --> 00:58:46,410
+when you you know and basically do a
+
+1078
+00:58:46,410 --> 00:58:48,480
+reinstall so if you're running it
+
+1079
+00:58:48,480 --> 00:58:51,570
+through this script where where we
+
+1080
+00:58:51,570 --> 00:58:53,940
+actually install the init script into
+
+1081
+00:58:53,940 --> 00:58:57,330
+system D you would just change the flag
+
+1082
+00:58:57,330 --> 00:58:59,160
+you're gonna have to do one note at a
+
+1083
+00:58:59,160 --> 00:58:59,700
+time
+
+1084
+00:58:59,700 --> 00:59:01,740
+they should be backwards compatible up
+
+1085
+00:59:01,740 --> 00:59:05,640
+to one version back the the challenge is
+
+1086
+00:59:05,640 --> 00:59:07,710
+going to be one one stable version back
+
+1087
+00:59:07,710 --> 00:59:10,650
+the challenge is always going to be if
+
+1088
+00:59:10,650 --> 00:59:14,970
+you installed an unstable version so if
+
+1089
+00:59:14,970 --> 00:59:17,160
+you've been playing around with latest
+
+1090
+00:59:17,160 --> 00:59:21,750
+but it wasn't March stable it may not
+
+1091
+00:59:21,750 --> 00:59:24,840
+be compatible but it's hard to say in
+
+1092
+00:59:24,840 --> 00:59:28,980
+terms of upgrading a cluster I would
+
+1093
+00:59:28,980 --> 00:59:32,310
+start with the server's do one server at
+
+1094
+00:59:32,310 --> 00:59:34,320
+a time make sure that it upgrades it
+
+1095
+00:59:34,320 --> 00:59:36,060
+would I should have for my next demo I'm
+
+1096
+00:59:36,060 --> 00:59:37,349
+going to I'm going to install an older
+
+1097
+00:59:37,349 --> 00:59:39,599
+version then we'll do an upgrade I think
+
+1098
+00:59:39,599 --> 00:59:42,090
+that's a great great thing to do show
+
+1099
+00:59:42,090 --> 00:59:44,310
+you how to do that but they basically
+
+1100
+00:59:44,310 --> 00:59:47,460
+upgrade my server make sure it upgraded
+
+1101
+00:59:47,460 --> 00:59:49,020
+right so I do one of them make sure it
+
+1102
+00:59:49,020 --> 00:59:51,480
+upgraded and then come back and do the
+
+1103
+00:59:51,480 --> 00:59:58,800
+next one and then do my agents once the
+
+1104
+00:59:58,800 --> 01:00:01,050
+server's are upgraded we could actually
+
+1105
+01:00:01,050 --> 01:00:04,890
+go in here I'm not gonna so I've got my
+
+1106
+01:00:04,890 --> 01:00:07,020
+four nodes right in this in this box on
+
+1107
+01:00:07,020 --> 01:00:09,960
+the middle box on the left hand side
+
+1108
+01:00:09,960 --> 01:00:12,630
+I've got the two masters and the two
+
+1109
+01:00:12,630 --> 01:00:25,560
+workers I'm gonna stop k3s on this
+
+1110
+01:00:25,560 --> 01:00:34,550
+master and that will drop it out of the
+
+1111
+01:00:34,550 --> 01:00:41,310
+cluster you'll see that the the it's
+
+1112
+01:00:41,310 --> 01:00:44,970
+been show as as not ready in the status
+
+1113
+01:00:44,970 --> 01:00:49,859
+right and so because I have this H a
+
+1114
+01:00:49,859 --> 01:00:51,660
+mode right and so now I can do this sort
+
+1115
+01:00:51,660 --> 01:00:52,940
+of thing where I can upgrade everything
+
+1116
+01:00:52,940 --> 01:00:55,349
+this becomes a little bit more complex
+
+1117
+01:00:55,349 --> 01:00:56,700
+you'll have some downtime if you have a
+
+1118
+01:00:56,700 --> 01:00:58,290
+single node and you do an upgrade you're
+
+1119
+01:00:58,290 --> 01:01:05,880
+gonna have downtime thank were you done
+
+1120
+01:01:05,880 --> 01:01:08,099
+with the odds gonna say next question
+
+1121
+01:01:08,099 --> 01:01:10,380
+yeah yeah next question alright there we
+
+1122
+01:01:10,380 --> 01:01:12,210
+go alright here's the next question this
+
+1123
+01:01:12,210 --> 01:01:16,830
+is from Soren who asks s who says SQL
+
+1124
+01:01:16,830 --> 01:01:20,550
+Lite is written in C iirc are you guys
+
+1125
+01:01:20,550 --> 01:01:24,750
+using C go to get to SQL Lite why not
+
+1126
+01:01:24,750 --> 01:01:30,210
+our cue light which is go based hmm that
+
+1127
+01:01:30,210 --> 01:01:33,420
+would be a question for the developers
+
+1128
+01:01:33,420 --> 01:01:35,530
+and I would recommend you
+
+1129
+01:01:35,530 --> 01:01:40,180
+the k3s slack channel - to ask that
+
+1130
+01:01:40,180 --> 01:01:43,060
+question I I don't know why the decision
+
+1131
+01:01:43,060 --> 01:01:47,800
+was made to use SQL Lite you know versus
+
+1132
+01:01:47,800 --> 01:01:53,530
+a go based sequel Lite okay cool yeah
+
+1133
+01:01:53,530 --> 01:01:54,040
+make sense
+
+1134
+01:01:54,040 --> 01:01:57,670
+so yeah found k3s channel on the
+
+1135
+01:01:57,670 --> 01:02:01,420
+ranchers Lac yes okay let's see so the
+
+1136
+01:02:01,420 --> 01:02:04,300
+next one this is from Ludovic sure I'm
+
+1137
+01:02:04,300 --> 01:02:07,330
+butchering your name but he says with
+
+1138
+01:02:07,330 --> 01:02:10,360
+MySQL as the backend could we have
+
+1139
+01:02:10,360 --> 01:02:13,810
+issues with bin logs like in Rancher one
+
+1140
+01:02:13,810 --> 01:02:20,860
+because of many updates I am not sure
+
+1141
+01:02:20,860 --> 01:02:25,300
+what the issues with bin logs were so so
+
+1142
+01:02:25,300 --> 01:02:27,580
+I just don't know the answer to that I
+
+1143
+01:02:27,580 --> 01:02:30,220
+don't know what the problems were
+
+1144
+01:02:30,220 --> 01:02:33,760
+if you're using MySQL as a back-end it
+
+1145
+01:02:33,760 --> 01:02:37,450
+it is external and so you do need to
+
+1146
+01:02:37,450 --> 01:02:40,600
+manage it independently of the
+
+1147
+01:02:40,600 --> 01:02:46,390
+kubernetes cluster okay cool yeah and
+
+1148
+01:02:46,390 --> 01:02:48,100
+maybe another good one for for a rancher
+
+1149
+01:02:48,100 --> 01:02:52,330
+general or the k3s channel so this is
+
+1150
+01:02:52,330 --> 01:02:53,770
+from the next question is from the same
+
+1151
+01:02:53,770 --> 01:02:56,050
+gentleman who asks could we imagine
+
+1152
+01:02:56,050 --> 01:03:02,980
+running rancher two on k3s what a great
+
+1153
+01:03:02,980 --> 01:03:08,560
+question it yes we can imagine it and it
+
+1154
+01:03:08,560 --> 01:03:13,930
+is coming we are targeting I don't know
+
+1155
+01:03:13,930 --> 01:03:15,760
+what the you know if we have a date set
+
+1156
+01:03:15,760 --> 01:03:19,630
+yet but we are targeting running Rancher
+
+1157
+01:03:19,630 --> 01:03:25,600
+two on k3s it would create a simplified
+
+1158
+01:03:25,600 --> 01:03:28,180
+installation of ranch or two which right
+
+1159
+01:03:28,180 --> 01:03:30,850
+now for those of you who don't know you
+
+1160
+01:03:30,850 --> 01:03:33,700
+need to install kubernetes first in
+
+1161
+01:03:33,700 --> 01:03:37,390
+order to run Rancher and this would be
+
+1162
+01:03:37,390 --> 01:03:39,940
+sort of all-in-one simplified
+
+1163
+01:03:39,940 --> 01:03:45,310
+installation okay cool thank you alright
+
+1164
+01:03:45,310 --> 01:03:46,570
+here's the next one this is from Luke
+
+1165
+01:03:46,570 --> 01:03:49,430
+who asks why not use
+
+1166
+01:03:49,430 --> 01:03:55,339
+and rke style installation yeah so so
+
+1167
+01:03:55,339 --> 01:03:58,910
+rke is the rancher kubernetes engine it
+
+1168
+01:03:58,910 --> 01:04:02,119
+is a distribution of kubernetes from
+
+1169
+01:04:02,119 --> 01:04:07,520
+rancher labs as well and the RK he I
+
+1170
+01:04:07,520 --> 01:04:10,099
+think what you mean by the arcade style
+
+1171
+01:04:10,099 --> 01:04:11,839
+installation is that that we have a
+
+1172
+01:04:11,839 --> 01:04:15,380
+config file for our ke and I can I can
+
+1173
+01:04:15,380 --> 01:04:18,589
+write all of my configuration into this
+
+1174
+01:04:18,589 --> 01:04:23,089
+yamo file and then I point rke at that
+
+1175
+01:04:23,089 --> 01:04:25,520
+config and say are ke up I tell it what
+
+1176
+01:04:25,520 --> 01:04:27,619
+my nodes are and and what the
+
+1177
+01:04:27,619 --> 01:04:31,550
+configuration should be for each type of
+
+1178
+01:04:31,550 --> 01:04:37,160
+node so the width with this distribution
+
+1179
+01:04:37,160 --> 01:04:39,940
+with k3s
+
+1180
+01:04:40,490 --> 01:04:43,099
+you're basically configuring each node
+
+1181
+01:04:43,099 --> 01:04:44,720
+at a time right there's no common
+
+1182
+01:04:44,720 --> 01:04:50,480
+configuration however you can use k3 OS
+
+1183
+01:04:50,480 --> 01:04:53,990
+k 3o s is the k3 operating system and k3
+
+1184
+01:04:53,990 --> 01:04:58,040
+OS has a cloud config a cloud in it
+
+1185
+01:04:58,040 --> 01:05:00,520
+config which will allow you to configure
+
+1186
+01:05:00,520 --> 01:05:05,119
+the the entire system and will install
+
+1187
+01:05:05,119 --> 01:05:10,609
+k3 s into that container operating
+
+1188
+01:05:10,609 --> 01:05:14,569
+system the I'm not sure you know exactly
+
+1189
+01:05:14,569 --> 01:05:18,319
+why it's done this way I think you know
+
+1190
+01:05:18,319 --> 01:05:20,270
+part of it is the simplicity of a single
+
+1191
+01:05:20,270 --> 01:05:24,500
+binary you could absolutely write a
+
+1192
+01:05:24,500 --> 01:05:29,540
+script to install k3 s you know
+
+1193
+01:05:29,540 --> 01:05:32,059
+basically using terraformer or something
+
+1194
+01:05:32,059 --> 01:05:39,049
+like that to to install k3 s into your
+
+1195
+01:05:39,049 --> 01:05:42,049
+nodes and so you really don't need that
+
+1196
+01:05:42,049 --> 01:05:45,319
+config file and in the same way you
+
+1197
+01:05:45,319 --> 01:05:48,190
+would be passing configure arguments as
+
+1198
+01:05:48,190 --> 01:05:51,970
+environment variables or parameters
+
+1199
+01:05:52,240 --> 01:05:54,880
+but that's an interesting question I am
+
+1200
+01:05:54,880 --> 01:05:56,500
+really thought a lot about it but I'm
+
+1201
+01:05:56,500 --> 01:06:00,640
+not sure that k3s lends itself to the
+
+1202
+01:06:00,640 --> 01:06:03,910
+same installation model as rke where you
+
+1203
+01:06:03,910 --> 01:06:05,320
+kind of blow in a whole installation
+
+1204
+01:06:05,320 --> 01:06:08,160
+into multiple nodes at the same time
+
+1205
+01:06:08,160 --> 01:06:11,800
+right okay cool well there's a few more
+
+1206
+01:06:11,800 --> 01:06:14,349
+questions um do you want to take those
+
+1207
+01:06:14,349 --> 01:06:17,470
+questions or do you want to finish that
+
+1208
+01:06:17,470 --> 01:06:20,680
+that last portion of the demo that and
+
+1209
+01:06:20,680 --> 01:06:22,510
+discuss today sure let's let's have a
+
+1210
+01:06:22,510 --> 01:06:26,859
+little break we'll we'll go in and let's
+
+1211
+01:06:26,859 --> 01:06:30,160
+let's restart this as you can see master
+
+1212
+01:06:30,160 --> 01:06:34,030
+one is not ready so I'm gonna restart
+
+1213
+01:06:34,030 --> 01:06:42,280
+this node and that'll come back up and H
+
+1214
+01:06:42,280 --> 01:06:50,830
+a cluster again and then so so a little
+
+1215
+01:06:50,830 --> 01:06:55,109
+bit about ranch or rancher it is a
+
+1216
+01:06:55,109 --> 01:06:57,849
+rancher Labs is an open source company
+
+1217
+01:06:57,849 --> 01:07:00,630
+we have a bunch of open source projects
+
+1218
+01:07:00,630 --> 01:07:05,650
+and k3s is just one of a number of
+
+1219
+01:07:05,650 --> 01:07:12,720
+projects that we have the we also have
+
+1220
+01:07:12,720 --> 01:07:16,810
+projects called Rancher management
+
+1221
+01:07:16,810 --> 01:07:20,050
+server which is actually a product so
+
+1222
+01:07:20,050 --> 01:07:24,099
+for us we don't sell software we develop
+
+1223
+01:07:24,099 --> 01:07:27,880
+software and then for certain projects
+
+1224
+01:07:27,880 --> 01:07:29,920
+which the community has really sort of
+
+1225
+01:07:29,920 --> 01:07:33,670
+taken so you know that the community
+
+1226
+01:07:33,670 --> 01:07:36,670
+likes basically and based on the
+
+1227
+01:07:36,670 --> 01:07:40,300
+adoption we then offer support for those
+
+1228
+01:07:40,300 --> 01:07:43,660
+products rancher management server is
+
+1229
+01:07:43,660 --> 01:07:45,760
+one of those products and we're in
+
+1230
+01:07:45,760 --> 01:07:48,660
+version two of Rancher management server
+
+1231
+01:07:48,660 --> 01:07:51,520
+Ranger management server is a supported
+
+1232
+01:07:51,520 --> 01:07:54,580
+product so it means you can actually pay
+
+1233
+01:07:54,580 --> 01:07:58,300
+to get support but the product Rancher
+
+1234
+01:07:58,300 --> 01:08:01,750
+management server the project is freely
+
+1235
+01:08:01,750 --> 01:08:03,760
+available just like k3s you can download
+
+1236
+01:08:03,760 --> 01:08:06,040
+it use it there's no enter
+
+1237
+01:08:06,040 --> 01:08:09,870
+addition of it but we can use that to
+
+1238
+01:08:09,870 --> 01:08:13,870
+connect with all of our clusters and so
+
+1239
+01:08:13,870 --> 01:08:18,819
+so we are moving towards building into
+
+1240
+01:08:18,819 --> 01:08:21,549
+your extra management server additional
+
+1241
+01:08:21,549 --> 01:08:25,720
+capability for specifically for edge but
+
+1242
+01:08:25,720 --> 01:08:26,859
+right now I'm just going to show you
+
+1243
+01:08:26,859 --> 01:08:29,770
+importing a k3s cluster there will be a
+
+1244
+01:08:29,770 --> 01:08:31,569
+number of things coming along so one of
+
+1245
+01:08:31,569 --> 01:08:34,990
+the things is you will be able to create
+
+1246
+01:08:34,990 --> 01:08:37,630
+k3s clusters from branch or management
+
+1247
+01:08:37,630 --> 01:08:40,450
+server right now you can create rke
+
+1248
+01:08:40,450 --> 01:08:42,450
+clusters from rancher management server
+
+1249
+01:08:42,450 --> 01:08:45,730
+in lots of different cloud providers and
+
+1250
+01:08:45,730 --> 01:08:47,200
+that's what Rancher management server is
+
+1251
+01:08:47,200 --> 01:08:50,790
+all about is running clusters everywhere
+
+1252
+01:08:50,790 --> 01:08:53,529
+so I'm going to go to this import
+
+1253
+01:08:53,529 --> 01:08:57,330
+cluster and I'm going to say k3s import
+
+1254
+01:08:57,330 --> 01:09:04,569
+and we'll create this this is going to
+
+1255
+01:09:04,569 --> 01:09:08,470
+give me a good CTL apply command I'm
+
+1256
+01:09:08,470 --> 01:09:11,310
+just going to copy out that command
+
+1257
+01:09:11,310 --> 01:09:14,920
+we'll go into just let's just make sure
+
+1258
+01:09:14,920 --> 01:09:24,700
+that things are running here it looks
+
+1259
+01:09:24,700 --> 01:09:25,339
+like the
+
+1260
+01:09:25,339 --> 01:09:28,130
+back up it looks like coop CTL is
+
+1261
+01:09:28,130 --> 01:09:31,670
+operating look my local path provisioner
+
+1262
+01:09:31,670 --> 01:09:33,290
+we've got some some additional things
+
+1263
+01:09:33,290 --> 01:09:35,750
+I've got a service load balancer most
+
+1264
+01:09:35,750 --> 01:09:38,799
+likely running on multiple nodes here
+
+1265
+01:09:38,799 --> 01:09:44,060
+right because it's a demon sets so you
+
+1266
+01:09:44,060 --> 01:09:46,670
+can see that that in fact my service
+
+1267
+01:09:46,670 --> 01:09:48,109
+load balancer is running on two
+
+1268
+01:09:48,109 --> 01:09:50,509
+different nodes because I have only two
+
+1269
+01:09:50,509 --> 01:09:54,530
+worker notes but also some other things
+
+1270
+01:09:54,530 --> 01:09:57,440
+came up some other pods came up in the
+
+1271
+01:09:57,440 --> 01:10:00,230
+interim while we were talking what I
+
+1272
+01:10:00,230 --> 01:10:02,270
+want to do is run this command here that
+
+1273
+01:10:02,270 --> 01:10:04,460
+that manager management server server
+
+1274
+01:10:04,460 --> 01:10:06,230
+gave me and this is going to install
+
+1275
+01:10:06,230 --> 01:10:09,530
+some agents into the system and allow me
+
+1276
+01:10:09,530 --> 01:10:12,770
+to get visibility back into the Rancher
+
+1277
+01:10:12,770 --> 01:10:16,219
+into the k3s cluster through Rancher
+
+1278
+01:10:16,219 --> 01:10:18,530
+management server as well as used the
+
+1279
+01:10:18,530 --> 01:10:20,630
+some of the capabilities to Rancher like
+
+1280
+01:10:20,630 --> 01:10:23,449
+our back and deployments and things like
+
+1281
+01:10:23,449 --> 01:10:23,840
+that
+
+1282
+01:10:23,840 --> 01:10:28,849
+I could obviously do a coop CTL apply -
+
+1283
+01:10:28,849 --> 01:10:33,619
+chef on any type of you know acceptable
+
+1284
+01:10:33,619 --> 01:10:38,090
+kubernetes configuration actually do I
+
+1285
+01:10:38,090 --> 01:10:42,739
+have one here no but I did it on this
+
+1286
+01:10:42,739 --> 01:10:44,840
+Jamo file that's that's how that's
+
+1287
+01:10:44,840 --> 01:10:46,760
+posted through my Rancher management
+
+1288
+01:10:46,760 --> 01:10:49,340
+server if we go back and look at what's
+
+1289
+01:10:49,340 --> 01:10:53,989
+in that what you'll see is some our back
+
+1290
+01:10:53,989 --> 01:10:56,420
+so you'll see there there's a cluster
+
+1291
+01:10:56,420 --> 01:10:58,400
+role there's a cluster role binding let
+
+1292
+01:10:58,400 --> 01:11:03,710
+me make this a little bigger there's a
+
+1293
+01:11:03,710 --> 01:11:07,360
+namespace there's a service accounts
+
+1294
+01:11:07,360 --> 01:11:09,889
+here's a secret right so a bunch of a
+
+1295
+01:11:09,889 --> 01:11:13,280
+bunch of kubernetes stuff and then
+
+1296
+01:11:13,280 --> 01:11:15,949
+finally here's a deployment so I've got
+
+1297
+01:11:15,949 --> 01:11:19,449
+this cattle cluster agent this is how
+
+1298
+01:11:19,449 --> 01:11:21,679
+Rancher is able to communicate with
+
+1299
+01:11:21,679 --> 01:11:23,960
+clusters everywhere is by installing
+
+1300
+01:11:23,960 --> 01:11:26,179
+these agents and then they they
+
+1301
+01:11:26,179 --> 01:11:28,250
+basically set up that two-way
+
+1302
+01:11:28,250 --> 01:11:30,830
+communication similar to the proxy
+
+1303
+01:11:30,830 --> 01:11:35,480
+server and there's a demon set and then
+
+1304
+01:11:35,480 --> 01:11:37,460
+that allows us to basically have
+
+1305
+01:11:37,460 --> 01:11:38,900
+visibility into
+
+1306
+01:11:38,900 --> 01:11:41,150
+things in ranchero made everything
+
+1307
+01:11:41,150 --> 01:11:45,620
+bigger alright um so here's my k3s
+
+1308
+01:11:45,620 --> 01:11:48,590
+importer it's still working
+
+1309
+01:11:48,590 --> 01:11:52,520
+let's see you can see that my 512 Meg on
+
+1310
+01:11:52,520 --> 01:11:54,920
+the bottom you can see I'm I still have
+
+1311
+01:11:54,920 --> 01:11:57,920
+plenty of space plenty of capacity as
+
+1312
+01:11:57,920 --> 01:12:00,140
+these things come in but I do I'm
+
+1313
+01:12:00,140 --> 01:12:02,030
+getting some use utilization there right
+
+1314
+01:12:02,030 --> 01:12:04,909
+some of those cores are getting used a
+
+1315
+01:12:04,909 --> 01:12:06,350
+little bit Oh
+
+1316
+01:12:06,350 --> 01:12:11,870
+176 178 eggs there we go so that's
+
+1317
+01:12:11,870 --> 01:12:15,770
+coming up if we do the coop CT I'll get
+
+1318
+01:12:15,770 --> 01:12:20,270
+pods we should have some more detail
+
+1319
+01:12:20,270 --> 01:12:21,770
+because we're going to start seeing
+
+1320
+01:12:21,770 --> 01:12:25,060
+these agent it's creating the agents now
+
+1321
+01:12:25,060 --> 01:12:27,679
+one of them was sat right the node
+
+1322
+01:12:27,679 --> 01:12:30,140
+agents or demon sets so you can see that
+
+1323
+01:12:30,140 --> 01:12:34,370
+those are getting created everywhere and
+
+1324
+01:12:34,370 --> 01:12:37,520
+I've got the cluster agent which is just
+
+1325
+01:12:37,520 --> 01:12:44,120
+landed on master - so waiting for all
+
+1326
+01:12:44,120 --> 01:12:48,320
+those things come up and once they do we
+
+1327
+01:12:48,320 --> 01:12:51,800
+will have this cluster imported back
+
+1328
+01:12:51,800 --> 01:12:54,380
+into kubernetes into ranch management
+
+1329
+01:12:54,380 --> 01:12:58,840
+server and we'll be able to see it so
+
+1330
+01:12:58,870 --> 01:13:02,920
+and then once I do that through here
+
+1331
+01:13:02,920 --> 01:13:05,030
+we'll wait till it comes up let's go
+
+1332
+01:13:05,030 --> 01:13:07,429
+back to questions once this comes up
+
+1333
+01:13:07,429 --> 01:13:08,750
+we'll take another look at it and see
+
+1334
+01:13:08,750 --> 01:13:10,060
+what we could do with it
+
+1335
+01:13:10,060 --> 01:13:15,110
+okay sweet let's see so okay here's
+
+1336
+01:13:15,110 --> 01:13:16,850
+another sort of roadmap question this is
+
+1337
+01:13:16,850 --> 01:13:20,210
+from Thomas who asks are there plans for
+
+1338
+01:13:20,210 --> 01:13:22,460
+the ability to run Windows container
+
+1339
+01:13:22,460 --> 01:13:25,960
+workloads on k3 yes
+
+1340
+01:13:25,960 --> 01:13:30,500
+um so my understanding is that one of
+
+1341
+01:13:30,500 --> 01:13:33,640
+our engineers got there is now an
+
+1342
+01:13:33,640 --> 01:13:38,960
+executable a XE version of kts I don't
+
+1343
+01:13:38,960 --> 01:13:43,760
+know if let's see that would be here I
+
+1344
+01:13:43,760 --> 01:13:47,239
+don't know if yeah it's not part of the
+
+1345
+01:13:47,239 --> 01:13:49,070
+build process right now but I know I
+
+1346
+01:13:49,070 --> 01:13:53,810
+know we have done it and but the the
+
+1347
+01:13:53,810 --> 01:13:56,870
+issue is you need you know dotnet core
+
+1348
+01:13:56,870 --> 01:14:01,670
+containers to run on it so as far as I
+
+1349
+01:14:01,670 --> 01:14:03,950
+know there's work being done in that
+
+1350
+01:14:03,950 --> 01:14:07,640
+area and there's progress being made I
+
+1351
+01:14:07,640 --> 01:14:09,350
+would check in this is another thing
+
+1352
+01:14:09,350 --> 01:14:12,250
+that I would check in with poundcake 3s
+
+1353
+01:14:12,250 --> 01:14:16,670
+in the slack user group and see where
+
+1354
+01:14:16,670 --> 01:14:20,510
+that's at okay great thank you
+
+1355
+01:14:20,510 --> 01:14:22,580
+alright couple more this is this next
+
+1356
+01:14:22,580 --> 01:14:26,540
+one is from Ludovic who says how do we
+
+1357
+01:14:26,540 --> 01:14:28,730
+were new certificates inside the cluster
+
+1358
+01:14:28,730 --> 01:14:33,739
+do we just restart every node cert
+
+1359
+01:14:33,739 --> 01:14:37,220
+renewal um I don't know what the process
+
+1360
+01:14:37,220 --> 01:14:42,070
+for cert renewal is inside the cluster
+
+1361
+01:14:42,070 --> 01:14:46,400
+another great question little vague the
+
+1362
+01:14:46,400 --> 01:14:51,050
+the it is not something I've done and I
+
+1363
+01:14:51,050 --> 01:14:56,180
+would defer you to the docks although I
+
+1364
+01:14:56,180 --> 01:15:00,580
+don't even know if the docks get us into
+
+1365
+01:15:00,580 --> 01:15:03,860
+that we you know it's worth probably
+
+1366
+01:15:03,860 --> 01:15:09,020
+posting that question up through up
+
+1367
+01:15:09,020 --> 01:15:14,570
+through slack pound k3s I'm not sure how
+
+1368
+01:15:14,570 --> 01:15:17,390
+you know how you get that done how you
+
+1369
+01:15:17,390 --> 01:15:20,840
+accomplish that okay no problem
+
+1370
+01:15:20,840 --> 01:15:24,410
+lots to learn here so this is okay so
+
+1371
+01:15:24,410 --> 01:15:27,860
+one more this is from Sorum who asks so
+
+1372
+01:15:27,860 --> 01:15:30,010
+this is this is going back to the
+
+1373
+01:15:30,010 --> 01:15:32,600
+privileges question from pseudo about
+
+1374
+01:15:32,600 --> 01:15:37,040
+pseudo from earlier so he says so k3s
+
+1375
+01:15:37,040 --> 01:15:38,420
+can run
+
+1376
+01:15:38,420 --> 01:15:42,350
+user space with no problems systemd can
+
+1377
+01:15:42,350 --> 01:15:44,390
+be tackled separately and I mean without
+
+1378
+01:15:44,390 --> 01:15:50,780
+using you know rude pseudo at all so the
+
+1379
+01:15:50,780 --> 01:16:04,760
+question here is let's see yes okay
+
+1380
+01:16:04,760 --> 01:16:06,230
+yes can be run in userspace with no
+
+1381
+01:16:06,230 --> 01:16:12,560
+problems so yes there is actually a
+
+1382
+01:16:12,560 --> 01:16:20,300
+project a part of k3 s for no root where
+
+1383
+01:16:20,300 --> 01:16:27,230
+is that in the in the docks and no there
+
+1384
+01:16:27,230 --> 01:16:30,020
+there's like one individual who really
+
+1385
+01:16:30,020 --> 01:16:32,360
+wanted that feature has worked on it I
+
+1386
+01:16:32,360 --> 01:16:35,120
+don't know the status of it but it is
+
+1387
+01:16:35,120 --> 01:16:38,030
+possible to run it in userspace without
+
+1388
+01:16:38,030 --> 01:16:44,600
+root okay all right cool
+
+1389
+01:16:44,600 --> 01:16:47,300
+that was the last question that has been
+
+1390
+01:16:47,300 --> 01:16:49,610
+answered they've been asked if anybody
+
+1391
+01:16:49,610 --> 01:16:52,910
+has another question posted soon because
+
+1392
+01:16:52,910 --> 01:16:55,150
+I think we'll be wrapping up in a minute
+
+1393
+01:16:55,150 --> 01:16:57,170
+so if there's anything else you want to
+
+1394
+01:16:57,170 --> 01:17:00,920
+show us mark and yeah sure let's take a
+
+1395
+01:17:00,920 --> 01:17:02,870
+look so let's see if we've got some
+
+1396
+01:17:02,870 --> 01:17:04,760
+things running here yeah it looks like
+
+1397
+01:17:04,760 --> 01:17:09,670
+we have the agents up and running and
+
+1398
+01:17:09,670 --> 01:17:16,100
+we're utilizing 194 mags out of it's
+
+1399
+01:17:16,100 --> 01:17:20,120
+probably 400 and you know shy of 512
+
+1400
+01:17:20,120 --> 01:17:23,810
+right and then if we go back to Rancher
+
+1401
+01:17:23,810 --> 01:17:28,250
+we should now see here here it is here's
+
+1402
+01:17:28,250 --> 01:17:31,160
+our cluster we can see our nodes we can
+
+1403
+01:17:31,160 --> 01:17:35,660
+see that two of these nodes are marked
+
+1404
+01:17:35,660 --> 01:17:40,250
+as masters that you know they're no
+
+1405
+01:17:40,250 --> 01:17:44,750
+executes and I can do things that I
+
+1406
+01:17:44,750 --> 01:17:46,400
+would normally do with ranch or like
+
+1407
+01:17:46,400 --> 01:17:48,410
+deployments and stuff like that so
+
+1408
+01:17:48,410 --> 01:17:50,870
+rancher creates this wrapper around
+
+1409
+01:17:50,870 --> 01:17:52,820
+namespaces for those of you that aren't
+
+1410
+01:17:52,820 --> 01:17:57,380
+familiar with it and I can go in and
+
+1411
+01:17:57,380 --> 01:18:00,370
+create a deployment this is just a UI
+
+1412
+01:18:00,370 --> 01:18:03,850
+surfacing kubernetes capabilities so
+
+1413
+01:18:03,850 --> 01:18:11,020
+I'll just do it on nginx deployments and
+
+1414
+01:18:11,020 --> 01:18:16,319
+we'll do five pods just for the kicks
+
+1415
+01:18:16,319 --> 01:18:29,339
+will create a new namespace and I know
+
+1416
+01:18:29,339 --> 01:18:37,079
+it exposes 80 and go ahead and launch
+
+1417
+01:18:37,079 --> 01:18:39,719
+that actually there's this I would need
+
+1418
+01:18:39,719 --> 01:18:43,729
+to also create an ingress for this
+
+1419
+01:18:43,729 --> 01:18:47,729
+because I don't expose my little private
+
+1420
+01:18:47,729 --> 01:18:52,859
+network here so we probably won't be
+
+1421
+01:18:52,859 --> 01:18:54,569
+able to actually view that unless we're
+
+1422
+01:18:54,569 --> 01:19:00,479
+inside the network all right so it's
+
+1423
+01:19:00,479 --> 01:19:04,169
+employing we should see in the top of
+
+1424
+01:19:04,169 --> 01:19:07,489
+this screen we should see some changes
+
+1425
+01:19:07,489 --> 01:19:10,609
+although there may be too many things
+
+1426
+01:19:10,609 --> 01:19:20,219
+let's see just nginx namespace we can
+
+1427
+01:19:20,219 --> 01:19:22,019
+see more utilization down on the bottom
+
+1428
+01:19:22,019 --> 01:19:34,280
+one those contain creating yeah let's
+
+1429
+01:19:34,280 --> 01:19:39,569
+get on - Oh wide now you know I'm I'm
+
+1430
+01:19:39,569 --> 01:19:42,869
+viewing this through coop CTL it's only
+
+1431
+01:19:42,869 --> 01:19:44,879
+one of them landed on the smaller
+
+1432
+01:19:44,879 --> 01:19:47,339
+Raspberry Pi four of them landed on the
+
+1433
+01:19:47,339 --> 01:19:52,409
+larger one and if I go if I go into the
+
+1434
+01:19:52,409 --> 01:19:54,780
+UI I can also see similar things right
+
+1435
+01:19:54,780 --> 01:19:57,149
+so I can come in and see that these are
+
+1436
+01:19:57,149 --> 01:19:58,889
+all unavailable and nothing's come up up
+
+1437
+01:19:58,889 --> 01:20:00,329
+here we go one of them came up on the
+
+1438
+01:20:00,329 --> 01:20:03,889
+three A+ so that's the first one up
+
+1439
+01:20:18,490 --> 01:20:21,560
+so that's pretty much it that's
+
+1440
+01:20:21,560 --> 01:20:27,740
+k3s that is you know manager management
+
+1441
+01:20:27,740 --> 01:20:31,580
+server we are working on as I said
+
+1442
+01:20:31,580 --> 01:20:35,260
+before we're working on setting up
+
+1443
+01:20:35,260 --> 01:20:38,000
+building basically a fleet capability
+
+1444
+01:20:38,000 --> 01:20:40,730
+into master management server it's not
+
+1445
+01:20:40,730 --> 01:20:41,900
+clear right now whether it's going to be
+
+1446
+01:20:41,900 --> 01:20:44,300
+a separate project or whether it'll be
+
+1447
+01:20:44,300 --> 01:20:47,000
+embedded into Rancher but the idea is
+
+1448
+01:20:47,000 --> 01:20:53,390
+that Rancher will have the that you've
+
+1449
+01:20:53,390 --> 01:20:54,980
+got all these edge clusters you're gonna
+
+1450
+01:20:54,980 --> 01:20:58,220
+have a this plethora of clusters and how
+
+1451
+01:20:58,220 --> 01:21:01,310
+do you manage them all and you know if
+
+1452
+01:21:01,310 --> 01:21:03,080
+you have right now Rancher is used
+
+1453
+01:21:03,080 --> 01:21:04,550
+because people have them in the data
+
+1454
+01:21:04,550 --> 01:21:05,750
+center they've got them in multiple
+
+1455
+01:21:05,750 --> 01:21:08,810
+clouds they want to manage clusters
+
+1456
+01:21:08,810 --> 01:21:10,130
+across providers
+
+1457
+01:21:10,130 --> 01:21:12,860
+that's what Rancher is used for we're
+
+1458
+01:21:12,860 --> 01:21:15,530
+seeing that in the edge with the large
+
+1459
+01:21:15,530 --> 01:21:17,180
+number of clusters
+
+1460
+01:21:17,180 --> 01:21:19,370
+there's not really a data center per se
+
+1461
+01:21:19,370 --> 01:21:22,910
+but lots of things to manage and process
+
+1462
+01:21:22,910 --> 01:21:28,030
+and to work with in that environment so
+
+1463
+01:21:28,030 --> 01:21:29,570
+that's all I've got
+
+1464
+01:21:29,570 --> 01:21:33,320
+thanks everybody for joining today yeah
+
+1465
+01:21:33,320 --> 01:21:35,660
+thank you so much mark awesome job thank
+
+1466
+01:21:35,660 --> 01:21:37,370
+you thank you thank you for the slides
+
+1467
+01:21:37,370 --> 01:21:41,120
+and the demo and the knowledge and just
+
+1468
+01:21:41,120 --> 01:21:42,740
+a reminder to everybody this session was
+
+1469
+01:21:42,740 --> 01:21:45,080
+recorded I'll do my best to get this out
+
+1470
+01:21:45,080 --> 01:21:48,050
+to you all in your email later today in
+
+1471
+01:21:48,050 --> 01:21:50,000
+the next couple hours just as soon as
+
+1472
+01:21:50,000 --> 01:21:53,690
+the the video processes um so you'll get
+
+1473
+01:21:53,690 --> 01:21:55,820
+the recording and the slides in your
+
+1474
+01:21:55,820 --> 01:21:57,530
+email if you don't see it check YouTube
+
+1475
+01:21:57,530 --> 01:22:00,230
+it'll be there you can also reach me on
+
+1476
+01:22:00,230 --> 01:22:04,010
+email and Matthew at Rancher calm or on
+
+1477
+01:22:04,010 --> 01:22:07,010
+slack at at Matthew and all that stuff
+
+1478
+01:22:07,010 --> 01:22:08,750
+all those that info will be in the
+
+1479
+01:22:08,750 --> 01:22:09,170
+slides
+
+1480
+01:22:09,170 --> 01:22:11,840
+alright that's all we have today I might
+
+1481
+01:22:11,840 --> 01:22:13,820
+see you all tomorrow we are doing an
+
+1482
+01:22:13,820 --> 01:22:16,100
+intro to rancher rancher management
+
+1483
+01:22:16,100 --> 01:22:19,040
+server and kubernetes tomorrow adrian
+
+1484
+01:22:19,040 --> 01:22:20,300
+goings will be doing that director of
+
+1485
+01:22:20,300 --> 01:22:22,240
+community so it should be really good
+
+1486
+01:22:22,240 --> 01:22:24,680
+otherwise that's it thanks everybody
+
+1487
+01:22:24,680 --> 01:22:26,120
+have a great rest of your week thanks
+
+1488
+01:22:26,120 --> 01:22:31,360
+mark you're welcome take care
