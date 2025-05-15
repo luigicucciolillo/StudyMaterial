@@ -1,0 +1,5647 @@
+1
+00:00:06,040 --> 00:00:07,680
+folks thank you very much for joining
+
+2
+00:00:07,680 --> 00:00:10,160
+this session about seress platform on
+
+3
+00:00:10,160 --> 00:00:12,559
+kubernetes uh we will be uh doing a
+
+4
+00:00:12,559 --> 00:00:14,240
+bunch of things here uh talking about
+
+5
+00:00:14,240 --> 00:00:16,400
+kubernetes mostly uh so let's start with
+
+6
+00:00:16,400 --> 00:00:19,080
+the basics kubernetes users how many
+
+7
+00:00:19,080 --> 00:00:21,080
+people using kubernetes already all
+
+8
+00:00:21,080 --> 00:00:22,480
+right that's that's good that's fair
+
+9
+00:00:22,480 --> 00:00:24,560
+enough most of the time because this is
+
+10
+00:00:24,560 --> 00:00:27,080
+kcd Spain uh it's you know it's about
+
+11
+00:00:27,080 --> 00:00:28,560
+kubernetes so I will not be going
+
+12
+00:00:28,560 --> 00:00:30,080
+through the basics but if you have any
+
+13
+00:00:30,080 --> 00:00:31,960
+questions please feel free to shout out
+
+14
+00:00:31,960 --> 00:00:33,719
+and we can stop and spend a little bit
+
+15
+00:00:33,719 --> 00:00:35,680
+more time there I will be showing a
+
+16
+00:00:35,680 --> 00:00:37,200
+bunch of different projects and I have
+
+17
+00:00:37,200 --> 00:00:39,520
+only 15 minutes uh so it's uh you know
+
+18
+00:00:39,520 --> 00:00:41,760
+it's going to be fast and the main idea
+
+19
+00:00:41,760 --> 00:00:44,000
+here is just to show things and then uh
+
+20
+00:00:44,000 --> 00:00:45,600
+you can go and research more you can ask
+
+21
+00:00:45,600 --> 00:00:47,199
+questions or you can ask for more
+
+22
+00:00:47,199 --> 00:00:49,000
+clarifications but I wanted to show a
+
+23
+00:00:49,000 --> 00:00:52,960
+bunch of different things um important
+
+24
+00:00:52,960 --> 00:00:54,280
+uh when we talk about platforms
+
+25
+00:00:54,280 --> 00:00:55,760
+basically we are talking about combining
+
+26
+00:00:55,760 --> 00:00:58,160
+a different uh set of projects to kind
+
+27
+00:00:58,160 --> 00:00:59,559
+like achieve something to enable
+
+28
+00:00:59,559 --> 00:01:01,559
+different teams and what we are going to
+
+29
+00:01:01,559 --> 00:01:03,320
+be talking specifically today is about
+
+30
+00:01:03,320 --> 00:01:05,519
+serverless on top of kubernetes which is
+
+31
+00:01:05,519 --> 00:01:07,960
+a specific thing that some people might
+
+32
+00:01:07,960 --> 00:01:09,960
+want and some people basically they are
+
+33
+00:01:09,960 --> 00:01:12,000
+not interested so it's not for everyone
+
+34
+00:01:12,000 --> 00:01:13,560
+but I think that it has some advantages
+
+35
+00:01:13,560 --> 00:01:15,960
+that you might consider at some point so
+
+36
+00:01:15,960 --> 00:01:17,680
+my name is Maurice salatino I work for a
+
+37
+00:01:17,680 --> 00:01:19,680
+company it's called Uh diagrid I will be
+
+38
+00:01:19,680 --> 00:01:20,880
+talking about the project that we're
+
+39
+00:01:20,880 --> 00:01:23,079
+working on a little bit and also the
+
+40
+00:01:23,079 --> 00:01:25,200
+products too not too much just to
+
+41
+00:01:25,200 --> 00:01:27,320
+mention kind like the the ideas Behind
+
+42
+00:01:27,320 --> 00:01:28,720
+These and other companies and other
+
+43
+00:01:28,720 --> 00:01:30,759
+projects I'm so sofware engineer I'm not
+
+44
+00:01:30,759 --> 00:01:32,680
+a developer advocate so my presentations
+
+45
+00:01:32,680 --> 00:01:35,240
+tends to be not funny and very technical
+
+46
+00:01:35,240 --> 00:01:37,200
+and and you know and Technical oriented
+
+47
+00:01:37,200 --> 00:01:39,840
+so it's it will be just very dry way of
+
+48
+00:01:39,840 --> 00:01:41,920
+showing different projects uh I'm also a
+
+49
+00:01:41,920 --> 00:01:43,880
+cncf Ambassador and I think that's
+
+50
+00:01:43,880 --> 00:01:45,560
+interesting uh mostly because I've been
+
+51
+00:01:45,560 --> 00:01:46,840
+just working with different projects and
+
+52
+00:01:46,840 --> 00:01:48,119
+I've been talking about this for for
+
+53
+00:01:48,119 --> 00:01:50,600
+some time now and I author this this
+
+54
+00:01:50,600 --> 00:01:52,520
+book I have two copies we will be
+
+55
+00:01:52,520 --> 00:01:54,320
+playing with the Wi-Fi in a bit uh just
+
+56
+00:01:54,320 --> 00:01:55,960
+to see if you can get one of the two
+
+57
+00:01:55,960 --> 00:01:58,079
+copies that I have here uh for free but
+
+58
+00:01:58,079 --> 00:01:59,479
+if you're interested in in platforms and
+
+59
+00:01:59,479 --> 00:02:01,360
+kubernetes this this book basically
+
+60
+00:02:01,360 --> 00:02:03,360
+covers like I think that like 17
+
+61
+00:02:03,360 --> 00:02:05,240
+different projects in the cncf space and
+
+62
+00:02:05,240 --> 00:02:07,080
+some projects that are not in the cncf
+
+63
+00:02:07,080 --> 00:02:09,520
+too uh and as I mentioned before I'm
+
+64
+00:02:09,520 --> 00:02:10,679
+collaborating with different projects
+
+65
+00:02:10,679 --> 00:02:12,280
+and I've been involved with the Dapper
+
+66
+00:02:12,280 --> 00:02:13,760
+project with the K8 project that I'm
+
+67
+00:02:13,760 --> 00:02:15,319
+showing today and also with Captain
+
+68
+00:02:15,319 --> 00:02:16,560
+something that I'm not showing today but
+
+69
+00:02:16,560 --> 00:02:18,160
+it's also like a a project that it's
+
+70
+00:02:18,160 --> 00:02:20,480
+very close to to my heart uh I've been
+
+71
+00:02:20,480 --> 00:02:22,319
+running a Blog for 15 years so if you
+
+72
+00:02:22,319 --> 00:02:24,440
+are interested check it there like salao
+
+73
+00:02:24,440 --> 00:02:27,680
+or salao at Twitter is my handle but
+
+74
+00:02:27,680 --> 00:02:29,080
+let's get it started let's take a look
+
+75
+00:02:29,080 --> 00:02:31,560
+into some open source projects so the
+
+76
+00:02:31,560 --> 00:02:32,920
+first thing that I will do which is
+
+77
+00:02:32,920 --> 00:02:34,599
+something that I usually don't is
+
+78
+00:02:34,599 --> 00:02:36,319
+showing a project that called open
+
+79
+00:02:36,319 --> 00:02:38,000
+function how many people here knows
+
+80
+00:02:38,000 --> 00:02:41,480
+about open function I see Zero hands
+
+81
+00:02:41,480 --> 00:02:43,280
+raising and this is there is a very good
+
+82
+00:02:43,280 --> 00:02:45,480
+reason for that uh open function is a
+
+83
+00:02:45,480 --> 00:02:49,319
+cncf project uh but it's a Chinese Le
+
+84
+00:02:49,319 --> 00:02:51,200
+cncf project that basically means that
+
+85
+00:02:51,200 --> 00:02:52,800
+it was created in a Chinese community
+
+86
+00:02:52,800 --> 00:02:55,920
+and donated to the cncf and it's a very
+
+87
+00:02:55,920 --> 00:02:57,680
+very interesting project to analyze
+
+88
+00:02:57,680 --> 00:02:59,200
+that's why I wanted to show it today
+
+89
+00:02:59,200 --> 00:03:01,159
+mostly because when we're talking about
+
+90
+00:03:01,159 --> 00:03:03,400
+serverless some people will think about
+
+91
+00:03:03,400 --> 00:03:05,519
+like function based you know
+
+92
+00:03:05,519 --> 00:03:07,280
+applications and platforms and open
+
+93
+00:03:07,280 --> 00:03:10,000
+function gives you exactly that so let's
+
+94
+00:03:10,000 --> 00:03:12,200
+take a quick look at how this looks in
+
+95
+00:03:12,200 --> 00:03:13,560
+in
+
+96
+00:03:13,560 --> 00:03:16,040
+practice let me see if you can see my
+
+97
+00:03:16,040 --> 00:03:18,400
+screen here I'm connected to a cluster I
+
+98
+00:03:18,400 --> 00:03:20,560
+basically install open function into a
+
+99
+00:03:20,560 --> 00:03:22,040
+kubernetes cluster this is running on
+
+100
+00:03:22,040 --> 00:03:24,000
+gke on Google Cloud so it's not in my
+
+101
+00:03:24,000 --> 00:03:26,080
+laptop meaning that if the Wi-Fi goes
+
+102
+00:03:26,080 --> 00:03:27,680
+wrong at some point I will just not be
+
+103
+00:03:27,680 --> 00:03:29,640
+able to do anything we will try 4G or
+
+104
+00:03:29,640 --> 00:03:30,959
+something else but it's it's kind of
+
+105
+00:03:30,959 --> 00:03:33,799
+working right uh when I just basically
+
+106
+00:03:33,799 --> 00:03:35,640
+list all the namespaces you can see that
+
+107
+00:03:35,640 --> 00:03:36,920
+I have a bunch of things I've just
+
+108
+00:03:36,920 --> 00:03:38,599
+installed open function which is just a
+
+109
+00:03:38,599 --> 00:03:40,000
+simple project and I have a bunch of
+
+110
+00:03:40,000 --> 00:03:42,239
+different tools installed there just to
+
+111
+00:03:42,239 --> 00:03:44,439
+be able to provide this like function
+
+112
+00:03:44,439 --> 00:03:46,159
+experience the idea here is to enable
+
+113
+00:03:46,159 --> 00:03:48,040
+developers just to write functions in
+
+114
+00:03:48,040 --> 00:03:50,040
+any language that they want and then
+
+115
+00:03:50,040 --> 00:03:51,760
+just by creating a
+
+116
+00:03:51,760 --> 00:03:54,879
+single kubernetes resource to be able to
+
+117
+00:03:54,879 --> 00:03:56,599
+get that function running into this
+
+118
+00:03:56,599 --> 00:03:59,400
+kubernetes cluster right but in order to
+
+119
+00:03:59,400 --> 00:04:01,280
+achieve that they actually integrated a
+
+120
+00:04:01,280 --> 00:04:03,400
+bunch of tools together in a very very
+
+121
+00:04:03,400 --> 00:04:06,120
+particular way the main interface that
+
+122
+00:04:06,120 --> 00:04:08,400
+you will see as a user it's something
+
+123
+00:04:08,400 --> 00:04:10,400
+called function of course and I don't
+
+124
+00:04:10,400 --> 00:04:11,720
+know if you can see this like in the
+
+125
+00:04:11,720 --> 00:04:13,760
+back but I will try to make it as big as
+
+126
+00:04:13,760 --> 00:04:15,840
+possible everything is in a reposto
+
+127
+00:04:15,840 --> 00:04:18,239
+there that it's called kcd Spain 2024 in
+
+128
+00:04:18,239 --> 00:04:19,720
+my GitHub reposter I will share the link
+
+129
+00:04:19,720 --> 00:04:22,079
+later but as you can see here let me see
+
+130
+00:04:22,079 --> 00:04:24,080
+if I can yeah as you can see here there
+
+131
+00:04:24,080 --> 00:04:26,120
+is just a new kubernetes resource called
+
+132
+00:04:26,120 --> 00:04:27,880
+function that's the thing that you
+
+133
+00:04:27,880 --> 00:04:30,080
+define now in order to actually deploy
+
+134
+00:04:30,080 --> 00:04:32,400
+function then uh basically you write the
+
+135
+00:04:32,400 --> 00:04:34,440
+function code in this case I have a you
+
+136
+00:04:34,440 --> 00:04:36,360
+know a go function which is pretty
+
+137
+00:04:36,360 --> 00:04:38,160
+pretty simple it's just printing a hello
+
+138
+00:04:38,160 --> 00:04:39,919
+world or something like that and then
+
+139
+00:04:39,919 --> 00:04:41,960
+you define two things here in the spec
+
+140
+00:04:41,960 --> 00:04:43,400
+uh definition in the spec you know
+
+141
+00:04:43,400 --> 00:04:46,400
+template here you define the build pH
+
+142
+00:04:46,400 --> 00:04:47,759
+how are you going to build this code
+
+143
+00:04:47,759 --> 00:04:50,199
+into a container and then you define how
+
+144
+00:04:50,199 --> 00:04:52,320
+are you going to serve this code for
+
+145
+00:04:52,320 --> 00:04:54,960
+people to access this function right as
+
+146
+00:04:54,960 --> 00:04:56,360
+you can see here the build side of
+
+147
+00:04:56,360 --> 00:04:58,199
+things you need to specify a builder in
+
+148
+00:04:58,199 --> 00:04:59,960
+this case you need to know that it's
+
+149
+00:04:59,960 --> 00:05:01,960
+goal and this Builder I think it's using
+
+150
+00:05:01,960 --> 00:05:03,520
+a cncf project that it's called build
+
+151
+00:05:03,520 --> 00:05:06,440
+packs to actually do the build and as
+
+152
+00:05:06,440 --> 00:05:08,120
+you can see here you start seen this
+
+153
+00:05:08,120 --> 00:05:09,639
+kind of stuff like okay if you're in
+
+154
+00:05:09,639 --> 00:05:11,520
+China maybe you cannot access the you
+
+155
+00:05:11,520 --> 00:05:13,280
+know go modules so you need a proxy for
+
+156
+00:05:13,280 --> 00:05:15,240
+that kind of like interesting stuff that
+
+157
+00:05:15,240 --> 00:05:17,800
+happens in the other side of the world
+
+158
+00:05:17,800 --> 00:05:19,840
+uh but another important part here is
+
+159
+00:05:19,840 --> 00:05:21,360
+not only how are you going to build the
+
+160
+00:05:21,360 --> 00:05:22,680
+the container but also where is the
+
+161
+00:05:22,680 --> 00:05:24,560
+source code and here I'm pointing to a
+
+162
+00:05:24,560 --> 00:05:26,960
+GitHub repos story that has the function
+
+163
+00:05:26,960 --> 00:05:28,600
+source code in this case again written
+
+164
+00:05:28,600 --> 00:05:32,280
+in go under this directory so no matter
+
+165
+00:05:32,280 --> 00:05:33,880
+where the cluster is it's going to be
+
+166
+00:05:33,880 --> 00:05:35,880
+able to pick up the source code of the
+
+167
+00:05:35,880 --> 00:05:37,800
+function build it and deploy it into the
+
+168
+00:05:37,800 --> 00:05:39,759
+cluster itself and it's going to then
+
+169
+00:05:39,759 --> 00:05:41,600
+serve it here we don't have much
+
+170
+00:05:41,600 --> 00:05:44,199
+parameters here in general it's just uh
+
+171
+00:05:44,199 --> 00:05:46,120
+the name of the image that will be
+
+172
+00:05:46,120 --> 00:05:48,680
+created On Demand by the build process
+
+173
+00:05:48,680 --> 00:05:50,440
+and then the fact that we will uh you
+
+174
+00:05:50,440 --> 00:05:51,919
+know we can configure the image here in
+
+175
+00:05:51,919 --> 00:05:53,240
+any way we want if we want to set up
+
+176
+00:05:53,240 --> 00:05:54,680
+environment variables or whatever we
+
+177
+00:05:54,680 --> 00:05:56,720
+just set it up there then the port that
+
+178
+00:05:56,720 --> 00:05:59,160
+it's being used by default so with this
+
+179
+00:05:59,160 --> 00:06:01,560
+thing um I will just apply this to to
+
+180
+00:06:01,560 --> 00:06:03,360
+the
+
+181
+00:06:03,360 --> 00:06:06,680
+cluster uh so basically not that one uh
+
+182
+00:06:06,680 --> 00:06:10,440
+this one functions go function functions
+
+183
+00:06:10,440 --> 00:06:12,880
+go function. jaml so I'm just applying
+
+184
+00:06:12,880 --> 00:06:14,560
+this resource to the cluster and
+
+185
+00:06:14,560 --> 00:06:16,599
+basically what I have now is you know a
+
+186
+00:06:16,599 --> 00:06:18,280
+function that is going to be built and
+
+187
+00:06:18,280 --> 00:06:20,280
+deploy inside this cluster by using a
+
+188
+00:06:20,280 --> 00:06:23,039
+bunch of different tools uh if I do I
+
+189
+00:06:23,039 --> 00:06:24,759
+can do get functions now because this is
+
+190
+00:06:24,759 --> 00:06:26,520
+a resource right like as any other
+
+191
+00:06:26,520 --> 00:06:28,520
+kubernetes resource and I can see kind
+
+192
+00:06:28,520 --> 00:06:31,199
+like the state of the function itself
+
+193
+00:06:31,199 --> 00:06:33,120
+right so it basically says it's been
+
+194
+00:06:33,120 --> 00:06:36,000
+buil it's building now uh and at some
+
+195
+00:06:36,000 --> 00:06:37,240
+point it will tell me if it's been
+
+196
+00:06:37,240 --> 00:06:39,240
+served if it's ready to receive request
+
+197
+00:06:39,240 --> 00:06:41,280
+or not and I will get some kind of
+
+198
+00:06:41,280 --> 00:06:44,440
+address here uh after all this process
+
+199
+00:06:44,440 --> 00:06:47,160
+happens I did build this function before
+
+200
+00:06:47,160 --> 00:06:48,919
+so I was expecting this to be built
+
+201
+00:06:48,919 --> 00:06:50,840
+again things that happen when you're
+
+202
+00:06:50,840 --> 00:06:52,560
+doing kind of like live demos right but
+
+203
+00:06:52,560 --> 00:06:53,800
+at the end of the day you will have a
+
+204
+00:06:53,800 --> 00:06:55,080
+URL there that you can basically
+
+205
+00:06:55,080 --> 00:06:57,759
+interact with just call it it will be
+
+206
+00:06:57,759 --> 00:06:59,840
+some sort of a public URL that you can
+
+207
+00:06:59,840 --> 00:07:02,240
+access uh if you have configured your
+
+208
+00:07:02,240 --> 00:07:04,199
+cluster correctly you will have a public
+
+209
+00:07:04,199 --> 00:07:06,520
+you know URL or like an internal cluster
+
+210
+00:07:06,520 --> 00:07:08,280
+URL that other functions can use to call
+
+211
+00:07:08,280 --> 00:07:09,240
+this
+
+212
+00:07:09,240 --> 00:07:11,319
+function one thing that I wanted to show
+
+213
+00:07:11,319 --> 00:07:13,039
+here uh which I think is important if
+
+214
+00:07:13,039 --> 00:07:14,360
+you go to their website like open
+
+215
+00:07:14,360 --> 00:07:16,560
+function. deev you will find this
+
+216
+00:07:16,560 --> 00:07:19,160
+diagram uh which for me basically tells
+
+217
+00:07:19,160 --> 00:07:21,120
+me a lot of things right it tells me
+
+218
+00:07:21,120 --> 00:07:23,199
+that to build an experience like this
+
+219
+00:07:23,199 --> 00:07:26,120
+where you basically expose an interface
+
+220
+00:07:26,120 --> 00:07:27,479
+the function interface in this case the
+
+221
+00:07:27,479 --> 00:07:29,840
+function resource and then you will have
+
+222
+00:07:29,840 --> 00:07:31,560
+different options to do different things
+
+223
+00:07:31,560 --> 00:07:32,879
+depending on what you're trying to do
+
+224
+00:07:32,879 --> 00:07:34,440
+right if you are trying to build the
+
+225
+00:07:34,440 --> 00:07:36,000
+container based on the source code you
+
+226
+00:07:36,000 --> 00:07:38,120
+have a bunch of cncf and open source
+
+227
+00:07:38,120 --> 00:07:40,440
+projects that will help you to do that
+
+228
+00:07:40,440 --> 00:07:43,319
+buildpacks is very like it's it's a it's
+
+229
+00:07:43,319 --> 00:07:44,919
+a complicated project it's not a simple
+
+230
+00:07:44,919 --> 00:07:46,800
+project but the main idea is that you
+
+231
+00:07:46,800 --> 00:07:48,360
+don't even need to specify in which
+
+232
+00:07:48,360 --> 00:07:50,440
+language your function is or your code
+
+233
+00:07:50,440 --> 00:07:52,639
+is uh buildpack will have a detection
+
+234
+00:07:52,639 --> 00:07:54,159
+mechanism to say you know this is a Java
+
+235
+00:07:54,159 --> 00:07:55,960
+function or this is a go function and
+
+236
+00:07:55,960 --> 00:07:58,400
+then we'll create containers based on
+
+237
+00:07:58,400 --> 00:08:00,000
+that which is a pretty interesting
+
+238
+00:08:00,000 --> 00:08:01,360
+mechanism and then the other ones are
+
+239
+00:08:01,360 --> 00:08:03,120
+are kind like more typical things that
+
+240
+00:08:03,120 --> 00:08:05,360
+you will use just to create containers
+
+241
+00:08:05,360 --> 00:08:07,240
+uh the main idea there is just not to be
+
+242
+00:08:07,240 --> 00:08:08,879
+playing with Docker fast right like
+
+243
+00:08:08,879 --> 00:08:11,080
+which are good they are easy to create
+
+244
+00:08:11,080 --> 00:08:12,440
+but they are also very easy to make
+
+245
+00:08:12,440 --> 00:08:15,120
+mistakes uh too and then you go through
+
+246
+00:08:15,120 --> 00:08:16,800
+you know the the facee of okay I have a
+
+247
+00:08:16,800 --> 00:08:18,879
+container now I need to serve this
+
+248
+00:08:18,879 --> 00:08:21,080
+function in a way that you know it's
+
+249
+00:08:21,080 --> 00:08:22,840
+serverless in a sense right like and the
+
+250
+00:08:22,840 --> 00:08:25,080
+main idea here is that I will be able to
+
+251
+00:08:25,080 --> 00:08:26,680
+upscale the function if it's getting a
+
+252
+00:08:26,680 --> 00:08:28,599
+lot of requests or I will be able to
+
+253
+00:08:28,599 --> 00:08:30,919
+downscale it to if it's nobody's using
+
+254
+00:08:30,919 --> 00:08:32,959
+it right and for that you know you can
+
+255
+00:08:32,959 --> 00:08:34,599
+see there that they are using a bunch of
+
+256
+00:08:34,599 --> 00:08:36,599
+projects and again it's not just using
+
+257
+00:08:36,599 --> 00:08:38,279
+the projects but it's combining them
+
+258
+00:08:38,279 --> 00:08:40,320
+together to achieve some use cases so
+
+259
+00:08:40,320 --> 00:08:41,919
+for some specific use cases you need to
+
+260
+00:08:41,919 --> 00:08:44,039
+combine them in in in a very specific
+
+261
+00:08:44,039 --> 00:08:45,880
+way you can see K native there you can
+
+262
+00:08:45,880 --> 00:08:48,200
+see kada you can see Dapper and at the
+
+263
+00:08:48,200 --> 00:08:49,880
+bottom they added also like a wasm
+
+264
+00:08:49,880 --> 00:08:52,200
+runtime too for for wasm modules and
+
+265
+00:08:52,200 --> 00:08:53,160
+stuff like that which is kind of
+
+266
+00:08:53,160 --> 00:08:55,360
+interesting and then on this side of the
+
+267
+00:08:55,360 --> 00:08:57,360
+the screen you can see events which is
+
+268
+00:08:57,360 --> 00:08:58,959
+again it's it's a way that they created
+
+269
+00:08:58,959 --> 00:09:00,600
+in order to to connect functions
+
+270
+00:09:00,600 --> 00:09:03,200
+together via messaging or Eventing right
+
+271
+00:09:03,200 --> 00:09:04,440
+it's kind of like an interesting thing
+
+272
+00:09:04,440 --> 00:09:06,360
+too uh that they created and again this
+
+273
+00:09:06,360 --> 00:09:08,959
+is where it becomes all about like is
+
+274
+00:09:08,959 --> 00:09:10,640
+this something that you really need like
+
+275
+00:09:10,640 --> 00:09:12,079
+do you need the functionality in this
+
+276
+00:09:12,079 --> 00:09:14,079
+way or are you willing to create your
+
+277
+00:09:14,079 --> 00:09:15,920
+own glue between the projects and Define
+
+278
+00:09:15,920 --> 00:09:17,240
+the use cases that you are trying to
+
+279
+00:09:17,240 --> 00:09:20,000
+Target in your company let's see and I
+
+280
+00:09:20,000 --> 00:09:21,600
+will just not wait for too long let's
+
+281
+00:09:21,600 --> 00:09:22,880
+see if this is
+
+282
+00:09:22,880 --> 00:09:25,279
+running I don't know demo gos are on my
+
+283
+00:09:25,279 --> 00:09:27,640
+side today so it seems to be running
+
+284
+00:09:27,640 --> 00:09:30,279
+here um I don't know if you can see down
+
+285
+00:09:30,279 --> 00:09:32,120
+there but like basically what I have
+
+286
+00:09:32,120 --> 00:09:34,839
+here is a URL that it's not a public URL
+
+287
+00:09:34,839 --> 00:09:37,680
+this is basically an internal URL and
+
+288
+00:09:37,680 --> 00:09:40,399
+this is where open function you actually
+
+289
+00:09:40,399 --> 00:09:42,040
+need to start understanding a little bit
+
+290
+00:09:42,040 --> 00:09:43,760
+about the tools that it's using in order
+
+291
+00:09:43,760 --> 00:09:46,440
+to use it because when things go wrong
+
+292
+00:09:46,440 --> 00:09:48,399
+abstractions start like falling apart
+
+293
+00:09:48,399 --> 00:09:50,160
+because if I need to troubleshoot or
+
+294
+00:09:50,160 --> 00:09:52,279
+figure out what's the public IP for that
+
+295
+00:09:52,279 --> 00:09:54,720
+function I need to know how it's being
+
+296
+00:09:54,720 --> 00:09:56,920
+served in a way and I will just run a
+
+297
+00:09:56,920 --> 00:09:59,120
+command because I know how this is being
+
+298
+00:09:59,120 --> 00:10:00,519
+served served and I know where the
+
+299
+00:10:00,519 --> 00:10:04,040
+public IP is uh but yeah at the end of
+
+300
+00:10:04,040 --> 00:10:05,519
+the day you don't really want to do this
+
+301
+00:10:05,519 --> 00:10:07,040
+so you need to make sure that whatever
+
+302
+00:10:07,040 --> 00:10:09,920
+you expose here it can be used right and
+
+303
+00:10:09,920 --> 00:10:11,800
+I can call this function Now using just
+
+304
+00:10:11,800 --> 00:10:14,839
+just sending an HTP request saying kcds
+
+305
+00:10:14,839 --> 00:10:17,399
+Spain for example right as you can see
+
+306
+00:10:17,399 --> 00:10:19,760
+the function will not respond pretty
+
+307
+00:10:19,760 --> 00:10:22,160
+fast because it wasn't upscaled yet so
+
+308
+00:10:22,160 --> 00:10:23,360
+there wasn't an instance of that
+
+309
+00:10:23,360 --> 00:10:25,240
+function running and it took like a
+
+310
+00:10:25,240 --> 00:10:27,920
+second to spin up a new replica you know
+
+311
+00:10:27,920 --> 00:10:29,880
+process the request and then it's now
+
+312
+00:10:29,880 --> 00:10:31,880
+waiting for most more request to happen
+
+313
+00:10:31,880 --> 00:10:33,519
+right if I call it again it will be much
+
+314
+00:10:33,519 --> 00:10:36,040
+faster right I can list the pots here
+
+315
+00:10:36,040 --> 00:10:38,360
+you will see that now I have uh let me
+
+316
+00:10:38,360 --> 00:10:41,279
+see if I can do that uh you will see
+
+317
+00:10:41,279 --> 00:10:43,120
+like I have that b running there and
+
+318
+00:10:43,120 --> 00:10:45,680
+again in the true serverless fashion in
+
+319
+00:10:45,680 --> 00:10:47,639
+in after 90 seconds or so which is the
+
+320
+00:10:47,639 --> 00:10:50,000
+theault time for this to be downscale if
+
+321
+00:10:50,000 --> 00:10:51,880
+I do not send more requests this will be
+
+322
+00:10:51,880 --> 00:10:54,399
+downscale to zero right and again as I
+
+323
+00:10:54,399 --> 00:10:56,320
+mentioned before uh there are some tools
+
+324
+00:10:56,320 --> 00:10:57,880
+that are basically implementing this
+
+325
+00:10:57,880 --> 00:11:00,560
+behavior and uh you
+
+326
+00:11:00,560 --> 00:11:03,760
+know it's actually up to you to Define
+
+327
+00:11:03,760 --> 00:11:06,040
+if the way that open function is uh
+
+328
+00:11:06,040 --> 00:11:08,120
+gluing things together works for you or
+
+329
+00:11:08,120 --> 00:11:11,880
+or not right open function gives like
+
+330
+00:11:11,880 --> 00:11:13,680
+for me it's a great initiative again
+
+331
+00:11:13,680 --> 00:11:15,880
+there are some you know language is
+
+332
+00:11:15,880 --> 00:11:17,560
+barriers that we need to tackle because
+
+333
+00:11:17,560 --> 00:11:19,160
+again all all the documentation it's a
+
+334
+00:11:19,160 --> 00:11:21,160
+little bit strange being translated from
+
+335
+00:11:21,160 --> 00:11:23,399
+Chinese to English there is tons of
+
+336
+00:11:23,399 --> 00:11:25,680
+possibilities there to contribute uh to
+
+337
+00:11:25,680 --> 00:11:27,440
+make things easier for non-chinese
+
+338
+00:11:27,440 --> 00:11:29,519
+speakers and and for you know for
+
+339
+00:11:29,519 --> 00:11:32,000
+Spanish speakers as well uh it provides
+
+340
+00:11:32,000 --> 00:11:33,959
+this abstraction based on a function
+
+341
+00:11:33,959 --> 00:11:35,639
+concept which is great and I think that
+
+342
+00:11:35,639 --> 00:11:38,200
+they did a good job there at gluing some
+
+343
+00:11:38,200 --> 00:11:40,360
+tools together but then of course like
+
+344
+00:11:40,360 --> 00:11:42,040
+when I see companies like large
+
+345
+00:11:42,040 --> 00:11:42,920
+companies creating their own
+
+346
+00:11:42,920 --> 00:11:45,320
+abstractions they probably have
+
+347
+00:11:45,320 --> 00:11:47,240
+something they need something similar to
+
+348
+00:11:47,240 --> 00:11:50,880
+that but not 100% right uh I think that
+
+349
+00:11:50,880 --> 00:11:52,480
+having an interface called function
+
+350
+00:11:52,480 --> 00:11:54,360
+actually limits the kind of applications
+
+351
+00:11:54,360 --> 00:11:56,040
+that you can deploy because you think
+
+352
+00:11:56,040 --> 00:11:57,279
+that you can only do functions like
+
+353
+00:11:57,279 --> 00:11:59,360
+lambdas or stuff like that but actually
+
+354
+00:11:59,360 --> 00:12:00,920
+no matter what container you put in
+
+355
+00:12:00,920 --> 00:12:02,720
+there it was going to be served and and
+
+356
+00:12:02,720 --> 00:12:04,639
+built in the same way and then you need
+
+357
+00:12:04,639 --> 00:12:06,040
+to figure it out you know like if the
+
+358
+00:12:06,040 --> 00:12:08,399
+tools that open functions is using are
+
+359
+00:12:08,399 --> 00:12:09,839
+you comfortable with those tools do you
+
+360
+00:12:09,839 --> 00:12:11,440
+know about those tools or not because at
+
+361
+00:12:11,440 --> 00:12:12,839
+some point when things go wrong you will
+
+362
+00:12:12,839 --> 00:12:14,360
+need to troubleshoot them so you will
+
+363
+00:12:14,360 --> 00:12:16,320
+need to maintain all that stuff together
+
+364
+00:12:16,320 --> 00:12:18,000
+and I see people you know using GitHub
+
+365
+00:12:18,000 --> 00:12:19,760
+actions to build their containers and
+
+366
+00:12:19,760 --> 00:12:22,000
+then using GTH ups to do the deployment
+
+367
+00:12:22,000 --> 00:12:24,760
+of things so having this tool that
+
+368
+00:12:24,760 --> 00:12:26,079
+basically you send a resource and then
+
+369
+00:12:26,079 --> 00:12:27,880
+you just get something built in the
+
+370
+00:12:27,880 --> 00:12:30,120
+cluster and then deploy in the cluster
+
+371
+00:12:30,120 --> 00:12:32,040
+might not be the right thing for you for
+
+372
+00:12:32,040 --> 00:12:34,839
+several reasons so you know it's it's a
+
+373
+00:12:34,839 --> 00:12:36,560
+trade-off right like I mean at least for
+
+374
+00:12:36,560 --> 00:12:38,720
+me just seeing how people is gluing tool
+
+375
+00:12:38,720 --> 00:12:40,560
+together uh these tools together it's
+
+376
+00:12:40,560 --> 00:12:42,519
+it's really important because it shows
+
+377
+00:12:42,519 --> 00:12:44,199
+me a set of use cases that are well
+
+378
+00:12:44,199 --> 00:12:46,760
+tested and well adopted but then to
+
+379
+00:12:46,760 --> 00:12:48,320
+choose this for real scenarios then you
+
+380
+00:12:48,320 --> 00:12:50,160
+just you just need to figure it out if
+
+381
+00:12:50,160 --> 00:12:52,880
+that's the good thing for you or not uh
+
+382
+00:12:52,880 --> 00:12:55,120
+and in order to go and talk a little bit
+
+383
+00:12:55,120 --> 00:12:56,680
+about the tools that are being used by
+
+384
+00:12:56,680 --> 00:12:58,480
+open function we created an example here
+
+385
+00:12:58,480 --> 00:13:00,000
+and this is where we the dangerous part
+
+386
+00:13:00,000 --> 00:13:01,639
+of the presentation we are going to use
+
+387
+00:13:01,639 --> 00:13:04,959
+HTTP and not https so if you scan that
+
+388
+00:13:04,959 --> 00:13:06,680
+QR code you will be able to access kind
+
+389
+00:13:06,680 --> 00:13:08,560
+like an application and I would love to
+
+390
+00:13:08,560 --> 00:13:11,279
+see if we can uh if we can play together
+
+391
+00:13:11,279 --> 00:13:13,279
+for a bit so let me know if you can
+
+392
+00:13:13,279 --> 00:13:15,199
+access you will need to accept that it's
+
+393
+00:13:15,199 --> 00:13:17,560
+an HTTP endpoint and not https you will
+
+394
+00:13:17,560 --> 00:13:19,079
+see the warning
+
+395
+00:13:19,079 --> 00:13:21,800
+there please accept it if if I have two
+
+396
+00:13:21,800 --> 00:13:23,279
+people pressing buttons I think that
+
+397
+00:13:23,279 --> 00:13:24,680
+that's more than
+
+398
+00:13:24,680 --> 00:13:28,320
+enough so I see phones app uh I will
+
+399
+00:13:28,320 --> 00:13:30,519
+take the QR code in a
+
+400
+00:13:30,519 --> 00:13:32,959
+second does it work somebody got it
+
+401
+00:13:32,959 --> 00:13:36,000
+working yes I get some thumbs up so let
+
+402
+00:13:36,000 --> 00:13:38,160
+me switch here and switch to the
+
+403
+00:13:38,160 --> 00:13:40,680
+application itself so the application
+
+404
+00:13:40,680 --> 00:13:42,720
+that you're are accessing basically it's
+
+405
+00:13:42,720 --> 00:13:45,160
+um it's just a simple thing it's a
+
+406
+00:13:45,160 --> 00:13:48,199
+simple dashboard uh to vote and we have
+
+407
+00:13:48,199 --> 00:13:50,519
+kind of like the real time events
+
+408
+00:13:50,519 --> 00:13:52,519
+popping up every time that somebody uh
+
+409
+00:13:52,519 --> 00:13:54,560
+submits a vote and then we have some
+
+410
+00:13:54,560 --> 00:13:56,560
+calculated views of who is winning cats
+
+411
+00:13:56,560 --> 00:13:58,240
+or dogs we have dogs people here in the
+
+412
+00:13:58,240 --> 00:14:01,040
+room so I'm I'm super happy this
+
+413
+00:14:01,040 --> 00:14:03,519
+application is really simple uh when you
+
+414
+00:14:03,519 --> 00:14:06,120
+voted you had like a like a hash code
+
+415
+00:14:06,120 --> 00:14:07,839
+generated so don't close that window
+
+416
+00:14:07,839 --> 00:14:09,600
+look at that that's going insane that's
+
+417
+00:14:09,600 --> 00:14:12,279
+awesome so don't close the window
+
+418
+00:14:12,279 --> 00:14:14,320
+because with that you can win uh a book
+
+419
+00:14:14,320 --> 00:14:15,880
+at the end of the presentation great so
+
+420
+00:14:15,880 --> 00:14:17,600
+the application is working again that
+
+421
+00:14:17,600 --> 00:14:19,800
+application is running on Google Cloud
+
+422
+00:14:19,800 --> 00:14:21,839
+the architecture of that application is
+
+423
+00:14:21,839 --> 00:14:24,040
+super super super simple right so we
+
+424
+00:14:24,040 --> 00:14:25,720
+have a a boat service that's the one
+
+425
+00:14:25,720 --> 00:14:27,600
+that you're using from your phones it
+
+426
+00:14:27,600 --> 00:14:29,720
+has a UI but also basically what it does
+
+427
+00:14:29,720 --> 00:14:31,560
+on the back end it just sends data to
+
+428
+00:14:31,560 --> 00:14:34,000
+Red's to store your boat like you know
+
+429
+00:14:34,000 --> 00:14:35,600
+you get the Json payload with the boat
+
+430
+00:14:35,600 --> 00:14:37,240
+then you store it and then at the same
+
+431
+00:14:37,240 --> 00:14:40,360
+time we send a rabbit mq message to uh
+
+432
+00:14:40,360 --> 00:14:41,880
+just to a queue that it's being picked
+
+433
+00:14:41,880 --> 00:14:43,320
+up by the Dashboard that you see well
+
+434
+00:14:43,320 --> 00:14:45,160
+all the cats and dogs are popping up
+
+435
+00:14:45,160 --> 00:14:47,040
+there in the middle here we have a
+
+436
+00:14:47,040 --> 00:14:48,839
+worker that doesn't have any user
+
+437
+00:14:48,839 --> 00:14:51,079
+interface and and it's doing kind of
+
+438
+00:14:51,079 --> 00:14:53,000
+like a chrome job right like every two
+
+439
+00:14:53,000 --> 00:14:55,279
+seconds is picking up data from BR and
+
+440
+00:14:55,279 --> 00:14:57,680
+translating that into a view to postgre
+
+441
+00:14:57,680 --> 00:15:00,199
+SQL and that's been read by the results
+
+442
+00:15:00,199 --> 00:15:01,800
+UI that it's basically showing every two
+
+443
+00:15:01,800 --> 00:15:03,600
+seconds you know the the percentage of
+
+444
+00:15:03,600 --> 00:15:05,920
+the BS pretty simple stuff and as you
+
+445
+00:15:05,920 --> 00:15:08,600
+can quickly see here there is no like
+
+446
+00:15:08,600 --> 00:15:10,120
+there is not I when I see this
+
+447
+00:15:10,120 --> 00:15:11,480
+architecture I don't think about
+
+448
+00:15:11,480 --> 00:15:13,600
+functions in general because I have user
+
+449
+00:15:13,600 --> 00:15:15,399
+interfaces I don't want to be waiting
+
+450
+00:15:15,399 --> 00:15:17,399
+you know to upscale a function to be
+
+451
+00:15:17,399 --> 00:15:19,320
+able to show a user interface that
+
+452
+00:15:19,320 --> 00:15:21,040
+should be up at least with this one
+
+453
+00:15:21,040 --> 00:15:23,560
+replica running all the time I have some
+
+454
+00:15:23,560 --> 00:15:25,880
+infrastructure like R rabid mq postgress
+
+455
+00:15:25,880 --> 00:15:27,240
+that needs to be running somewhere and I
+
+456
+00:15:27,240 --> 00:15:29,240
+need to manage and then I have you know
+
+457
+00:15:29,240 --> 00:15:32,000
+some uh web sockets going on back and
+
+458
+00:15:32,000 --> 00:15:34,120
+forth again another reason why a
+
+459
+00:15:34,120 --> 00:15:35,720
+function might not be the best thing if
+
+460
+00:15:35,720 --> 00:15:37,160
+I need to keep this by directional
+
+461
+00:15:37,160 --> 00:15:39,279
+connections open just to send
+
+462
+00:15:39,279 --> 00:15:41,680
+notifications so how difficult it could
+
+463
+00:15:41,680 --> 00:15:44,480
+be to build an application like this uh
+
+464
+00:15:44,480 --> 00:15:46,240
+it's actually it's it's a little bit
+
+465
+00:15:46,240 --> 00:15:48,279
+hard but like the main problem that I
+
+466
+00:15:48,279 --> 00:15:50,040
+face here is that okay we need to create
+
+467
+00:15:50,040 --> 00:15:51,440
+containers for all these things we need
+
+468
+00:15:51,440 --> 00:15:53,160
+to connect to all this infrastructure we
+
+469
+00:15:53,160 --> 00:15:55,440
+need to make sure that somebody creates
+
+470
+00:15:55,440 --> 00:15:56,880
+environments where this infrastructure
+
+471
+00:15:56,880 --> 00:15:58,759
+is is ready for me to to develop and all
+
+472
+00:15:58,759 --> 00:16:00,360
+that's stuff so let's talk a little
+
+473
+00:16:00,360 --> 00:16:01,759
+about the projects that are being used
+
+474
+00:16:01,759 --> 00:16:04,480
+by open function and the reasons why
+
+475
+00:16:04,480 --> 00:16:06,399
+they chose to use those projects the
+
+476
+00:16:06,399 --> 00:16:08,480
+first one k native how many people have
+
+477
+00:16:08,480 --> 00:16:11,440
+heard about K native before okay so we
+
+478
+00:16:11,440 --> 00:16:13,480
+have half half the room or a little bit
+
+479
+00:16:13,480 --> 00:16:16,079
+less so K native is usually associated
+
+480
+00:16:16,079 --> 00:16:18,000
+to serverless and to you know
+
+481
+00:16:18,000 --> 00:16:20,560
+autoscaling basically the main idea with
+
+482
+00:16:20,560 --> 00:16:23,160
+K native is to be able to go from
+
+483
+00:16:23,160 --> 00:16:25,160
+container right like I have a container
+
+484
+00:16:25,160 --> 00:16:27,720
+and I want to serve it in a URL so if
+
+485
+00:16:27,720 --> 00:16:29,279
+you give me a container I will just give
+
+486
+00:16:29,279 --> 00:16:31,279
+you a URL where this container is being
+
+487
+00:16:31,279 --> 00:16:34,759
+served and I will manage as a k project
+
+488
+00:16:34,759 --> 00:16:36,440
+I will manage the life cycle of that
+
+489
+00:16:36,440 --> 00:16:38,319
+container in a way that I can downscale
+
+490
+00:16:38,319 --> 00:16:40,079
+it to zero if nobody's calling it or
+
+491
+00:16:40,079 --> 00:16:42,920
+upscale it if I'm getting a lot of
+
+492
+00:16:42,920 --> 00:16:46,800
+demand uh so let
+
+493
+00:16:46,800 --> 00:16:49,279
+me this is something that happens with
+
+494
+00:16:49,279 --> 00:16:50,759
+Keynotes sometimes that you cannot get
+
+495
+00:16:50,759 --> 00:16:52,759
+out of the presentation mode when you
+
+496
+00:16:52,759 --> 00:16:56,720
+are presenting the screen which is super
+
+497
+00:16:56,720 --> 00:16:58,720
+interesting it's it's really interesting
+
+498
+00:16:58,720 --> 00:17:00,800
+and and then you said okay what do I do
+
+499
+00:17:00,800 --> 00:17:02,639
+one one way of dealing with this is like
+
+500
+00:17:02,639 --> 00:17:04,280
+maybe
+
+501
+00:17:04,280 --> 00:17:07,160
+that but not really so I'm just
+
+502
+00:17:07,160 --> 00:17:09,039
+connected again and just praying that it
+
+503
+00:17:09,039 --> 00:17:09,919
+will
+
+504
+00:17:09,919 --> 00:17:13,959
+work well and it doesn't uh react to my
+
+505
+00:17:13,959 --> 00:17:17,000
+uh to my clicks either right like it's
+
+506
+00:17:17,000 --> 00:17:18,839
+just going forward which is super
+
+507
+00:17:18,839 --> 00:17:21,000
+interesting uh this happened to me
+
+508
+00:17:21,000 --> 00:17:24,039
+before and I don't know
+
+509
+00:17:25,039 --> 00:17:27,480
+why so let's let's let's play with the
+
+510
+00:17:27,480 --> 00:17:29,240
+demo Gods this is not even demo Gods
+
+511
+00:17:29,240 --> 00:17:31,000
+this is like keynote Gods right like
+
+512
+00:17:31,000 --> 00:17:32,320
+this is is
+
+513
+00:17:32,320 --> 00:17:35,600
+insane all right all right uh think
+
+514
+00:17:35,600 --> 00:17:39,000
+think what do you do when nothing
+
+515
+00:17:39,000 --> 00:17:41,360
+works turn it off and turn it on again
+
+516
+00:17:41,360 --> 00:17:45,400
+right I've done this before let you go
+
+517
+00:17:45,400 --> 00:17:48,000
+oh
+
+518
+00:17:48,000 --> 00:17:51,679
+o let's see let's see so basically now
+
+519
+00:17:51,679 --> 00:17:53,480
+it's un blocking I'm blocking my my
+
+520
+00:17:53,480 --> 00:17:56,039
+screen right this is super
+
+521
+00:17:56,039 --> 00:17:59,720
+fun yeah there there that's that's the
+
+522
+00:17:59,720 --> 00:18:02,440
+thing that happens so what I can do is I
+
+523
+00:18:02,440 --> 00:18:04,799
+actually can continue without slides
+
+524
+00:18:04,799 --> 00:18:07,240
+which was my original
+
+525
+00:18:07,240 --> 00:18:10,760
+idea but that will not work let me try
+
+526
+00:18:10,760 --> 00:18:13,600
+let me try like hard hard reset we can
+
+527
+00:18:13,600 --> 00:18:17,000
+wait right so K native again it's
+
+528
+00:18:17,000 --> 00:18:18,720
+associated with that upscaling and out
+
+529
+00:18:18,720 --> 00:18:21,120
+scaling applications there it goes
+
+530
+00:18:21,120 --> 00:18:23,720
+off I will unplug this and then see if
+
+531
+00:18:23,720 --> 00:18:26,919
+it works yep so it's bootstrapping again
+
+532
+00:18:26,919 --> 00:18:29,039
+again K native is upscaling down scal in
+
+533
+00:18:29,039 --> 00:18:30,679
+applications how does it work it
+
+534
+00:18:30,679 --> 00:18:33,039
+basically works by injecting a sidecar
+
+535
+00:18:33,039 --> 00:18:34,039
+into your
+
+536
+00:18:34,039 --> 00:18:36,960
+application uh and basically monitoring
+
+537
+00:18:36,960 --> 00:18:39,480
+incoming request HTTP request so you
+
+538
+00:18:39,480 --> 00:18:40,840
+have a proxy in front of your
+
+539
+00:18:40,840 --> 00:18:43,000
+application basically looking for HTTP
+
+540
+00:18:43,000 --> 00:18:45,799
+request and it will uh basically extract
+
+541
+00:18:45,799 --> 00:18:47,799
+data about those requests and inform the
+
+542
+00:18:47,799 --> 00:18:49,200
+K native control plan the things that
+
+543
+00:18:49,200 --> 00:18:51,760
+you install in your cluster about how
+
+544
+00:18:51,760 --> 00:18:53,760
+many requests are you getting and if you
+
+545
+00:18:53,760 --> 00:18:55,640
+need to if you need more replicas or
+
+546
+00:18:55,640 --> 00:18:57,640
+less replicas uh to serve all those
+
+547
+00:18:57,640 --> 00:18:59,880
+requests it's it's a very sophisticated
+
+548
+00:18:59,880 --> 00:19:02,280
+mechanism and it's a very mature project
+
+549
+00:19:02,280 --> 00:19:04,080
+that uh it has been tested a lot and
+
+550
+00:19:04,080 --> 00:19:05,840
+it's been it's been adopted by a lot of
+
+551
+00:19:05,840 --> 00:19:08,919
+companies and a lot of products uh which
+
+552
+00:19:08,919 --> 00:19:10,640
+uh makes me think that it's mature
+
+553
+00:19:10,640 --> 00:19:12,919
+enough for people to use and now it's
+
+554
+00:19:12,919 --> 00:19:14,760
+reaching to a point where uh you know
+
+555
+00:19:14,760 --> 00:19:17,480
+it's uh it's been graduated in the cncf
+
+556
+00:19:17,480 --> 00:19:19,000
+which basically means that there is
+
+557
+00:19:19,000 --> 00:19:21,360
+enough adoption to justify the use of
+
+558
+00:19:21,360 --> 00:19:26,039
+these tools so no more keynote for me uh
+
+559
+00:19:26,039 --> 00:19:27,679
+and I will probably need to authenticate
+
+560
+00:19:27,679 --> 00:19:29,360
+to all the services again I don't even
+
+561
+00:19:29,360 --> 00:19:31,919
+know what that is that's probably slack
+
+562
+00:19:31,919 --> 00:19:33,880
+uh but the good thing is that we get my
+
+563
+00:19:33,880 --> 00:19:35,400
+computer back again so I can keep
+
+564
+00:19:35,400 --> 00:19:39,520
+showing demos and stuff let me see
+
+565
+00:19:39,520 --> 00:19:42,000
+if documents
+
+566
+00:19:42,000 --> 00:19:45,320
+maybe nah all
+
+567
+00:19:45,320 --> 00:19:49,000
+right yeah there you go not
+
+568
+00:19:49,000 --> 00:19:51,080
+there that's that's really good okay
+
+569
+00:19:51,080 --> 00:19:56,000
+let's try keynote again why not why
+
+570
+00:19:56,200 --> 00:20:00,280
+not keynote case this pain let's see all
+
+571
+00:20:00,280 --> 00:20:03,240
+right I was there so kened how does it
+
+572
+00:20:03,240 --> 00:20:05,480
+work do deploy a service uh they have a
+
+573
+00:20:05,480 --> 00:20:06,960
+new kind of resource I don't even want
+
+574
+00:20:06,960 --> 00:20:09,400
+to go in full screen anymore but let's
+
+575
+00:20:09,400 --> 00:20:12,080
+try why not so you have a a thing here
+
+576
+00:20:12,080 --> 00:20:13,919
+you have a new type of service basically
+
+577
+00:20:13,919 --> 00:20:15,280
+where again the only thing that you
+
+578
+00:20:15,280 --> 00:20:18,000
+define is two things the image name that
+
+579
+00:20:18,000 --> 00:20:20,520
+you want to deploy and basically K8 will
+
+580
+00:20:20,520 --> 00:20:22,679
+give you an name basically and K8 will
+
+581
+00:20:22,679 --> 00:20:25,400
+give you a URL with using that name and
+
+582
+00:20:25,400 --> 00:20:28,200
+it will run your image it deploys a side
+
+583
+00:20:28,200 --> 00:20:30,120
+car that called Q proxy that basically
+
+584
+00:20:30,120 --> 00:20:31,720
+will run very close to your application
+
+585
+00:20:31,720 --> 00:20:34,200
+and it will intercept all the requests
+
+586
+00:20:34,200 --> 00:20:36,039
+but it will also create a bunch of other
+
+587
+00:20:36,039 --> 00:20:38,400
+you know resources behind your back like
+
+588
+00:20:38,400 --> 00:20:40,039
+it doesn't really matter but it will
+
+589
+00:20:40,039 --> 00:20:41,559
+create that route resource that
+
+590
+00:20:41,559 --> 00:20:43,360
+basically is in charge of having a URL
+
+591
+00:20:43,360 --> 00:20:44,880
+Associated and then routing all the
+
+592
+00:20:44,880 --> 00:20:48,080
+traffic to the proxy of the application
+
+593
+00:20:48,080 --> 00:20:49,799
+uh the main idea with K native is that
+
+594
+00:20:49,799 --> 00:20:51,720
+it has a networking layer that will give
+
+595
+00:20:51,720 --> 00:20:53,640
+you access to doing other things like
+
+596
+00:20:53,640 --> 00:20:55,159
+traffic splitting and a bunch of other
+
+597
+00:20:55,159 --> 00:20:56,760
+crazy things that you will do with
+
+598
+00:20:56,760 --> 00:20:59,520
+something like a service mesh but but
+
+599
+00:20:59,520 --> 00:21:01,159
+the basic functionality is that it's
+
+600
+00:21:01,159 --> 00:21:02,559
+going to Route the request to your
+
+601
+00:21:02,559 --> 00:21:04,400
+application and the Q proxy will
+
+602
+00:21:04,400 --> 00:21:06,960
+basically inform the G control plane
+
+603
+00:21:06,960 --> 00:21:09,039
+about the requests if you have a lot of
+
+604
+00:21:09,039 --> 00:21:11,120
+people calling your application you know
+
+605
+00:21:11,120 --> 00:21:12,840
+the Q proxy will tell the control plane
+
+606
+00:21:12,840 --> 00:21:15,080
+hey we need more replicas more replicas
+
+607
+00:21:15,080 --> 00:21:16,799
+will be created and as you can see there
+
+608
+00:21:16,799 --> 00:21:18,640
+will be because there are multiple
+
+609
+00:21:18,640 --> 00:21:20,559
+replicas that basically means multiple Q
+
+610
+00:21:20,559 --> 00:21:22,240
+proxies so there is something load
+
+611
+00:21:22,240 --> 00:21:25,120
+balancing on top of this as well if
+
+612
+00:21:25,120 --> 00:21:27,120
+nobody's calling your route basically
+
+613
+00:21:27,120 --> 00:21:28,840
+what happens is like your service get
+
+614
+00:21:28,840 --> 00:21:31,440
+downscale after 90 seconds or so and
+
+615
+00:21:31,440 --> 00:21:33,080
+basically there is a route now there is
+
+616
+00:21:33,080 --> 00:21:36,200
+a URL with no replicas serving requests
+
+617
+00:21:36,200 --> 00:21:37,600
+which is a pretty interesting scenario
+
+618
+00:21:37,600 --> 00:21:38,640
+and I think that this is the most
+
+619
+00:21:38,640 --> 00:21:40,720
+interesting scenario of the entire k
+
+620
+00:21:40,720 --> 00:21:42,960
+thing is the okay what what do you do
+
+621
+00:21:42,960 --> 00:21:44,400
+when you don't have anything serving
+
+622
+00:21:44,400 --> 00:21:46,559
+your requests well you need a different
+
+623
+00:21:46,559 --> 00:21:48,240
+mechanism that it's called activator
+
+624
+00:21:48,240 --> 00:21:51,039
+that basically is waiting for request in
+
+625
+00:21:51,039 --> 00:21:52,880
+order to buffer them and then wait for
+
+626
+00:21:52,880 --> 00:21:55,440
+new replicas to be kickstarted when you
+
+627
+00:21:55,440 --> 00:21:57,200
+do that you wait for a second that's why
+
+628
+00:21:57,200 --> 00:21:59,200
+we waited at at the beginning because we
+
+629
+00:21:59,200 --> 00:22:01,120
+didn't have any replicas of the function
+
+630
+00:22:01,120 --> 00:22:02,960
+the activator kicks in creates a new
+
+631
+00:22:02,960 --> 00:22:04,840
+replica and then you know you have a
+
+632
+00:22:04,840 --> 00:22:08,320
+replica serving your uh your traffic uh
+
+633
+00:22:08,320 --> 00:22:10,919
+the main idea from K just to uh go back
+
+634
+00:22:10,919 --> 00:22:12,960
+in track and let's go faster to the next
+
+635
+00:22:12,960 --> 00:22:15,919
+one is go from container to URL and I
+
+636
+00:22:15,919 --> 00:22:17,120
+didn't show that because I was
+
+637
+00:22:17,120 --> 00:22:20,120
+restarting my computer but if I do here
+
+638
+00:22:20,120 --> 00:22:22,000
+the the ctive services that I have this
+
+639
+00:22:22,000 --> 00:22:24,720
+is my function K native service I can
+
+640
+00:22:24,720 --> 00:22:27,520
+describe the K native service type this
+
+641
+00:22:27,520 --> 00:22:29,039
+is a new type that basically provides
+
+642
+00:22:29,039 --> 00:22:30,360
+all these abstractions to go from
+
+643
+00:22:30,360 --> 00:22:32,720
+containers to uh to
+
+644
+00:22:32,720 --> 00:22:35,279
+URL you can see here that there is a
+
+645
+00:22:35,279 --> 00:22:37,840
+bunch of status reports about you know
+
+646
+00:22:37,840 --> 00:22:39,440
+how the function is being configured and
+
+647
+00:22:39,440 --> 00:22:41,640
+all that stuff but the only important
+
+648
+00:22:41,640 --> 00:22:43,840
+bit here is that if I have an image I
+
+649
+00:22:43,840 --> 00:22:45,799
+can just provide you an URL right you
+
+650
+00:22:45,799 --> 00:22:47,440
+can add like environment variables and
+
+651
+00:22:47,440 --> 00:22:49,600
+other stuff but at the end of the day
+
+652
+00:22:49,600 --> 00:22:51,720
+you want to run this image and then you
+
+653
+00:22:51,720 --> 00:22:54,559
+want a URL back so you can go this
+
+654
+00:22:54,559 --> 00:22:57,159
+container uh important uh thing to
+
+655
+00:22:57,159 --> 00:22:59,039
+mention about K native and and the K
+
+656
+00:22:59,039 --> 00:23:00,919
+native serving apis is that it's being
+
+657
+00:23:00,919 --> 00:23:03,360
+used by uh you know Google Cloud run
+
+658
+00:23:03,360 --> 00:23:05,080
+Google Cloud run provides this container
+
+659
+00:23:05,080 --> 00:23:06,360
+as a service mechanism where you can
+
+660
+00:23:06,360 --> 00:23:07,679
+just give them a container and they will
+
+661
+00:23:07,679 --> 00:23:09,440
+run it without using kubernetes or
+
+662
+00:23:09,440 --> 00:23:12,400
+anything and they expose the same API of
+
+663
+00:23:12,400 --> 00:23:13,799
+K native serving which is pretty
+
+664
+00:23:13,799 --> 00:23:15,320
+interesting to see you know it's just
+
+665
+00:23:15,320 --> 00:23:17,960
+the standard interface for container you
+
+666
+00:23:17,960 --> 00:23:20,799
+know container as service applications
+
+667
+00:23:20,799 --> 00:23:22,960
+but again this is just about serving
+
+668
+00:23:22,960 --> 00:23:24,279
+traffic right like it's about just
+
+669
+00:23:24,279 --> 00:23:25,799
+deploying applications and then just
+
+670
+00:23:25,799 --> 00:23:28,279
+making them AOS Scale based on demand
+
+671
+00:23:28,279 --> 00:23:30,440
+and only based on HTTP in this case
+
+672
+00:23:30,440 --> 00:23:32,039
+right like this is just using HTTP
+
+673
+00:23:32,039 --> 00:23:34,360
+metrics to know when to upscale and down
+
+674
+00:23:34,360 --> 00:23:36,840
+scale uh there is another project being
+
+675
+00:23:36,840 --> 00:23:38,600
+mentioned there in in open function
+
+676
+00:23:38,600 --> 00:23:40,600
+which is called kada which is basically
+
+677
+00:23:40,600 --> 00:23:42,520
+the other side of things when you do
+
+678
+00:23:42,520 --> 00:23:44,080
+when you want to do a synchronous you
+
+679
+00:23:44,080 --> 00:23:46,440
+know upscaling and down Scale based on
+
+680
+00:23:46,440 --> 00:23:49,480
+for example messages on our rabbit mqq
+
+681
+00:23:49,480 --> 00:23:51,760
+right so if you have messages uh in
+
+682
+00:23:51,760 --> 00:23:53,320
+Kafka or something like that that it's
+
+683
+00:23:53,320 --> 00:23:55,120
+more like a synchronous in nature you
+
+684
+00:23:55,120 --> 00:23:57,760
+can be monitoring these resources taking
+
+685
+00:23:57,760 --> 00:23:59,000
+a look at how many how many messages do
+
+686
+00:23:59,000 --> 00:24:00,640
+I have in the queue and then based on
+
+687
+00:24:00,640 --> 00:24:01,880
+the messages that we have in the queue
+
+688
+00:24:01,880 --> 00:24:03,640
+we can upscale or
+
+689
+00:24:03,640 --> 00:24:06,120
+downscale uh and again this is about
+
+690
+00:24:06,120 --> 00:24:08,320
+running workloads it's not about what do
+
+691
+00:24:08,320 --> 00:24:10,559
+we do inside of our workloads and that's
+
+692
+00:24:10,559 --> 00:24:11,720
+what I want to talk a little bit about
+
+693
+00:24:11,720 --> 00:24:13,120
+Dapper which is the project that I'm
+
+694
+00:24:13,120 --> 00:24:15,039
+currently working on that stands for
+
+695
+00:24:15,039 --> 00:24:17,600
+distributed application runtime this is
+
+696
+00:24:17,600 --> 00:24:20,080
+much more closer to developers and
+
+697
+00:24:20,080 --> 00:24:21,960
+usually I see people looking into this
+
+698
+00:24:21,960 --> 00:24:23,400
+project when they are working in a
+
+699
+00:24:23,400 --> 00:24:25,200
+platform team and they want to enable
+
+700
+00:24:25,200 --> 00:24:27,440
+development teams with like a set of
+
+701
+00:24:27,440 --> 00:24:29,360
+unified API that they can use to
+
+702
+00:24:29,360 --> 00:24:32,279
+interact with complex
+
+703
+00:24:32,279 --> 00:24:36,399
+environments so uh Dapper uh it's a
+
+704
+00:24:36,399 --> 00:24:38,240
+project that I'm using in the in the
+
+705
+00:24:38,240 --> 00:24:39,960
+cats and dogs example that I've showed
+
+706
+00:24:39,960 --> 00:24:42,840
+you before and for that I will
+
+707
+00:24:42,840 --> 00:24:45,159
+switch I will not switch to the other
+
+708
+00:24:45,159 --> 00:24:47,320
+cluster because it's uh closed now
+
+709
+00:24:47,320 --> 00:24:50,399
+that's good right things that happen let
+
+710
+00:24:50,399 --> 00:24:54,000
+me see uh it should be
+
+711
+00:24:54,000 --> 00:24:59,720
+somewhere somewhere here new window
+
+712
+00:24:59,720 --> 00:25:02,600
+uh and with my company profile so I can
+
+713
+00:25:02,600 --> 00:25:05,240
+show you all the secrets restore there
+
+714
+00:25:05,240 --> 00:25:07,120
+you go probably I need to log in again
+
+715
+00:25:07,120 --> 00:25:08,840
+okay so I have kind like the cluster
+
+716
+00:25:08,840 --> 00:25:10,360
+where the open function stuff was
+
+717
+00:25:10,360 --> 00:25:12,799
+installed we have a bunch of projects
+
+718
+00:25:12,799 --> 00:25:14,039
+installed in there and I created a
+
+719
+00:25:14,039 --> 00:25:15,320
+different cluster for serving the
+
+720
+00:25:15,320 --> 00:25:17,159
+application that we used
+
+721
+00:25:17,159 --> 00:25:19,840
+before and uh there you go so I can
+
+722
+00:25:19,840 --> 00:25:22,640
+connect to a different cluster now and
+
+723
+00:25:22,640 --> 00:25:25,120
+I'm using some of these uh uh some of
+
+724
+00:25:25,120 --> 00:25:27,039
+these you know tools that I mentioned
+
+725
+00:25:27,039 --> 00:25:29,840
+before so we have ketive Services that's
+
+726
+00:25:29,840 --> 00:25:31,720
+how I list my ketive services for the
+
+727
+00:25:31,720 --> 00:25:33,799
+application if it actually connects to
+
+728
+00:25:33,799 --> 00:25:35,159
+the internet there you go and you can
+
+729
+00:25:35,159 --> 00:25:36,840
+see that I have three services that are
+
+730
+00:25:36,840 --> 00:25:39,279
+being exposed the three uis that we saw
+
+731
+00:25:39,279 --> 00:25:41,399
+before the ones that you use to vote the
+
+732
+00:25:41,399 --> 00:25:43,360
+results and the dashboard that was
+
+733
+00:25:43,360 --> 00:25:45,360
+showing the cuts and the dogs right
+
+734
+00:25:45,360 --> 00:25:47,279
+that's that's the the side of things so
+
+735
+00:25:47,279 --> 00:25:49,919
+I'm using K there to scale things up and
+
+736
+00:25:49,919 --> 00:25:51,600
+down and as you will see and as I
+
+737
+00:25:51,600 --> 00:25:53,600
+mentioned before the vot service for
+
+738
+00:25:53,600 --> 00:25:57,360
+example because is um uh describe it's a
+
+739
+00:25:57,360 --> 00:25:59,399
+it's it's a UI I don't want to downscale
+
+740
+00:25:59,399 --> 00:26:01,200
+it right so one thing that you need to
+
+741
+00:26:01,200 --> 00:26:02,520
+understand about kinetic is that you can
+
+742
+00:26:02,520 --> 00:26:04,600
+set up boundaries right there is no need
+
+743
+00:26:04,600 --> 00:26:06,640
+to downscale to Z if you don't need it
+
+744
+00:26:06,640 --> 00:26:08,279
+in this case I want to maintain one
+
+745
+00:26:08,279 --> 00:26:10,720
+replica all the time so I can do that
+
+746
+00:26:10,720 --> 00:26:12,480
+and also what you can do is you can in
+
+747
+00:26:12,480 --> 00:26:15,720
+in can you can Define you know um how is
+
+748
+00:26:15,720 --> 00:26:17,640
+that called like how many request per
+
+749
+00:26:17,640 --> 00:26:20,200
+second your application is designed to
+
+750
+00:26:20,200 --> 00:26:21,679
+handle right so you can say you know
+
+751
+00:26:21,679 --> 00:26:24,039
+this container can handle 100 requests
+
+752
+00:26:24,039 --> 00:26:26,559
+per second if I'm getting more than 100
+
+753
+00:26:26,559 --> 00:26:28,279
+requests per seconds I will need more
+
+754
+00:26:28,279 --> 00:26:30,200
+replicas so I will need to scale up so
+
+755
+00:26:30,200 --> 00:26:32,240
+you can fine tune when new replicas will
+
+756
+00:26:32,240 --> 00:26:34,760
+be created using that something like a
+
+757
+00:26:34,760 --> 00:26:36,840
+common misconception is is about like
+
+758
+00:26:36,840 --> 00:26:39,200
+thinking that you know one pod one
+
+759
+00:26:39,200 --> 00:26:41,159
+container will handle a single request
+
+760
+00:26:41,159 --> 00:26:43,360
+at a time and this is not the case you
+
+761
+00:26:43,360 --> 00:26:44,799
+know the container can't handle multiple
+
+762
+00:26:44,799 --> 00:26:46,559
+requests at the same time and you can
+
+763
+00:26:46,559 --> 00:26:47,919
+Define when to scale up and when to
+
+764
+00:26:47,919 --> 00:26:49,320
+scale
+
+765
+00:26:49,320 --> 00:26:51,720
+down the next thing that I wanted to
+
+766
+00:26:51,720 --> 00:26:53,840
+show is Dapper uh because we were
+
+767
+00:26:53,840 --> 00:26:56,000
+talking about now let's go and try to
+
+768
+00:26:56,000 --> 00:26:58,360
+enable developers to do stuff uh inside
+
+769
+00:26:58,360 --> 00:26:59,960
+your clusters and the kind of stuff that
+
+770
+00:26:59,960 --> 00:27:01,720
+you want to enable developers to do is
+
+771
+00:27:01,720 --> 00:27:04,840
+to basically interact with uh you know
+
+772
+00:27:04,840 --> 00:27:06,760
+the environment that they are running
+
+773
+00:27:06,760 --> 00:27:09,200
+with and in this case Dapper basically
+
+774
+00:27:09,200 --> 00:27:12,440
+provides uh an obstruction uh that uh
+
+775
+00:27:12,440 --> 00:27:14,960
+gives developers apis to do things that
+
+776
+00:27:14,960 --> 00:27:16,640
+distributed applications wants to do
+
+777
+00:27:16,640 --> 00:27:18,200
+right so if you go to the Dapper website
+
+778
+00:27:18,200 --> 00:27:20,440
+which is
+
+779
+00:27:28,279 --> 00:27:30,480
+way right like with resilient with retry
+
+780
+00:27:30,480 --> 00:27:32,000
+mechanism secet Breakers and all these
+
+781
+00:27:32,000 --> 00:27:34,600
+things uh and then like stuff that it's
+
+782
+00:27:34,600 --> 00:27:36,440
+very common for applications to do and
+
+783
+00:27:36,440 --> 00:27:38,000
+that's why I was showing the application
+
+784
+00:27:38,000 --> 00:27:40,960
+like sending and consuming messages most
+
+785
+00:27:40,960 --> 00:27:42,600
+of the application will want to submit
+
+786
+00:27:42,600 --> 00:27:45,279
+and consume events right so if instead
+
+787
+00:27:45,279 --> 00:27:47,039
+of pushing developers to learn about
+
+788
+00:27:47,039 --> 00:27:49,039
+gafka or rabit mq I just give them an
+
+789
+00:27:49,039 --> 00:27:51,360
+API that they can call well let's give
+
+790
+00:27:51,360 --> 00:27:53,080
+them an API so they can start you know
+
+791
+00:27:53,080 --> 00:27:55,120
+creating their applications faster if
+
+792
+00:27:55,120 --> 00:27:57,480
+they want to store a state in a in a St
+
+793
+00:27:57,480 --> 00:27:59,360
+state store like a key value store or
+
+794
+00:27:59,360 --> 00:28:01,399
+like a database well let's give them a
+
+795
+00:28:01,399 --> 00:28:02,840
+database and let's not push them to
+
+796
+00:28:02,840 --> 00:28:04,559
+learn about drivers or where the
+
+797
+00:28:04,559 --> 00:28:06,440
+database is and all that stuff I will
+
+798
+00:28:06,440 --> 00:28:07,760
+just give you an API you can start
+
+799
+00:28:07,760 --> 00:28:09,960
+building your applications you have then
+
+800
+00:28:09,960 --> 00:28:11,840
+common stuff like reading configurations
+
+801
+00:28:11,840 --> 00:28:13,440
+or secrets from the environment that
+
+802
+00:28:13,440 --> 00:28:15,320
+it's very envirment specific so you need
+
+803
+00:28:15,320 --> 00:28:17,200
+to use bolt you need to use a cloud
+
+804
+00:28:17,200 --> 00:28:18,720
+provider service or what do you need to
+
+805
+00:28:18,720 --> 00:28:20,240
+use instead of pushing developers to
+
+806
+00:28:20,240 --> 00:28:23,399
+learn again let's give them an API and
+
+807
+00:28:23,399 --> 00:28:26,080
+let's lets them building applications so
+
+808
+00:28:26,080 --> 00:28:28,120
+if you see uh the application that I was
+
+809
+00:28:28,120 --> 00:28:29,559
+showing before like with the cats and
+
+810
+00:28:29,559 --> 00:28:32,200
+the dogs I'm using Dapper here to
+
+811
+00:28:32,200 --> 00:28:34,679
+basically store the bots in red uh
+
+812
+00:28:34,679 --> 00:28:36,279
+without pushing the developer to know
+
+813
+00:28:36,279 --> 00:28:39,320
+about r at all so what I have here for
+
+814
+00:28:39,320 --> 00:28:42,080
+example I have a go service right so I
+
+815
+00:28:42,080 --> 00:28:44,760
+have all the all the application modules
+
+816
+00:28:44,760 --> 00:28:46,480
+in different languages using different
+
+817
+00:28:46,480 --> 00:28:48,120
+languages on purpose just to connect to
+
+818
+00:28:48,120 --> 00:28:50,240
+the same Dapper apis from different
+
+819
+00:28:50,240 --> 00:28:52,679
+languages and I have some for example if
+
+820
+00:28:52,679 --> 00:28:55,559
+I want to save the vote in a persistent
+
+821
+00:28:55,559 --> 00:28:57,360
+store that I don't even know where it is
+
+822
+00:28:57,360 --> 00:28:59,880
+or what it is I will just use a client
+
+823
+00:28:59,880 --> 00:29:02,840
+in this case to connect to the apis so
+
+824
+00:29:02,840 --> 00:29:05,799
+what it does basically is just send this
+
+825
+00:29:05,799 --> 00:29:07,640
+request to Dapper Dapper will know where
+
+826
+00:29:07,640 --> 00:29:10,120
+to store it based on the environment
+
+827
+00:29:10,120 --> 00:29:11,480
+I've been working on some more
+
+828
+00:29:11,480 --> 00:29:13,159
+Integrations how many Java people do we
+
+829
+00:29:13,159 --> 00:29:16,000
+have here spring boot stuff yeah okay so
+
+830
+00:29:16,000 --> 00:29:18,080
+a fair a fair amount of people will
+
+831
+00:29:18,080 --> 00:29:19,480
+understand a little bit more this this
+
+832
+00:29:19,480 --> 00:29:21,519
+example so I've been working on this you
+
+833
+00:29:21,519 --> 00:29:23,720
+know Springwood integration where I can
+
+834
+00:29:23,720 --> 00:29:25,640
+show you uh you know more like instead
+
+835
+00:29:25,640 --> 00:29:28,480
+of just using an API using common spring
+
+836
+00:29:28,480 --> 00:29:30,720
+interfaces like this is a spring data
+
+837
+00:29:30,720 --> 00:29:33,039
+key value template that you can use and
+
+838
+00:29:33,039 --> 00:29:34,440
+also the messaging template which is
+
+839
+00:29:34,440 --> 00:29:36,360
+pretty similar to the Kafka template or
+
+840
+00:29:36,360 --> 00:29:39,200
+to the rabbit mq template this case uh
+
+841
+00:29:39,200 --> 00:29:41,159
+again I'm uh storing bats by just
+
+842
+00:29:41,159 --> 00:29:42,960
+calling the key value template update
+
+843
+00:29:42,960 --> 00:29:45,200
+method here I don't even care where that
+
+844
+00:29:45,200 --> 00:29:46,880
+boat is being stored I just want to
+
+845
+00:29:46,880 --> 00:29:48,840
+store it somewhere or if I send if I
+
+846
+00:29:48,840 --> 00:29:50,279
+want to send a message I'm using you
+
+847
+00:29:50,279 --> 00:29:52,559
+know the same messaging template send
+
+848
+00:29:52,559 --> 00:29:54,320
+and then I'm just sending my vat
+
+849
+00:29:54,320 --> 00:29:55,640
+somewhere right and it's going to be
+
+850
+00:29:55,640 --> 00:29:57,519
+sent and somebody else can consume it
+
+851
+00:29:57,519 --> 00:30:00,000
+from there interesting enough like now
+
+852
+00:30:00,000 --> 00:30:02,880
+because we don't have gafka r or rabbit
+
+853
+00:30:02,880 --> 00:30:04,640
+mq dependencies in my application my
+
+854
+00:30:04,640 --> 00:30:06,159
+application now can be moved across
+
+855
+00:30:06,159 --> 00:30:08,039
+environments even if I'm using for
+
+856
+00:30:08,039 --> 00:30:10,559
+example manage service provided services
+
+857
+00:30:10,559 --> 00:30:12,399
+for example for Google popsa for
+
+858
+00:30:12,399 --> 00:30:15,399
+messaging or or or Amazon sqs I can just
+
+859
+00:30:15,399 --> 00:30:17,080
+change the Dapper configuration behind
+
+860
+00:30:17,080 --> 00:30:19,519
+the Dapper apis just to connect to those
+
+861
+00:30:19,519 --> 00:30:21,360
+services without changing my
+
+862
+00:30:21,360 --> 00:30:23,919
+application so how does it work I want
+
+863
+00:30:23,919 --> 00:30:26,279
+to show you quickly some diagrams if
+
+864
+00:30:26,279 --> 00:30:28,360
+this works because I'm now super scared
+
+865
+00:30:28,360 --> 00:30:30,200
+that this will not work so how does it
+
+866
+00:30:30,200 --> 00:30:32,240
+work so you deploy your application you
+
+867
+00:30:32,240 --> 00:30:33,799
+can be using K native or you can be
+
+868
+00:30:33,799 --> 00:30:35,279
+using just the normal kubernetes
+
+869
+00:30:35,279 --> 00:30:37,880
+deployment then you annotate you know
+
+870
+00:30:37,880 --> 00:30:39,320
+your application with a specific
+
+871
+00:30:39,320 --> 00:30:41,039
+annotation saying this application wants
+
+872
+00:30:41,039 --> 00:30:43,360
+to consume the Dapper apis and the
+
+873
+00:30:43,360 --> 00:30:44,919
+Dapper control plane will basically
+
+874
+00:30:44,919 --> 00:30:47,120
+inject a side car that exposes these
+
+875
+00:30:47,120 --> 00:30:49,640
+apis to your application these apis are
+
+876
+00:30:49,640 --> 00:30:51,919
+exposed via HTTP and grpc so your
+
+877
+00:30:51,919 --> 00:30:53,640
+application can basically be sending
+
+878
+00:30:53,640 --> 00:30:56,600
+HTTP request to the daer side car or use
+
+879
+00:30:56,600 --> 00:30:58,960
+one of the sdks like I was showing with
+
+880
+00:30:58,960 --> 00:31:01,399
+go or with Java just to connect and do
+
+881
+00:31:01,399 --> 00:31:03,360
+that connection this is a VI directional
+
+882
+00:31:03,360 --> 00:31:05,279
+connection that basically means that you
+
+883
+00:31:05,279 --> 00:31:07,519
+can send data or receive data from
+
+884
+00:31:07,519 --> 00:31:10,679
+Dapper right in this case uh when you
+
+885
+00:31:10,679 --> 00:31:12,639
+connect to the Dapper side card Dapper
+
+886
+00:31:12,639 --> 00:31:14,159
+will read to some environment
+
+887
+00:31:14,159 --> 00:31:17,399
+configurations about how these apis you
+
+888
+00:31:17,399 --> 00:31:18,840
+know if I want to store state or send
+
+889
+00:31:18,840 --> 00:31:20,760
+messages are implemented with real
+
+890
+00:31:20,760 --> 00:31:22,480
+infrastructure so what I have in my
+
+891
+00:31:22,480 --> 00:31:24,720
+environment is basically configured that
+
+892
+00:31:24,720 --> 00:31:26,720
+for messaging I want to use rabit mq and
+
+893
+00:31:26,720 --> 00:31:28,720
+for storing State I want to use use R
+
+894
+00:31:28,720 --> 00:31:31,240
+right so the D side card will connect to
+
+895
+00:31:31,240 --> 00:31:32,919
+this infrastructure and it will allow me
+
+896
+00:31:32,919 --> 00:31:34,919
+to you know uh run my applications in
+
+897
+00:31:34,919 --> 00:31:37,120
+the cluster and because now I have
+
+898
+00:31:37,120 --> 00:31:38,840
+unified interfaces that basically means
+
+899
+00:31:38,840 --> 00:31:40,080
+that again I can just move my
+
+900
+00:31:40,080 --> 00:31:41,799
+infrastructure to Google cloud manag
+
+901
+00:31:41,799 --> 00:31:44,519
+services and my my application will not
+
+902
+00:31:44,519 --> 00:31:46,440
+change I just only need to change the
+
+903
+00:31:46,440 --> 00:31:49,760
+Dapper configuration for how these apis
+
+904
+00:31:49,760 --> 00:31:52,559
+are implemented the same with AWS I can
+
+905
+00:31:52,559 --> 00:31:54,320
+just switch to AWS or I can switch to
+
+906
+00:31:54,320 --> 00:31:55,639
+usher and I will have different
+
+907
+00:31:55,639 --> 00:31:56,720
+implementations for all these
+
+908
+00:31:56,720 --> 00:31:58,880
+environments making my application you
+
+909
+00:31:58,880 --> 00:32:00,440
+know a little bit more stable and
+
+910
+00:32:00,440 --> 00:32:02,320
+portable across environments it's not
+
+911
+00:32:02,320 --> 00:32:03,320
+that you're going to be moving your
+
+912
+00:32:03,320 --> 00:32:05,159
+applications from one cloud cloud
+
+913
+00:32:05,159 --> 00:32:07,039
+provider to another but think about like
+
+914
+00:32:07,039 --> 00:32:08,639
+running your application locally with
+
+915
+00:32:08,639 --> 00:32:10,000
+local infrastructure and then moving
+
+916
+00:32:10,000 --> 00:32:12,799
+into to the cloud with manag Services
+
+917
+00:32:12,799 --> 00:32:15,000
+the API is the same and because we have
+
+918
+00:32:15,000 --> 00:32:16,919
+side cars every time that you have side
+
+919
+00:32:16,919 --> 00:32:18,679
+cars you can do a bunch of things as I
+
+920
+00:32:18,679 --> 00:32:20,279
+mentioned before service to Service
+
+921
+00:32:20,279 --> 00:32:22,720
+invocations uh you can have you know
+
+922
+00:32:22,720 --> 00:32:24,320
+Discovery but you can also have retries
+
+923
+00:32:24,320 --> 00:32:25,919
+circuit breakers and a bunch of other
+
+924
+00:32:25,919 --> 00:32:28,080
+things like for example security you can
+
+925
+00:32:28,080 --> 00:32:30,679
+add mtls connection between the two side
+
+926
+00:32:30,679 --> 00:32:32,559
+cars and all the communications now will
+
+927
+00:32:32,559 --> 00:32:34,639
+be handled by that because you are
+
+928
+00:32:34,639 --> 00:32:37,000
+observing traffic between infrastructure
+
+929
+00:32:37,000 --> 00:32:38,720
+and other services then you can get like
+
+930
+00:32:38,720 --> 00:32:41,720
+a unified view of logs metrics and and
+
+931
+00:32:41,720 --> 00:32:43,960
+traces about how your applications are
+
+932
+00:32:43,960 --> 00:32:45,919
+consuming infrastructure how much time
+
+933
+00:32:45,919 --> 00:32:48,440
+infrastructure is taking and exactly
+
+934
+00:32:48,440 --> 00:32:49,840
+what your applications are doing against
+
+935
+00:32:49,840 --> 00:32:51,720
+that infrastructure so you can trouble
+
+936
+00:32:51,720 --> 00:32:53,639
+shoot easier because you have a single
+
+937
+00:32:53,639 --> 00:32:55,919
+view of what your applications are
+
+938
+00:32:55,919 --> 00:32:59,039
+doing from uh upper point of view again
+
+939
+00:32:59,039 --> 00:33:00,960
+I showed you a bunch of things usually
+
+940
+00:33:00,960 --> 00:33:02,480
+this project will not make any sense
+
+941
+00:33:02,480 --> 00:33:04,639
+unless you go and give it a try uh if
+
+942
+00:33:04,639 --> 00:33:06,440
+you take a look at the book it has a
+
+943
+00:33:06,440 --> 00:33:07,919
+bunch of reposto that are basically
+
+944
+00:33:07,919 --> 00:33:09,720
+showing all these projects in action so
+
+945
+00:33:09,720 --> 00:33:11,440
+you can run them in your own laptop and
+
+946
+00:33:11,440 --> 00:33:14,200
+experiment with an example application
+
+947
+00:33:14,200 --> 00:33:15,960
+not similar to the one that I'm showing
+
+948
+00:33:15,960 --> 00:33:19,000
+here but like it's close enough uh and
+
+949
+00:33:19,000 --> 00:33:21,200
+again this project makes sense when you
+
+950
+00:33:21,200 --> 00:33:23,559
+try to enable developers to just do more
+
+951
+00:33:23,559 --> 00:33:25,159
+stuff without learning about complex
+
+952
+00:33:25,159 --> 00:33:26,519
+environments or learning about cloud
+
+953
+00:33:26,519 --> 00:33:28,679
+provider stuff
+
+954
+00:33:28,679 --> 00:33:30,919
+uh this does separate you know the
+
+955
+00:33:30,919 --> 00:33:33,039
+infrastructure from your application
+
+956
+00:33:33,039 --> 00:33:35,240
+code and I didn't show that but if I go
+
+957
+00:33:35,240 --> 00:33:37,840
+here to the application uh I can list
+
+958
+00:33:37,840 --> 00:33:40,519
+all the daper components it's another
+
+959
+00:33:40,519 --> 00:33:42,039
+kubernetes resource
+
+960
+00:33:42,039 --> 00:33:44,320
+components another kubernetes resource
+
+961
+00:33:44,320 --> 00:33:46,000
+that basically is defined there I
+
+962
+00:33:46,000 --> 00:33:47,840
+mentioned before that I'm using R post
+
+963
+00:33:47,840 --> 00:33:51,399
+SQL and rabit mq so I have two what are
+
+964
+00:33:51,399 --> 00:33:53,600
+called State Stores configured to uh
+
+965
+00:33:53,600 --> 00:33:56,519
+connect to post SQL and to r i can
+
+966
+00:33:56,519 --> 00:33:59,399
+describe one of these
+
+967
+00:33:59,399 --> 00:34:01,760
+uh and you will see that it's very basic
+
+968
+00:34:01,760 --> 00:34:04,279
+configuration uh which has like two
+
+969
+00:34:04,279 --> 00:34:06,639
+things that are important like type
+
+970
+00:34:06,639 --> 00:34:08,320
+that's the implementation type so if you
+
+971
+00:34:08,320 --> 00:34:10,119
+want to move this to Google you know in
+
+972
+00:34:10,119 --> 00:34:12,399
+memory database store in memory data
+
+973
+00:34:12,399 --> 00:34:13,919
+store or something like that you just
+
+974
+00:34:13,919 --> 00:34:15,839
+need to change this type and then just
+
+975
+00:34:15,839 --> 00:34:17,480
+provide the credentials here so it can
+
+976
+00:34:17,480 --> 00:34:19,359
+connect to to that service in your
+
+977
+00:34:19,359 --> 00:34:21,960
+Google Cloud account right uh and then
+
+978
+00:34:21,960 --> 00:34:24,040
+it has a bunch of other parameters but
+
+979
+00:34:24,040 --> 00:34:25,679
+those are actually not important this is
+
+980
+00:34:25,679 --> 00:34:27,440
+how you index data here maybe you want
+
+981
+00:34:27,440 --> 00:34:30,079
+to add some hints on how to index data
+
+982
+00:34:30,079 --> 00:34:33,200
+and I have the same for uh for rabid mq
+
+983
+00:34:33,200 --> 00:34:35,679
+again I have a rabid mq instance running
+
+984
+00:34:35,679 --> 00:34:37,679
+here so if I I didn't show you that but
+
+985
+00:34:37,679 --> 00:34:39,720
+like I have a rabit mq instance a post
+
+986
+00:34:39,720 --> 00:34:41,800
+instance and a r instance running here
+
+987
+00:34:41,800 --> 00:34:44,560
+in the cluster that's red uh I think
+
+988
+00:34:44,560 --> 00:34:47,040
+that's postgress and that's rabid mq
+
+989
+00:34:47,040 --> 00:34:48,679
+right so the only thing that I'm doing
+
+990
+00:34:48,679 --> 00:34:50,839
+is I'm telling thater hey you know these
+
+991
+00:34:50,839 --> 00:34:52,679
+components are here just connect to the
+
+992
+00:34:52,679 --> 00:34:55,440
+local instances and if actually I want
+
+993
+00:34:55,440 --> 00:34:57,040
+to start moving my the services to
+
+994
+00:34:57,040 --> 00:34:58,520
+Google Cloud because my application is
+
+995
+00:34:58,520 --> 00:35:00,359
+going running on Google Cloud I can just
+
+996
+00:35:00,359 --> 00:35:01,480
+need I just need to change those
+
+997
+00:35:01,480 --> 00:35:04,160
+configurations there just for uh
+
+998
+00:35:04,160 --> 00:35:07,280
+completion let me show you uh components
+
+999
+00:35:07,280 --> 00:35:09,599
+the Rabid mq1 so you see that it's
+
+1000
+00:35:09,599 --> 00:35:12,400
+basically connecting to that
+
+1001
+00:35:12,400 --> 00:35:14,400
+instance again the only thing that I
+
+1002
+00:35:14,400 --> 00:35:16,599
+wanted to show here is the the type
+
+1003
+00:35:16,599 --> 00:35:18,079
+basically that basically tells you you
+
+1004
+00:35:18,079 --> 00:35:20,920
+know this pu up API of sending and
+
+1005
+00:35:20,920 --> 00:35:22,480
+consuming messages is implemented by
+
+1006
+00:35:22,480 --> 00:35:24,599
+rabid mq from the application point of
+
+1007
+00:35:24,599 --> 00:35:26,160
+view I don't care but from the
+
+1008
+00:35:26,160 --> 00:35:27,320
+infrastructure point of view I need to
+
+1009
+00:35:27,320 --> 00:35:29,240
+connect to Rabbit mq so I need to know
+
+1010
+00:35:29,240 --> 00:35:31,720
+where you know the rabbit mq host name
+
+1011
+00:35:31,720 --> 00:35:33,200
+is and the user and the password to
+
+1012
+00:35:33,200 --> 00:35:35,880
+connect to it right that's just pretty
+
+1013
+00:35:35,880 --> 00:35:37,599
+much what you need to know as like from
+
+1014
+00:35:37,599 --> 00:35:39,480
+from an infrastructure side of things
+
+1015
+00:35:39,480 --> 00:35:41,079
+again because it's a kubernetes resource
+
+1016
+00:35:41,079 --> 00:35:43,320
+you can start defining environments in
+
+1017
+00:35:43,320 --> 00:35:45,119
+git right like you have all these
+
+1018
+00:35:45,119 --> 00:35:46,400
+definitions on how to connect to
+
+1019
+00:35:46,400 --> 00:35:48,079
+infrastructure defining git and then use
+
+1020
+00:35:48,079 --> 00:35:51,000
+something like Argo CD to replicate this
+
+1021
+00:35:51,000 --> 00:35:52,720
+environment somewhere
+
+1022
+00:35:52,720 --> 00:35:55,160
+else and I think that's kind of like
+
+1023
+00:35:55,160 --> 00:35:56,560
+what I wanted to share about Dapper
+
+1024
+00:35:56,560 --> 00:35:58,040
+again trying to share some some kind of
+
+1025
+00:35:58,040 --> 00:35:59,800
+the main points and and some examples
+
+1026
+00:35:59,800 --> 00:36:01,280
+quickly so you can go and research more
+
+1027
+00:36:01,280 --> 00:36:03,319
+if you're interested in that space
+
+1028
+00:36:03,319 --> 00:36:05,599
+specifically uh to finally arrive to
+
+1029
+00:36:05,599 --> 00:36:07,119
+something that open function is not
+
+1030
+00:36:07,119 --> 00:36:08,800
+using but I think that it's also
+
+1031
+00:36:08,800 --> 00:36:11,079
+important to mention because uh I've
+
+1032
+00:36:11,079 --> 00:36:12,520
+been talking about clusters I've been
+
+1033
+00:36:12,520 --> 00:36:14,040
+talking about infrastructure like
+
+1034
+00:36:14,040 --> 00:36:17,079
+databases message Brokers and also like
+
+1035
+00:36:17,079 --> 00:36:19,119
+deploying the application uh but I
+
+1036
+00:36:19,119 --> 00:36:20,839
+haven't been talking about creating and
+
+1037
+00:36:20,839 --> 00:36:22,720
+provisioning infrastructure if you're
+
+1038
+00:36:22,720 --> 00:36:24,880
+working with any kind of application
+
+1039
+00:36:24,880 --> 00:36:25,960
+like the one that I'm showing that is
+
+1040
+00:36:25,960 --> 00:36:27,280
+running on a kubernetes cluster you will
+
+1041
+00:36:27,280 --> 00:36:29,760
+need to to manage and create Cloud
+
+1042
+00:36:29,760 --> 00:36:31,800
+resources including kubernetes clusters
+
+1043
+00:36:31,800 --> 00:36:33,800
+right who created the cluster that I'm
+
+1044
+00:36:33,800 --> 00:36:35,920
+using well you probably will be trying
+
+1045
+00:36:35,920 --> 00:36:37,520
+to automate that using a tool like
+
+1046
+00:36:37,520 --> 00:36:40,040
+crossplane or terraform or pumi are the
+
+1047
+00:36:40,040 --> 00:36:42,119
+the ones in the space I'm usually
+
+1048
+00:36:42,119 --> 00:36:43,640
+concentrated on crossplane because
+
+1049
+00:36:43,640 --> 00:36:45,960
+crossplane extends kubernetes and I
+
+1050
+00:36:45,960 --> 00:36:47,480
+think that that's a very important
+
+1051
+00:36:47,480 --> 00:36:49,440
+difference compared with all the other
+
+1052
+00:36:49,440 --> 00:36:51,880
+competitors so for certain use cases
+
+1053
+00:36:51,880 --> 00:36:56,680
+that makes a lot of sense so again uh we
+
+1054
+00:36:56,680 --> 00:36:58,440
+had our application running in a cluster
+
+1055
+00:36:58,440 --> 00:37:00,359
+we had G native and Dapper installed
+
+1056
+00:37:00,359 --> 00:37:01,280
+there and we have a bunch of
+
+1057
+00:37:01,280 --> 00:37:03,880
+infrastructure so who created all that
+
+1058
+00:37:03,880 --> 00:37:06,000
+stuff somebody needs to create and
+
+1059
+00:37:06,000 --> 00:37:07,599
+configure these environments in a way
+
+1060
+00:37:07,599 --> 00:37:09,520
+that it's reproducible but also simple
+
+1061
+00:37:09,520 --> 00:37:12,319
+to use so a platform engineer can use
+
+1062
+00:37:12,319 --> 00:37:13,640
+something like crossplay that is
+
+1063
+00:37:13,640 --> 00:37:14,839
+something that you will install in your
+
+1064
+00:37:14,839 --> 00:37:17,920
+clusters in order to provision Cloud
+
+1065
+00:37:17,920 --> 00:37:21,079
+resources or resources in general uh
+
+1066
+00:37:21,079 --> 00:37:23,599
+it's interesting because crossplane is
+
+1067
+00:37:23,599 --> 00:37:26,680
+not is not using kubernetes as most
+
+1068
+00:37:26,680 --> 00:37:28,839
+people will use it like most of us will
+
+1069
+00:37:28,839 --> 00:37:30,960
+use it just to run workloads with
+
+1070
+00:37:30,960 --> 00:37:32,599
+crossplane you basically install
+
+1071
+00:37:32,599 --> 00:37:34,119
+crossplane in a cluster where you are
+
+1072
+00:37:34,119 --> 00:37:35,240
+probably not going to run your
+
+1073
+00:37:35,240 --> 00:37:36,880
+applications you will have a management
+
+1074
+00:37:36,880 --> 00:37:38,079
+cluster that is in charge of
+
+1075
+00:37:38,079 --> 00:37:40,720
+provisioning resources but not running
+
+1076
+00:37:40,720 --> 00:37:42,560
+your workloads your applications will be
+
+1077
+00:37:42,560 --> 00:37:44,560
+not running in that cluster at least in
+
+1078
+00:37:44,560 --> 00:37:46,599
+it you know you shouldn't do that I
+
+1079
+00:37:46,599 --> 00:37:49,359
+think uh the main reason uh why is that
+
+1080
+00:37:49,359 --> 00:37:51,319
+is because this cluster will have
+
+1081
+00:37:51,319 --> 00:37:53,800
+credentials to connect to Cloud
+
+1082
+00:37:53,800 --> 00:37:55,720
+providers and provision resources on
+
+1083
+00:37:55,720 --> 00:37:58,280
+your behalf right so what I did for my
+
+1084
+00:37:58,280 --> 00:38:00,440
+cluster is basically I installed
+
+1085
+00:38:00,440 --> 00:38:02,480
+crossplane in a cluster then I installed
+
+1086
+00:38:02,480 --> 00:38:05,280
+the gcp provider so actually crossplane
+
+1087
+00:38:05,280 --> 00:38:07,839
+can provision new resources for me and
+
+1088
+00:38:07,839 --> 00:38:10,280
+how does it do that it basically extend
+
+1089
+00:38:10,280 --> 00:38:13,200
+kubernetes with custom types for cloud
+
+1090
+00:38:13,200 --> 00:38:14,560
+providers right so you can have
+
+1091
+00:38:14,560 --> 00:38:16,440
+something for example like the cluster
+
+1092
+00:38:16,440 --> 00:38:18,359
+resource or the database resource or the
+
+1093
+00:38:18,359 --> 00:38:20,720
+message broker resource for Google Cloud
+
+1094
+00:38:20,720 --> 00:38:22,160
+then you create a jaml file that
+
+1095
+00:38:22,160 --> 00:38:23,560
+basically represents the resource that
+
+1096
+00:38:23,560 --> 00:38:24,960
+you want to create you send it to
+
+1097
+00:38:24,960 --> 00:38:27,480
+crossplane crossplane will create this
+
+1098
+00:38:27,480 --> 00:38:28,760
+resources for you and it will keep
+
+1099
+00:38:28,760 --> 00:38:30,319
+monitoring these resources to see if
+
+1100
+00:38:30,319 --> 00:38:32,280
+they are created and running all the
+
+1101
+00:38:32,280 --> 00:38:34,520
+time and it will report status back if
+
+1102
+00:38:34,520 --> 00:38:36,160
+you go and delete the resource
+
+1103
+00:38:36,160 --> 00:38:37,800
+kubernetes will create it again in the
+
+1104
+00:38:37,800 --> 00:38:39,359
+same way that it will create again a pod
+
+1105
+00:38:39,359 --> 00:38:41,400
+if you delet it when you're running your
+
+1106
+00:38:41,400 --> 00:38:43,800
+applications so it's a it's a a little
+
+1107
+00:38:43,800 --> 00:38:45,560
+bit different model and it also opens
+
+1108
+00:38:45,560 --> 00:38:48,119
+the door for more like multicloud or
+
+1109
+00:38:48,119 --> 00:38:50,200
+cross Cloud uh kind of scenarios where
+
+1110
+00:38:50,200 --> 00:38:51,880
+you can have multiple providers it's not
+
+1111
+00:38:51,880 --> 00:38:53,599
+that you will only have your Google
+
+1112
+00:38:53,599 --> 00:38:55,319
+cloud provider you can have Google cloud
+
+1113
+00:38:55,319 --> 00:38:57,440
+AWS Asher and then send resources
+
+1114
+00:38:57,440 --> 00:38:59,359
+process and create stuff across
+
+1115
+00:38:59,359 --> 00:39:01,599
+different accounts which is kind of like
+
+1116
+00:39:01,599 --> 00:39:03,680
+interesting uh I wanted to show you
+
+1117
+00:39:03,680 --> 00:39:05,720
+quickly I think again I don't know if
+
+1118
+00:39:05,720 --> 00:39:07,520
+this will work but let's give it a try
+
+1119
+00:39:07,520 --> 00:39:09,720
+so I have cross plan installed here uh
+
+1120
+00:39:09,720 --> 00:39:12,280
+and I have the gcp uh provider installed
+
+1121
+00:39:12,280 --> 00:39:14,560
+you can get the
+
+1122
+00:39:14,560 --> 00:39:16,640
+providers and you will see that yeah I
+
+1123
+00:39:16,640 --> 00:39:19,480
+have a provider gcp SQL that basically
+
+1124
+00:39:19,480 --> 00:39:21,800
+means that I have a bunch of resources
+
+1125
+00:39:21,800 --> 00:39:24,400
+related to databases that are installed
+
+1126
+00:39:24,400 --> 00:39:28,440
+here I have here uh the directory here
+
+1127
+00:39:28,440 --> 00:39:30,480
+with just a simple Jamal file which
+
+1128
+00:39:30,480 --> 00:39:32,880
+basically describe a database instance
+
+1129
+00:39:32,880 --> 00:39:36,200
+for Google Cloud right so this resource
+
+1130
+00:39:36,200 --> 00:39:38,200
+basically allows me to say hey I want to
+
+1131
+00:39:38,200 --> 00:39:40,599
+create a new database in my Google Cloud
+
+1132
+00:39:40,599 --> 00:39:42,640
+account and I want to send these
+
+1133
+00:39:42,640 --> 00:39:44,319
+parameters you know I want the postgress
+
+1134
+00:39:44,319 --> 00:39:47,920
+ul5 to be created and I also want to
+
+1135
+00:39:47,920 --> 00:39:49,480
+have a way to connect to it so I need
+
+1136
+00:39:49,480 --> 00:39:52,079
+the URL for that uh database and the
+
+1137
+00:39:52,079 --> 00:39:54,720
+user and password that I will need to
+
+1138
+00:39:54,720 --> 00:39:57,200
+connect the kind of database how big it
+
+1139
+00:39:57,200 --> 00:40:00,760
+is is in which region all the stuff that
+
+1140
+00:40:00,760 --> 00:40:02,000
+you will need to Define when you are
+
+1141
+00:40:02,000 --> 00:40:04,240
+creating a database right and because I
+
+1142
+00:40:04,240 --> 00:40:05,760
+have crossplane installed in my cluster
+
+1143
+00:40:05,760 --> 00:40:07,880
+basically I can just apply this I think
+
+1144
+00:40:07,880 --> 00:40:10,200
+that I need to create this is using some
+
+1145
+00:40:10,200 --> 00:40:12,520
+weird stuff for generating names so you
+
+1146
+00:40:12,520 --> 00:40:14,200
+cannot apply it you need to create so it
+
+1147
+00:40:14,200 --> 00:40:16,960
+will just generate the random name and
+
+1148
+00:40:16,960 --> 00:40:18,880
+basically what I do is just send this
+
+1149
+00:40:18,880 --> 00:40:20,960
+request to the cluster and then
+
+1150
+00:40:20,960 --> 00:40:22,640
+basically crossplane will provision a
+
+1151
+00:40:22,640 --> 00:40:25,280
+new database in my Google Cloud account
+
+1152
+00:40:25,280 --> 00:40:27,359
+in a way what crossplane is doing here
+
+1153
+00:40:27,359 --> 00:40:31,680
+here uh and I know I think that I
+
+1154
+00:40:31,680 --> 00:40:34,359
+just I have the screen
+
+1155
+00:40:34,359 --> 00:40:36,800
+somewhere here so if I go to my Google
+
+1156
+00:40:36,800 --> 00:40:37,800
+Cloud
+
+1157
+00:40:37,800 --> 00:40:41,079
+account uh and if if this is working uh
+
+1158
+00:40:41,079 --> 00:40:43,880
+which is my not but let's check so if I
+
+1159
+00:40:43,880 --> 00:40:46,760
+go to Google cloudsql
+
+1160
+00:40:46,760 --> 00:40:48,960
+what I'm doing with crossplaying is
+
+1161
+00:40:48,960 --> 00:40:51,800
+basically yeah here there you go so um
+
+1162
+00:40:51,800 --> 00:40:54,079
+I'm just codifying a way to create
+
+1163
+00:40:54,079 --> 00:40:57,520
+resources into resources into kubernetes
+
+1164
+00:40:57,520 --> 00:40:59,280
+into kubernetes resources so I create a
+
+1165
+00:40:59,280 --> 00:41:01,960
+kubernetes resource uh which basically
+
+1166
+00:41:01,960 --> 00:41:04,119
+allows me to enter pretty much the same
+
+1167
+00:41:04,119 --> 00:41:06,880
+information that I will be able to you
+
+1168
+00:41:06,880 --> 00:41:09,440
+know fill here into a form in order to
+
+1169
+00:41:09,440 --> 00:41:11,720
+create this database but what crossplane
+
+1170
+00:41:11,720 --> 00:41:13,359
+is doing is automating all the process
+
+1171
+00:41:13,359 --> 00:41:14,760
+of creating and monitoring these
+
+1172
+00:41:14,760 --> 00:41:18,119
+resources which is pretty pretty useful
+
+1173
+00:41:18,119 --> 00:41:20,040
+in general if you are building complex
+
+1174
+00:41:20,040 --> 00:41:22,440
+infrastructure right when I'm creating a
+
+1175
+00:41:22,440 --> 00:41:24,400
+database usually I don't want the
+
+1176
+00:41:24,400 --> 00:41:26,240
+database I want the database I want the
+
+1177
+00:41:26,240 --> 00:41:29,000
+network I want probably some keys I want
+
+1178
+00:41:29,000 --> 00:41:30,560
+a bunch of different things in order to
+
+1179
+00:41:30,560 --> 00:41:32,000
+be able to access that probably I want
+
+1180
+00:41:32,000 --> 00:41:34,359
+like a like a role somewhere so I can
+
+1181
+00:41:34,359 --> 00:41:36,240
+have access to write tables and do stuff
+
+1182
+00:41:36,240 --> 00:41:38,599
+like that so usually it's not that I
+
+1183
+00:41:38,599 --> 00:41:40,079
+want to just create a single thing I
+
+1184
+00:41:40,079 --> 00:41:42,240
+just want to create a group of things
+
+1185
+00:41:42,240 --> 00:41:45,000
+and they need to be uh linked together
+
+1186
+00:41:45,000 --> 00:41:47,000
+and that's where I think that crossplane
+
+1187
+00:41:47,000 --> 00:41:49,720
+actually nailed it with their their uh
+
+1188
+00:41:49,720 --> 00:41:52,240
+definitions and their mechanisms uh and
+
+1189
+00:41:52,240 --> 00:41:53,520
+they created something that it's called
+
+1190
+00:41:53,520 --> 00:41:54,960
+composition so if you go to their
+
+1191
+00:41:54,960 --> 00:41:57,440
+website crossplane doio and look for for
+
+1192
+00:41:57,440 --> 00:41:59,640
+compositions basically what they allow
+
+1193
+00:41:59,640 --> 00:42:01,760
+you to do is to create you know this
+
+1194
+00:42:01,760 --> 00:42:03,920
+composable resources when you can say I
+
+1195
+00:42:03,920 --> 00:42:05,880
+want a CL cluster a database and a
+
+1196
+00:42:05,880 --> 00:42:08,240
+message broker and that will be my
+
+1197
+00:42:08,240 --> 00:42:10,560
+environment and now environment becomes
+
+1198
+00:42:10,560 --> 00:42:12,720
+a kubernetes resource that only exposes
+
+1199
+00:42:12,720 --> 00:42:14,640
+the thing that I I'm interested in
+
+1200
+00:42:14,640 --> 00:42:15,920
+defining when I'm creating a new
+
+1201
+00:42:15,920 --> 00:42:17,960
+environment for example if I'm a
+
+1202
+00:42:17,960 --> 00:42:19,280
+developer and I want to test my
+
+1203
+00:42:19,280 --> 00:42:21,240
+application the one that we deployed
+
+1204
+00:42:21,240 --> 00:42:23,359
+maybe I just want to say I just want
+
+1205
+00:42:23,359 --> 00:42:25,079
+like a development environment so I can
+
+1206
+00:42:25,079 --> 00:42:26,640
+just send a single resource saying
+
+1207
+00:42:26,640 --> 00:42:28,680
+development environment and you get all
+
+1208
+00:42:28,680 --> 00:42:30,520
+the things like a cluster with K native
+
+1209
+00:42:30,520 --> 00:42:33,160
+install Dapper and R and rabit mq all
+
+1210
+00:42:33,160 --> 00:42:35,240
+running for you to deploy your
+
+1211
+00:42:35,240 --> 00:42:37,800
+application I think that mechanisms like
+
+1212
+00:42:37,800 --> 00:42:39,079
+this that allows you to create
+
+1213
+00:42:39,079 --> 00:42:41,160
+interfaces and create abstractions
+
+1214
+00:42:41,160 --> 00:42:43,520
+without actually creating a controller
+
+1215
+00:42:43,520 --> 00:42:45,319
+are extremely powerful and I think that
+
+1216
+00:42:45,319 --> 00:42:47,000
+that's the main reason why crossplane is
+
+1217
+00:42:47,000 --> 00:42:50,200
+so popular nowadays into the cncf space
+
+1218
+00:42:50,200 --> 00:42:52,160
+I strongly recommend you to check it out
+
+1219
+00:42:52,160 --> 00:42:53,599
+again in the book there are like a bunch
+
+1220
+00:42:53,599 --> 00:42:55,359
+of tutorials where you just will go and
+
+1221
+00:42:55,359 --> 00:42:57,400
+use crossplay in different ways to
+
+1222
+00:42:57,400 --> 00:42:58,920
+create abstractions and to deploy these
+
+1223
+00:42:58,920 --> 00:43:01,680
+abstractions in in a local cluster that
+
+1224
+00:43:01,680 --> 00:43:03,599
+uh will give you a different Insight
+
+1225
+00:43:03,599 --> 00:43:05,440
+that when you see it in a presentation
+
+1226
+00:43:05,440 --> 00:43:07,280
+it kind of makes sense in a way maybe
+
+1227
+00:43:07,280 --> 00:43:08,599
+you're using terraform maybe you're
+
+1228
+00:43:08,599 --> 00:43:10,200
+using some of the tools but when you
+
+1229
+00:43:10,200 --> 00:43:11,880
+actually have some hands-on experience
+
+1230
+00:43:11,880 --> 00:43:14,240
+with the tool you actually realize how
+
+1231
+00:43:14,240 --> 00:43:16,839
+powerful this is and how other use cases
+
+1232
+00:43:16,839 --> 00:43:18,800
+you can uh tackle with this and at the
+
+1233
+00:43:18,800 --> 00:43:20,280
+end of the day I've seen many many
+
+1234
+00:43:20,280 --> 00:43:22,040
+people using terraform for provisioning
+
+1235
+00:43:22,040 --> 00:43:24,119
+some stuff and then going into crossling
+
+1236
+00:43:24,119 --> 00:43:25,520
+for doing the management of these
+
+1237
+00:43:25,520 --> 00:43:27,119
+resources that are a little bit more
+
+1238
+00:43:27,119 --> 00:43:29,839
+more sensitive or more uh where you need
+
+1239
+00:43:29,839 --> 00:43:32,599
+just to fine tune uh some things that
+
+1240
+00:43:32,599 --> 00:43:33,880
+you can do with terraform but it's much
+
+1241
+00:43:33,880 --> 00:43:35,440
+more easy to manage
+
+1242
+00:43:35,440 --> 00:43:39,920
+here so crossplane again basic stuff you
+
+1243
+00:43:39,920 --> 00:43:41,599
+create infrastructure using kubernetes
+
+1244
+00:43:41,599 --> 00:43:44,160
+resources more Advance stuff you create
+
+1245
+00:43:44,160 --> 00:43:45,800
+higher level abstractions that you can
+
+1246
+00:43:45,800 --> 00:43:48,599
+use to expose your interfaces that are
+
+1247
+00:43:48,599 --> 00:43:50,839
+more specific to your domain looking
+
+1248
+00:43:50,839 --> 00:43:52,640
+into compositions and composition
+
+1249
+00:43:52,640 --> 00:43:54,800
+functions is a a key thing on the
+
+1250
+00:43:54,800 --> 00:43:56,839
+project and they have been doing great
+
+1251
+00:43:56,839 --> 00:43:58,319
+with that and I've seen a lot of
+
+1252
+00:43:58,319 --> 00:44:00,160
+companies just picking crossplay for
+
+1253
+00:44:00,160 --> 00:44:01,079
+those
+
+1254
+00:44:01,079 --> 00:44:03,000
+capabilities uh and the other thing that
+
+1255
+00:44:03,000 --> 00:44:04,440
+you can do with this is now because you
+
+1256
+00:44:04,440 --> 00:44:06,160
+have some kind of like packaging
+
+1257
+00:44:06,160 --> 00:44:08,119
+mechanism to say all these jaml and all
+
+1258
+00:44:08,119 --> 00:44:09,319
+these compositions and all these
+
+1259
+00:44:09,319 --> 00:44:11,359
+abstractions can be packaged as
+
+1260
+00:44:11,359 --> 00:44:12,960
+containers so I can just package
+
+1261
+00:44:12,960 --> 00:44:15,160
+everything as an oci image share it with
+
+1262
+00:44:15,160 --> 00:44:16,520
+another team that can install it in
+
+1263
+00:44:16,520 --> 00:44:18,480
+their crossplay installation and start
+
+1264
+00:44:18,480 --> 00:44:20,839
+using these resources make it even more
+
+1265
+00:44:20,839 --> 00:44:22,520
+attractive for platform teams to share
+
+1266
+00:44:22,520 --> 00:44:24,240
+knowledge and share these obstructions
+
+1267
+00:44:24,240 --> 00:44:26,720
+across different installations so I
+
+1268
+00:44:26,720 --> 00:44:29,000
+strongly recommend to check that out I'm
+
+1269
+00:44:29,000 --> 00:44:32,640
+running out of time now uh but I wanted
+
+1270
+00:44:32,640 --> 00:44:33,960
+to mention this because I think that
+
+1271
+00:44:33,960 --> 00:44:36,640
+this is this is super super important if
+
+1272
+00:44:36,640 --> 00:44:38,359
+you're building platforms don't build
+
+1273
+00:44:38,359 --> 00:44:40,079
+the platforms on your own just go
+
+1274
+00:44:40,079 --> 00:44:41,680
+outside and check what other companies
+
+1275
+00:44:41,680 --> 00:44:44,760
+are doing I mentioned K serving here and
+
+1276
+00:44:44,760 --> 00:44:47,359
+I needed to mention this because uh
+
+1277
+00:44:47,359 --> 00:44:49,960
+again it's it's a very mature project
+
+1278
+00:44:49,960 --> 00:44:52,040
+that does one thing and does it well do
+
+1279
+00:44:52,040 --> 00:44:54,440
+the AOS scaling of HTTP uh based
+
+1280
+00:44:54,440 --> 00:44:56,720
+workloads it's been adopted by companies
+
+1281
+00:44:56,720 --> 00:44:58,720
+like red in their open shift suite and
+
+1282
+00:44:58,720 --> 00:45:01,640
+BMW tansu they both bundle K in there
+
+1283
+00:45:01,640 --> 00:45:03,160
+because again it's it's mature and it's
+
+1284
+00:45:03,160 --> 00:45:05,040
+being used a lot for those particular
+
+1285
+00:45:05,040 --> 00:45:07,000
+use cases and as I mentioned before
+
+1286
+00:45:07,000 --> 00:45:10,119
+Google Cloud run runs the same apis for
+
+1287
+00:45:10,119 --> 00:45:12,680
+for their containers as Service uh
+
+1288
+00:45:12,680 --> 00:45:15,319
+Service uh where the main idea there is
+
+1289
+00:45:15,319 --> 00:45:18,000
+just to simplify you know the experience
+
+1290
+00:45:18,000 --> 00:45:19,720
+of you know running containers without
+
+1291
+00:45:19,720 --> 00:45:21,200
+needing to know or needing to create
+
+1292
+00:45:21,200 --> 00:45:22,800
+clusters that basically cost a lot of
+
+1293
+00:45:22,800 --> 00:45:25,000
+money and you need to maintain them so
+
+1294
+00:45:25,000 --> 00:45:27,440
+check that out the case of that I
+
+1295
+00:45:27,440 --> 00:45:29,800
+mentioned uh you know the this unified
+
+1296
+00:45:29,800 --> 00:45:31,760
+interfaces for interacting with
+
+1297
+00:45:31,760 --> 00:45:33,160
+infrastructure and building distributed
+
+1298
+00:45:33,160 --> 00:45:35,319
+applications I need to mention that
+
+1299
+00:45:35,319 --> 00:45:38,200
+Dapper was created by Microsoft in 2019
+
+1300
+00:45:38,200 --> 00:45:39,880
+and it's running as part of container
+
+1301
+00:45:39,880 --> 00:45:41,400
+apps Asher container apps so if you're
+
+1302
+00:45:41,400 --> 00:45:43,359
+running containers on Asher you already
+
+1303
+00:45:43,359 --> 00:45:45,319
+have the Dapper apis already there they
+
+1304
+00:45:45,319 --> 00:45:47,319
+running Dapper in as a manag service
+
+1305
+00:45:47,319 --> 00:45:49,880
+there and again if you're are using aure
+
+1306
+00:45:49,880 --> 00:45:52,359
+you just are half way to be able to use
+
+1307
+00:45:52,359 --> 00:45:55,040
+this across across teams and in the the
+
+1308
+00:45:55,040 --> 00:45:56,640
+company I'm working on right now I
+
+1309
+00:45:56,640 --> 00:45:58,280
+agreed we offer two products for
+
+1310
+00:45:58,280 --> 00:45:59,760
+managing you know daa at scale when
+
+1311
+00:45:59,760 --> 00:46:01,200
+you're not running an Asher and you're
+
+1312
+00:46:01,200 --> 00:46:03,800
+running daera yourself and uh Catalyst
+
+1313
+00:46:03,800 --> 00:46:06,119
+which is basically okay a multi uh Cloud
+
+1314
+00:46:06,119 --> 00:46:08,200
+approach for running these apis without
+
+1315
+00:46:08,200 --> 00:46:10,160
+pushing you to manage this these
+
+1316
+00:46:10,160 --> 00:46:12,680
+services and finally crossplane it's
+
+1317
+00:46:12,680 --> 00:46:15,119
+again it's uh cross plan is been uh you
+
+1318
+00:46:15,119 --> 00:46:17,280
+know has been created by abbound the
+
+1319
+00:46:17,280 --> 00:46:19,520
+company which basically offers you know
+
+1320
+00:46:19,520 --> 00:46:21,599
+managed services on top of crossplane
+
+1321
+00:46:21,599 --> 00:46:23,040
+that you can run on their cloud or you
+
+1322
+00:46:23,040 --> 00:46:25,240
+can run on your own accounts in your own
+
+1323
+00:46:25,240 --> 00:46:26,920
+clouds which makes a lot of sense for
+
+1324
+00:46:26,920 --> 00:46:29,000
+for for a lot of companies I've seen
+
+1325
+00:46:29,000 --> 00:46:30,640
+very very large companies running these
+
+1326
+00:46:30,640 --> 00:46:33,200
+Services inside their compute because
+
+1327
+00:46:33,200 --> 00:46:34,280
+most of the time you don't want to
+
+1328
+00:46:34,280 --> 00:46:36,480
+delegate you know this to an external
+
+1329
+00:46:36,480 --> 00:46:39,240
+service like for example terraform
+
+1330
+00:46:39,240 --> 00:46:42,160
+Cloud again uh building platforms is
+
+1331
+00:46:42,160 --> 00:46:43,800
+hard I wanted to show open function at
+
+1332
+00:46:43,800 --> 00:46:45,520
+the beginning because it's a very
+
+1333
+00:46:45,520 --> 00:46:47,599
+complicated project that does a lot for
+
+1334
+00:46:47,599 --> 00:46:49,559
+you but when things go wrong you need to
+
+1335
+00:46:49,559 --> 00:46:50,720
+learn about all the tools that they are
+
+1336
+00:46:50,720 --> 00:46:53,079
+using I wanted to show like each of the
+
+1337
+00:46:53,079 --> 00:46:54,760
+individual tools that I've seen being
+
+1338
+00:46:54,760 --> 00:46:56,440
+used by platform teams when they are
+
+1339
+00:46:56,440 --> 00:46:59,040
+trying to to simplify their operations
+
+1340
+00:46:59,040 --> 00:47:01,599
+uh for development teams or for uh you
+
+1341
+00:47:01,599 --> 00:47:02,800
+know operation
+
+1342
+00:47:02,800 --> 00:47:06,079
+teams uh and I keep saying this because
+
+1343
+00:47:06,079 --> 00:47:07,440
+I think that it's the most important
+
+1344
+00:47:07,440 --> 00:47:08,680
+topic you need to build your own
+
+1345
+00:47:08,680 --> 00:47:10,359
+abstractions and you need to focus
+
+1346
+00:47:10,359 --> 00:47:12,800
+really really hard on what to expose and
+
+1347
+00:47:12,800 --> 00:47:14,880
+what not to expose to your teams if you
+
+1348
+00:47:14,880 --> 00:47:16,640
+want to simplify their their job you
+
+1349
+00:47:16,640 --> 00:47:17,800
+just need to make sure that you have
+
+1350
+00:47:17,800 --> 00:47:20,800
+that right uh and again platforms are
+
+1351
+00:47:20,800 --> 00:47:22,760
+not about adopting technology just for
+
+1352
+00:47:22,760 --> 00:47:24,520
+the sake of adopting technology just try
+
+1353
+00:47:24,520 --> 00:47:26,480
+to measure you know try to measure if
+
+1354
+00:47:26,480 --> 00:47:28,599
+you are simplifying the life of users or
+
+1355
+00:47:28,599 --> 00:47:31,480
+not and in order to just actually do
+
+1356
+00:47:31,480 --> 00:47:33,559
+that you need to prioritize what are the
+
+1357
+00:47:33,559 --> 00:47:34,960
+challenges that they are facing so
+
+1358
+00:47:34,960 --> 00:47:36,160
+adding crossplane because you like
+
+1359
+00:47:36,160 --> 00:47:38,040
+crossplane will not make sense unless
+
+1360
+00:47:38,040 --> 00:47:39,599
+they are having kind like an issue with
+
+1361
+00:47:39,599 --> 00:47:41,640
+provisioning infrastructure and again
+
+1362
+00:47:41,640 --> 00:47:43,400
+don't do it alone just there are tons of
+
+1363
+00:47:43,400 --> 00:47:46,119
+companies building uh products out there
+
+1364
+00:47:46,119 --> 00:47:48,520
+uh and most of these are related to open
+
+1365
+00:47:48,520 --> 00:47:49,960
+source projects so they are more than
+
+1366
+00:47:49,960 --> 00:47:51,880
+happy to engage with companies
+
+1367
+00:47:51,880 --> 00:47:53,520
+implementing these Solutions and help
+
+1368
+00:47:53,520 --> 00:47:55,640
+them to integrate you know uh with
+
+1369
+00:47:55,640 --> 00:47:59,040
+different tools and the entire ecosystem
+
+1370
+00:47:59,040 --> 00:48:01,240
+so thank you very much uh there is a
+
+1371
+00:48:01,240 --> 00:48:02,800
+discount code there if you're interested
+
+1372
+00:48:02,800 --> 00:48:05,599
+in the book and I will do that now
+
+1373
+00:48:05,599 --> 00:48:07,280
+because I have one more minute so let's
+
+1374
+00:48:07,280 --> 00:48:09,720
+do that so I have two copies of the book
+
+1375
+00:48:09,720 --> 00:48:12,079
+and I if you voted at the
+
+1376
+00:48:12,079 --> 00:48:14,440
+beginning and if the window it's of
+
+1377
+00:48:14,440 --> 00:48:16,000
+course it's not open anymore because
+
+1378
+00:48:16,000 --> 00:48:17,720
+it's not
+
+1379
+00:48:17,720 --> 00:48:21,119
+here but I'm using kubernetes so I
+
+1380
+00:48:21,119 --> 00:48:22,599
+should be able to get this sorted out
+
+1381
+00:48:22,599 --> 00:48:24,960
+right uh it should be here there's an
+
+1382
+00:48:24,960 --> 00:48:27,200
+URL somewhere
+
+1383
+00:48:27,200 --> 00:48:29,800
+uh and let's see if this works I just
+
+1384
+00:48:29,800 --> 00:48:31,680
+not trusting my computer anymore from
+
+1385
+00:48:31,680 --> 00:48:34,440
+now on uh so if you still have the you
+
+1386
+00:48:34,440 --> 00:48:37,040
+can see that that's working I know that
+
+1387
+00:48:37,040 --> 00:48:40,359
+like dogs win I think uh but drum roll
+
+1388
+00:48:40,359 --> 00:48:41,880
+let's see if we can find a winner from
+
+1389
+00:48:41,880 --> 00:48:44,520
+the voters check your hash code if
+
+1390
+00:48:44,520 --> 00:48:46,520
+somebody has that hash code that I just
+
+1391
+00:48:46,520 --> 00:48:48,319
+click and delet it there you go that
+
+1392
+00:48:48,319 --> 00:48:50,760
+hash code if somebody has that one you
+
+1393
+00:48:50,760 --> 00:48:52,520
+get a
+
+1394
+00:48:52,520 --> 00:48:56,200
+book do we have it okay yes okay we have
+
+1395
+00:48:56,200 --> 00:48:58,640
+one winner that's the the cats winner
+
+1396
+00:48:58,640 --> 00:49:00,799
+let's do the dogs winner and my computer
+
+1397
+00:49:00,799 --> 00:49:02,200
+doesn't have the mouse anymore there you
+
+1398
+00:49:02,200 --> 00:49:05,000
+go dogs winner drum
+
+1399
+00:49:05,000 --> 00:49:07,280
+rolls you cannot win two books that's
+
+1400
+00:49:07,280 --> 00:49:08,720
+the only thing that I'm saying does
+
+1401
+00:49:08,720 --> 00:49:10,960
+somebody has that one hey there you go
+
+1402
+00:49:10,960 --> 00:49:14,119
+congratulations guys thank you very much
+
+1403
+00:49:14,119 --> 00:49:17,040
+for your attention and apologies for my
+
+1404
+00:49:17,040 --> 00:49:18,799
+computer freezing I cannot do anything
+
+1405
+00:49:18,799 --> 00:49:21,040
+about it right the clust are working
+
+1406
+00:49:21,040 --> 00:49:25,000
+which makes me happy so thank
+
+1407
+00:49:25,720 --> 00:49:29,000
+you we
+
+1408
+00:49:29,079 --> 00:49:34,400
+go any questions uh or things please
+
+1409
+00:49:34,400 --> 00:49:36,520
+please feel free to come and and ask
+
+1410
+00:49:36,520 --> 00:49:38,440
+directly right I will be around today
+
+1411
+00:49:38,440 --> 00:49:42,000
+and tomorrow so I think that's it thank
+
+1412
+00:49:42,000 --> 00:49:46,319
+you there you go

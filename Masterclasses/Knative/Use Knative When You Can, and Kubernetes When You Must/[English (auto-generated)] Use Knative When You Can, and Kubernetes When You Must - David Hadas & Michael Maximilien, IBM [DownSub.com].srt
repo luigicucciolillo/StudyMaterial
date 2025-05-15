@@ -1,0 +1,3467 @@
+1
+00:00:05,000 --> 00:00:09,059
+so I am Max
+
+2
+00:00:09,059 --> 00:00:11,280
+um and I work I'm a distinguished
+
+3
+00:00:11,280 --> 00:00:12,780
+engineer at IBM
+
+4
+00:00:12,780 --> 00:00:15,719
+and actually I was one of the people
+
+5
+00:00:15,719 --> 00:00:19,080
+after Google made k-native public
+
+6
+00:00:19,080 --> 00:00:21,600
+to uh start contributing to it obviously
+
+7
+00:00:21,600 --> 00:00:25,800
+lots of folks from Red Hat VMware you
+
+8
+00:00:25,800 --> 00:00:27,060
+know I'm sure I'm gonna forget some
+
+9
+00:00:27,060 --> 00:00:29,580
+names but the project has grown
+
+10
+00:00:29,580 --> 00:00:31,679
+especially the folks that created chain
+
+11
+00:00:31,679 --> 00:00:34,980
+guard most of them were from Google and
+
+12
+00:00:34,980 --> 00:00:37,500
+then they created a native
+
+13
+00:00:37,500 --> 00:00:40,680
+um and I worked on that for about two
+
+14
+00:00:40,680 --> 00:00:43,620
+years or two and a half years and then
+
+15
+00:00:43,620 --> 00:00:46,680
+now I'm working actually on sort of what
+
+16
+00:00:46,680 --> 00:00:49,399
+we call Quantum serverless
+
+17
+00:00:49,399 --> 00:00:52,320
+so it actually uses K native underneath
+
+18
+00:00:52,320 --> 00:00:55,079
+but my mission is bordered and just that
+
+19
+00:00:55,079 --> 00:00:56,879
+it's actually
+
+20
+00:00:56,879 --> 00:01:00,300
+um you know Quantum open quantum
+
+21
+00:01:00,300 --> 00:01:01,980
+so we're not going to talk about that
+
+22
+00:01:01,980 --> 00:01:03,840
+now that was the talk before that's why
+
+23
+00:01:03,840 --> 00:01:06,780
+I was late but I'm here with my
+
+24
+00:01:06,780 --> 00:01:08,640
+colleague David Harris
+
+25
+00:01:08,640 --> 00:01:10,260
+and actually I'll give a lot of credit
+
+26
+00:01:10,260 --> 00:01:12,659
+to David for this talk
+
+27
+00:01:12,659 --> 00:01:14,460
+not only for putting it together but
+
+28
+00:01:14,460 --> 00:01:16,920
+also it came from a blog post that he
+
+29
+00:01:16,920 --> 00:01:21,119
+had so David Works uh and startup Nation
+
+30
+00:01:21,119 --> 00:01:23,100
+anybody knows where that is
+
+31
+00:01:23,100 --> 00:01:25,380
+you all know Silicon Valley right but
+
+32
+00:01:25,380 --> 00:01:28,560
+there is a country called startup Nation
+
+33
+00:01:28,560 --> 00:01:29,759
+yes
+
+34
+00:01:29,759 --> 00:01:33,119
+I've never been but I've collaborated
+
+35
+00:01:33,119 --> 00:01:35,040
+with so many people from Israel that
+
+36
+00:01:35,040 --> 00:01:36,600
+it's probably true it's startup Nation
+
+37
+00:01:36,600 --> 00:01:39,119
+so anyway he's from there he worked 10
+
+38
+00:01:39,119 --> 00:01:41,040
+years I think trying to build startups
+
+39
+00:01:41,040 --> 00:01:43,740
+and then you give up and join us
+
+40
+00:01:43,740 --> 00:01:47,040
+and he's an expert in security and when
+
+41
+00:01:47,040 --> 00:01:52,020
+he contacted me to help in k-native he's
+
+42
+00:01:52,020 --> 00:01:54,180
+made a big difference so he's going to
+
+43
+00:01:54,180 --> 00:01:55,259
+talk about some of the work that he's
+
+44
+00:01:55,259 --> 00:01:57,540
+also doing but what's interesting about
+
+45
+00:01:57,540 --> 00:02:00,000
+this talk is that it tries to position K
+
+46
+00:02:00,000 --> 00:02:03,240
+native as the place you should start so
+
+47
+00:02:03,240 --> 00:02:06,079
+let's get to it
+
+48
+00:02:06,240 --> 00:02:08,819
+so obviously you know when you're
+
+49
+00:02:08,819 --> 00:02:11,340
+talking about cloud computing
+
+50
+00:02:11,340 --> 00:02:13,379
+um you know in terms of the big picture
+
+51
+00:02:13,379 --> 00:02:15,959
+right it's pretty much what everybody is
+
+52
+00:02:15,959 --> 00:02:18,060
+using so I'm you know here because you
+
+53
+00:02:18,060 --> 00:02:20,599
+know with this is cloud native
+
+54
+00:02:20,599 --> 00:02:23,640
+and people are using cloud computing for
+
+55
+00:02:23,640 --> 00:02:27,840
+all types of you know problems solving
+
+56
+00:02:27,840 --> 00:02:30,660
+problems even Quantum which is what you
+
+57
+00:02:30,660 --> 00:02:32,879
+know I just came back from a talk on
+
+58
+00:02:32,879 --> 00:02:33,720
+that
+
+59
+00:02:33,720 --> 00:02:37,379
+but there is some downside to it and we
+
+60
+00:02:37,379 --> 00:02:39,360
+wrote a blog post at least for some
+
+61
+00:02:39,360 --> 00:02:41,459
+aspects of this so starting from the
+
+62
+00:02:41,459 --> 00:02:43,560
+bottom for instance I think yesterday if
+
+63
+00:02:43,560 --> 00:02:46,739
+you are the keynote uh folks colleagues
+
+64
+00:02:46,739 --> 00:02:48,959
+from Azure are talking about this as
+
+65
+00:02:48,959 --> 00:02:51,300
+well as red hat where there is actually
+
+66
+00:02:51,300 --> 00:02:53,940
+a lot of energy that's being consumed by
+
+67
+00:02:53,940 --> 00:02:55,560
+those data centers
+
+68
+00:02:55,560 --> 00:02:58,860
+and if we keep going in that direction
+
+69
+00:02:58,860 --> 00:03:01,620
+uh it's not going to help the problem
+
+70
+00:03:01,620 --> 00:03:03,239
+that we all face I mean I don't have to
+
+71
+00:03:03,239 --> 00:03:04,620
+tell you we all
+
+72
+00:03:04,620 --> 00:03:06,300
+you know hopefully you're not a climate
+
+73
+00:03:06,300 --> 00:03:09,060
+denier but if you are maybe we can talk
+
+74
+00:03:09,060 --> 00:03:12,080
+about it offline there is quite of
+
+75
+00:03:12,080 --> 00:03:16,440
+issues with uh you know the climate
+
+76
+00:03:16,440 --> 00:03:18,180
+right now so what could we do for
+
+77
+00:03:18,180 --> 00:03:20,580
+instance as computer scientists as
+
+78
+00:03:20,580 --> 00:03:22,680
+people in a community to make for
+
+79
+00:03:22,680 --> 00:03:26,099
+instance those cloud computing centers a
+
+80
+00:03:26,099 --> 00:03:27,959
+little bit more energy efficient so
+
+81
+00:03:27,959 --> 00:03:30,260
+that's one of the downsides right
+
+82
+00:03:30,260 --> 00:03:33,120
+and the demand is going to keep going so
+
+83
+00:03:33,120 --> 00:03:35,159
+it's not a downside that we're gonna
+
+84
+00:03:35,159 --> 00:03:37,080
+have tomorrow it's a downside today and
+
+85
+00:03:37,080 --> 00:03:38,400
+it's going to keep going
+
+86
+00:03:38,400 --> 00:03:40,440
+right
+
+87
+00:03:40,440 --> 00:03:43,860
+so one of the things that we believe and
+
+88
+00:03:43,860 --> 00:03:46,920
+we don't have a proof of it so it's not
+
+89
+00:03:46,920 --> 00:03:49,739
+something I want to want you to bet on
+
+90
+00:03:49,739 --> 00:03:52,040
+but it's an intuition
+
+91
+00:03:52,040 --> 00:03:56,519
+and it's that essentially serverless so
+
+92
+00:03:56,519 --> 00:03:58,019
+the approach of
+
+93
+00:03:58,019 --> 00:04:00,420
+running software
+
+94
+00:04:00,420 --> 00:04:02,099
+for just the amount of time that you
+
+95
+00:04:02,099 --> 00:04:02,879
+need
+
+96
+00:04:02,879 --> 00:04:04,739
+just the amount of resources that you
+
+97
+00:04:04,739 --> 00:04:07,440
+need being very Dynamic and how you go
+
+98
+00:04:07,440 --> 00:04:09,840
+so instead of scaling
+
+99
+00:04:09,840 --> 00:04:11,819
+and trying to predict the scale you
+
+100
+00:04:11,819 --> 00:04:14,099
+Scale based on the demand
+
+101
+00:04:14,099 --> 00:04:16,199
+it's gonna help right partly because
+
+102
+00:04:16,199 --> 00:04:18,620
+you're using less resources you're using
+
+103
+00:04:18,620 --> 00:04:21,000
+you know just the amount of resources
+
+104
+00:04:21,000 --> 00:04:22,019
+that you need
+
+105
+00:04:22,019 --> 00:04:24,300
+and when you start multiplying this by
+
+106
+00:04:24,300 --> 00:04:26,639
+all the workloads we're all running in
+
+107
+00:04:26,639 --> 00:04:28,080
+the rest of the world
+
+108
+00:04:28,080 --> 00:04:31,440
+the intuition is that it will help
+
+109
+00:04:31,440 --> 00:04:32,720
+reduce
+
+110
+00:04:32,720 --> 00:04:35,699
+you know some of the energy pressure
+
+111
+00:04:35,699 --> 00:04:37,500
+that we're putting on cloud
+
+112
+00:04:37,500 --> 00:04:39,720
+so we would this blog post it's one of
+
+113
+00:04:39,720 --> 00:04:42,479
+the IBM Cloud on how we believe you know
+
+114
+00:04:42,479 --> 00:04:43,860
+K native for instance is a good
+
+115
+00:04:43,860 --> 00:04:46,320
+direction in that and also colleagues
+
+116
+00:04:46,320 --> 00:04:49,020
+have built on this with like for
+
+117
+00:04:49,020 --> 00:04:51,540
+instance Kepler as a model for you to
+
+118
+00:04:51,540 --> 00:04:54,240
+measure for instance the amount of you
+
+119
+00:04:54,240 --> 00:04:56,400
+know at least the con the carbon offset
+
+120
+00:04:56,400 --> 00:04:58,860
+that your computation is is doing so a
+
+121
+00:04:58,860 --> 00:05:00,660
+lot of clouds you're gonna see is gonna
+
+122
+00:05:00,660 --> 00:05:06,120
+expose this but that's just one one
+
+123
+00:05:06,120 --> 00:05:08,940
+um benefit there's a lot more so David
+
+124
+00:05:08,940 --> 00:05:11,400
+is going to walk you through
+
+125
+00:05:11,400 --> 00:05:14,520
+the benefits that we've identified of
+
+126
+00:05:14,520 --> 00:05:17,040
+using K native
+
+127
+00:05:17,040 --> 00:05:20,639
+not really instead of kubernetes but
+
+128
+00:05:20,639 --> 00:05:23,400
+using k-native as the way to use
+
+129
+00:05:23,400 --> 00:05:25,680
+kubernetes and then of course because K
+
+130
+00:05:25,680 --> 00:05:27,840
+native you can Form K native use
+
+131
+00:05:27,840 --> 00:05:29,639
+kubernetes if you need it you can also
+
+132
+00:05:29,639 --> 00:05:32,400
+use it so David thank you can you hear
+
+133
+00:05:32,400 --> 00:05:34,440
+me yes
+
+134
+00:05:34,440 --> 00:05:37,380
+so we will start with a question that
+
+135
+00:05:37,380 --> 00:05:39,720
+this old dog doesn't know the answer for
+
+136
+00:05:39,720 --> 00:05:42,600
+because every person I would ask would
+
+137
+00:05:42,600 --> 00:05:44,400
+give me a different answer and which
+
+138
+00:05:44,400 --> 00:05:47,100
+which is what is serverless now there
+
+139
+00:05:47,100 --> 00:05:49,020
+are different concepts about what is
+
+140
+00:05:49,020 --> 00:05:50,820
+serverless we will Define it for this
+
+141
+00:05:50,820 --> 00:05:51,660
+talk
+
+142
+00:05:51,660 --> 00:05:53,639
+for this talk we talk about serverless
+
+143
+00:05:53,639 --> 00:05:55,440
+when we talk about a situation when you
+
+144
+00:05:55,440 --> 00:05:59,039
+approach the cloud with your whatever
+
+145
+00:05:59,039 --> 00:06:00,960
+you need whatever service you want to
+
+146
+00:06:00,960 --> 00:06:03,180
+deploy there without telling the cloud
+
+147
+00:06:03,180 --> 00:06:05,880
+how many resources the cloud needs to
+
+148
+00:06:05,880 --> 00:06:08,880
+associate with that service so if you
+
+149
+00:06:08,880 --> 00:06:10,680
+take away step back and you give the
+
+150
+00:06:10,680 --> 00:06:12,900
+cloud the decision how many resources
+
+151
+00:06:12,900 --> 00:06:14,699
+are going to deploy be deployed for your
+
+152
+00:06:14,699 --> 00:06:16,620
+service and of course it means that the
+
+153
+00:06:16,620 --> 00:06:18,419
+clouds need to measure that and decide
+
+154
+00:06:18,419 --> 00:06:19,620
+that for you
+
+155
+00:06:19,620 --> 00:06:22,800
+then in this in this case this is what
+
+156
+00:06:22,800 --> 00:06:24,960
+we will call serverless and of course it
+
+157
+00:06:24,960 --> 00:06:27,360
+goes hand in hand with pay as you go
+
+158
+00:06:27,360 --> 00:06:29,160
+because if you didn't Define how many
+
+159
+00:06:29,160 --> 00:06:31,259
+resources you're going to use then you
+
+160
+00:06:31,259 --> 00:06:32,759
+need to pay as much as you're actually
+
+161
+00:06:32,759 --> 00:06:34,259
+using
+
+162
+00:06:34,259 --> 00:06:37,979
+so there used to be this um two options
+
+163
+00:06:37,979 --> 00:06:41,280
+for you you either use microservices and
+
+164
+00:06:41,280 --> 00:06:44,280
+you define exactly how many resources I
+
+165
+00:06:44,280 --> 00:06:48,000
+want 27 parts of this deployment
+
+166
+00:06:48,000 --> 00:06:49,860
+how do you get to that number is a good
+
+167
+00:06:49,860 --> 00:06:52,259
+question but that's what I want
+
+168
+00:06:52,259 --> 00:06:54,300
+and that's the other option which is
+
+169
+00:06:54,300 --> 00:06:56,940
+serverless which says I have no idea how
+
+170
+00:06:56,940 --> 00:07:00,300
+much I want it's Dynamic I'll I will let
+
+171
+00:07:00,300 --> 00:07:02,699
+the cloud do that and that serverless
+
+172
+00:07:02,699 --> 00:07:06,539
+but the truth is it's not really too
+
+173
+00:07:06,539 --> 00:07:09,240
+two options it's there is a whole range
+
+174
+00:07:09,240 --> 00:07:12,479
+of other options you may say Okay I want
+
+175
+00:07:12,479 --> 00:07:14,699
+at least three pods or at least one pod
+
+176
+00:07:14,699 --> 00:07:17,160
+running all the time because I want that
+
+177
+00:07:17,160 --> 00:07:19,080
+Dynamic service like microservice it
+
+178
+00:07:19,080 --> 00:07:22,020
+answers every every request I have but
+
+179
+00:07:22,020 --> 00:07:25,500
+then when I need more then please make
+
+180
+00:07:25,500 --> 00:07:28,020
+sure I have more and I don't care how
+
+181
+00:07:28,020 --> 00:07:30,780
+many if you want if I if I need 300 use
+
+182
+00:07:30,780 --> 00:07:34,620
+300. and and then I I may say Okay I
+
+183
+00:07:34,620 --> 00:07:37,319
+want between three and ten don't ever
+
+184
+00:07:37,319 --> 00:07:39,840
+use more than 10 because I'm never going
+
+185
+00:07:39,840 --> 00:07:41,400
+to pay for that
+
+186
+00:07:41,400 --> 00:07:44,759
+so this is this is a completely dynamic
+
+187
+00:07:44,759 --> 00:07:48,900
+range and it's uh
+
+188
+00:07:48,900 --> 00:07:50,880
+um leave the question what is serverless
+
+189
+00:07:50,880 --> 00:07:54,360
+completely irrelevant and that changes
+
+190
+00:07:54,360 --> 00:07:56,639
+how we see K native as well
+
+191
+00:07:56,639 --> 00:07:59,400
+so let's let us redefine what K native
+
+192
+00:07:59,400 --> 00:08:00,960
+is
+
+193
+00:08:00,960 --> 00:08:03,539
+K native is your way it's your
+
+194
+00:08:03,539 --> 00:08:07,280
+automation layer to deploy native
+
+195
+00:08:07,280 --> 00:08:10,680
+kubernetes services and what is a native
+
+196
+00:08:10,680 --> 00:08:12,720
+kubernetes service a native kubernetes
+
+197
+00:08:12,720 --> 00:08:14,699
+service is one that follows the best
+
+198
+00:08:14,699 --> 00:08:15,900
+practices
+
+199
+00:08:15,900 --> 00:08:17,520
+12 Factor up
+
+200
+00:08:17,520 --> 00:08:19,860
+if you are building micro Services based
+
+201
+00:08:19,860 --> 00:08:22,919
+on the 12 Factor up methodology then
+
+202
+00:08:22,919 --> 00:08:27,180
+you're probably good to go with k-native
+
+203
+00:08:27,180 --> 00:08:28,379
+um
+
+204
+00:08:28,379 --> 00:08:31,919
+serverless of course you as a result of
+
+205
+00:08:31,919 --> 00:08:33,599
+that any serverless application that
+
+206
+00:08:33,599 --> 00:08:36,180
+you're You're Building would also they
+
+207
+00:08:36,180 --> 00:08:38,399
+also comply with 12 12 Factor up and
+
+208
+00:08:38,399 --> 00:08:41,159
+there would also be considered a native
+
+209
+00:08:41,159 --> 00:08:44,459
+service and also if you're going for the
+
+210
+00:08:44,459 --> 00:08:46,980
+new K native functions which is a build
+
+211
+00:08:46,980 --> 00:08:48,600
+system that helps you create new
+
+212
+00:08:48,600 --> 00:08:51,420
+Services then those functions at the end
+
+213
+00:08:51,420 --> 00:08:54,300
+of the day are just container images and
+
+214
+00:08:54,300 --> 00:08:55,560
+those container images are running
+
+215
+00:08:55,560 --> 00:08:58,160
+serverless so it's a native
+
+216
+00:08:58,160 --> 00:09:00,120
+kubernetes service
+
+217
+00:09:00,120 --> 00:09:02,399
+so so now we make a distinction between
+
+218
+00:09:02,399 --> 00:09:05,279
+running against kubernetes and in that
+
+219
+00:09:05,279 --> 00:09:08,100
+case we talked to the cube API and do
+
+220
+00:09:08,100 --> 00:09:10,560
+whatever we are used to doing or we talk
+
+221
+00:09:10,560 --> 00:09:12,899
+to that automation layer which does that
+
+222
+00:09:12,899 --> 00:09:13,920
+for us
+
+223
+00:09:13,920 --> 00:09:15,959
+so it is like a layer that would
+
+224
+00:09:15,959 --> 00:09:18,600
+simplify things implement the best
+
+225
+00:09:18,600 --> 00:09:21,480
+practices for us and we have now less
+
+226
+00:09:21,480 --> 00:09:24,540
+complexity as a result
+
+227
+00:09:24,540 --> 00:09:27,720
+so instead of running all and and making
+
+228
+00:09:27,720 --> 00:09:29,760
+sure that we get all the kubernetes
+
+229
+00:09:29,760 --> 00:09:33,600
+resources right we essentially have one
+
+230
+00:09:33,600 --> 00:09:36,420
+important resource to manage
+
+231
+00:09:36,420 --> 00:09:39,360
+which is a service resource and that's
+
+232
+00:09:39,360 --> 00:09:41,279
+like a new obstruction layer that is
+
+233
+00:09:41,279 --> 00:09:43,740
+added to kubernetes to allow us to
+
+234
+00:09:43,740 --> 00:09:47,000
+deploy our services
+
+235
+00:09:47,100 --> 00:09:47,880
+um
+
+236
+00:09:47,880 --> 00:09:50,339
+so that reduces our complexity as a
+
+237
+00:09:50,339 --> 00:09:52,500
+result it reduces how much we need to
+
+238
+00:09:52,500 --> 00:09:54,540
+learn or our team needs to learn in
+
+239
+00:09:54,540 --> 00:09:57,120
+order to deploy and run and operate
+
+240
+00:09:57,120 --> 00:09:59,720
+those services
+
+241
+00:10:00,240 --> 00:10:00,899
+um
+
+242
+00:10:00,899 --> 00:10:03,839
+in a way you can think of kubernetes as
+
+243
+00:10:03,839 --> 00:10:07,560
+a non-opinionated system it allows you
+
+244
+00:10:07,560 --> 00:10:11,399
+to do everything deploy anything you
+
+245
+00:10:11,399 --> 00:10:12,420
+would like
+
+246
+00:10:12,420 --> 00:10:15,600
+unlike K native k-native is very
+
+247
+00:10:15,600 --> 00:10:19,260
+opinionated it defines it has embedded
+
+248
+00:10:19,260 --> 00:10:21,060
+in the best practices and it defines
+
+249
+00:10:21,060 --> 00:10:22,440
+what are the best practices that you
+
+250
+00:10:22,440 --> 00:10:23,640
+should follow
+
+251
+00:10:23,640 --> 00:10:25,680
+now that may be a good thing and that
+
+252
+00:10:25,680 --> 00:10:27,720
+may be a bad thing for in certain
+
+253
+00:10:27,720 --> 00:10:29,880
+situations so you don't have to use K
+
+254
+00:10:29,880 --> 00:10:32,700
+native for all your microservices but
+
+255
+00:10:32,700 --> 00:10:35,459
+for most of your microservices that will
+
+256
+00:10:35,459 --> 00:10:38,040
+bring you uniformity that will bring
+
+257
+00:10:38,040 --> 00:10:40,140
+view as you we will see later more
+
+258
+00:10:40,140 --> 00:10:42,480
+security it will bring you the ability
+
+259
+00:10:42,480 --> 00:10:45,480
+to operate faster with your services and
+
+260
+00:10:45,480 --> 00:10:46,500
+so forth
+
+261
+00:10:46,500 --> 00:10:49,560
+so this is like instead of getting all
+
+262
+00:10:49,560 --> 00:10:52,079
+the bits of pieces to create a camera
+
+263
+00:10:52,079 --> 00:10:54,480
+you get a ready-made camera you can
+
+264
+00:10:54,480 --> 00:10:56,760
+create great shots with it but you can't
+
+265
+00:10:56,760 --> 00:10:59,240
+make coffee
+
+266
+00:11:00,060 --> 00:11:03,180
+so by the way these are in in on the
+
+267
+00:11:03,180 --> 00:11:06,180
+bottom are examples of how simple it is
+
+268
+00:11:06,180 --> 00:11:09,120
+to deploy a kubernetes a k-native
+
+269
+00:11:09,120 --> 00:11:12,360
+service it's just a one-liner but of
+
+270
+00:11:12,360 --> 00:11:14,100
+course you can use the yaml to do that
+
+271
+00:11:14,100 --> 00:11:16,440
+and you can Define everything that a
+
+272
+00:11:16,440 --> 00:11:18,660
+service can have but that's just if you
+
+273
+00:11:18,660 --> 00:11:20,519
+just want to try to play with it and
+
+274
+00:11:20,519 --> 00:11:22,740
+create your service very quickly you can
+
+275
+00:11:22,740 --> 00:11:26,600
+also do that with the CLI
+
+276
+00:11:26,880 --> 00:11:28,560
+so let's talk a little bit about that
+
+277
+00:11:28,560 --> 00:11:30,959
+auto scaling that Max also referred to
+
+278
+00:11:30,959 --> 00:11:33,899
+as as part of our path for for reducing
+
+279
+00:11:33,899 --> 00:11:36,180
+energy
+
+280
+00:11:36,180 --> 00:11:37,860
+um so
+
+281
+00:11:37,860 --> 00:11:41,820
+I want 27 of these and 17 of these and
+
+282
+00:11:41,820 --> 00:11:42,959
+six of that
+
+283
+00:11:42,959 --> 00:11:46,079
+and how did you get to those numbers
+
+284
+00:11:46,079 --> 00:11:48,240
+well I don't know
+
+285
+00:11:48,240 --> 00:11:50,160
+how do you get to the right number of
+
+286
+00:11:50,160 --> 00:11:52,680
+resources you need how many pods you
+
+287
+00:11:52,680 --> 00:11:54,660
+need for each microservice
+
+288
+00:11:54,660 --> 00:11:56,459
+is that the magical number that you have
+
+289
+00:11:56,459 --> 00:11:59,279
+in your pocket no you probably over
+
+290
+00:11:59,279 --> 00:12:03,180
+provision you probably just say 32 that
+
+291
+00:12:03,180 --> 00:12:04,560
+should do it
+
+292
+00:12:04,560 --> 00:12:06,720
+and if it will not do it then I'll
+
+293
+00:12:06,720 --> 00:12:09,120
+increase to 48.
+
+294
+00:12:09,120 --> 00:12:11,700
+it's a good number why not
+
+295
+00:12:11,700 --> 00:12:14,160
+when you over provision everything just
+
+296
+00:12:14,160 --> 00:12:16,079
+everything all your microservices are
+
+297
+00:12:16,079 --> 00:12:19,920
+over provisioned and that's a very bad
+
+298
+00:12:19,920 --> 00:12:21,560
+thing for for
+
+299
+00:12:21,560 --> 00:12:23,459
+managing your resources of course
+
+300
+00:12:23,459 --> 00:12:26,640
+because it at the end of the day they
+
+301
+00:12:26,640 --> 00:12:29,640
+all introduce some overhead and they all
+
+302
+00:12:29,640 --> 00:12:33,480
+consume energy one way or another
+
+303
+00:12:33,480 --> 00:12:34,500
+um
+
+304
+00:12:34,500 --> 00:12:37,860
+so so you really need that magical thing
+
+305
+00:12:37,860 --> 00:12:40,560
+that would follow up with dynamically
+
+306
+00:12:40,560 --> 00:12:44,279
+with your load and would decide now you
+
+307
+00:12:44,279 --> 00:12:46,740
+need four now you need 40.
+
+308
+00:12:46,740 --> 00:12:49,079
+and change the number of parts for you
+
+309
+00:12:49,079 --> 00:12:51,720
+so Auto scaling is an essential part and
+
+310
+00:12:51,720 --> 00:12:54,660
+that's part of what k-native offers you
+
+311
+00:12:54,660 --> 00:12:56,880
+now one more
+
+312
+00:12:56,880 --> 00:12:58,680
+um very nice
+
+313
+00:12:58,680 --> 00:13:01,680
+um future that we would have for that
+
+314
+00:13:01,680 --> 00:13:04,740
+is look at the at that picture that we
+
+315
+00:13:04,740 --> 00:13:07,100
+see over here we see all those
+
+316
+00:13:07,100 --> 00:13:09,660
+provisioned pods which are on not being
+
+317
+00:13:09,660 --> 00:13:10,680
+used
+
+318
+00:13:10,680 --> 00:13:13,139
+of course when you have those pods
+
+319
+00:13:13,139 --> 00:13:14,459
+provisioned
+
+320
+00:13:14,459 --> 00:13:18,000
+you cannot reduce your energy and you
+
+321
+00:13:18,000 --> 00:13:19,980
+cannot reduce the number of VMS in your
+
+322
+00:13:19,980 --> 00:13:21,899
+cluster as a result
+
+323
+00:13:21,899 --> 00:13:24,720
+but if you are able to eliminate them
+
+324
+00:13:24,720 --> 00:13:26,940
+through some magical way which is an
+
+325
+00:13:26,940 --> 00:13:28,680
+auto scaler
+
+326
+00:13:28,680 --> 00:13:32,040
+then you only have a bunch of PODS that
+
+327
+00:13:32,040 --> 00:13:35,220
+you can control and you know that are
+
+328
+00:13:35,220 --> 00:13:39,000
+actively working this will give you in
+
+329
+00:13:39,000 --> 00:13:41,399
+the future as we move forward they'll be
+
+330
+00:13:41,399 --> 00:13:45,019
+able to do the scaling of the cluster
+
+331
+00:13:45,019 --> 00:13:47,160
+dynamically reducing now the number of
+
+332
+00:13:47,160 --> 00:13:49,560
+VMS keeping some VMS extra for your
+
+333
+00:13:49,560 --> 00:13:51,839
+growth and then growing those numbers
+
+334
+00:13:51,839 --> 00:13:54,240
+once you start using those extra VMS
+
+335
+00:13:54,240 --> 00:13:55,680
+always keeping something
+
+336
+00:13:55,680 --> 00:13:57,540
+because it takes time to bring up a VM
+
+337
+00:13:57,540 --> 00:13:59,820
+let's be honest
+
+338
+00:13:59,820 --> 00:14:00,660
+um
+
+339
+00:14:00,660 --> 00:14:04,380
+so that's another benefit that we have
+
+340
+00:14:04,380 --> 00:14:06,839
+um which comes with the with K native
+
+341
+00:14:06,839 --> 00:14:10,019
+the second thing is okay we we are using
+
+342
+00:14:10,019 --> 00:14:11,940
+microservices most of us are developing
+
+343
+00:14:11,940 --> 00:14:13,260
+micro services for kubernetes
+
+344
+00:14:13,260 --> 00:14:16,920
+microservices were designed in that what
+
+345
+00:14:16,920 --> 00:14:20,279
+in in this uh mindset that you take the
+
+346
+00:14:20,279 --> 00:14:22,380
+big problem you divide it into small
+
+347
+00:14:22,380 --> 00:14:24,779
+problems and each problem has a very
+
+348
+00:14:24,779 --> 00:14:28,560
+defined API such that you can change the
+
+349
+00:14:28,560 --> 00:14:31,380
+revision of that little piece and
+
+350
+00:14:31,380 --> 00:14:33,180
+continue growing it growing it
+
+351
+00:14:33,180 --> 00:14:36,240
+developing it iteratively
+
+352
+00:14:36,240 --> 00:14:39,839
+so to do that it's very nice to keep all
+
+353
+00:14:39,839 --> 00:14:42,180
+those revisions as images but you also
+
+354
+00:14:42,180 --> 00:14:44,579
+need the deployment system the
+
+355
+00:14:44,579 --> 00:14:46,680
+kubernetes system or the k-native system
+
+356
+00:14:46,680 --> 00:14:48,899
+to help you do that because there are
+
+357
+00:14:48,899 --> 00:14:51,540
+risks in in changing revision revisions
+
+358
+00:14:51,540 --> 00:14:53,699
+you may want to decide that at the
+
+359
+00:14:53,699 --> 00:14:55,019
+beginning you want to start off with
+
+360
+00:14:55,019 --> 00:14:57,660
+just one percent or then go to five
+
+361
+00:14:57,660 --> 00:15:00,360
+percent then go to 25 for this new
+
+362
+00:15:00,360 --> 00:15:02,519
+revision and over time
+
+363
+00:15:02,519 --> 00:15:04,019
+you're going to trust that revision
+
+364
+00:15:04,019 --> 00:15:06,180
+enough and throw out all the revision
+
+365
+00:15:06,180 --> 00:15:08,339
+and go to the new revision
+
+366
+00:15:08,339 --> 00:15:10,620
+so revision management is a crucial
+
+367
+00:15:10,620 --> 00:15:13,800
+thing that you we all need in in
+
+368
+00:15:13,800 --> 00:15:16,320
+kubernetes which comes as part of of K
+
+369
+00:15:16,320 --> 00:15:18,000
+native very natively and we will
+
+370
+00:15:18,000 --> 00:15:21,959
+demonstrate that also later on
+
+371
+00:15:21,959 --> 00:15:24,779
+um and and the next thing is my my pet
+
+372
+00:15:24,779 --> 00:15:28,139
+topic which is security
+
+373
+00:15:28,139 --> 00:15:29,639
+um so
+
+374
+00:15:29,639 --> 00:15:32,760
+first of all the first bullet
+
+375
+00:15:32,760 --> 00:15:35,160
+K native Community is presently working
+
+376
+00:15:35,160 --> 00:15:38,940
+very actively to add TLS to k-native
+
+377
+00:15:38,940 --> 00:15:41,699
+such that you would not be required to
+
+378
+00:15:41,699 --> 00:15:46,260
+to rely on your service mesh for TLS so
+
+379
+00:15:46,260 --> 00:15:48,420
+you could get you could either use your
+
+380
+00:15:48,420 --> 00:15:51,660
+service mesh or you could get k-native
+
+381
+00:15:51,660 --> 00:15:54,959
+with TLS without without requiring you
+
+382
+00:15:54,959 --> 00:15:56,820
+to deploy the
+
+383
+00:15:56,820 --> 00:15:58,560
+um service mesh
+
+384
+00:15:58,560 --> 00:16:01,019
+that's first thing second we just talked
+
+385
+00:16:01,019 --> 00:16:04,380
+about rolling out new revisions that
+
+386
+00:16:04,380 --> 00:16:06,660
+help you when you have a patch for
+
+387
+00:16:06,660 --> 00:16:08,940
+security reasons so it will expedite the
+
+388
+00:16:08,940 --> 00:16:11,820
+entire process of your teams getting new
+
+389
+00:16:11,820 --> 00:16:14,220
+patches to work because it reduces the
+
+390
+00:16:14,220 --> 00:16:16,560
+risk of each new patch you can deploy
+
+391
+00:16:16,560 --> 00:16:18,540
+the patch and see that everything is
+
+392
+00:16:18,540 --> 00:16:21,540
+okay very quickly and then continue with
+
+393
+00:16:21,540 --> 00:16:24,060
+that patch so that's another security
+
+394
+00:16:24,060 --> 00:16:26,940
+aspect of K native the third aspect
+
+395
+00:16:26,940 --> 00:16:28,079
+we're going to talk in the next few
+
+396
+00:16:28,079 --> 00:16:30,420
+slides so I'll leave it for now but
+
+397
+00:16:30,420 --> 00:16:33,420
+basically it says okay we have all those
+
+398
+00:16:33,420 --> 00:16:35,220
+Services deployed and they're all very
+
+399
+00:16:35,220 --> 00:16:37,620
+uniform let's use that
+
+400
+00:16:37,620 --> 00:16:40,500
+and do security and monitoring of those
+
+401
+00:16:40,500 --> 00:16:42,959
+uniform services because we already
+
+402
+00:16:42,959 --> 00:16:44,519
+Define how they are going to look like
+
+403
+00:16:44,519 --> 00:16:46,800
+in the as far as best best practices
+
+404
+00:16:46,800 --> 00:16:49,199
+we're going to use that for security
+
+405
+00:16:49,199 --> 00:16:52,920
+and then the the three points on on the
+
+406
+00:16:52,920 --> 00:16:54,240
+left side
+
+407
+00:16:54,240 --> 00:16:56,820
+right side if you're sitting
+
+408
+00:16:56,820 --> 00:16:58,980
+um then um our
+
+409
+00:16:58,980 --> 00:17:01,980
+um the whole issue which is a very known
+
+410
+00:17:01,980 --> 00:17:03,540
+problem in security which is a
+
+411
+00:17:03,540 --> 00:17:05,880
+configuration problems configuration
+
+412
+00:17:05,880 --> 00:17:08,160
+drift you know every time you configure
+
+413
+00:17:08,160 --> 00:17:10,559
+a system even if you got it right the
+
+414
+00:17:10,559 --> 00:17:11,699
+first time
+
+415
+00:17:11,699 --> 00:17:14,339
+three weeks later someone changed the
+
+416
+00:17:14,339 --> 00:17:17,339
+configuration now why is it such a great
+
+417
+00:17:17,339 --> 00:17:20,400
+thing to to do uh K native in in that
+
+418
+00:17:20,400 --> 00:17:22,679
+respect because most of your
+
+419
+00:17:22,679 --> 00:17:26,160
+configuration are not done by humans
+
+420
+00:17:26,160 --> 00:17:29,040
+anymore most of them are done by the
+
+421
+00:17:29,040 --> 00:17:30,480
+automation
+
+422
+00:17:30,480 --> 00:17:33,179
+so the humans Define the service the
+
+423
+00:17:33,179 --> 00:17:35,039
+automation does all the configuration in
+
+424
+00:17:35,039 --> 00:17:36,660
+kubernetes for you
+
+425
+00:17:36,660 --> 00:17:38,700
+and set all the configuration right so
+
+426
+00:17:38,700 --> 00:17:40,919
+even if someone tried to change that
+
+427
+00:17:40,919 --> 00:17:44,520
+then you have continual repaving and and
+
+428
+00:17:44,520 --> 00:17:46,559
+it will be redone to the right
+
+429
+00:17:46,559 --> 00:17:48,419
+configuration so you don't have to worry
+
+430
+00:17:48,419 --> 00:17:50,940
+anymore from security perspective for
+
+431
+00:17:50,940 --> 00:17:53,039
+configuration drift and so on
+
+432
+00:17:53,039 --> 00:17:56,179
+and misconfigurations
+
+433
+00:17:56,580 --> 00:17:58,260
+um okay so let's talk about the security
+
+434
+00:17:58,260 --> 00:18:00,900
+use cases that we all face
+
+435
+00:18:00,900 --> 00:18:04,260
+and the first is that there is a basic
+
+436
+00:18:04,260 --> 00:18:06,419
+assumption and very naive assumptions by
+
+437
+00:18:06,419 --> 00:18:07,980
+all
+
+438
+00:18:07,980 --> 00:18:10,500
+everyone that if you do everything right
+
+439
+00:18:10,500 --> 00:18:12,900
+then everything should be right
+
+440
+00:18:12,900 --> 00:18:15,600
+but that's not the reality with cyber
+
+441
+00:18:15,600 --> 00:18:17,940
+with cyber even if you do everything
+
+442
+00:18:17,940 --> 00:18:19,500
+right and you follow all the best
+
+443
+00:18:19,500 --> 00:18:20,700
+practices
+
+444
+00:18:20,700 --> 00:18:24,900
+your microservices are still vulnerable
+
+445
+00:18:24,900 --> 00:18:26,340
+well if
+
+446
+00:18:26,340 --> 00:18:28,559
+if you micro service
+
+447
+00:18:28,559 --> 00:18:31,020
+team and you say they are well trained
+
+448
+00:18:31,020 --> 00:18:33,360
+but maybe that's so maybe they followed
+
+449
+00:18:33,360 --> 00:18:35,400
+all the practices but then they use all
+
+450
+00:18:35,400 --> 00:18:37,320
+those libraries and you don't know the
+
+451
+00:18:37,320 --> 00:18:39,240
+people who wrote those libraries and
+
+452
+00:18:39,240 --> 00:18:40,919
+then those libraries use other libraries
+
+453
+00:18:40,919 --> 00:18:43,320
+and so on so and so and then it's not
+
+454
+00:18:43,320 --> 00:18:45,000
+only that you're using development
+
+455
+00:18:45,000 --> 00:18:46,380
+systems
+
+456
+00:18:46,380 --> 00:18:48,000
+and you don't know all the people who
+
+457
+00:18:48,000 --> 00:18:50,700
+developed those development systems
+
+458
+00:18:50,700 --> 00:18:52,440
+and those extensions that you're using
+
+459
+00:18:52,440 --> 00:18:54,360
+for your development systems
+
+460
+00:18:54,360 --> 00:18:57,960
+and your GitHub or your git sorry your
+
+461
+00:18:57,960 --> 00:18:59,640
+git that you're using and the image
+
+462
+00:18:59,640 --> 00:19:01,740
+repository and the cacd tools that
+
+463
+00:19:01,740 --> 00:19:05,039
+you're using and well you're using a lot
+
+464
+00:19:05,039 --> 00:19:07,500
+a lot of tools and back-end services
+
+465
+00:19:07,500 --> 00:19:09,780
+with your image
+
+466
+00:19:09,780 --> 00:19:12,860
+and all of these need to be perfectly
+
+467
+00:19:12,860 --> 00:19:16,520
+secure which is really unrealistically
+
+468
+00:19:16,520 --> 00:19:19,980
+by evidence but what we see in the in in
+
+469
+00:19:19,980 --> 00:19:21,960
+actual deployments
+
+470
+00:19:21,960 --> 00:19:25,679
+so assuming your microservice is
+
+471
+00:19:25,679 --> 00:19:29,400
+um safe is a very bad practice
+
+472
+00:19:29,400 --> 00:19:31,860
+so the right practice for you is we
+
+473
+00:19:31,860 --> 00:19:34,200
+always assume your micro services are
+
+474
+00:19:34,200 --> 00:19:35,220
+vulnerable
+
+475
+00:19:35,220 --> 00:19:38,039
+and that's like the normal situation you
+
+476
+00:19:38,039 --> 00:19:39,480
+have no idea what the vulnerability is
+
+477
+00:19:39,480 --> 00:19:42,299
+is but you know they are vulnerable so
+
+478
+00:19:42,299 --> 00:19:44,100
+someone may use may find those
+
+479
+00:19:44,100 --> 00:19:45,960
+vulnerabilities may use the
+
+480
+00:19:45,960 --> 00:19:48,299
+vulnerabilities you just have to keep an
+
+481
+00:19:48,299 --> 00:19:50,940
+eye on them just you can't just deploy
+
+482
+00:19:50,940 --> 00:19:53,880
+pods and assume they're safe you have to
+
+483
+00:19:53,880 --> 00:19:55,919
+keep an eye on them you have to monitor
+
+484
+00:19:55,919 --> 00:19:57,780
+them all the time and everything that
+
+485
+00:19:57,780 --> 00:19:59,760
+goes into your pods needs to be
+
+486
+00:19:59,760 --> 00:20:00,900
+monitored
+
+487
+00:20:00,900 --> 00:20:02,700
+and you have to have those Gates which
+
+488
+00:20:02,700 --> 00:20:04,799
+will block anything which is which may
+
+489
+00:20:04,799 --> 00:20:06,720
+explode your pod you have to have those
+
+490
+00:20:06,720 --> 00:20:09,299
+Gates which will delete any point that
+
+491
+00:20:09,299 --> 00:20:12,900
+you have which may become misused
+
+492
+00:20:12,900 --> 00:20:14,580
+and of course you have all these other
+
+493
+00:20:14,580 --> 00:20:16,559
+use cases where you already know a bunch
+
+494
+00:20:16,559 --> 00:20:19,260
+of CVS but it takes on average two
+
+495
+00:20:19,260 --> 00:20:22,380
+months to fix an average CV
+
+496
+00:20:22,380 --> 00:20:25,260
+so if that's the case then you are
+
+497
+00:20:25,260 --> 00:20:26,880
+running with CVS all the time because
+
+498
+00:20:26,880 --> 00:20:29,220
+you may have more than one you're
+
+499
+00:20:29,220 --> 00:20:32,039
+running with CVS all the time and you
+
+500
+00:20:32,039 --> 00:20:33,480
+need a way to
+
+501
+00:20:33,480 --> 00:20:36,120
+um deal with that maybe you also know
+
+502
+00:20:36,120 --> 00:20:38,280
+about an exploit which is uh compatible
+
+503
+00:20:38,280 --> 00:20:42,240
+with that CV so you exactly know exactly
+
+504
+00:20:42,240 --> 00:20:44,220
+what you need to protect from but you
+
+505
+00:20:44,220 --> 00:20:46,980
+need to have that protection in front of
+
+506
+00:20:46,980 --> 00:20:49,980
+every pod or every service that you have
+
+507
+00:20:49,980 --> 00:20:53,760
+if you put it at the perimeter
+
+508
+00:20:53,760 --> 00:20:56,039
+then it only protects
+
+509
+00:20:56,039 --> 00:20:58,020
+against someone who comes through the
+
+510
+00:20:58,020 --> 00:21:00,480
+perimeter if it's already in in another
+
+511
+00:21:00,480 --> 00:21:02,700
+pod somewhere then maybe it doesn't
+
+512
+00:21:02,700 --> 00:21:05,240
+protect you
+
+513
+00:21:05,400 --> 00:21:08,340
+so these are the use cases that all of
+
+514
+00:21:08,340 --> 00:21:09,780
+all of the space all the time and now
+
+515
+00:21:09,780 --> 00:21:12,080
+let's use the fact that we have a very
+
+516
+00:21:12,080 --> 00:21:14,520
+well designed system with the
+
+517
+00:21:14,520 --> 00:21:16,160
+microservices
+
+518
+00:21:16,160 --> 00:21:19,860
+to monitor those services in the old
+
+519
+00:21:19,860 --> 00:21:21,900
+days when you we were using monolithics
+
+520
+00:21:21,900 --> 00:21:24,240
+then the same all the requests came to
+
+521
+00:21:24,240 --> 00:21:26,400
+that monolithic entity and that
+
+522
+00:21:26,400 --> 00:21:27,960
+monolithic entity the behave in all
+
+523
+00:21:27,960 --> 00:21:30,059
+different ways for that request it is
+
+524
+00:21:30,059 --> 00:21:32,280
+that for the other work requested the
+
+525
+00:21:32,280 --> 00:21:33,780
+other thing and we didn't see everything
+
+526
+00:21:33,780 --> 00:21:35,460
+that's going on inside
+
+527
+00:21:35,460 --> 00:21:38,820
+that monolithic application but we are
+
+528
+00:21:38,820 --> 00:21:40,740
+using microservices right so let's use
+
+529
+00:21:40,740 --> 00:21:43,020
+that we know that every microservices
+
+530
+00:21:43,020 --> 00:21:46,440
+should have if it's well designed it
+
+531
+00:21:46,440 --> 00:21:49,740
+should have a very clear pattern of the
+
+532
+00:21:49,740 --> 00:21:51,419
+requests coming in
+
+533
+00:21:51,419 --> 00:21:54,600
+so let's look at what is coming in and
+
+534
+00:21:54,600 --> 00:21:56,659
+make sure that that pattern that we see
+
+535
+00:21:56,659 --> 00:22:00,000
+conforms to what we expect to see
+
+536
+00:22:00,000 --> 00:22:02,460
+let's look at the behavior of each and
+
+537
+00:22:02,460 --> 00:22:04,620
+every microservice and see the the
+
+538
+00:22:04,620 --> 00:22:06,179
+behavior of that microservice because
+
+539
+00:22:06,179 --> 00:22:09,360
+afterwards just code reacting to a very
+
+540
+00:22:09,360 --> 00:22:11,039
+specific request
+
+541
+00:22:11,039 --> 00:22:13,620
+so we expect the behavior to be quite
+
+542
+00:22:13,620 --> 00:22:16,679
+the same every time it processes a new
+
+543
+00:22:16,679 --> 00:22:18,780
+request
+
+544
+00:22:18,780 --> 00:22:22,200
+so that that approach which is security
+
+545
+00:22:22,200 --> 00:22:25,320
+Behavior analytics is implemented as
+
+546
+00:22:25,320 --> 00:22:27,419
+part of a k native extension called
+
+547
+00:22:27,419 --> 00:22:30,360
+security guard which you can get with
+
+548
+00:22:30,360 --> 00:22:33,600
+your k-native deployment security guard
+
+549
+00:22:33,600 --> 00:22:36,600
+is embedded into the Q proxy of create
+
+550
+00:22:36,600 --> 00:22:39,000
+native which means that you don't have
+
+551
+00:22:39,000 --> 00:22:41,700
+to to deploy anything special it is um
+
+552
+00:22:41,700 --> 00:22:44,520
+every request that you you have already
+
+553
+00:22:44,520 --> 00:22:47,700
+go through the Q proxy now it's also
+
+554
+00:22:47,700 --> 00:22:51,000
+being monitored and also we have the
+
+555
+00:22:51,000 --> 00:22:54,000
+chance of blocking any requests which is
+
+556
+00:22:54,000 --> 00:22:55,440
+off
+
+557
+00:22:55,440 --> 00:22:58,020
+we also sit very next to your user
+
+558
+00:22:58,020 --> 00:23:00,059
+container so at the same time we are
+
+559
+00:23:00,059 --> 00:23:02,580
+able to monitor certain aspects even
+
+560
+00:23:02,580 --> 00:23:04,200
+without privileges
+
+561
+00:23:04,200 --> 00:23:06,299
+even without having special privileges
+
+562
+00:23:06,299 --> 00:23:08,220
+we're able to monitor your user
+
+563
+00:23:08,220 --> 00:23:10,140
+container for example any attempt of
+
+564
+00:23:10,140 --> 00:23:12,780
+your user container to start approaching
+
+565
+00:23:12,780 --> 00:23:15,900
+IPS he never he's not supposed to
+
+566
+00:23:15,900 --> 00:23:17,460
+approach
+
+567
+00:23:17,460 --> 00:23:19,940
+and we also have a machine learning
+
+568
+00:23:19,940 --> 00:23:22,919
+component as part of k-native which
+
+569
+00:23:22,919 --> 00:23:24,480
+would learn the patterns so you don't
+
+570
+00:23:24,480 --> 00:23:27,140
+have to deal and create all those
+
+571
+00:23:27,140 --> 00:23:31,559
+hundreds of of rules for your hundreds
+
+572
+00:23:31,559 --> 00:23:34,500
+of services and maintain them all the
+
+573
+00:23:34,500 --> 00:23:36,480
+time so you have a machine learning that
+
+574
+00:23:36,480 --> 00:23:38,700
+helps you do that and it creates a
+
+575
+00:23:38,700 --> 00:23:41,400
+certain a certain rule set and if you
+
+576
+00:23:41,400 --> 00:23:44,280
+have an SUV you may decide well I want
+
+577
+00:23:44,280 --> 00:23:46,080
+to change that rule set because I want
+
+578
+00:23:46,080 --> 00:23:47,760
+to be more strict or I want to make sure
+
+579
+00:23:47,760 --> 00:23:50,100
+that this rules is fine for me and
+
+580
+00:23:50,100 --> 00:23:54,320
+protect against this cve and so on
+
+581
+00:23:57,000 --> 00:24:00,380
+um okay demo just in time
+
+582
+00:24:00,960 --> 00:24:04,260
+so we'll start by just deploying
+
+583
+00:24:04,260 --> 00:24:07,740
+um a k-native kubernetes we have the
+
+584
+00:24:07,740 --> 00:24:11,880
+list of services the list of revisions
+
+585
+00:24:11,880 --> 00:24:16,260
+and then going to cube CTL we go to the
+
+586
+00:24:16,260 --> 00:24:18,659
+get the number of PODS and we will
+
+587
+00:24:18,659 --> 00:24:21,600
+deploy a very just a demonstrate how we
+
+588
+00:24:21,600 --> 00:24:23,700
+deploy a new service very very easily
+
+589
+00:24:23,700 --> 00:24:26,280
+with a CLI we'll just need to say the
+
+590
+00:24:26,280 --> 00:24:28,440
+name of the service the image the
+
+591
+00:24:28,440 --> 00:24:30,900
+environment variables and we scale it
+
+592
+00:24:30,900 --> 00:24:32,580
+for one at least
+
+593
+00:24:32,580 --> 00:24:35,520
+so it can be any number but at least one
+
+594
+00:24:35,520 --> 00:24:38,760
+and we get the URL already for that
+
+595
+00:24:38,760 --> 00:24:40,640
+service and we can use it and we can
+
+596
+00:24:40,640 --> 00:24:42,900
+immediately access it and it will
+
+597
+00:24:42,900 --> 00:24:45,179
+respond and and we are fine we we
+
+598
+00:24:45,179 --> 00:24:48,059
+deployed a service
+
+599
+00:24:48,059 --> 00:24:50,340
+so next let's try to see if what
+
+600
+00:24:50,340 --> 00:24:52,500
+happened if we load that service
+
+601
+00:24:52,500 --> 00:24:55,020
+we will start 4 000 connections against
+
+602
+00:24:55,020 --> 00:24:57,840
+that service and then we will stop those
+
+603
+00:24:57,840 --> 00:25:00,240
+connections and we start them again so
+
+604
+00:25:00,240 --> 00:25:03,059
+we start we start increasing the load
+
+605
+00:25:03,059 --> 00:25:04,740
+the news as you can see the number of
+
+606
+00:25:04,740 --> 00:25:07,740
+ports just increase to overcome the new
+
+607
+00:25:07,740 --> 00:25:09,360
+load
+
+608
+00:25:09,360 --> 00:25:10,980
+um and then when we stopped it the
+
+609
+00:25:10,980 --> 00:25:13,860
+number of PODS will will adjust and
+
+610
+00:25:13,860 --> 00:25:15,780
+we'll start it again and we'll increase
+
+611
+00:25:15,780 --> 00:25:20,039
+again so okay fine that's that one works
+
+612
+00:25:20,039 --> 00:25:23,340
+so next thing is let's deploy a new
+
+613
+00:25:23,340 --> 00:25:25,919
+revision so the change that I'm going to
+
+614
+00:25:25,919 --> 00:25:28,500
+do in the neurovision in a second is I'm
+
+615
+00:25:28,500 --> 00:25:29,700
+just going to change the environment
+
+616
+00:25:29,700 --> 00:25:31,320
+variable but I could change the image
+
+617
+00:25:31,320 --> 00:25:32,940
+just as well
+
+618
+00:25:32,940 --> 00:25:36,000
+so we will give that new revision latest
+
+619
+00:25:36,000 --> 00:25:38,279
+is 5 meaning I'm going to give it five
+
+620
+00:25:38,279 --> 00:25:40,020
+percent of the traffic which means I'm
+
+621
+00:25:40,020 --> 00:25:43,320
+going to keep 20 95 for the older vision
+
+622
+00:25:43,320 --> 00:25:45,960
+and you see the number of PODS and the
+
+623
+00:25:45,960 --> 00:25:48,240
+number of PODS has changed I have up
+
+624
+00:25:48,240 --> 00:25:50,159
+there in the list of provisions and and
+
+625
+00:25:50,159 --> 00:25:54,120
+the five percent and 95 and the New Port
+
+626
+00:25:54,120 --> 00:25:56,880
+for revision two was created so let's
+
+627
+00:25:56,880 --> 00:25:59,000
+play with it and and change that to 50
+
+628
+00:25:59,000 --> 00:26:02,640
+and see that the system actually works
+
+629
+00:26:02,640 --> 00:26:05,039
+um and yes it changes the number of
+
+630
+00:26:05,039 --> 00:26:06,779
+ports accordingly
+
+631
+00:26:06,779 --> 00:26:09,059
+and of course at the end I will change
+
+632
+00:26:09,059 --> 00:26:13,320
+it to a hundred percent so we don't need
+
+633
+00:26:13,320 --> 00:26:16,380
+revision one pods anymore we have
+
+634
+00:26:16,380 --> 00:26:20,460
+revision two completely deployed
+
+635
+00:26:20,460 --> 00:26:22,740
+and
+
+636
+00:26:22,740 --> 00:26:25,140
+it we may reach a case
+
+637
+00:26:25,140 --> 00:26:27,480
+where we found after some time that
+
+638
+00:26:27,480 --> 00:26:29,760
+revision two is not working as we
+
+639
+00:26:29,760 --> 00:26:31,440
+expected and we want to go back to
+
+640
+00:26:31,440 --> 00:26:33,059
+revision one
+
+641
+00:26:33,059 --> 00:26:35,179
+so as long as we have revision one still
+
+642
+00:26:35,179 --> 00:26:38,640
+deployed on our system on K native then
+
+643
+00:26:38,640 --> 00:26:40,860
+all we have to do is tell K native okay
+
+644
+00:26:40,860 --> 00:26:43,740
+please give 100 of the traffic to
+
+645
+00:26:43,740 --> 00:26:45,900
+revision one
+
+646
+00:26:45,900 --> 00:26:48,299
+that's all we have to do right now
+
+647
+00:26:48,299 --> 00:26:51,360
+and the system will adjust
+
+648
+00:26:51,360 --> 00:26:53,760
+so it's all very nice let's go and see
+
+649
+00:26:53,760 --> 00:26:55,799
+the security features
+
+650
+00:26:55,799 --> 00:26:58,440
+which is my project so
+
+651
+00:26:58,440 --> 00:27:00,720
+not surprising
+
+652
+00:27:00,720 --> 00:27:03,779
+so we'll start with a simple service and
+
+653
+00:27:03,779 --> 00:27:05,880
+we're going to use that service and we
+
+654
+00:27:05,880 --> 00:27:07,500
+assume that already the system was
+
+655
+00:27:07,500 --> 00:27:09,059
+trained with that service so all the
+
+656
+00:27:09,059 --> 00:27:11,159
+rules are out there and what we're going
+
+657
+00:27:11,159 --> 00:27:13,860
+to do is start off with just sending out
+
+658
+00:27:13,860 --> 00:27:17,340
+query string or a header that was that
+
+659
+00:27:17,340 --> 00:27:19,320
+is not supposed to be there and we are
+
+660
+00:27:19,320 --> 00:27:22,380
+monitoring the log at the bottom and we
+
+661
+00:27:22,380 --> 00:27:24,360
+see an alert coming up and we if you
+
+662
+00:27:24,360 --> 00:27:27,840
+also notice we asked K native to block
+
+663
+00:27:27,840 --> 00:27:30,960
+the the requests which are which are
+
+664
+00:27:30,960 --> 00:27:33,659
+creating the alerts so these are blocked
+
+665
+00:27:33,659 --> 00:27:36,600
+but it's not only new keys that are
+
+666
+00:27:36,600 --> 00:27:38,580
+being monitored but also the values and
+
+667
+00:27:38,580 --> 00:27:40,799
+what's in the value so it could be that
+
+668
+00:27:40,799 --> 00:27:44,100
+the value is too long for example that
+
+669
+00:27:44,100 --> 00:27:45,840
+the system already learned what is
+
+670
+00:27:45,840 --> 00:27:48,539
+expected the length of each value or it
+
+671
+00:27:48,539 --> 00:27:51,000
+could be the actual content of that
+
+672
+00:27:51,000 --> 00:27:54,179
+value and I'll
+
+673
+00:27:54,179 --> 00:27:57,299
+stop for a second and what you see here
+
+674
+00:27:57,299 --> 00:27:59,100
+for example is that it's been detected
+
+675
+00:27:59,100 --> 00:28:02,039
+that we were using a curly bracket oh no
+
+676
+00:28:02,039 --> 00:28:05,279
+rounded brackets and rounded brackets
+
+677
+00:28:05,279 --> 00:28:07,679
+are being used in in all sorts of
+
+678
+00:28:07,679 --> 00:28:12,059
+attacks and if that specific value
+
+679
+00:28:12,059 --> 00:28:15,299
+of that specific service shouldn't have
+
+680
+00:28:15,299 --> 00:28:17,419
+brackets
+
+681
+00:28:17,419 --> 00:28:21,480
+then let's block it
+
+682
+00:28:21,480 --> 00:28:24,480
+let's not let that in
+
+683
+00:28:24,480 --> 00:28:26,520
+so
+
+684
+00:28:26,520 --> 00:28:28,380
+that's what the system did
+
+685
+00:28:28,380 --> 00:28:31,020
+and the next thing is that's let's let's
+
+686
+00:28:31,020 --> 00:28:34,140
+say that everything went sour
+
+687
+00:28:34,140 --> 00:28:36,900
+and we actually have an exploitable
+
+688
+00:28:36,900 --> 00:28:40,080
+service and someone is able to run a
+
+689
+00:28:40,080 --> 00:28:41,940
+remote shell on that and we will just do
+
+690
+00:28:41,940 --> 00:28:43,919
+an exact as an example
+
+691
+00:28:43,919 --> 00:28:45,840
+so we were running an exactly against
+
+692
+00:28:45,840 --> 00:28:48,419
+our service in a second and
+
+693
+00:28:48,419 --> 00:28:50,880
+normally when when you're going to to
+
+694
+00:28:50,880 --> 00:28:52,740
+you you have a remote share the first
+
+695
+00:28:52,740 --> 00:28:54,000
+thing you're going to do is try to
+
+696
+00:28:54,000 --> 00:28:56,600
+install something on that pod
+
+697
+00:28:56,600 --> 00:28:59,580
+so we will try to install in that case
+
+698
+00:28:59,580 --> 00:29:00,840
+uh
+
+699
+00:29:00,840 --> 00:29:03,600
+um wget doesn't really matter and the
+
+700
+00:29:03,600 --> 00:29:05,940
+system detects that there is now a
+
+701
+00:29:05,940 --> 00:29:08,520
+connection to an IP that is not supposed
+
+702
+00:29:08,520 --> 00:29:10,919
+to be addressed from from this pod and
+
+703
+00:29:10,919 --> 00:29:13,860
+there is an alert and there is a block I
+
+704
+00:29:13,860 --> 00:29:16,640
+mean that that sorry there is a
+
+705
+00:29:16,640 --> 00:29:21,360
+this uh um pod was deleted as you can
+
+706
+00:29:21,360 --> 00:29:25,020
+see here it was deleted by the system a
+
+707
+00:29:25,020 --> 00:29:27,360
+new pad came to replace it because
+
+708
+00:29:27,360 --> 00:29:28,980
+that's done automatically by by
+
+709
+00:29:28,980 --> 00:29:31,919
+kubernetes once you delete the Pod
+
+710
+00:29:31,919 --> 00:29:35,760
+um and um the the attacker is not very
+
+711
+00:29:35,760 --> 00:29:37,380
+happy because everything that he did
+
+712
+00:29:37,380 --> 00:29:38,659
+until now
+
+713
+00:29:38,659 --> 00:29:43,260
+to get to that point is destroyed
+
+714
+00:29:43,260 --> 00:29:45,000
+so you he start he needs to start over
+
+715
+00:29:45,000 --> 00:29:47,520
+the attack and it will just repeat so he
+
+716
+00:29:47,520 --> 00:29:50,240
+will go elsewhere
+
+717
+00:29:55,860 --> 00:29:57,360
+okay so
+
+718
+00:29:57,360 --> 00:30:00,600
+um limitations as we mentioned
+
+719
+00:30:00,600 --> 00:30:03,059
+um it's an opinionated system
+
+720
+00:30:03,059 --> 00:30:05,640
+so you can't do everything with it you
+
+721
+00:30:05,640 --> 00:30:11,100
+can't deploy an um SQL database with it
+
+722
+00:30:11,100 --> 00:30:15,000
+it suits your homegrown microservices so
+
+723
+00:30:15,000 --> 00:30:16,860
+what do you do how do you handle those
+
+724
+00:30:16,860 --> 00:30:18,899
+situations when you have something to
+
+725
+00:30:18,899 --> 00:30:20,460
+deploy which is not
+
+726
+00:30:20,460 --> 00:30:23,779
+suitable for k-native
+
+727
+00:30:24,840 --> 00:30:25,799
+um
+
+728
+00:30:25,799 --> 00:30:29,100
+well you just use kubernetes to do that
+
+729
+00:30:29,100 --> 00:30:30,779
+it's a mix and match
+
+730
+00:30:30,779 --> 00:30:32,520
+well
+
+731
+00:30:32,520 --> 00:30:34,200
+it's a mix and match
+
+732
+00:30:34,200 --> 00:30:36,840
+you can use your kubernetes for your any
+
+733
+00:30:36,840 --> 00:30:39,000
+service which doesn't fit the pattern
+
+734
+00:30:39,000 --> 00:30:41,520
+and then use k-native for everything
+
+735
+00:30:41,520 --> 00:30:43,799
+which fits the pattern and normally your
+
+736
+00:30:43,799 --> 00:30:46,799
+homegrown microservices should fit the
+
+737
+00:30:46,799 --> 00:30:47,700
+pattern
+
+738
+00:30:47,700 --> 00:30:50,820
+so I'll ask Max to uh
+
+739
+00:30:50,820 --> 00:30:53,880
+yes so if all of this wasn't enough for
+
+740
+00:30:53,880 --> 00:30:56,179
+you in terms of why you should be using
+
+741
+00:30:56,179 --> 00:30:58,559
+k-native there's actually another reason
+
+742
+00:30:58,559 --> 00:31:00,600
+and it's a very important one and it's
+
+743
+00:31:00,600 --> 00:31:04,140
+the fact that K native comes built with
+
+744
+00:31:04,140 --> 00:31:06,720
+a Eventing infrastructure
+
+745
+00:31:06,720 --> 00:31:09,419
+and this is important because if you can
+
+746
+00:31:09,419 --> 00:31:11,640
+imagine a lot of your problems or the
+
+747
+00:31:11,640 --> 00:31:13,799
+applications that you're building they
+
+748
+00:31:13,799 --> 00:31:15,480
+are not just a bunch of microservices
+
+749
+00:31:15,480 --> 00:31:17,880
+it's also which microservices you need
+
+750
+00:31:17,880 --> 00:31:21,299
+to run what event is going to trigger a
+
+751
+00:31:21,299 --> 00:31:23,520
+execution of a service
+
+752
+00:31:23,520 --> 00:31:28,200
+etc etc and when you have to do this you
+
+753
+00:31:28,200 --> 00:31:30,659
+need it to scale you need to have your
+
+754
+00:31:30,659 --> 00:31:34,440
+events be I guess you need to to to keep
+
+755
+00:31:34,440 --> 00:31:38,520
+them in a queue you need to be able to
+
+756
+00:31:38,520 --> 00:31:41,760
+consume them so you need sex and sources
+
+757
+00:31:41,760 --> 00:31:44,880
+Etc and the good thing is the designers
+
+758
+00:31:44,880 --> 00:31:47,399
+of K native so this is uh give credit to
+
+759
+00:31:47,399 --> 00:31:50,460
+Matt and the rest of the team now at
+
+760
+00:31:50,460 --> 00:31:53,960
+chain guard they built in Scott
+
+761
+00:31:53,960 --> 00:31:57,960
+they initially created key native with
+
+762
+00:31:57,960 --> 00:32:00,240
+an Eventing infrastructure so that comes
+
+763
+00:32:00,240 --> 00:32:03,419
+in and more and even better you can plug
+
+764
+00:32:03,419 --> 00:32:06,539
+in your own so for instance at IBM we
+
+765
+00:32:06,539 --> 00:32:09,120
+put login mq and you can plug in Kafka
+
+766
+00:32:09,120 --> 00:32:12,120
+for an open source version Etc so
+
+767
+00:32:12,120 --> 00:32:14,700
+everything else that David told you
+
+768
+00:32:14,700 --> 00:32:17,820
+there's also even more but to summarize
+
+769
+00:32:17,820 --> 00:32:19,700
+and conclude
+
+770
+00:32:19,700 --> 00:32:23,240
+if you think of different actors
+
+771
+00:32:23,240 --> 00:32:27,000
+in a running system whether it's
+
+772
+00:32:27,000 --> 00:32:29,700
+kubernetes or k-native you can think of
+
+773
+00:32:29,700 --> 00:32:32,820
+the developers most of us here operators
+
+774
+00:32:32,820 --> 00:32:34,919
+probably some of us that are operating
+
+775
+00:32:34,919 --> 00:32:37,799
+the system and then the users right so
+
+776
+00:32:37,799 --> 00:32:40,440
+what are the benefits Azure summary for
+
+777
+00:32:40,440 --> 00:32:44,279
+operators it's more secure because you
+
+778
+00:32:44,279 --> 00:32:46,679
+can deploy it with guard and add the
+
+779
+00:32:46,679 --> 00:32:48,179
+rules that you need for the services
+
+780
+00:32:48,179 --> 00:32:49,559
+that you know you're going to operate
+
+781
+00:32:49,559 --> 00:32:52,440
+you don't have to deal with scaling it's
+
+782
+00:32:52,440 --> 00:32:54,419
+going to do it for you it's gonna
+
+783
+00:32:54,419 --> 00:32:57,240
+hopefully optimize and it's going to
+
+784
+00:32:57,240 --> 00:32:59,760
+help you reduce costs and reduce energy
+
+785
+00:32:59,760 --> 00:33:01,559
+right so that's the advantage of
+
+786
+00:33:01,559 --> 00:33:04,020
+operators what are you operating at a
+
+787
+00:33:04,020 --> 00:33:05,520
+large scale or small scale you'll get
+
+788
+00:33:05,520 --> 00:33:09,120
+those benefits for an end user it
+
+789
+00:33:09,120 --> 00:33:10,860
+definitely will help you scale nicely
+
+790
+00:33:10,860 --> 00:33:12,659
+maybe reduce cost
+
+791
+00:33:12,659 --> 00:33:15,419
+and certainly it's going to be greener
+
+792
+00:33:15,419 --> 00:33:19,019
+so if that matters to you you know this
+
+793
+00:33:19,019 --> 00:33:20,820
+is something you can mention
+
+794
+00:33:20,820 --> 00:33:23,159
+and then finally for developers it's
+
+795
+00:33:23,159 --> 00:33:26,700
+everything that David mentioned so using
+
+796
+00:33:26,700 --> 00:33:29,279
+for instance a CLI it's super easy to
+
+797
+00:33:29,279 --> 00:33:31,740
+start training your developers to use
+
+798
+00:33:31,740 --> 00:33:35,820
+k-native you can do blue green Canary
+
+799
+00:33:35,820 --> 00:33:38,700
+deployment in a breeze you don't have to
+
+800
+00:33:38,700 --> 00:33:40,620
+deal with the kubernetes objects
+
+801
+00:33:40,620 --> 00:33:42,620
+underneath because it's doing it for you
+
+802
+00:33:42,620 --> 00:33:46,860
+you can scale obviously a lot better and
+
+803
+00:33:46,860 --> 00:33:49,500
+you can add a security layer that comes
+
+804
+00:33:49,500 --> 00:33:52,620
+built in so with that let me stop and
+
+805
+00:33:52,620 --> 00:33:55,500
+invite David back so we can get your
+
+806
+00:33:55,500 --> 00:33:57,600
+questions
+
+807
+00:33:57,600 --> 00:34:00,019
+okay
+
+808
+00:34:05,760 --> 00:34:07,740
+so any questions I think you might have
+
+809
+00:34:07,740 --> 00:34:10,379
+to yell because yes
+
+810
+00:34:10,379 --> 00:34:12,359
+yeah go ahead I don't know if there's a
+
+811
+00:34:12,359 --> 00:34:15,200
+mic so
+
+812
+00:34:24,119 --> 00:34:26,639
+let's repeat the question so I think you
+
+813
+00:34:26,639 --> 00:34:28,980
+asked about comparing Dapper with
+
+814
+00:34:28,980 --> 00:34:30,300
+k-native
+
+815
+00:34:30,300 --> 00:34:33,780
+uh not familiar with Dapper is it is it
+
+816
+00:34:33,780 --> 00:34:35,820
+another serverless environment for
+
+817
+00:34:35,820 --> 00:34:37,800
+kubernetes
+
+818
+00:34:37,800 --> 00:34:39,960
+okay
+
+819
+00:34:39,960 --> 00:34:42,659
+I see no I'm not familiar with it so
+
+820
+00:34:42,659 --> 00:34:45,179
+yeah I don't think we're gonna make that
+
+821
+00:34:45,179 --> 00:34:47,940
+comparison here but uh
+
+822
+00:34:47,940 --> 00:34:50,520
+any other questions
+
+823
+00:34:50,520 --> 00:34:52,320
+yes
+
+824
+00:34:52,320 --> 00:34:55,580
+I'll repeat it so good
+
+825
+00:34:55,679 --> 00:34:57,400
+how do you see
+
+826
+00:34:57,400 --> 00:34:59,220
+[Music]
+
+827
+00:34:59,220 --> 00:35:03,000
+can can you change grab the rules from
+
+828
+00:35:03,000 --> 00:35:04,560
+from a developer environment the
+
+829
+00:35:04,560 --> 00:35:07,400
+cardboard yeah
+
+830
+00:35:08,099 --> 00:35:11,339
+so the question is about uh the the god
+
+831
+00:35:11,339 --> 00:35:14,520
+rules and can you put them into cicd for
+
+832
+00:35:14,520 --> 00:35:16,020
+example
+
+833
+00:35:16,020 --> 00:35:18,960
+um and and the answer is yes God learned
+
+834
+00:35:18,960 --> 00:35:20,760
+the rules they are placed in a crd
+
+835
+00:35:20,760 --> 00:35:23,760
+object so you can take that C or D
+
+836
+00:35:23,760 --> 00:35:26,099
+object and you can run it through your
+
+837
+00:35:26,099 --> 00:35:29,280
+CI CD you can read them from from the
+
+838
+00:35:29,280 --> 00:35:31,280
+cloud you can write them to the cloud
+
+839
+00:35:31,280 --> 00:35:34,320
+you can define whether to God whether it
+
+840
+00:35:34,320 --> 00:35:36,480
+who needs to continue learning or stop
+
+841
+00:35:36,480 --> 00:35:39,359
+learning uh whether it needs to use the
+
+842
+00:35:39,359 --> 00:35:43,020
+Learned rules or configured rules so you
+
+843
+00:35:43,020 --> 00:35:44,820
+have a lot of control there that you can
+
+844
+00:35:44,820 --> 00:35:46,859
+uh they can you can use
+
+845
+00:35:46,859 --> 00:35:50,960
+for to do that another question yes
+
+846
+00:35:54,060 --> 00:35:56,099
+so the question is how do we detect the
+
+847
+00:35:56,099 --> 00:35:58,700
+misuse part this is for the auto scaling
+
+848
+00:35:58,700 --> 00:36:01,800
+yeah so the auto scaling went through a
+
+849
+00:36:01,800 --> 00:36:05,400
+lot of revisions and uh you know the the
+
+850
+00:36:05,400 --> 00:36:07,140
+algorithm is pretty complex but there is
+
+851
+00:36:07,140 --> 00:36:08,160
+a
+
+852
+00:36:08,160 --> 00:36:09,960
+part of the code that's actually
+
+853
+00:36:09,960 --> 00:36:12,900
+monitoring uh the usage
+
+854
+00:36:12,900 --> 00:36:17,460
+and it's using that to compute it
+
+855
+00:36:17,460 --> 00:36:20,180
+yeah pretty much but it's it's not
+
+856
+00:36:20,180 --> 00:36:22,680
+heavily configurable but there is some
+
+857
+00:36:22,680 --> 00:36:24,420
+parameters that are exposed so you can
+
+858
+00:36:24,420 --> 00:36:26,820
+you can you know tune it a little bit
+
+859
+00:36:26,820 --> 00:36:29,880
+yeah the thing that we did really well I
+
+860
+00:36:29,880 --> 00:36:31,920
+think NK native is that we've had a lot
+
+861
+00:36:31,920 --> 00:36:35,040
+of uh tests bad so whatever you get out
+
+862
+00:36:35,040 --> 00:36:37,500
+of K native is tends to be pretty good
+
+863
+00:36:37,500 --> 00:36:40,680
+and it scales meaning you could run it
+
+864
+00:36:40,680 --> 00:36:43,800
+for a very large systems and it's in it
+
+865
+00:36:43,800 --> 00:36:45,900
+and it will scale where they will really
+
+866
+00:36:45,900 --> 00:36:47,520
+well but you can actually tune that too
+
+867
+00:36:47,520 --> 00:36:50,000
+if you need

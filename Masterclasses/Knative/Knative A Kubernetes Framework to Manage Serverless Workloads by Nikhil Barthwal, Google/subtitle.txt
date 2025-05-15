@@ -1,0 +1,797 @@
+hi everyone my name is nikhil bharthwal um and i'm going to be talking about k native
+0:12
+what k native and we'll go into details of it of course but what k native is communities framework for managing
+0:18
+serverless workloads uh the way i've structured this this talk is i have about
+0:24
+half of it as theory so i'll go through my slides explain what i'm everything about k native and
+0:30
+then the remaining half of it is demo now the demo is actually from the github link that you see below
+0:36
+right demo itself is quite big so i'm only going to be covering parts of the demo i'm not going to go into details of
+0:41
+the entire demo of course but you have the link feel free to play around with it and you have my contact
+0:47
+information so should you need to contact me just feel free to bring me any time so
+0:53
+let's get started introduction to canada was k native right so like i mentioned canadian is
+1:00
+basically a kubernetes platform for building block basically some building blocks are serverless now
+1:06
+kubernetes is essentially a platform for platform it's never really a starting point but it's never
+1:12
+really an endgame but it's a great place to start so it's basically think of it as you have kubernetes as a platform you
+1:18
+have layers and layers and then you have k native on top and you have other layers on top of k native so when i show the entire technology stack you
+1:25
+would actually see that but essentially what k native provides you is an extension components
+1:31
+on top of communities for serverless computing so kubernetes is a de facto platform
+1:37
+it's by far the most open source by far the most popular
+1:42
+container orchestration system out there it has there's a diagram of kubernetes
+1:48
+it has pods and you know it has all the containers where it runs but essentially what it is is it's
+1:54
+basically a descriptive definition of how your infrastructure should look like you're mentioning the
+2:00
+state of the system it's a descriptive system and what kubernetes as such does is tries to maintain that state so if you
+2:06
+deviate off it will basically take corrective actions to bring the system back to the desired state that's
+2:11
+what it is it's an orchestration system and it handles a lot of a lot of things
+2:17
+for you so it handles scheduling scaling life cycle naming discovery you have the full list it's
+2:23
+it's open source it's quite popular i'm sure you would have heard the name of it but it's handling all these things for
+2:29
+you and there's a large body of kubernetes ecosystem it's by far the most popular
+2:36
+or container orchestration systems it's fully open source so google has gke amazon supports it using
+2:43
+eks elastic community service azure has aks azure community service
+2:49
+so there's a big ecosystem around kubernetes and let's switch to serverless right
+2:55
+what do we mean by serverless computing now when we look from an operational point of view what serverless brings to
+3:01
+table is it brings you all in no intra management it brings you an automated infra
+3:08
+management it matches the security it manages the infrastructure but the characteristic of serverless unique
+3:13
+characteristics of serverless is you pay for use so typically in
+3:18
+normal uh container based systems you're paying for the capacity
+3:24
+in serverless you're paying for the use so if you're not using your container if you're not using your
+3:29
+whatever function basically gets switched off so it is handling an auto scaling for you
+3:35
+where it scales from zero to infinity or whatever you configure it to
+3:40
+so that auto scaling is all handled for you so you're only paying for what you're using
+3:46
+and from a programming point of view it's service based right and it's an event-driven platform
+3:51
+service based means you have these computational units uh i'm going to use
+3:56
+the term service in a little broadway if you're using something like aws lambda it basically means functions if you're
+4:02
+using container serverless systems which is what k native is service there means containers
+4:07
+but service is more of a broad term it's event driven so even supplied you respond to those
+4:13
+events so it's an event-driven system and something very particular about k-native
+4:20
+is that it's portable now typically what happens with serverless systems is there's a common
+4:27
+criticism of serverless that's vendor lock-in and the reason is that all the infrastructure is handled for you so you
+4:33
+don't really have you don't get to choose anything or you don't really have any control over it so the underlying system is basically
+4:39
+handling so you're basically tied to that system now in in k native you're not tied to
+4:46
+the underlying system you're actually tied to kubernetes but then again it's an open source
+4:51
+system so you're you're not really vendor locked here that's why it's portable any cloud vendor
+4:57
+or any kind of distributed system that provides kubernetes practically everybody
+5:02
+you can actually run k native on top of it that's why there's a portability aspect which is very particular to k native or serverless containers
+5:11
+so talking about containers containers are industry standard so you basically have pre-built images and you can
+5:17
+pick any programming language any library even binaries for that matter you could actually build so you can have
+5:24
+these containers and containers are kind of industry standard right so if you look at the
+5:30
+trend it's actually increasing so it's basically an industry standard um and then let's switch gears and let's
+5:36
+talk about k native project okay so k native project what it is is it basically gives you the
+5:44
+set of components for serverless system now you there were prior to version
+5:50
+eight there were actually three components they were serving eventing and build and after version point eight is actually
+5:55
+two components so that is why you see that build crossed out on the slide serving is basically the base component
+6:02
+that talks about all the scaling of your services so that's serving eventing is the framework that lets you create events
+6:09
+for which these services respond to that's inventing build was initially
+6:14
+how you deploy the system so going from source code to containers now that has actually been deprecated
+6:20
+and the officially supported system is teched on tecton is a separate project it works
+6:25
+with k native but it's a separate project completely so we are not going to talk about techcon too much but essentially what it is is it's a
+6:32
+kubernetes-based ci cd systems cicd system and like i said it's open
+6:37
+source and what k native is giving you is it's giving you all the basic ingredients
+6:43
+for serverless uh computing that solves a modern development patterns and essentially k native started as a joint
+6:50
+project as a consortium between google ibm red hat which is the same now sap pivotal and so on
+6:56
+so k native incorporates all the learnings from all of these partners and you have the website knee deep.dev
+7:02
+right so k native.dev let's actually check out knative.dev
+7:07
+dot dev that's the website so you have all the information here so now
+7:14
+you see the two main components serving and eventing there's actually a slack channel you could you
+7:19
+could actually go to the github repository so you could actually see
+7:28
+a native now mine
+7:34
+okay so that's the github repository for it so you have the inventing and serving as the two main
+7:40
+components you have the docs and so on so that's the website so a lot of good information there on
+7:45
+canadian project now what's the motivation for k native
+7:51
+developers want serverless systems and the reason why they want serverless is they want to run their code they don't
+7:57
+want to handle infrastructure and developers tend to be very opinionated you know they have their own
+8:02
+favorite programming languages and dependencies that they actually pack they are passionate about it
+8:08
+so they want the flexibility to run any kind of language or any kind of framework that they choose
+8:15
+on on on their platform so that's what containers basically bring you so that's what developers basically wants and
+8:22
+that's why they love serverless because they don't have to manage the infrastructure operator on the other hand like
+8:29
+kubernetes because kubernetes is a great orchestration system they don't want to handle it's not the
+8:35
+right abstraction for developers but operators love communities because
+8:40
+you know it's a very descriptive system they describe the state everything is handled for you so knf basically sits between the two
+8:48
+it's built on top of kubernetes so the operators love that operators handle the cluster the base
+8:54
+cluster and then on top of it is k native and the developers have built their code on top of k native so
+9:01
+it's the glue between the developer view and the operator view so that's the motivation so there are
+9:09
+like i said there are two basically point of views there are two ways of looking at it so let's actually look at the developer view for k
+9:15
+native now developers want to write code so that's what they want what they
+9:21
+don't want is they don't want to handle the infrastructure so they don't want logging they don't want monitoring they don't want to build all these
+9:27
+you know images and so on i just have my docker file where i give the steps of how i'm going to build the container
+9:33
+everything should be taken care of i don't want to do it myself i don't want to handle orchestration so that's what developers
+9:39
+want and that's the canadian view for developers now going back to k native news for
+9:46
+operators k native is handling all the infrastructure complexity for you right
+9:52
+so you don't really have to worry about too much you just have to worry about describing your state what you want and
+9:58
+it takes care of it i've mentioned that repeatedly it's basically a universal system supported by all major
+10:05
+providers right and that enables portability across multiple providers that also enables
+10:11
+portability across on-prem and cloud by the way and it's a very extendable platform with clear
+10:17
+separation of concerns right it has an open source api which is pretty well documented like i said it's
+10:23
+a platform for building platform so it's it has to be by definition very extendable
+10:30
+so this portability associated with kubernetes because it's offered by all cloud
+10:36
+providers and then k native which is built on top of kubernetes
+10:43
+so let's look at the k native stack so when you look at the k native stat we start with the underlying platform
+10:49
+uh which is kubernetes then we have service mesh now the default service mesh that
+10:55
+comes with uh kubernetes and with knight which is the one we're going to be using for our demo
+11:01
+is istio so you see the istio there but you could choose to use glue ambassador
+11:07
+or any other service mesh if you want to on top of it are the
+11:12
+two or three i'll call two because the more recent versions only have two basic primitives and that's serving an
+11:18
+event tecton is a separate com project by itself so you could use it with k native but as i mentioned it's
+11:24
+not really part of k native project so you have the serving and eventing that's the base layer for k native
+11:30
+and then on top you have this uh different products that are built on
+11:36
+top of k native so you have google cloud run google cloud run on gk now it's renamed as google crowdfund for
+11:42
+anthos ibm and red hat being partners they have their own products kubernetes service open shift trigger
+11:50
+mesh sap clima such and such
+11:55
+so um this is the serverless portfolio on google cloud i'm going to be focusing
+12:01
+mostly on candidate because i don't want to make this stocks very specific to google cloud i want to kind of keep it
+12:08
+broad so k native is like the open source so that's broadly applicable
+12:13
+for any vendor but you do have a managed it's not technically correct but it's
+12:19
+think of it as a managed key native service now the reason why it's not technically correct is because the
+12:24
+underlying code between cloud print and cloud and gk is a little different from k native but what cloud run in cloud run
+12:32
+or gke does is basically giving you the same k native capability that you have
+12:37
+running on prem on your clusters is managed for you they're both very similar to each other
+12:43
+but in cloud run you have everything fully managed so you don't really have a control of the cluster
+12:48
+whereas cloud run on gke or cloud run for anthos what you have is you have basically
+12:55
+running on gke cluster now the reason why you want to sometimes run on gke cluster is because
+13:00
+lot of lot of clients a lot of companies already have a lot of stuff built on gke so they want to continue using that
+13:07
+platform because they are already using it used to it also cloud run on gk you have
+13:13
+the access to underlying cluster so that's good that you have more control of course when you have
+13:19
+more control you obviously have to manage that infrastructure so there are upsides and downsides also
+13:24
+so if you want a fully managed completely i just want to run my code and i don't want to worry about
+13:30
+anything that's cloud run now the api so k native is a product in
+13:36
+itself but k native can also be thought of as a reference api
+13:42
+and the reason why it's reference api is across all of this portfolio it's the same api so what that what that
+13:48
+gives you the advantage you have is you can take a workload on your on-prem
+13:55
+running k native and you can take it to the cloud and run cloud run on run it on cloud run and
+14:01
+bring it back so it gives you the possibility of having a hybrid cloud right you have part of your
+14:06
+infrastructure locally part of your infrastructure on cloud and you can move the workloads across each other
+14:11
+seamlessly so the hybrid cloud capability comes up and you can obviously go
+14:17
+and if you and if you have a case and you're running k native on other cloud vendors you can actually take
+14:22
+the workloads there also and move them across on-prem or different cloud vendors so that that possibility also exists
+14:31
+so let's go into details of uh k native components now so let's talk about serving first okay
+14:38
+so what is serving serving is basically the one that handles your components right so it's
+14:45
+talking about deployment of containers it's talking about um scaling now on slides i mentioned
+14:52
+0 to n but mind you this is all configurable because one of the common criticism of a
+14:59
+serverless is that it has a gold star problem so you sometimes you don't want the
+15:06
+component instance to go down to zero because it takes time to come back up so to prevent you might have to
+15:11
+configure or change sometimes on the scaling of one to infinity or one two well whatever
+15:16
+you you probably want to have an upper limit also because you want to have some kind of cost control right i don't want
+15:23
+to have like tens of thousands of containers running and then i have to pay for them also
+15:28
+so sometimes people like to have lower and upper limits but theoretically you can have scaling from zero to infinity
+15:36
+it has an inbuilt configuration and revision management and it also enables you to do traffic
+15:42
+splitting divisions now why is that important it's important
+15:47
+because you do want to have some kind of sometimes gradual deployment right i release a new version i'm not sure if it
+15:55
+works so i'm going to have traffic serving 10 percent and the 90 percent should go to the one that works so you
+16:00
+can split the traffic and gradually you can make the profit hundred percent so you have different traffic spreading
+16:06
+you can do all kind of a b experiments in my demo depending on how much time i have i'll actually show
+16:13
+traffic splitting between different revisions but yeah you have you have all of these
+16:20
+divisions and you have traffic splitting creative by design was something like a
+16:26
+loosely coupled component so you can pick and choose the components you want and replace the components you don't
+16:32
+want so for example if you don't want logging or monitoring you can take out that component and
+16:37
+replace it with your own building so it gives you that flexibility it's a it's a
+16:43
+pluggable system and we already talked about auto scalers auto scaler you can configure it or you can swap it
+16:49
+out for your custom code depending on what you want so the system is very being open source
+16:56
+it's very open by definition and you can mix and match things the way you want of course mixing and matching things
+17:02
+means more operational work but that's the price you pay for more flexibility
+17:08
+so k native serving primitives um i'm gonna show with demo how traffic
+17:13
+splitting and how different revisions etc work but essentially you have a configuration
+17:18
+which is the desired state of application that kind of follows the 12 factor methodology and then you have all
+17:24
+of these deployments as separate revisions right there point in time snapshots for your code and configurations and then
+17:31
+you have root that actually maps traffic to these divisions so that's what k native has and like i mentioned before you can
+17:38
+split between multiple revisions in my demo i'll try to show that
+17:44
+moving on uh let's talk about the eventing framework
+17:49
+so canada preventing by definition serverless systems are loosely coupled eventually even even
+17:56
+architecture systems right so you have events you respond to that events and you bind these event producers as
+18:02
+different services so you know you have a broker you have a channel again demo week
+18:08
+things become more clear but you have like a broker you have your channel you have different event types and you define all your custom event
+18:14
+pipelines to connect to your multiple services so events come and you respond you have all sorts of different event
+18:21
+sources right you have you have like the messaging bus for google which is pops up you have like kubernetes event source
+18:28
+you can have github you can have amazon sqs source and you
+18:33
+could even have kafka kafka is a very popular uh message broker which is again open
+18:38
+source so simple diagram you have different event source and you have a broker and
+18:44
+then you have services that actually have triggers associated with it so services would subscribe to a trigger
+18:50
+and trigger would basically collect the message from broker filter it and deliver it to the service now this is a simplified picture you
+18:57
+actually can have much more complicated in the sense you can have channels that subscribe to multiple services uh
+19:04
+the demo has that again depending on time i don't know how far i'll get but i can show you some of how the channels
+19:10
+work and you can have services calling each other so you can build like a very flexible
+19:16
+event-driven platform here with this eventing framework
+19:22
+so you have different event sources right you have apache kafka aws sqs cron job pops up github
+19:28
+just about everyone there's a full list here you can write your own event sources for custom event source
+19:34
+hopefully you should have to do that because all the common event sources are already captured but
+19:39
+you could do that if you choose to um so what are the eventing use cases
+19:46
+right you can have different use cases like you can have a com job a cron job event source is the one
+19:52
+actually i use on my demo but you can have to write weekly reports you can press as well as iot events
+19:58
+pub sub kafka so on you can even have like work um a workflows defined on your
+20:04
+github by github so there are a lot of examples of how eventing can be used
+20:11
+below link will basically tell you it gives you some of the good use cases for inventing
+20:18
+but let's talk about building now i'm not going to talk too much about the building because the original build
+20:25
+uh has been duplicated so before 0.8 was built now it's post point aid is stacked on uh
+20:32
+build was basically how you would build from your source code to containers and build pipe you can define build
+20:39
+pipelines but that's all now kind of deprecated and it has been replaced by tecton um
+20:45
+i'm gonna cover tecton very briefly i won't have it as part of demo because it's not strictly a canadian
+20:52
+component anymore it's a separate project of its own but what it is is basically a kubernetes
+20:58
+style cicd deployment system typically the common
+21:04
+criticism for something like a traditional jenkins is you have these agents right and you have
+21:09
+every time your build request comes these agents serve the request but the problem with these agents that
+21:15
+they are static you have fixed number you can't easily or automatically scale up and scale down
+21:21
+and if you're not using your system you're still paying for them with with kubernetes ci cd you can scale
+21:28
+up and you can scale down these agents as you want so if you have basically you have a controller of
+21:33
+course or your master but then you can have spin up n number of slaves and scale up and scale down as per your
+21:40
+needs so that's what tektron brings to the table there's a jenkins also has i think jenkins x which
+21:46
+basically shares similar goals with electrons even the code between the two is actually quite common
+21:52
+so jenkins basically is takes that kubernetes style ci cd on top of uh traditional jenkins
+22:01
+so k native uh community right these are some of the stacks they're actually old stats so now
+22:06
+hopefully things are gonna be much better will be a lot of contributors we have a slack channel like i have a link
+22:12
+to that slack channel so i welcome you to join and contribute um but a lot of contributing companies
+22:18
+pull requests creative community is pretty big today it has auto scale managed workloads it provides you
+22:24
+several benefits like one step deployed and so on and as we move to the demo so i'm
+22:29
+actually going to switch to the demo now um i'll show some of the aspects of k
+22:34
+native i have about to get 25 minutes remaining that's good so the demo i'm actually going to be
+22:41
+using is if you go to my github nikhil.com github and the link also was there on my
+22:47
+slides the first link that's the demo um so i have my
+22:52
+slides here that's the link for the demo and you have like whole different examples for setup
+22:58
+eventing and so on now i've already set up my cluster in the interest of time i would
+23:05
+not be repeating the setup steps but there's a setup folder which basically talks about what
+23:12
+steps you need to do and these are the scripts that run a bunch of commands so if you wanna see how setup is done you can actually
+23:19
+open up let's say create setup it will show you all the geek how would i set up my cluster
+23:25
+so everything all the information on how you set up is here but for now i have my cluster and i have
+23:31
+a vm running with all the cluster and everything set up and i'm gonna be taking some examples
+23:36
+from serving and some examples from eventing i'm going to be skipping examples from build and i'm also be
+23:43
+skipping examples from google cloud because i want to focus more on the open source part of it because
+23:48
+not everybody is in google cloud and i want you guys to have information that you could probably use go back and take
+23:55
+use it on your job even if you're not not using gcp so
+24:00
+what i'm going to do is i'm actually going to be mostly focusing on these two parts of it sorry these two
+24:06
+parts of it serving and eventing okay so let's go to some simple example
+24:11
+so let's go to hello world good old hello world the starting point for everything
+24:16
+and i have a bunch of my simple services and i'm going to show what it is but k native serving has a
+24:23
+lot of samples right so you can actually go to the samples and it it has wonderful examples with
+24:28
+different programming languages of what you want to use but going back we'll probably create one
+24:34
+simple example of hello world service i have two languages in c sharp and
+24:39
+python i think i'll probably use python here and i have this small script so it's all
+24:45
+it's pretty simple takes hello world it has basically a variable defined called target
+24:52
+and all it does is you know defines hello world v1 gets the world and
+24:59
+returns a simple string so we'll see a demo of it and there's an associated docker file
+25:04
+that shows how to build this code so we are actually going to [Music] build this
+25:11
+okay so let me go to my terminal
+25:16
+okay i think this is a little better and uh
+25:22
+something wrong with the instance sorry i think i i need to create a new
+25:28
+instance maybe set up ssh
+25:33
+transferring the keys it will take time
+25:39
+oh it probably deleted everything did i did i did i did it oh shoot okay i'll probably switch back
+25:47
+to a terminal then in that case that's fine because i have everything set up on my terminal but i will
+25:53
+zoom the code because i don't want uh this should be
+25:58
+[Music] yeah terminal windows
+26:05
+apologies i think i did some configuration changes so
+26:13
+let's actually go to serving examples so i can do everything from here
+26:18
+hello world right um so we're gonna have a simple
+26:27
+where am i yeah simple python service so we'll just look at this code hello world python okay
+26:37
+so that's my docker file and what i'm actually going to do is i'm going to build this image
+26:44
+and i'm using uh google container registry uh as my cloud container history but if
+26:51
+you have docker hub or something you can actually use that one so it doesn't have to be google it just would be any container
+26:58
+testing so i'm gonna build this and my project id here is
+27:08
+wow okay so i'm going to build this image
+27:14
+[Music] okay
+27:22
+am i not having docker i'm so sorry i think i uh the images
+27:29
+there was some reset done okay i'll try to install it if it works
+27:35
+good if it doesn't work i'll just walk through the example sorry i wish i could have shown
+27:41
+but i had everything set up in my vm it just everything got deleted i don't know how
+27:46
+it got deleted i can set it up again but it probably
+27:51
+will take time for me to do that so
+27:58
+that's it this docker demon running on this if not
+28:07
+okay let me actually walk through the demo rather than showing because the demo is long i won't be able to complete it anyway
+28:14
+so let's actually walk through the demo so you're gonna build this image okay and
+28:20
+you're gonna push it and once you push it it actually will come here
+28:29
+it actually would come here in the container registry okay
+28:36
+the container is tree and container testing would have that image
+28:42
+and then i'm going to apply this file and when i apply this file uh let's look
+28:48
+at this file scan it is service it says take this container so this is my project on my gcp
+28:54
+but if you have this is basically a location of your container history you take this image and you define an
+29:00
+environment variable called target target v1 and when you actually apply
+29:07
+you could actually see all of this
+29:24
+desktop
+29:34
+my installation could probably take time and will eat up most of my time so
+29:39
+my apologies i could have just picked up this vm i'll probably refresh this image but i won't
+29:45
+have time to do it right now app engine compute engine
+29:53
+yeah or i can just quickly
+30:45
+see if i can get things working pretty fast
+30:51
+or maybe not yeah it's it's gonna be i can't set this
+30:58
+instance up fast enough so i won't worry about that okay sorry i will just walk through the demo
+31:03
+i don't have a lot of time anyway left so i'll just walk through the demo so when you deploy the service you would
+31:11
+have all of these pods running and they'll show you a status okay so this is how you do and then
+31:18
+to test the service you just get the external ip so that's the command for external ip and then you make a request to the
+31:24
+service so you say curl the service and zip is basically a
+31:30
+service that what it does is if you have an ip it will basically convert it to a url so
+31:36
+you can actually use zip and it will display hello v1 and v1 is basically the environment name now
+31:44
+if you go back to this example and let's go to a little bit more complicated examples i can change the configuration
+31:51
+so here i'm talking about multiple services so here i'm actually going to be talking
+31:56
+about another same service the same docker image but the variable name will be v2
+32:03
+it won't be v1 so the variable name is v2
+32:08
+and i go back and now i'm going to deploy the second
+32:13
+service right so this is the x yaml file we saw and it will have the
+32:19
+pods and if i curl them it will say hello v2 i could change the container image also
+32:25
+but i'll just use the same one and i can have a v3 also so it could have like buy bp you can
+32:32
+change it whichever way you want now this is an example of traffic splitting in traffic splitting
+32:38
+what you do is you have this different current and you see you defined and this is the part i want to actually
+32:44
+highlight let me actually highlight this part i should probably zoom out but yeah this is better visible so
+32:52
+current 100 latest zero so i can apply and i can have all of
+32:59
+these services and then if i deploy this new version you would see that i'll have
+33:04
+v1 v2 you know statistically i can split this traffic 50 50. so now here i'm split as
+33:12
+splitting the traffic 50 50 and i have two different revisions name so every revision would have a different
+33:17
+name and i can just do 50 50 and apply this change split traffic and then if i run through
+33:24
+multiple times statistically i should get like a 50 50 kind of uh distribution so this is this
+33:33
+is going to be a traffic distance example i can configure the auto scaling and in
+33:38
+the auto scaling configuration what i have is i can define some parameters so i i have
+33:45
+the four to your load test tool i have these parameters it will actually scale down to zero and how you configure
+33:52
+it is you define these min scales and math scale so if i look at the service
+33:57
+yaml file here it defines a target of one and then it says
+34:05
+min scale is one max scale is fives so now my maximum
+34:11
+auto scaling would maximum have five instances and minimum one and this is important to prevent cold start problem now
+34:18
+usually what you have is in a big system you have multi-tier system so you have tier one which is where the customers would
+34:24
+basically interact and then you have tier two tier three and typically you don't want the cold start problem on your tier one services
+34:31
+because that impacts your availability right or that that is that impacts directly to the customer so
+34:37
+it won't be available it will be slow to respond it takes time to boot up the customers will notice it
+34:42
+so tier one services generally should not be auto scale to zero they should generally have at least
+34:48
+one to prevent cold start you can have the tier two tier three services in zero to five that isn't a problem
+34:53
+so this is your auto scaler so once you do that you basically would have you could scale
+35:00
+down five or you can go down to zero okay so now that's your auto scaling
+35:07
+uh this is the cloud run deployment now i could actually deploy
+35:12
+to cloud run uh these are my three uh cloud and portfolio services and i
+35:18
+can have i have to define gcloud cloud1 as of now is only available in certain so uh certain regions because
+35:24
+it's not it's not really um it's it's released but it's not available in
+35:30
+all regions so i can have something like the configuration activate and then i
+35:37
+push the container to the registry i define the project i submit a tag and i deploy okay let's see
+35:43
+if i can just um install
+35:49
+a docker and probably do a demo on cloud and that i should be able to do it rather easily genitive
+35:56
+would be a rather more difficult stocks yeah i don't know my instance got rebooted and i think
+36:02
+everything uh everything basically all my files and everything went down
+36:07
+because i had the entire cluster and everything set up so um yeah so i'll install the docker
+36:15
+or i could just um
+36:39
+that's um
+36:44
+can i do that how long would it take i should be able to do something
+37:02
+yeah so let's do the background background is happening install docker demon
+37:10
+uh okay docker demon is it coming docker dng
+37:48
+uh see if i can do something here
+38:35
+sometimes something special anyway let me sorry
+38:42
+i don't think i'll have time to fix this okay so deployed to google communities
+38:47
+you actually have a choice you could do cloud run you can drop down on anthony's you can have the cluster
+38:53
+you pick and you would deploy and it gets deployed to the region
+38:58
+and then you're like great it's deployed with hundred percent and then cloud run you can actually access cloud
+39:05
+run from here so you go to this panel you go to compute and you have cloud run
+39:12
+and when you go to cloud run you actually would see the instances and manage create service
+39:18
+can i do it from uh i don't really have allow
+39:23
+unauthenticated yeah i could i could do that from here but i don't really have the image on my restroom
+39:29
+and you would see all the revisions here and then once you click you actually get some xml
+39:35
+so this is the k native equal sorry yaml this is the k native equivalent gable api that you have so this is cloud run okay
+39:43
+you would basically see the yaml part here and then you can test the service in the sense you can have
+39:49
+you do a simple testing you can have update target variables and so on and then you deploy to cloud run okay
+39:57
+so grpc eventing works the same way you basically have a broker trigger and
+40:04
+a service okay you like it's open source so sorry for the demo mess up but you can just
+40:10
+clone the repository and play it with yourself i'll just go through it okay you have commands so
+40:15
+you just want to check the key preventing pods are running great you inject the broker in the name space
+40:22
+get the broker um you have the default you have event display
+40:28
+python so you have some sample code for event display so what you have here is you would have something like you
+40:35
+know um just put a message eventing display message and we'll just have a message here
+40:40
+and then when you push and deploy you put the sk native k service so this actually talks about the event displays
+40:47
+this is basically the service name and the container and then
+40:53
+once you have the trigger also you actually if you do a curl you have to install the
+40:58
+curl part and then when you do a curl and you put this message
+41:03
+you actually would be able to get this message so if you do like
+41:09
+the locks for your container you actually will see a message here
+41:16
+okay so that's that's basically the eventing let's go back to
+41:23
+the docs so you have simple delivery okay simple delivery source service
+41:32
+you have the source and the service you have the yaml file and uh yeah you have the yaml file
+41:40
+here and then what you would do is you would apply this and you verify
+41:47
+that the pods are running and once they are running you can actually see hello world from cron message so that's
+41:54
+that's basically a simple delivery now you can go into more complex delivery so what is a complex
+41:59
+delivery in a complex dealer you have a concept of channel so channel can basically have multiple subscription
+42:05
+in it's not exactly similar to kafka but there are similarities
+42:10
+or channels basically you you could have multiple subscriptions so services subscribe you define
+42:16
+a channel it's a persistence forwarding there there are a number of channels so let's
+42:21
+actually look at available channels so it's pops up kafka channel in memory channel will
+42:26
+use in memory for the demo but you create the channel you have the source code and you have different
+42:32
+services and subscriptions and once you apply all the subscriptions you actually will see
+42:39
+these messages coming from containers so that's that's
+42:44
+what renting is and then you have complex delivery with reply so
+42:51
+with reply you basically have source channel and services and services can have a
+42:56
+reply to the subscription and under the service channel which the third service basically
+43:05
+would get this message so here in this if you follow these instructions you actually would see that you would get these
+43:12
+messages as hello messages and then you have the reply this is knight reply you also have an example
+43:22
+of broker and trigger right so you have broker you have different triggers you install the
+43:28
+broker you have those different sources you install the triggers and then you get these messages so i'm
+43:35
+actually pretty much running out of time here so feel free to play around with the
+43:43
+demo you have all the instructions you need here okay
+43:48
+uh if you don't have a google cloud account you actually can sign up for a trial account they
+43:54
+give you like some i think 300 credit or something and it will it'll serve you well for a
+44:00
+couple of weeks actually so you can actually play around and have the demo you don't actually need to pay anything to use the demo fi and
+44:08
+my contact information is here if you have any problems feel free to contact me
+44:15
+thank you very much and i'm open to questions thank you

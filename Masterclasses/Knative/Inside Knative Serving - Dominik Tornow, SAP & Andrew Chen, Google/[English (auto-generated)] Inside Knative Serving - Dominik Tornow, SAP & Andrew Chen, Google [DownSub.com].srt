@@ -1,0 +1,2663 @@
+1
+00:00:00,030 --> 00:00:02,520
+alright let's get started thank you
+
+2
+00:00:02,520 --> 00:00:04,380
+everyone for coming to our talk inside
+
+3
+00:00:04,380 --> 00:00:07,259
+Katy native serving I am Andrew Chen I'm
+
+4
+00:00:07,259 --> 00:00:09,000
+a program manager and a technical writer
+
+5
+00:00:09,000 --> 00:00:11,570
+and with me is Dominick tour now a
+
+6
+00:00:11,570 --> 00:00:15,420
+principal engineer so for the past year
+
+7
+00:00:15,420 --> 00:00:17,100
+we've been working together to try to
+
+8
+00:00:17,100 --> 00:00:19,050
+figure out why kubernetes is so hard to
+
+9
+00:00:19,050 --> 00:00:21,900
+understand when I started as a Technical
+
+10
+00:00:21,900 --> 00:00:24,180
+Writer over two years ago I was
+
+11
+00:00:24,180 --> 00:00:26,340
+bombarded with terms such as control
+
+12
+00:00:26,340 --> 00:00:28,769
+plane data plane kubernetes object
+
+13
+00:00:28,769 --> 00:00:32,009
+controller ingress you know and the list
+
+14
+00:00:32,009 --> 00:00:33,660
+goes on and on all right
+
+15
+00:00:33,660 --> 00:00:35,820
+I had at my disposal all of the
+
+16
+00:00:35,820 --> 00:00:37,920
+committee's documentation yet I still
+
+17
+00:00:37,920 --> 00:00:39,960
+lacked a big picture understanding of
+
+18
+00:00:39,960 --> 00:00:43,140
+how everything worked together was it
+
+19
+00:00:43,140 --> 00:00:44,879
+because I didn't read all the source
+
+20
+00:00:44,879 --> 00:00:46,890
+code who even has the time to do that
+
+21
+00:00:46,890 --> 00:00:49,559
+and do you even believe that it's
+
+22
+00:00:49,559 --> 00:00:51,600
+possible to understand a software system
+
+23
+00:00:51,600 --> 00:00:53,579
+without examining its source code
+
+24
+00:00:53,579 --> 00:00:55,770
+well Dominic showed me that there is
+
+25
+00:00:55,770 --> 00:00:58,489
+another way it's called systems modeling
+
+26
+00:00:58,489 --> 00:01:01,020
+so for the past year we've been writing
+
+27
+00:01:01,020 --> 00:01:03,359
+blog posts using formal and conceptual
+
+28
+00:01:03,359 --> 00:01:05,519
+models to help people better understand
+
+29
+00:01:05,519 --> 00:01:07,710
+how kubernetes works so that they may
+
+30
+00:01:07,710 --> 00:01:09,570
+reason about its behavior with
+
+31
+00:01:09,570 --> 00:01:12,240
+confidence so we're applying this
+
+32
+00:01:12,240 --> 00:01:16,049
+methodology now to K native serving so
+
+33
+00:01:16,049 --> 00:01:17,880
+that you may understand K native better
+
+34
+00:01:17,880 --> 00:01:20,369
+and what makes this presentation a
+
+35
+00:01:20,369 --> 00:01:21,750
+little different than others you may see
+
+36
+00:01:21,750 --> 00:01:23,369
+is that we're not going to show you
+
+37
+00:01:23,369 --> 00:01:25,049
+source code we're not going to show you
+
+38
+00:01:25,049 --> 00:01:27,390
+a console we're not going to do a demo
+
+39
+00:01:27,390 --> 00:01:28,829
+we're just going to be showing you
+
+40
+00:01:28,829 --> 00:01:32,220
+systems models and yet you should still
+
+41
+00:01:32,220 --> 00:01:34,200
+be able to walk away today with the
+
+42
+00:01:34,200 --> 00:01:36,479
+crystal clear understanding of how cane
+
+43
+00:01:36,479 --> 00:01:39,479
+ativ serving works and without further
+
+44
+00:01:39,479 --> 00:01:41,880
+delay here is dominic turnout to talk
+
+45
+00:01:41,880 --> 00:01:46,850
+about cane and is serving thanks Angela
+
+46
+00:01:49,070 --> 00:01:52,560
+thank you if you heard of K native
+
+47
+00:01:52,560 --> 00:01:56,130
+before you probably heard that K native
+
+48
+00:01:56,130 --> 00:01:58,590
+is a kubernetes extension designed to
+
+49
+00:01:58,590 --> 00:02:01,799
+manage service applications this
+
+50
+00:02:01,799 --> 00:02:03,979
+statement about K native is correct
+
+51
+00:02:03,979 --> 00:02:06,509
+however this statement does not describe
+
+52
+00:02:06,509 --> 00:02:09,660
+K native well k native is a kubernetes
+
+53
+00:02:09,660 --> 00:02:12,810
+extension a kubernetes extension is a
+
+54
+00:02:12,810 --> 00:02:15,360
+collection of custom controllers and
+
+55
+00:02:15,360 --> 00:02:18,000
+custom resource definitions that an
+
+56
+00:02:18,000 --> 00:02:21,360
+ember that enable new use cases on top
+
+57
+00:02:21,360 --> 00:02:24,600
+of kubernetes if you hear members of the
+
+58
+00:02:24,600 --> 00:02:26,910
+kubernetes community safe kubernetes is
+
+59
+00:02:26,910 --> 00:02:29,850
+a platform to build a platform they're
+
+60
+00:02:29,850 --> 00:02:33,780
+talking about kubernetes extensions Kay
+
+61
+00:02:33,780 --> 00:02:36,330
+native is in fact a collection of three
+
+62
+00:02:36,330 --> 00:02:39,510
+kubernetes extensions candidate build k
+
+63
+00:02:39,510 --> 00:02:43,140
+native serving and k native eventing in
+
+64
+00:02:43,140 --> 00:02:44,310
+combination
+
+65
+00:02:44,310 --> 00:02:46,680
+k native is not just a server list
+
+66
+00:02:46,680 --> 00:02:49,769
+extension but it is a zero operations
+
+67
+00:02:49,769 --> 00:02:52,170
+extension for reactive micro service
+
+68
+00:02:52,170 --> 00:02:56,340
+applications hosted on kubernetes zero
+
+69
+00:02:56,340 --> 00:03:00,630
+ops also called no ops or more formally
+
+70
+00:03:00,630 --> 00:03:04,380
+operation automation refers to the fact
+
+71
+00:03:04,380 --> 00:03:07,680
+that most or all tasks which are
+
+72
+00:03:07,680 --> 00:03:10,170
+required to operate an application are
+
+73
+00:03:10,170 --> 00:03:13,260
+performed by the system not performed by
+
+74
+00:03:13,260 --> 00:03:17,160
+the developer today we will discuss K
+
+75
+00:03:17,160 --> 00:03:19,799
+native serving in particular we will
+
+76
+00:03:19,799 --> 00:03:23,370
+discuss two aspects canada serving as a
+
+77
+00:03:23,370 --> 00:03:25,530
+zero operations extension for the
+
+78
+00:03:25,530 --> 00:03:27,989
+lifecycle management of reactive micro
+
+79
+00:03:27,989 --> 00:03:30,720
+services and k native serving as a
+
+80
+00:03:30,720 --> 00:03:34,799
+server list extension to understand the
+
+81
+00:03:34,799 --> 00:03:37,470
+benefits of canada serving we need to
+
+82
+00:03:37,470 --> 00:03:39,720
+shift our point of view from an
+
+83
+00:03:39,720 --> 00:03:41,790
+architectural perspective to an
+
+84
+00:03:41,790 --> 00:03:45,120
+operational perspective from an
+
+85
+00:03:45,120 --> 00:03:47,670
+architectural perspective a reactive
+
+86
+00:03:47,670 --> 00:03:50,850
+micro service is an individual stateless
+
+87
+00:03:50,850 --> 00:03:53,910
+component the processes individual
+
+88
+00:03:53,910 --> 00:03:57,900
+requests micro services are located
+
+89
+00:03:57,900 --> 00:03:59,500
+behind the Gateway
+
+90
+00:03:59,500 --> 00:04:01,810
+the Gateway is responsible for traffic
+
+91
+00:04:01,810 --> 00:04:04,570
+management the Gateway acts as a reverse
+
+92
+00:04:04,570 --> 00:04:07,300
+proxy routing a request from a service
+
+93
+00:04:07,300 --> 00:04:12,030
+consumer to the correct service provider
+
+94
+00:04:15,000 --> 00:04:18,400
+from an operational perspective for each
+
+95
+00:04:18,400 --> 00:04:20,920
+micro service there exists at least one
+
+96
+00:04:20,920 --> 00:04:26,800
+version also called revision in order to
+
+97
+00:04:26,800 --> 00:04:28,810
+release the initial revision of a
+
+98
+00:04:28,810 --> 00:04:31,260
+service you have to perform two steps
+
+99
+00:04:31,260 --> 00:04:36,720
+first you have to deploy the revision to
+
+100
+00:04:37,410 --> 00:04:40,450
+deploy a revision you have to create a
+
+101
+00:04:40,450 --> 00:04:43,200
+workload specification a workload
+
+102
+00:04:43,200 --> 00:04:46,290
+specification is a set of resources that
+
+103
+00:04:46,290 --> 00:04:49,990
+specify how to process requests and by
+
+104
+00:04:49,990 --> 00:04:52,420
+the way if you are thinking workload
+
+105
+00:04:52,420 --> 00:04:54,730
+specification that sounds like pod
+
+106
+00:04:54,730 --> 00:04:58,170
+specification in essence you are correct
+
+107
+00:04:58,170 --> 00:05:03,420
+second you have to roll out the revision
+
+108
+00:05:06,439 --> 00:05:08,989
+to roll out a revision you have to
+
+109
+00:05:08,989 --> 00:05:11,449
+create a traffic split specification a
+
+110
+00:05:11,449 --> 00:05:14,119
+traffic split specification is a set of
+
+111
+00:05:14,119 --> 00:05:16,759
+resources that specify how to route
+
+112
+00:05:16,759 --> 00:05:19,639
+requests and now if you are thinking
+
+113
+00:05:19,639 --> 00:05:22,009
+traffic split specification that sounds
+
+114
+00:05:22,009 --> 00:05:24,529
+like ingress specification again in
+
+115
+00:05:24,529 --> 00:05:28,009
+essence you are correct here all traffic
+
+116
+00:05:28,009 --> 00:05:31,179
+splits are probabilistic traffic splits
+
+117
+00:05:31,179 --> 00:05:34,369
+in order to release the next revision of
+
+118
+00:05:34,369 --> 00:05:37,269
+a service you have to repeat these steps
+
+119
+00:05:37,269 --> 00:05:40,069
+first you have to deploy the new
+
+120
+00:05:40,069 --> 00:05:44,989
+revision second you have to roll out the
+
+121
+00:05:44,989 --> 00:05:47,839
+revision with a probabilistic traffic
+
+122
+00:05:47,839 --> 00:05:50,149
+split you have two options to do a
+
+123
+00:05:50,149 --> 00:05:52,849
+rollout you may choose an immediate
+
+124
+00:05:52,849 --> 00:05:55,369
+rollout or you may choose a gradual
+
+125
+00:05:55,369 --> 00:05:59,779
+rollout to perform an immediate rollout
+
+126
+00:05:59,779 --> 00:06:02,079
+you have to update the traffic split
+
+127
+00:06:02,079 --> 00:06:05,300
+specification only once shifting all
+
+128
+00:06:05,300 --> 00:06:07,879
+requests from the current to the next
+
+129
+00:06:07,879 --> 00:06:11,110
+revision in an instant
+
+130
+00:06:18,400 --> 00:06:21,100
+to perform a gradual rollout you have to
+
+131
+00:06:21,100 --> 00:06:23,169
+update the traffic split specification
+
+132
+00:06:23,169 --> 00:06:25,630
+multiple times shifting all requests
+
+133
+00:06:25,630 --> 00:06:27,190
+from the current to the next revision
+
+134
+00:06:27,190 --> 00:06:30,870
+over a period of time
+
+135
+00:06:39,260 --> 00:06:42,320
+as an operator of a micro service you
+
+136
+00:06:42,320 --> 00:06:45,350
+are locked in an endless tedious cycle
+
+137
+00:06:45,350 --> 00:06:48,350
+of deployments and rollouts and if this
+
+138
+00:06:48,350 --> 00:06:50,120
+dire situation does not ask for
+
+139
+00:06:50,120 --> 00:06:52,970
+automation nothing else does but let's
+
+140
+00:06:52,970 --> 00:06:55,240
+not get ahead of ourselves
+
+141
+00:06:55,240 --> 00:06:58,310
+so far we talked about micro services
+
+142
+00:06:58,310 --> 00:07:01,180
+but we did not talk about kubernetes and
+
+143
+00:07:01,180 --> 00:07:04,340
+we did not talk about Canada's yet well
+
+144
+00:07:04,340 --> 00:07:06,610
+let's talk about kubernetes first
+
+145
+00:07:06,610 --> 00:07:09,620
+kubernetes is a prominent platform for
+
+146
+00:07:09,620 --> 00:07:13,070
+hosting micro services kubernetes
+
+147
+00:07:13,070 --> 00:07:15,980
+provides an extensive set of very
+
+148
+00:07:15,980 --> 00:07:18,950
+rounded abstractions to compose a micro
+
+149
+00:07:18,950 --> 00:07:21,950
+service however kubernetes does not
+
+150
+00:07:21,950 --> 00:07:24,620
+provide a dedicated abstraction for a
+
+151
+00:07:24,620 --> 00:07:27,950
+micro service simply put kubernetes
+
+152
+00:07:27,950 --> 00:07:30,470
+gives us everything we need but we have
+
+153
+00:07:30,470 --> 00:07:33,530
+to piece everything together ourselves
+
+154
+00:07:33,530 --> 00:07:36,350
+and there are many options to choose
+
+155
+00:07:36,350 --> 00:07:40,670
+from turns out the most prominent is
+
+156
+00:07:40,670 --> 00:07:44,360
+also the most basic pattern here one
+
+157
+00:07:44,360 --> 00:07:46,730
+micro service is represented by
+
+158
+00:07:46,730 --> 00:07:50,140
+composing four kinds of objects a
+
+159
+00:07:50,140 --> 00:07:53,090
+kubernetes deployment a kubernetes
+
+160
+00:07:53,090 --> 00:07:54,710
+horizontal pod autoscaler
+
+161
+00:07:54,710 --> 00:07:57,830
+a kubernetes service and o kubernetes
+
+162
+00:07:57,830 --> 00:08:03,110
+ingress deployment and HP a represent
+
+163
+00:08:03,110 --> 00:08:05,600
+the workload specification service and
+
+164
+00:08:05,600 --> 00:08:07,850
+ingress represent the traffic split
+
+165
+00:08:07,850 --> 00:08:12,500
+specification in order to release the
+
+166
+00:08:12,500 --> 00:08:14,690
+initial revision the developer has to
+
+167
+00:08:14,690 --> 00:08:17,630
+create a deployment object a horizontal
+
+168
+00:08:17,630 --> 00:08:19,790
+port or a scalar object a service object
+
+169
+00:08:19,790 --> 00:08:24,440
+and an ingress object in order to
+
+170
+00:08:24,440 --> 00:08:26,510
+release a subsequent revision the
+
+171
+00:08:26,510 --> 00:08:28,730
+developer has to update the deployment
+
+172
+00:08:28,730 --> 00:08:33,920
+object again the basic pattern from an
+
+173
+00:08:33,920 --> 00:08:38,599
+actions point of view in order to
+
+174
+00:08:38,599 --> 00:08:40,490
+release the initial revision of a micro
+
+175
+00:08:40,490 --> 00:08:42,320
+service the developer has to create a
+
+176
+00:08:42,320 --> 00:08:44,330
+deployment object a horizontal port
+
+177
+00:08:44,330 --> 00:08:46,370
+order scalar object an ingress object
+
+178
+00:08:46,370 --> 00:08:50,690
+and a service object in order to release
+
+179
+00:08:50,690 --> 00:08:51,540
+a subsequent
+
+180
+00:08:51,540 --> 00:08:53,670
+vision the developer has to update the
+
+181
+00:08:53,670 --> 00:08:56,880
+deployment object this pattern is simple
+
+182
+00:08:56,880 --> 00:08:58,759
+to implement and simple to operate
+
+183
+00:08:58,759 --> 00:09:01,680
+however the developer has limited
+
+184
+00:09:01,680 --> 00:09:04,680
+control over the rollout that is limited
+
+185
+00:09:04,680 --> 00:09:06,240
+control over the traffic split
+
+186
+00:09:06,240 --> 00:09:10,079
+specification this diagram illustrates
+
+187
+00:09:10,079 --> 00:09:12,000
+in mechanics of the traffic split
+
+188
+00:09:12,000 --> 00:09:14,880
+specification of the basic pattern here
+
+189
+00:09:14,880 --> 00:09:16,800
+we have one microservice that is
+
+190
+00:09:16,800 --> 00:09:20,670
+currently in rollout that is traffic is
+
+191
+00:09:20,670 --> 00:09:22,440
+shifted from deployment number one
+
+192
+00:09:22,440 --> 00:09:24,810
+replica set number one to deployment
+
+193
+00:09:24,810 --> 00:09:27,199
+number one replica set number two
+
+194
+00:09:27,199 --> 00:09:30,360
+kubernetes ingress directs all requests
+
+195
+00:09:30,360 --> 00:09:32,970
+that are bound to one micro service to
+
+196
+00:09:32,970 --> 00:09:36,360
+one kubernetes service in turn the
+
+197
+00:09:36,360 --> 00:09:39,389
+kubernetes service directs request to
+
+198
+00:09:39,389 --> 00:09:42,839
+matching parts with equal probability in
+
+199
+00:09:42,839 --> 00:09:46,170
+summary traffic split is implicit in
+
+200
+00:09:46,170 --> 00:09:49,279
+effect determined solely by the
+
+201
+00:09:49,279 --> 00:09:52,079
+kubernetes service and dependent on the
+
+202
+00:09:52,079 --> 00:09:55,050
+number of ports per replica set for
+
+203
+00:09:55,050 --> 00:09:58,889
+example here if there are three parts in
+
+204
+00:09:58,889 --> 00:10:00,810
+replica set number one and three parts
+
+205
+00:10:00,810 --> 00:10:03,060
+in replica set number two the resulting
+
+206
+00:10:03,060 --> 00:10:09,029
+traffic split is 50/50 to grant the
+
+207
+00:10:09,029 --> 00:10:11,279
+developer full control over the traffic
+
+208
+00:10:11,279 --> 00:10:14,310
+split specification a more advanced
+
+209
+00:10:14,310 --> 00:10:17,579
+pattern emerged here again one micro
+
+210
+00:10:17,579 --> 00:10:20,339
+service is represented by composing four
+
+211
+00:10:20,339 --> 00:10:22,380
+different kinds of objects a kubernetes
+
+212
+00:10:22,380 --> 00:10:24,810
+deployment a kubernetes horizontal pod
+
+213
+00:10:24,810 --> 00:10:25,470
+autoscaler
+
+214
+00:10:25,470 --> 00:10:29,430
+a kubernetes service and an sto virtual
+
+215
+00:10:29,430 --> 00:10:33,600
+service deployment and HP a represent
+
+216
+00:10:33,600 --> 00:10:36,540
+the workload specification service and
+
+217
+00:10:36,540 --> 00:10:38,970
+virtual service represent the traffic
+
+218
+00:10:38,970 --> 00:10:42,959
+split specification in order to release
+
+219
+00:10:42,959 --> 00:10:46,410
+the initial revision the developer has
+
+220
+00:10:46,410 --> 00:10:48,089
+to create a deployment object a
+
+221
+00:10:48,089 --> 00:10:50,279
+horizontal port autoscaler object a
+
+222
+00:10:50,279 --> 00:10:52,949
+service object and an easier virtual
+
+223
+00:10:52,949 --> 00:10:57,180
+service object in order to release a
+
+224
+00:10:57,180 --> 00:10:59,430
+subsequent revision the developer has to
+
+225
+00:10:59,430 --> 00:11:01,470
+create a new deployment object
+
+226
+00:11:01,470 --> 00:11:03,629
+a new horizontal pod or a scalar object
+
+227
+00:11:03,629 --> 00:11:06,240
+and a new service object and has to
+
+228
+00:11:06,240 --> 00:11:09,540
+update the existing sto virtual service
+
+229
+00:11:09,540 --> 00:11:12,899
+object again the advance pattern from an
+
+230
+00:11:12,899 --> 00:11:16,259
+actions point of view in order to
+
+231
+00:11:16,259 --> 00:11:18,180
+release the initial revision of a micro
+
+232
+00:11:18,180 --> 00:11:19,920
+service the developer has to create a
+
+233
+00:11:19,920 --> 00:11:22,050
+deployment object a horizontal port or a
+
+234
+00:11:22,050 --> 00:11:24,750
+scalar object a service object and an
+
+235
+00:11:24,750 --> 00:11:28,829
+sto virtual service object in order to
+
+236
+00:11:28,829 --> 00:11:31,560
+release a subsequent revision the
+
+237
+00:11:31,560 --> 00:11:33,779
+developer has to create a new deployment
+
+238
+00:11:33,779 --> 00:11:36,149
+object a new horizontal port or the
+
+239
+00:11:36,149 --> 00:11:38,279
+scalar object a new service object and
+
+240
+00:11:38,279 --> 00:11:40,649
+has to update the existing is your
+
+241
+00:11:40,649 --> 00:11:44,189
+virtual service object in case of an
+
+242
+00:11:44,189 --> 00:11:46,290
+immediate rollout the developer has to
+
+243
+00:11:46,290 --> 00:11:48,420
+update the ISTE of virtual service only
+
+244
+00:11:48,420 --> 00:11:51,420
+once in case of a gradual rollout the
+
+245
+00:11:51,420 --> 00:11:53,550
+developer has to update the ischial
+
+246
+00:11:53,550 --> 00:11:56,250
+virtual service multiple times this
+
+247
+00:11:56,250 --> 00:11:59,790
+pattern is still simple to implement but
+
+248
+00:11:59,790 --> 00:12:04,230
+way more involved to operate however the
+
+249
+00:12:04,230 --> 00:12:06,689
+developer has full control over the
+
+250
+00:12:06,689 --> 00:12:09,269
+rollout that is full control over the
+
+251
+00:12:09,269 --> 00:12:13,019
+traffic split specification this diagram
+
+252
+00:12:13,019 --> 00:12:14,939
+illustrates the mechanics of the traffic
+
+253
+00:12:14,939 --> 00:12:16,800
+split specification of the advanced
+
+254
+00:12:16,800 --> 00:12:19,949
+pattern here we have one micro service
+
+255
+00:12:19,949 --> 00:12:21,750
+that is currently in rollout that is
+
+256
+00:12:21,750 --> 00:12:25,079
+traffic is split from I'm sorry traffic
+
+257
+00:12:25,079 --> 00:12:27,019
+is shifted from deployment number one
+
+258
+00:12:27,019 --> 00:12:29,250
+replica set number one to deployment
+
+259
+00:12:29,250 --> 00:12:33,029
+number two replica set number one is to
+
+260
+00:12:33,029 --> 00:12:35,880
+virtual service directs all requests
+
+261
+00:12:35,880 --> 00:12:38,279
+that are bound to one micro service to a
+
+262
+00:12:38,279 --> 00:12:40,860
+configurable set of kubernetes services
+
+263
+00:12:40,860 --> 00:12:43,680
+in turn the kubernetes service directs
+
+264
+00:12:43,680 --> 00:12:45,449
+request to matching parts with equal
+
+265
+00:12:45,449 --> 00:12:46,500
+probability
+
+266
+00:12:46,500 --> 00:12:50,790
+in summary traffic split is explicit in
+
+267
+00:12:50,790 --> 00:12:53,459
+fact determined solely by the ISTE of
+
+268
+00:12:53,459 --> 00:12:57,689
+virtual service so far we had good news
+
+269
+00:12:57,689 --> 00:13:00,079
+and we have bad news the good news
+
+270
+00:13:00,079 --> 00:13:02,610
+kubernetes is a convenient choice to
+
+271
+00:13:02,610 --> 00:13:05,100
+implement micro service applications the
+
+272
+00:13:05,100 --> 00:13:07,620
+bad news kubernetes is not a convenient
+
+273
+00:13:07,620 --> 00:13:09,959
+choice to operate micro service
+
+274
+00:13:09,959 --> 00:13:12,509
+applications you have to perform an
+
+275
+00:13:12,509 --> 00:13:15,089
+involved with edit of sequence of
+
+276
+00:13:15,089 --> 00:13:18,029
+steps for the initial release in every
+
+277
+00:13:18,029 --> 00:13:22,649
+subsequent release well meet K native
+
+278
+00:13:22,649 --> 00:13:25,379
+serving finally K native serving
+
+279
+00:13:25,379 --> 00:13:28,350
+automates the sequence of steps for the
+
+280
+00:13:28,350 --> 00:13:30,120
+initial release and every subsequent
+
+281
+00:13:30,120 --> 00:13:34,079
+release of your microservice K native
+
+282
+00:13:34,079 --> 00:13:36,420
+provides a custom resource definition
+
+283
+00:13:36,420 --> 00:13:39,029
+the K native service object that
+
+284
+00:13:39,029 --> 00:13:41,550
+implements the advanced pattern and
+
+285
+00:13:41,550 --> 00:13:45,990
+automates its operations when you create
+
+286
+00:13:45,990 --> 00:13:48,949
+a K native service object K native
+
+287
+00:13:48,949 --> 00:13:51,059
+automatically creates an initial
+
+288
+00:13:51,059 --> 00:13:53,309
+deployment the initial autoscaler
+
+289
+00:13:53,309 --> 00:13:56,790
+the initial service and the sto virtual
+
+290
+00:13:56,790 --> 00:14:00,959
+service for you please note that K
+
+291
+00:14:00,959 --> 00:14:02,850
+native replaces the horizontal part
+
+292
+00:14:02,850 --> 00:14:05,100
+autoscaler with a K native pod
+
+293
+00:14:05,100 --> 00:14:08,009
+autoscaler the kubernetes horizontal pod
+
+294
+00:14:08,009 --> 00:14:10,920
+autoscaler scales instances based on
+
+295
+00:14:10,920 --> 00:14:13,589
+metrics like CPU utilization or memory
+
+296
+00:14:13,589 --> 00:14:16,889
+utilization the K native pod autoscaler
+
+297
+00:14:16,889 --> 00:14:19,079
+scales instances based on in-flight
+
+298
+00:14:19,079 --> 00:14:23,189
+request count in addition the k p8 can
+
+299
+00:14:23,189 --> 00:14:26,279
+scale from n to 0 we will go into more
+
+300
+00:14:26,279 --> 00:14:28,199
+detail in the next section of the
+
+301
+00:14:28,199 --> 00:14:32,790
+presentation when you update a K native
+
+302
+00:14:32,790 --> 00:14:35,610
+service object K native automatically
+
+303
+00:14:35,610 --> 00:14:38,370
+creates the next deployment the next
+
+304
+00:14:38,370 --> 00:14:40,589
+autoscaler and the next service and
+
+305
+00:14:40,589 --> 00:14:45,629
+updates is to virtual service for you in
+
+306
+00:14:45,629 --> 00:14:48,089
+conclusion from an actions point of view
+
+307
+00:14:48,089 --> 00:14:50,970
+K native reduces the operational burden
+
+308
+00:14:50,970 --> 00:14:54,089
+on the developer in order to release the
+
+309
+00:14:54,089 --> 00:14:56,490
+initial revision of a micro service the
+
+310
+00:14:56,490 --> 00:14:59,189
+developer simply has to create a K
+
+311
+00:14:59,189 --> 00:15:03,410
+native serving object in turn can ativ
+
+312
+00:15:03,410 --> 00:15:05,730
+automatically creates a required set of
+
+313
+00:15:05,730 --> 00:15:08,179
+objects
+
+314
+00:15:10,440 --> 00:15:12,569
+in order to release this subsequent
+
+315
+00:15:12,569 --> 00:15:14,610
+revision the developer simply has to
+
+316
+00:15:14,610 --> 00:15:16,889
+update the tentative serving object and
+
+317
+00:15:16,889 --> 00:15:20,519
+in turn Canada automatically creates and
+
+318
+00:15:20,519 --> 00:15:24,000
+updates a required set of objects still
+
+319
+00:15:24,000 --> 00:15:26,399
+in case traffic is shifted immediately
+
+320
+00:15:26,399 --> 00:15:28,620
+the developer updates the key native
+
+321
+00:15:28,620 --> 00:15:31,470
+service once in case traffic is shifted
+
+322
+00:15:31,470 --> 00:15:33,629
+gradually the developer updates the key
+
+323
+00:15:33,629 --> 00:15:38,279
+native service multiple times let's take
+
+324
+00:15:38,279 --> 00:15:40,230
+a closer look at the mechanics of
+
+325
+00:15:40,230 --> 00:15:43,879
+Canada's AK a native service object
+
+326
+00:15:43,879 --> 00:15:46,620
+combines the workload and traffic split
+
+327
+00:15:46,620 --> 00:15:49,490
+specification of your micro service
+
+328
+00:15:49,490 --> 00:15:52,230
+ultimately the workload specification is
+
+329
+00:15:52,230 --> 00:15:54,629
+your part specification specifying the
+
+330
+00:15:54,629 --> 00:15:58,529
+image of your service the traffic split
+
+331
+00:15:58,529 --> 00:16:00,959
+specification is the ISTE of virtual
+
+332
+00:16:00,959 --> 00:16:04,019
+service specification specifying one
+
+333
+00:16:04,019 --> 00:16:06,329
+revision or two revisions with the
+
+334
+00:16:06,329 --> 00:16:11,220
+traffic split as your traffic target for
+
+335
+00:16:11,220 --> 00:16:13,050
+each K native service there exists
+
+336
+00:16:13,050 --> 00:16:15,810
+exactly one K native configuration when
+
+337
+00:16:15,810 --> 00:16:18,259
+the service object is created a
+
+338
+00:16:18,259 --> 00:16:20,819
+configuration object will be created
+
+339
+00:16:20,819 --> 00:16:22,680
+with the services initial workload
+
+340
+00:16:22,680 --> 00:16:25,310
+specification when the workload
+
+341
+00:16:25,310 --> 00:16:27,449
+specification of the service object is
+
+342
+00:16:27,449 --> 00:16:29,430
+updated the configuration will be
+
+343
+00:16:29,430 --> 00:16:32,029
+updated with the services new workload
+
+344
+00:16:32,029 --> 00:16:36,149
+specification for each K native
+
+345
+00:16:36,149 --> 00:16:38,759
+configuration there exists at least one
+
+346
+00:16:38,759 --> 00:16:41,819
+K native revision when the configuration
+
+347
+00:16:41,819 --> 00:16:44,579
+object is created a revision object is
+
+348
+00:16:44,579 --> 00:16:47,579
+created with the configurations initial
+
+349
+00:16:47,579 --> 00:16:49,889
+workload specification when the
+
+350
+00:16:49,889 --> 00:16:53,069
+configuration object is updated a new
+
+351
+00:16:53,069 --> 00:16:54,990
+revision object will be created with the
+
+352
+00:16:54,990 --> 00:16:56,430
+configurations new workload
+
+353
+00:16:56,430 --> 00:17:00,149
+specification each revision results in a
+
+354
+00:17:00,149 --> 00:17:02,279
+deployment a K native port autoscaler
+
+355
+00:17:02,279 --> 00:17:08,189
+and a service in addition for each K
+
+356
+00:17:08,189 --> 00:17:10,079
+native service there exists a K native
+
+357
+00:17:10,079 --> 00:17:12,390
+route when the service object is created
+
+358
+00:17:12,390 --> 00:17:14,909
+a route object will be created with the
+
+359
+00:17:14,909 --> 00:17:16,909
+services traffic split specification
+
+360
+00:17:16,909 --> 00:17:19,679
+when the traffic split specification of
+
+361
+00:17:19,679 --> 00:17:22,110
+the service object is updated the route
+
+362
+00:17:22,110 --> 00:17:24,100
+object will be updated with
+
+363
+00:17:24,100 --> 00:17:26,500
+services new traffic split specification
+
+364
+00:17:26,500 --> 00:17:30,610
+and ultimately a route results in an sto
+
+365
+00:17:30,610 --> 00:17:34,299
+virtual service let's take a closer look
+
+366
+00:17:34,299 --> 00:17:36,070
+at the workload specification of your
+
+367
+00:17:36,070 --> 00:17:41,559
+service as stated the workload
+
+368
+00:17:41,559 --> 00:17:44,309
+specification is a part specification
+
+369
+00:17:44,309 --> 00:17:47,860
+you have to specify one image called the
+
+370
+00:17:47,860 --> 00:17:50,410
+user container image that contains your
+
+371
+00:17:50,410 --> 00:17:52,770
+application or more specifically that
+
+372
+00:17:52,770 --> 00:17:55,350
+contains a revision of your application
+
+373
+00:17:55,350 --> 00:17:58,179
+your application must be an HTTP
+
+374
+00:17:58,179 --> 00:18:02,940
+application processing HTTP requests
+
+375
+00:18:05,910 --> 00:18:08,820
+kay native injects another image into
+
+376
+00:18:08,820 --> 00:18:11,280
+the pot specification on creation of the
+
+377
+00:18:11,280 --> 00:18:13,650
+deployment called the cue container
+
+378
+00:18:13,650 --> 00:18:16,290
+image the cue container is a reverse
+
+379
+00:18:16,290 --> 00:18:18,870
+proxy to the user container the cue
+
+380
+00:18:18,870 --> 00:18:21,930
+container intercepts all requests to the
+
+381
+00:18:21,930 --> 00:18:24,180
+user container and is responsible for
+
+382
+00:18:24,180 --> 00:18:26,150
+collecting and reporting statistics
+
+383
+00:18:26,150 --> 00:18:29,100
+namely the in-flight request count to
+
+384
+00:18:29,100 --> 00:18:31,800
+the autoscaler again we will go into
+
+385
+00:18:31,800 --> 00:18:33,630
+more detail in the next section of the
+
+386
+00:18:33,630 --> 00:18:38,160
+presentation so to release the initial
+
+387
+00:18:38,160 --> 00:18:39,930
+revision of a micro service the
+
+388
+00:18:39,930 --> 00:18:41,700
+developer creates a que native service
+
+389
+00:18:41,700 --> 00:18:44,220
+object with an initial workload and an
+
+390
+00:18:44,220 --> 00:18:47,490
+initial traffic split specification in
+
+391
+00:18:47,490 --> 00:18:49,620
+turn can aid of creates a Canadian
+
+392
+00:18:49,620 --> 00:18:51,420
+configuration object with the workload
+
+393
+00:18:51,420 --> 00:18:56,550
+specification in turn can ativ creates a
+
+394
+00:18:56,550 --> 00:18:58,260
+candidate revision object with the
+
+395
+00:18:58,260 --> 00:19:02,730
+workload specification in turn que
+
+396
+00:19:02,730 --> 00:19:04,710
+native creates a deployment object with
+
+397
+00:19:04,710 --> 00:19:06,930
+the workload specification a service and
+
+398
+00:19:06,930 --> 00:19:10,500
+make a native autoscaler additionally
+
+399
+00:19:10,500 --> 00:19:13,110
+que native creates a Canada Froude
+
+400
+00:19:13,110 --> 00:19:15,030
+object with the initial traffic split
+
+401
+00:19:15,030 --> 00:19:19,650
+specification in turn can aid of creates
+
+402
+00:19:19,650 --> 00:19:21,630
+an SEO virtual service with the traffic
+
+403
+00:19:21,630 --> 00:19:25,140
+split specification at this point the
+
+404
+00:19:25,140 --> 00:19:27,000
+initial revision is released and
+
+405
+00:19:27,000 --> 00:19:31,560
+receiving 100% of requests to release
+
+406
+00:19:31,560 --> 00:19:34,110
+the next revision of a micro service the
+
+407
+00:19:34,110 --> 00:19:35,910
+developer updates the kinetic service
+
+408
+00:19:35,910 --> 00:19:38,400
+object here with an updated workload and
+
+409
+00:19:38,400 --> 00:19:41,420
+an updated traffic split specification
+
+410
+00:19:41,420 --> 00:19:43,740
+Canada updates a configuration object
+
+411
+00:19:43,740 --> 00:19:45,840
+and in turn creates a new revision
+
+412
+00:19:45,840 --> 00:19:49,200
+object additionally que native updates a
+
+413
+00:19:49,200 --> 00:19:51,630
+route object and in turn updates a
+
+414
+00:19:51,630 --> 00:19:54,510
+virtual service at this point the next
+
+415
+00:19:54,510 --> 00:19:57,300
+revision is deployed and receiving 100%
+
+416
+00:19:57,300 --> 00:20:01,500
+of requests so we could stop here and
+
+417
+00:20:01,500 --> 00:20:04,320
+enjoy the sweet benefits of operation
+
+418
+00:20:04,320 --> 00:20:07,470
+automation however Canada has one more
+
+419
+00:20:07,470 --> 00:20:10,260
+trick up its sleeve que native serving
+
+420
+00:20:10,260 --> 00:20:13,320
+is able to scale a revision from n to
+
+421
+00:20:13,320 --> 00:20:16,590
+zero an approach that is frequently
+
+422
+00:20:16,590 --> 00:20:17,870
+called serve
+
+423
+00:20:17,870 --> 00:20:22,490
+as computing in a traditional
+
+424
+00:20:22,490 --> 00:20:26,620
+environment resources must be acquired
+
+425
+00:20:26,620 --> 00:20:30,320
+before a request can be received simply
+
+426
+00:20:30,320 --> 00:20:33,980
+put in kubernetes terms if your pod is
+
+427
+00:20:33,980 --> 00:20:36,710
+not up and running yet your application
+
+428
+00:20:36,710 --> 00:20:43,190
+cannot receive requests in a service
+
+429
+00:20:43,190 --> 00:20:45,559
+environment resources may be acquired
+
+430
+00:20:45,559 --> 00:20:48,460
+after a request has been received in
+
+431
+00:20:48,460 --> 00:20:52,400
+kubernetes terms even if your pod is not
+
+432
+00:20:52,400 --> 00:20:55,040
+up and running yet your application may
+
+433
+00:20:55,040 --> 00:21:00,800
+already receive requests typical
+
+434
+00:21:00,800 --> 00:21:02,900
+implementations of a service environment
+
+435
+00:21:02,900 --> 00:21:05,540
+do not release resources after
+
+436
+00:21:05,540 --> 00:21:09,080
+processing a request immediately instead
+
+437
+00:21:09,080 --> 00:21:12,700
+once acquired resources are held in
+
+438
+00:21:12,700 --> 00:21:15,500
+anticipation of additional requests for
+
+439
+00:21:15,500 --> 00:21:20,990
+some period of time code path refers to
+
+440
+00:21:20,990 --> 00:21:23,870
+the situation where receiving a request
+
+441
+00:21:23,870 --> 00:21:27,050
+and processing a request are separated
+
+442
+00:21:27,050 --> 00:21:32,540
+by acquiring resources hot path refers
+
+443
+00:21:32,540 --> 00:21:34,550
+to the situation where receiving a
+
+444
+00:21:34,550 --> 00:21:38,050
+request and processing a request are not
+
+445
+00:21:38,050 --> 00:21:42,890
+separated by acquiring resources but how
+
+446
+00:21:42,890 --> 00:21:47,960
+does key native scale from n20 and if
+
+447
+00:21:47,960 --> 00:21:50,690
+there is no part who is listening to
+
+448
+00:21:50,690 --> 00:21:56,330
+your requests meet the key native
+
+449
+00:21:56,330 --> 00:22:00,080
+serving activator for this walkthrough I
+
+450
+00:22:00,080 --> 00:22:03,290
+assume one key native service service
+
+451
+00:22:03,290 --> 00:22:06,380
+number one to revisions revision number
+
+452
+00:22:06,380 --> 00:22:08,960
+one in revision number two and that the
+
+453
+00:22:08,960 --> 00:22:11,630
+service is currently in roll out that is
+
+454
+00:22:11,630 --> 00:22:14,470
+traffic is split between revisions
+
+455
+00:22:14,470 --> 00:22:17,410
+currently both revision number one and
+
+456
+00:22:17,410 --> 00:22:22,059
+revision number two are scale it to zero
+
+457
+00:22:22,059 --> 00:22:24,310
+now this is a fun part
+
+458
+00:22:24,310 --> 00:22:27,580
+when a request enters the system the
+
+459
+00:22:27,580 --> 00:22:30,940
+Gateway inspects a request determines
+
+460
+00:22:30,940 --> 00:22:33,670
+the service and selects a revision to
+
+461
+00:22:33,670 --> 00:22:38,020
+process the request here I assume the
+
+462
+00:22:38,020 --> 00:22:39,930
+Gateway selects revision number one
+
+463
+00:22:39,930 --> 00:22:43,240
+since no instance of revision number one
+
+464
+00:22:43,240 --> 00:22:46,120
+is running requests to revision number
+
+465
+00:22:46,120 --> 00:22:49,450
+one are on a code path the Gateway is
+
+466
+00:22:49,450 --> 00:22:52,030
+configured to forward the request to the
+
+467
+00:22:52,030 --> 00:22:56,860
+activator the activator buffers the
+
+468
+00:22:56,860 --> 00:22:59,620
+original request and sends a request to
+
+469
+00:22:59,620 --> 00:23:02,590
+the autoscaler to scale revision number
+
+470
+00:23:02,590 --> 00:23:07,870
+one the autoscaler sends a request to
+
+471
+00:23:07,870 --> 00:23:10,210
+kubernetes to increase the replicas
+
+472
+00:23:10,210 --> 00:23:12,040
+count of the deployment object
+
+473
+00:23:12,040 --> 00:23:15,990
+corresponding to revision number one
+
+474
+00:23:18,600 --> 00:23:21,700
+kubernetes creates a pot object and
+
+475
+00:23:21,700 --> 00:23:24,250
+executes the queue and user container
+
+476
+00:23:24,250 --> 00:23:29,380
+therefore scaling from zero to one the
+
+477
+00:23:29,380 --> 00:23:32,470
+Gateway is configured to forward future
+
+478
+00:23:32,470 --> 00:23:34,390
+requests for revision number one
+
+479
+00:23:34,390 --> 00:23:37,690
+directly to a part of that revision by
+
+480
+00:23:37,690 --> 00:23:41,410
+passing the activator the activator
+
+481
+00:23:41,410 --> 00:23:43,990
+forwards a buffered original request of
+
+482
+00:23:43,990 --> 00:23:47,740
+the queue container the queue container
+
+483
+00:23:47,740 --> 00:23:49,840
+forwards the original request to the
+
+484
+00:23:49,840 --> 00:23:55,150
+user container for processing in
+
+485
+00:23:55,150 --> 00:23:57,400
+addition the queue container sends a
+
+486
+00:23:57,400 --> 00:23:59,650
+request to the autoscaler to increase
+
+487
+00:23:59,650 --> 00:24:02,950
+the in-flight request count omitted in
+
+488
+00:24:02,950 --> 00:24:05,350
+this animation when the response of the
+
+489
+00:24:05,350 --> 00:24:07,600
+user container is returned to the caller
+
+490
+00:24:07,600 --> 00:24:09,850
+the queue container sends another
+
+491
+00:24:09,850 --> 00:24:12,190
+request to the autoscaler to decrease
+
+492
+00:24:12,190 --> 00:24:18,280
+the in-flight request count now to do
+
+493
+00:24:18,280 --> 00:24:20,140
+this all over again when a new request
+
+494
+00:24:20,140 --> 00:24:22,900
+enters the system the Gateway inspects a
+
+495
+00:24:22,900 --> 00:24:25,270
+request determines the service and
+
+496
+00:24:25,270 --> 00:24:27,610
+selects a revision to process the
+
+497
+00:24:27,610 --> 00:24:31,090
+request here I assume the gateway
+
+498
+00:24:31,090 --> 00:24:35,710
+selects revision number one again since
+
+499
+00:24:35,710 --> 00:24:37,690
+an instance of revision number
+
+500
+00:24:37,690 --> 00:24:40,480
+is running requests to revision number
+
+501
+00:24:40,480 --> 00:24:43,720
+one are on a hot path the Gateway is
+
+502
+00:24:43,720 --> 00:24:45,970
+configured to forward requests for
+
+503
+00:24:45,970 --> 00:24:48,640
+revision number one directly to a part
+
+504
+00:24:48,640 --> 00:24:52,950
+of that revision bypassing the activator
+
+505
+00:24:52,950 --> 00:24:55,720
+again the queue container forwards to
+
+506
+00:24:55,720 --> 00:24:57,640
+originally request to the user container
+
+507
+00:24:57,640 --> 00:25:01,390
+for processing again the queue container
+
+508
+00:25:01,390 --> 00:25:03,430
+sends a request to the autoscaler to
+
+509
+00:25:03,430 --> 00:25:08,230
+increase in flight request count if the
+
+510
+00:25:08,230 --> 00:25:11,320
+number of in-flight requests passes a
+
+511
+00:25:11,320 --> 00:25:14,020
+configurable threshold the autoscaler
+
+512
+00:25:14,020 --> 00:25:16,390
+sends a request to kubernetes to
+
+513
+00:25:16,390 --> 00:25:18,040
+increase the replica count of the
+
+514
+00:25:18,040 --> 00:25:19,870
+deployment object corresponding to
+
+515
+00:25:19,870 --> 00:25:23,920
+revision number one kubernetes creates
+
+516
+00:25:23,920 --> 00:25:26,380
+additional pods and execute the queue
+
+517
+00:25:26,380 --> 00:25:28,990
+and you can use a container here scaling
+
+518
+00:25:28,990 --> 00:25:33,370
+from one to three ultimately the same
+
+519
+00:25:33,370 --> 00:25:36,190
+process takes place for revision number
+
+520
+00:25:36,190 --> 00:25:43,800
+two in summary que native is a zero
+
+521
+00:25:43,800 --> 00:25:46,630
+operations extension for reactive micro
+
+522
+00:25:46,630 --> 00:25:49,680
+service applications on kubernetes
+
+523
+00:25:49,680 --> 00:25:52,780
+within canada 'the que native serving is
+
+524
+00:25:52,780 --> 00:25:55,150
+a zero operations extension for the
+
+525
+00:25:55,150 --> 00:25:57,970
+lifecycle management of reactive micro
+
+526
+00:25:57,970 --> 00:26:01,270
+service applications on kubernetes k
+
+527
+00:26:01,270 --> 00:26:03,210
+native serving provides a dedicated
+
+528
+00:26:03,210 --> 00:26:05,410
+abstraction for a micro service and
+
+529
+00:26:05,410 --> 00:26:08,320
+automates its operation that is it
+
+530
+00:26:08,320 --> 00:26:12,780
+automates deployment and rollout
+
+531
+00:26:12,780 --> 00:26:15,730
+additionally k native serving is a
+
+532
+00:26:15,730 --> 00:26:20,560
+service extension k native serving is
+
+533
+00:26:20,560 --> 00:26:23,650
+able to scale a micro service from n to
+
+534
+00:26:23,650 --> 00:26:27,790
+zero instances in response to service
+
+535
+00:26:27,790 --> 00:26:31,780
+requests thank you very much with that I
+
+536
+00:26:31,780 --> 00:26:34,800
+hand back to Andrew
+
+537
+00:26:35,830 --> 00:26:38,740
+thank you thanks Dominic that was great
+
+538
+00:26:38,740 --> 00:26:42,070
+so if you like how Dominic explained K
+
+539
+00:26:42,070 --> 00:26:44,380
+native serving not just the content
+
+540
+00:26:44,380 --> 00:26:46,210
+please come and talk to us after the
+
+541
+00:26:46,210 --> 00:26:47,650
+presentation we'd love to hear your
+
+542
+00:26:47,650 --> 00:26:49,600
+feedback and I think we have some time
+
+543
+00:26:49,600 --> 00:26:57,670
+for some questions just one second for
+
+544
+00:26:57,670 --> 00:27:05,260
+the microphone to arrive I won't ask if
+
+545
+00:27:05,260 --> 00:27:08,770
+I run application in cognitive service
+
+546
+00:27:08,770 --> 00:27:12,520
+and which component to ensures that my
+
+547
+00:27:12,520 --> 00:27:15,930
+applications is a high available because
+
+548
+00:27:15,930 --> 00:27:19,960
+my application perhaps you know has some
+
+549
+00:27:19,960 --> 00:27:23,680
+trouble and it can be broke down in the
+
+550
+00:27:23,680 --> 00:27:27,930
+Canadian Canadian service container so I
+
+551
+00:27:27,930 --> 00:27:32,290
+should I develop another application to
+
+552
+00:27:32,290 --> 00:27:37,120
+fix these to fix this problem or the
+
+553
+00:27:37,120 --> 00:27:39,970
+Canadian who has a internal mechanism to
+
+554
+00:27:39,970 --> 00:27:43,270
+have me to do that Canada actually does
+
+555
+00:27:43,270 --> 00:27:45,730
+not address this problem can it it falls
+
+556
+00:27:45,730 --> 00:27:49,330
+back on to kubernetes because a que
+
+557
+00:27:49,330 --> 00:27:51,520
+native service or more specifically a
+
+558
+00:27:51,520 --> 00:27:53,430
+revision of ack a native service
+
+559
+00:27:53,430 --> 00:27:56,310
+ultimately translates into a deployment
+
+560
+00:27:56,310 --> 00:27:59,800
+so from there on it inherits all the
+
+561
+00:27:59,800 --> 00:28:03,460
+properties that the deployment exposes
+
+562
+00:28:03,460 --> 00:28:05,770
+and since kubernetes deployment
+
+563
+00:28:05,770 --> 00:28:08,740
+controller makes sure or at least tries
+
+564
+00:28:08,740 --> 00:28:11,380
+as much as you can to bring up as many
+
+565
+00:28:11,380 --> 00:28:13,540
+pots as specified in the replicas count
+
+566
+00:28:13,540 --> 00:28:16,000
+k native falls back on to the
+
+567
+00:28:16,000 --> 00:28:18,490
+availability guarantees of kubernetes
+
+568
+00:28:18,490 --> 00:28:21,970
+but the problem the the point stands and
+
+569
+00:28:21,970 --> 00:28:25,090
+is correct kubernetes deployment does
+
+570
+00:28:25,090 --> 00:28:27,430
+not give you a guarantee that it can
+
+571
+00:28:27,430 --> 00:28:29,950
+scale yes to this point it just gives
+
+572
+00:28:29,950 --> 00:28:32,800
+you the guarantee it will keep trying k
+
+573
+00:28:32,800 --> 00:28:34,480
+native does the same thing
+
+574
+00:28:34,480 --> 00:28:38,610
+yep because you know our applications
+
+575
+00:28:38,610 --> 00:28:42,730
+always was deployed deployed in our
+
+576
+00:28:42,730 --> 00:28:46,149
+production environment through
+
+577
+00:28:46,149 --> 00:28:49,190
+deployment workload and the stiff side
+
+578
+00:28:49,190 --> 00:28:52,789
+workload but our application is a
+
+579
+00:28:52,789 --> 00:28:56,470
+database system so there are so many
+
+580
+00:28:56,470 --> 00:29:00,169
+unstable problems will be happened in
+
+581
+00:29:00,169 --> 00:29:03,500
+the container so the Canadian stories is
+
+582
+00:29:03,500 --> 00:29:08,500
+very convenient - for us if we want to
+
+583
+00:29:08,500 --> 00:29:11,360
+provide as a database service to our
+
+584
+00:29:11,360 --> 00:29:12,380
+customers yeah
+
+585
+00:29:12,380 --> 00:29:15,710
+actually in that case so Canada Canada
+
+586
+00:29:15,710 --> 00:29:17,750
+serving is specifically designed for
+
+587
+00:29:17,750 --> 00:29:19,580
+reactive micro services that is
+
+588
+00:29:19,580 --> 00:29:22,100
+stateless components that process HTTP
+
+589
+00:29:22,100 --> 00:29:24,590
+requests if a database is running in
+
+590
+00:29:24,590 --> 00:29:27,380
+your container then ke native serving is
+
+591
+00:29:27,380 --> 00:29:29,750
+not the choice for you it's not a
+
+592
+00:29:29,750 --> 00:29:34,090
+solution okay thank you you're welcome
+
+593
+00:29:38,080 --> 00:29:40,780
+well thank you I'm a little bit confused
+
+594
+00:29:40,780 --> 00:29:43,600
+with the concept with the cold path and
+
+595
+00:29:43,600 --> 00:29:48,220
+how paths also so here confused about
+
+596
+00:29:48,220 --> 00:29:50,560
+like say it seems that a native can
+
+597
+00:29:50,560 --> 00:29:53,650
+sense first sense that there whether
+
+598
+00:29:53,650 --> 00:29:57,190
+there is a rollout going on and then to
+
+599
+00:29:57,190 --> 00:29:59,680
+put it and to trigger that with a cue
+
+600
+00:29:59,680 --> 00:30:02,350
+container and then is that means that
+
+601
+00:30:02,350 --> 00:30:04,390
+the to wait to finish that rollout and
+
+602
+00:30:04,390 --> 00:30:07,480
+intuitive scaling so I mean like so if I
+
+603
+00:30:07,480 --> 00:30:09,580
+see I mean the rollout and scaling will
+
+604
+00:30:09,580 --> 00:30:13,390
+they happens simultaneously or a little
+
+605
+00:30:13,390 --> 00:30:17,620
+bit confused about that thank you I see
+
+606
+00:30:17,620 --> 00:30:22,600
+so actually the cue container is not
+
+607
+00:30:22,600 --> 00:30:26,050
+involved in cold path or hot path the
+
+608
+00:30:26,050 --> 00:30:28,600
+only component that is involved in cold
+
+609
+00:30:28,600 --> 00:30:32,590
+path or hot path is the gateway and the
+
+610
+00:30:32,590 --> 00:30:36,610
+activator the ingress gateway is if
+
+611
+00:30:36,610 --> 00:30:40,090
+there is no no pod running the ingress
+
+612
+00:30:40,090 --> 00:30:42,700
+gateway is configured to forward a
+
+613
+00:30:42,700 --> 00:30:45,160
+request to the activator and then the
+
+614
+00:30:45,160 --> 00:30:47,320
+activator will talk to the autoscaler to
+
+615
+00:30:47,320 --> 00:30:54,220
+scale up in the future after just one
+
+616
+00:30:54,220 --> 00:30:56,670
+second
+
+617
+00:31:02,760 --> 00:31:06,150
+in the future after a pot has been
+
+618
+00:31:06,150 --> 00:31:09,809
+acquired the gateway is reconfigured we
+
+619
+00:31:09,809 --> 00:31:12,690
+are the ISTE of virtual service to then
+
+620
+00:31:12,690 --> 00:31:17,040
+direct requests directly to the pot so
+
+621
+00:31:17,040 --> 00:31:19,530
+this situation now or actually the blue
+
+622
+00:31:19,530 --> 00:31:21,690
+line you can think of the blue line as
+
+623
+00:31:21,690 --> 00:31:24,960
+the hot path and the queue container
+
+624
+00:31:24,960 --> 00:31:28,710
+within the pot its sole responsibility
+
+625
+00:31:28,710 --> 00:31:33,870
+is to count statistics so it every time
+
+626
+00:31:33,870 --> 00:31:36,270
+it receives the requests it increases in
+
+627
+00:31:36,270 --> 00:31:38,070
+flight requests count and every time it
+
+628
+00:31:38,070 --> 00:31:40,740
+returns a response it decreases in
+
+629
+00:31:40,740 --> 00:31:45,860
+flight requests come in super helpful
+
+630
+00:31:47,570 --> 00:31:51,260
+please me have one question over there
+
+631
+00:31:51,260 --> 00:31:54,380
+thank you
+
+632
+00:31:55,039 --> 00:31:58,460
+there's some in the back
+
+633
+00:32:02,120 --> 00:32:05,779
+hi the Gateway is configured to route
+
+634
+00:32:05,779 --> 00:32:07,909
+certain requests to service one revision
+
+635
+00:32:07,909 --> 00:32:09,919
+one and certain to say revision 2 while
+
+636
+00:32:09,919 --> 00:32:13,520
+the rollout is happening right so now in
+
+637
+00:32:13,520 --> 00:32:16,400
+the cold path we had the first request
+
+638
+00:32:16,400 --> 00:32:18,440
+come to revision one and your user
+
+639
+00:32:18,440 --> 00:32:21,289
+container came up and now it's directly
+
+640
+00:32:21,289 --> 00:32:23,900
+going to the queue container off so this
+
+641
+00:32:23,900 --> 00:32:27,409
+one revision one now say a request comes
+
+642
+00:32:27,409 --> 00:32:29,059
+where the Gateway has to route it to
+
+643
+00:32:29,059 --> 00:32:31,070
+revision 2 but the cold path is still
+
+644
+00:32:31,070 --> 00:32:33,770
+enable there so to reduce the response
+
+645
+00:32:33,770 --> 00:32:37,880
+time does it route it to so revision 1
+
+646
+00:32:37,880 --> 00:32:41,750
+meanwhile no no no now not to my
+
+647
+00:32:41,750 --> 00:32:42,289
+knowledge
+
+648
+00:32:42,289 --> 00:32:44,870
+I mean to do please do not quote me on
+
+649
+00:32:44,870 --> 00:32:47,750
+that but I am 99% sure no it does not
+
+650
+00:32:47,750 --> 00:32:52,100
+right so if we wish for us to have SLA
+
+651
+00:32:52,100 --> 00:32:54,460
+of 99 like triple nine or something and
+
+652
+00:32:54,460 --> 00:32:57,169
+have lower response times can we
+
+653
+00:32:57,169 --> 00:32:59,750
+configure it to do that though I do not
+
+654
+00:32:59,750 --> 00:33:03,559
+think that this is a possibility no it's
+
+655
+00:33:03,559 --> 00:33:06,770
+a it's a strictly probabilistic traffic
+
+656
+00:33:06,770 --> 00:33:08,570
+split that does not take any other
+
+657
+00:33:08,570 --> 00:33:10,450
+environmental conditions into account
+
+658
+00:33:10,450 --> 00:33:16,990
+understand alright thank you very much
+
+659
+00:33:19,030 --> 00:33:21,400
+all right I got I got the final warning
+
+660
+00:33:21,400 --> 00:33:23,200
+so I'm not sure I can take more
+
+661
+00:33:23,200 --> 00:33:25,420
+questions up here on stage but please do
+
+662
+00:33:25,420 --> 00:33:27,460
+not hesitate come find us we're gonna
+
+663
+00:33:27,460 --> 00:33:29,590
+hang out right in front of this room and
+
+664
+00:33:29,590 --> 00:33:31,330
+are happy to answer any more questions
+
+665
+00:33:31,330 --> 00:33:34,800
+thank you very much thanks for coming
+
+666
+00:33:34,800 --> 00:33:38,150
+[Applause]

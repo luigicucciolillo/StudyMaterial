@@ -1,0 +1,4423 @@
+1
+00:00:03,879 --> 00:00:07,269
+ok buongiorno a tutti benvenuti alla
+
+2
+00:00:07,269 --> 00:00:10,280
+seconda edizione del download
+
+3
+00:00:10,280 --> 00:00:12,769
+niente se siete venuti in questo album
+
+4
+00:00:12,769 --> 00:00:15,250
+penso perché siete interessati appunto
+
+5
+00:00:15,250 --> 00:00:18,439
+era un nuovo in vai romance per lo
+
+6
+00:00:18,439 --> 00:00:21,020
+sviluppo di sistemi diciamo di funzioni
+
+7
+00:00:21,020 --> 00:00:25,490
+serverless di sistemi di eventi e via
+
+8
+00:00:25,490 --> 00:00:25,970
+dicendo
+
+9
+00:00:25,970 --> 00:00:29,809
+e appunto lo scopo di questo talk è un
+
+10
+00:00:29,809 --> 00:00:32,599
+po presentarvi le funzionalità di questo
+
+11
+00:00:32,599 --> 00:00:35,430
+strumento di questo framework che
+
+12
+00:00:35,430 --> 00:00:38,640
+e nato diciamo un anno fa un anno e due
+
+13
+00:00:38,640 --> 00:00:44,100
+mesi fa allora ci sono io so niente sono
+
+14
+00:00:44,100 --> 00:00:46,620
+luigi leoni e mi occupo lavoro in ambito
+
+15
+00:00:46,620 --> 00:00:49,950
+it id a 14 anni ho avuto un percorso un
+
+16
+00:00:49,950 --> 00:00:51,420
+po vario nel senso che ho cominciato
+
+17
+00:00:51,420 --> 00:00:53,190
+come
+
+18
+00:00:53,190 --> 00:00:55,649
+sviluppatore di software fino a software
+
+19
+00:00:55,649 --> 00:00:57,329
+architect poi spostarsi una parte
+
+20
+00:00:57,329 --> 00:00:59,190
+middleware iniziato a vedere un po
+
+21
+00:00:59,190 --> 00:01:01,109
+l'interazione effettiva fra per i
+
+22
+00:01:01,109 --> 00:01:05,009
+cattivi applicativi applicazioni e
+
+23
+00:01:05,009 --> 00:01:07,290
+sistemi su cui giravano in dire tutti
+
+24
+00:01:07,290 --> 00:01:09,630
+dalle varie stecca di vari application
+
+25
+00:01:09,630 --> 00:01:13,080
+server ghetto e tutto va tutta la parte
+
+26
+00:01:13,080 --> 00:01:16,009
+networking po tutto in sostanza fino a
+
+27
+00:01:16,009 --> 00:01:19,770
+diciamo conciliare i due aspetti nel e
+
+28
+00:01:19,770 --> 00:01:22,409
+quindi nel diventare leader della parte
+
+29
+00:01:22,409 --> 00:01:24,840
+di automation per quanto riguarda le
+
+30
+00:01:24,840 --> 00:01:27,330
+pratiche deluxe che eroghiamo appunto
+
+31
+00:01:27,330 --> 00:01:29,039
+come sony presso clienti oppure per
+
+32
+00:01:29,039 --> 00:01:30,869
+progetti interni e organizzazioni di
+
+33
+00:01:30,869 --> 00:01:33,750
+progetti open source sono circoli della
+
+34
+00:01:33,750 --> 00:01:36,030
+punto di un paio di circolo che si
+
+35
+00:01:36,030 --> 00:01:38,220
+occupano di queste tematiche e mi occupo
+
+36
+00:01:38,220 --> 00:01:40,229
+anche di innovazioni portare innovazione
+
+37
+00:01:40,229 --> 00:01:43,560
+all'interno di sorint su tutte queste
+
+38
+00:01:43,560 --> 00:01:46,409
+tema su tutte queste tematiche tra cui
+
+39
+00:01:46,409 --> 00:01:50,520
+anche questo che in i team è quello il
+
+40
+00:01:50,520 --> 00:01:51,390
+mio secondo lavoro
+
+41
+00:01:51,390 --> 00:01:53,610
+quindi quando non sono al lavoro in giro
+
+42
+00:01:53,610 --> 00:01:58,020
+con la con trattorino a casa
+
+43
+00:01:58,020 --> 00:02:00,569
+allora che i netiv l'avete già sentito
+
+44
+00:02:00,569 --> 00:02:03,899
+qualcuno di voi l'ha già approcciato ha
+
+45
+00:02:03,899 --> 00:02:05,910
+avuto modo di vedere qualcosa
+
+46
+00:02:05,910 --> 00:02:09,599
+1 non nessuno l'ha mai provato hanno
+
+47
+00:02:09,599 --> 00:02:15,440
+sentito ok allora diciamo cosa è detto
+
+48
+00:02:15,440 --> 00:02:17,459
+allora prima facciamo un'introduzione
+
+49
+00:02:17,459 --> 00:02:20,520
+dicendo cosa esser cosa il server le ore
+
+50
+00:02:20,520 --> 00:02:22,050
+siccome però che su un bergamasco fatto
+
+51
+00:02:22,050 --> 00:02:27,180
+serverless ecco cos'è la definizione di
+
+52
+00:02:27,180 --> 00:02:29,610
+server praticamente dipende da dal punto
+
+53
+00:02:29,610 --> 00:02:32,160
+di vista da cui lo si guarda c'è non è
+
+54
+00:02:32,160 --> 00:02:34,410
+come si può pensare appunto un qualcosa
+
+55
+00:02:34,410 --> 00:02:36,810
+che gira senza serva perché largo al ce
+
+56
+00:02:36,810 --> 00:02:38,760
+n'è comunque bisogno ci sono due
+
+57
+00:02:38,760 --> 00:02:41,910
+definizioni che servono appunto per far
+
+58
+00:02:41,910 --> 00:02:43,440
+capire un po il concetto di server
+
+59
+00:02:43,440 --> 00:02:46,230
+nessuno è che serverless sono le
+
+60
+00:02:46,230 --> 00:02:47,640
+architetture serve adesso una delle
+
+61
+00:02:47,640 --> 00:02:49,379
+architetture per cui il design
+
+62
+00:02:49,379 --> 00:02:51,500
+dell'applicazione
+
+63
+00:02:51,500 --> 00:02:54,500
+incorpora al suo interno il dialogo con
+
+64
+00:02:54,500 --> 00:02:56,720
+elementi di terze parti o l'esecuzione
+
+65
+00:02:56,720 --> 00:03:01,070
+di funzioni appunto che sono effimere
+
+66
+00:03:01,070 --> 00:03:04,550
+sono state l'ex per definizione e quindi
+
+67
+00:03:04,550 --> 00:03:06,500
+di conseguenza si sposano bene con i
+
+68
+00:03:06,500 --> 00:03:08,300
+concetti di container che negli ultimi
+
+69
+00:03:08,300 --> 00:03:10,880
+anni appunto stanno prendendo sempre più
+
+70
+00:03:10,880 --> 00:03:11,900
+piede
+
+71
+00:03:11,900 --> 00:03:13,520
+un'altra definizione invece carina che
+
+72
+00:03:13,520 --> 00:03:16,030
+si cala invece nel server nel server nas
+
+73
+00:03:16,030 --> 00:03:19,790
+diciamo in ambiente cloud è il fatto di
+
+74
+00:03:19,790 --> 00:03:23,660
+io ho una funzione che la cui esecuzione
+
+75
+00:03:23,660 --> 00:03:25,790
+viene pagata solo nel momento in cui la
+
+76
+00:03:25,790 --> 00:03:28,640
+uso quindi nel concetto di nell'idea
+
+77
+00:03:28,640 --> 00:03:32,239
+diciamo di diminuzione dei costi e via
+
+78
+00:03:32,239 --> 00:03:34,100
+dicendo anche se uno è comunque una cosa
+
+79
+00:03:34,100 --> 00:03:37,280
+che diciamo è trascurabile perché non è
+
+80
+00:03:37,280 --> 00:03:39,310
+vero che andare in cloud coast meno
+
+81
+00:03:39,310 --> 00:03:41,780
+diciamo l'idea è quella di appunto io
+
+82
+00:03:41,780 --> 00:03:43,610
+pago per un qualcosa che utilizza solo
+
+83
+00:03:43,610 --> 00:03:45,260
+nel momento in cui l'utilizzo e non per
+
+84
+00:03:45,260 --> 00:03:47,780
+il servizio che attivo sempre e quindi
+
+85
+00:03:47,780 --> 00:03:50,720
+mi consuma in sostanza in diciamo in
+
+86
+00:03:50,720 --> 00:03:53,959
+cloud allora cos'è che in etica che in
+
+87
+00:03:53,959 --> 00:03:56,360
+attivo appunto è una piattaforma basata
+
+88
+00:03:56,360 --> 00:04:01,020
+su tuber l'itis che serve per gestire il
+
+89
+00:04:01,020 --> 00:04:03,560
+il carico in pratica di
+
+90
+00:04:03,560 --> 00:04:06,550
+cuore di un workload serverless quindi
+
+91
+00:04:06,550 --> 00:04:09,970
+cosa è successo in pratica all'incirca
+
+92
+00:04:09,970 --> 00:04:14,270
+appunto nel luglio del 2018 è stato è
+
+93
+00:04:14,270 --> 00:04:16,840
+stato diciamo
+
+94
+00:04:16,840 --> 00:04:22,000
+è stato annunciato al mondo da google
+
+95
+00:04:22,000 --> 00:04:23,860
+questo nuovo questa nuova piattaforma
+
+96
+00:04:23,860 --> 00:04:26,680
+che è composta da una serie di elementi
+
+97
+00:04:26,680 --> 00:04:29,800
+costruiti al di sopra dei kuber l'itis
+
+98
+00:04:29,800 --> 00:04:33,040
+sfruttando però le funzioni native di
+
+99
+00:04:33,040 --> 00:04:35,199
+cuper nyt e quindi per intenderci perché
+
+100
+00:04:35,199 --> 00:04:37,479
+un po più tecnico gli operators quindi
+
+101
+00:04:37,479 --> 00:04:39,970
+usando gli operator castor rhesus
+
+102
+00:04:39,970 --> 00:04:44,110
+definition diciamo e altri elementi loro
+
+103
+00:04:44,110 --> 00:04:45,910
+riccamente avevano i cooper ni ti sanno
+
+104
+00:04:45,910 --> 00:04:50,530
+tutto quanto è necessario per realizzare
+
+105
+00:04:50,530 --> 00:04:52,479
+una piattaforma per il serverless
+
+106
+00:04:52,479 --> 00:04:57,400
+computing e via dicendo cosa cosa così
+
+107
+00:04:57,400 --> 00:04:59,830
+era la mission di questa di questo
+
+108
+00:04:59,830 --> 00:05:00,340
+progetto
+
+109
+00:05:00,340 --> 00:05:04,600
+o meglio cosa è avere un building block
+
+110
+00:05:04,600 --> 00:05:07,090
+appunto per creare uno stack serverless
+
+111
+00:05:07,090 --> 00:05:10,510
+e soprattutto guidare guidare diciamo
+
+112
+00:05:10,510 --> 00:05:12,460
+portare cooper nitish hanno maggiore
+
+113
+00:05:12,460 --> 00:05:14,470
+diffusione lo stesso inglobando quello
+
+114
+00:05:14,470 --> 00:05:16,510
+che non era presente in cui vernizzi
+
+115
+00:05:16,510 --> 00:05:19,810
+relativamente quindi il fatto di poter
+
+116
+00:05:19,810 --> 00:05:22,060
+eseguire funzioni serverless in un
+
+117
+00:05:22,060 --> 00:05:24,550
+cluster gubernatis tipicamente cooper
+
+118
+00:05:24,550 --> 00:05:26,680
+nick è utilizzato per erogare
+
+119
+00:05:26,680 --> 00:05:30,130
+applicazioni servizi ed alcuni tipi di
+
+120
+00:05:30,130 --> 00:05:31,409
+da quelli di b
+
+121
+00:05:31,409 --> 00:05:34,110
+i sistemi di memory di memorie data grid
+
+122
+00:05:34,110 --> 00:05:37,619
+e via dicendo però diciamo poco si
+
+123
+00:05:37,619 --> 00:05:39,889
+sposavano con il concetto di serverless
+
+124
+00:05:39,889 --> 00:05:42,689
+e quindi diciamo sfruttando tutte le
+
+125
+00:05:42,689 --> 00:05:45,089
+componenti già presente in cooper miti
+
+126
+00:05:45,089 --> 00:05:46,319
+sono state create queste nuove
+
+127
+00:05:46,319 --> 00:05:47,939
+astrazioni che permettono appunto di
+
+128
+00:05:47,939 --> 00:05:50,309
+ottenere uno stack server has come
+
+129
+00:05:50,309 --> 00:05:53,189
+dicevo allora l'aiuto di storia e
+
+130
+00:05:53,189 --> 00:05:54,809
+appunto è stato annunciato come dicevo
+
+131
+00:05:54,809 --> 00:05:58,229
+nel luglio 2018 è stato creato da google
+
+132
+00:05:58,229 --> 00:06:00,419
+all'inizio c'è stata una collaborazione
+
+133
+00:06:00,419 --> 00:06:03,569
+forte da parte di alcune compagnie per
+
+134
+00:06:03,569 --> 00:06:05,819
+quello diciamo la più grande
+
+135
+00:06:05,819 --> 00:06:07,110
+collaborazione arriva comunque da
+
+136
+00:06:07,110 --> 00:06:12,449
+pivotal e dare that ibm anche e samp te
+
+137
+00:06:12,449 --> 00:06:16,619
+lo dico pur di un prossimo rosate
+
+138
+00:06:16,619 --> 00:06:20,369
+serverless e poi diciamo che stanca
+
+139
+00:06:20,369 --> 00:06:22,589
+tutta la collaborazione da parte di di
+
+140
+00:06:22,589 --> 00:06:25,019
+framework open source che già esistevano
+
+141
+00:06:25,019 --> 00:06:28,589
+quindi dei degli stack per ottenere una
+
+142
+00:06:28,589 --> 00:06:33,040
+piattaforma serverless tipo open fas
+
+143
+00:06:33,040 --> 00:06:34,120
+per
+
+144
+00:06:34,120 --> 00:06:36,790
+open week ce ne sono e adesso che sta
+
+145
+00:06:36,790 --> 00:06:38,830
+crescendo ce ne stanno per ne stanno
+
+146
+00:06:38,830 --> 00:06:41,650
+uscendo sempre di più e diciamo tutti
+
+147
+00:06:41,650 --> 00:06:45,130
+hanno collaborato per per tenere su che
+
+148
+00:06:45,130 --> 00:06:48,400
+i netiv la soluzione diciamo stop
+
+149
+00:06:48,400 --> 00:06:51,790
+questo era uno degli obiettivi nella
+
+150
+00:06:51,790 --> 00:06:53,560
+prima versione avevano avevano
+
+151
+00:06:53,560 --> 00:06:55,690
+introdotto due componenti quello che
+
+152
+00:06:55,690 --> 00:06:57,630
+venne definito appunto building serving
+
+153
+00:06:57,630 --> 00:07:01,720
+e nella versione già 02 hanno aggiunto
+
+154
+00:07:01,720 --> 00:07:04,000
+un sistema di eventing praticamente qui
+
+155
+00:07:04,000 --> 00:07:05,440
+la possibilità di mandare dagli eventi
+
+156
+00:07:05,440 --> 00:07:08,260
+che poi trigano esecuzioni che possono
+
+157
+00:07:08,260 --> 00:07:10,270
+essere o invio di altri eventi oppure
+
+158
+00:07:10,270 --> 00:07:12,070
+esecuzioni di funzioni che a sua volta
+
+159
+00:07:12,070 --> 00:07:13,840
+inviano altrimenti seguono altre
+
+160
+00:07:13,840 --> 00:07:15,880
+funzioni per ottenere la sincronicità in
+
+161
+00:07:15,880 --> 00:07:18,789
+sostanza l'ultima versione è stata
+
+162
+00:07:18,789 --> 00:07:20,660
+rilasciata
+
+163
+00:07:20,660 --> 00:07:27,050
+il 20 agosto è appunto la 08 allora vado
+
+164
+00:07:27,050 --> 00:07:31,430
+un po un pò veloce adesso ci sono un po
+
+165
+00:07:31,430 --> 00:07:33,680
+di highlights senso cos'erano quali sono
+
+166
+00:07:33,680 --> 00:07:35,630
+gli obiettivi il fatto che appunto
+
+167
+00:07:35,630 --> 00:07:37,000
+doveva semplificare lo sviluppo
+
+168
+00:07:37,000 --> 00:07:39,710
+l'utilizzo di funzioni serverless tardi
+
+169
+00:07:39,710 --> 00:07:42,160
+sviluppatori senza che gli sviluppatori
+
+170
+00:07:42,160 --> 00:07:45,050
+conoscano bene la piattaforma su cui poi
+
+171
+00:07:45,050 --> 00:07:47,860
+vanno a girare quindi non preoccuparsi
+
+172
+00:07:47,860 --> 00:07:49,640
+dell'infrastruttura su cui girano ma
+
+173
+00:07:49,640 --> 00:07:51,320
+preoccuparsi del suo sviluppare le
+
+174
+00:07:51,320 --> 00:07:52,460
+applicazioni che questo è un obiettivo
+
+175
+00:07:52,460 --> 00:07:55,660
+appunto in focal point di di cai netiv
+
+176
+00:07:55,660 --> 00:07:58,040
+il fatto che a portabile nel senso
+
+177
+00:07:58,040 --> 00:08:00,890
+funziona su qualsiasi ambiente dove dove
+
+178
+00:08:00,890 --> 00:08:02,540
+funziona più berny tease funzionerà
+
+179
+00:08:02,540 --> 00:08:05,330
+anche finiti quindi vari i vari
+
+180
+00:08:05,330 --> 00:08:07,910
+openshift via dicendo
+
+181
+00:08:07,910 --> 00:08:12,320
+e poi sposa sposa l'esperienza punto di
+
+182
+00:08:12,320 --> 00:08:13,670
+sviluppo o meglio
+
+183
+00:08:13,670 --> 00:08:17,240
+scusate supporta diciamo le pratiche di
+
+184
+00:08:17,240 --> 00:08:18,680
+jobs
+
+185
+00:08:18,680 --> 00:08:21,860
+no caro ops via dicendo
+
+186
+00:08:21,860 --> 00:08:24,770
+allora il trend così in questo in questi
+
+187
+00:08:24,770 --> 00:08:27,470
+in questo ultimo anno e che appunto gli
+
+188
+00:08:27,470 --> 00:08:29,150
+sviluppatori vogliono server e aspar che
+
+189
+00:08:29,150 --> 00:08:30,169
+dicono io voglio fare il mio codice
+
+190
+00:08:30,169 --> 00:08:32,659
+vogliono mia funzione dove gira me ne
+
+191
+00:08:32,659 --> 00:08:35,719
+può fregar di meno chi è sulla parte
+
+192
+00:08:35,719 --> 00:08:37,490
+appunto gli occhiuti o ferito skinny che
+
+193
+00:08:37,490 --> 00:08:41,270
+amministra poi la sauber nitish invece
+
+194
+00:08:41,270 --> 00:08:46,040
+dice ok a me non mi interessa niente di
+
+195
+00:08:46,040 --> 00:08:49,730
+quello che ci gira sopra io voglio che i
+
+196
+00:08:49,730 --> 00:08:53,149
+miei sviluppatori mi danno le mie o
+
+197
+00:08:53,149 --> 00:08:55,520
+meglio le immagini le dichiarazioni dei
+
+198
+00:08:55,520 --> 00:08:57,560
+diplomi 20 service che ci devono girare
+
+199
+00:08:57,560 --> 00:08:59,630
+le concordiamo assieme e se le faccio
+
+200
+00:08:59,630 --> 00:09:03,529
+girare sopra ai aglio periodo appunto
+
+201
+00:09:03,529 --> 00:09:05,750
+piace cooper nitex perché riescono
+
+202
+00:09:05,750 --> 00:09:08,540
+comunque avere il controllo della di
+
+203
+00:09:08,540 --> 00:09:10,399
+tutta l'infrastruttura s'è fatta
+
+204
+00:09:10,399 --> 00:09:12,890
+chiaramente in maniera diciamo cristiana
+
+205
+00:09:12,890 --> 00:09:18,140
+comunque a modo c'è che niente può
+
+206
+00:09:18,140 --> 00:09:20,420
+essere cambia diciamo la visione di cai
+
+207
+00:09:20,420 --> 00:09:22,670
+nitiva seconda della prospettiva quindi
+
+208
+00:09:22,670 --> 00:09:24,140
+gli sviluppatori per gli sviluppatori
+
+209
+00:09:24,140 --> 00:09:26,690
+che ntv sono una serie di ep ai che
+
+210
+00:09:26,690 --> 00:09:29,240
+possono utilizzare per sviluppare le
+
+211
+00:09:29,240 --> 00:09:30,589
+proprie applicazioni
+
+212
+00:09:30,589 --> 00:09:33,410
+le proprie funzioni e farceli a girare
+
+213
+00:09:33,410 --> 00:09:35,740
+per
+
+214
+00:09:35,740 --> 00:09:39,370
+per di operators appunto gestiscono il
+
+215
+00:09:39,370 --> 00:09:42,550
+the player e che in e ti va le istanze
+
+216
+00:09:42,550 --> 00:09:44,020
+di kenneth iva all'interno della classe
+
+217
+00:09:44,020 --> 00:09:46,360
+cooper nitish gli utenti o altre
+
+218
+00:09:46,360 --> 00:09:48,310
+applicazioni o sistemi aiuti appunto
+
+219
+00:09:48,310 --> 00:09:51,330
+sfruttano accedono alle funzioni
+
+220
+00:09:51,330 --> 00:09:53,200
+dall'esterno passando da questo
+
+221
+00:09:53,200 --> 00:09:55,900
+componente che non avete visto prima che
+
+222
+00:09:55,900 --> 00:09:57,520
+si chiama appunto ischio è un elemento
+
+223
+00:09:57,520 --> 00:09:59,680
+che ho aggiunto adesso dopo vi dirò
+
+224
+00:09:59,680 --> 00:10:01,330
+cos'è se non lo sapete
+
+225
+00:10:01,330 --> 00:10:02,800
+e poi vabbè c'è tutta la parte di kenny
+
+226
+00:10:02,800 --> 00:10:04,450
+aveva visto dalla parte del contributo
+
+227
+00:10:04,450 --> 00:10:06,060
+che mi diede la community open source
+
+228
+00:10:06,060 --> 00:10:08,860
+che sviluppa implementa sempre nuove
+
+229
+00:10:08,860 --> 00:10:12,160
+funzionalità questo è quello che vi ho
+
+230
+00:10:12,160 --> 00:10:14,260
+detto prima che vi ho accennato allora
+
+231
+00:10:14,260 --> 00:10:16,350
+vediamo un po come strutturato dall'alto
+
+232
+00:10:16,350 --> 00:10:19,570
+che i netiv in pratica abbiamo la
+
+233
+00:10:19,570 --> 00:10:20,830
+piattaforma su cui gira che abbiamo
+
+234
+00:10:20,830 --> 00:10:23,440
+detto che cooper niti funziona con un
+
+235
+00:10:23,440 --> 00:10:24,970
+gateway che è a scelta
+
+236
+00:10:24,970 --> 00:10:27,880
+il deal di forte rischio però si può
+
+237
+00:10:27,880 --> 00:10:30,160
+usare anche glug oppure ambassador con
+
+238
+00:10:30,160 --> 00:10:34,000
+chiaramente delle restrizioni e questo
+
+239
+00:10:34,000 --> 00:10:36,310
+cos'è un gateway appunto rischio
+
+240
+00:10:36,310 --> 00:10:38,279
+qualcuno di voi l'ha già usato
+
+241
+00:10:38,279 --> 00:10:40,949
+l'ho già sentito via nappi ghetto e con
+
+242
+00:10:40,949 --> 00:10:43,110
+tutta una serie di altre funzionalità
+
+243
+00:10:43,110 --> 00:10:45,790
+per gestire le metriche
+
+244
+00:10:45,790 --> 00:10:47,440
+via dicendo non entro in questi dettagli
+
+245
+00:10:47,440 --> 00:10:50,290
+però diciamo al punto di ingresso tra il
+
+246
+00:10:50,290 --> 00:10:52,210
+punto di dialogo tra kuber nitish in
+
+247
+00:10:52,210 --> 00:10:56,460
+pratica è la parte che ntv effettiva e i
+
+248
+00:10:56,460 --> 00:10:58,900
+componenti di che i meeting che vedete
+
+249
+00:10:58,900 --> 00:11:00,550
+appunto nella parte component sono
+
+250
+00:11:00,550 --> 00:11:02,860
+serving eventing and building che qua
+
+251
+00:11:02,860 --> 00:11:05,860
+non vedete dopo vi dirò perché ci sono
+
+252
+00:11:05,860 --> 00:11:07,480
+prodotti e sviluppati appunto su che i
+
+253
+00:11:07,480 --> 00:11:09,310
+meeting messi in cloud con riportati
+
+254
+00:11:09,310 --> 00:11:12,100
+solo quelli di google in realtà ce ne
+
+255
+00:11:12,100 --> 00:11:14,050
+sono anche altri c'è quello di pivotal
+
+256
+00:11:14,050 --> 00:11:16,150
+c'è quello di bienne che si basano loro
+
+257
+00:11:16,150 --> 00:11:17,650
+stessi su su che iniettive di
+
+258
+00:11:17,650 --> 00:11:21,250
+conseguenza tutte lo stack sotto ischio
+
+259
+00:11:21,250 --> 00:11:24,550
+cos'è praticamente è un agglomerato
+
+260
+00:11:24,550 --> 00:11:27,820
+diciamo degli strumenti che permettono
+
+261
+00:11:27,820 --> 00:11:30,970
+appunto tipo line voi è un proxy è un
+
+262
+00:11:30,970 --> 00:11:33,160
+sidecar che un proxy side e calcia un
+
+263
+00:11:33,160 --> 00:11:34,990
+container sidecar che quando io avvio un
+
+264
+00:11:34,990 --> 00:11:40,090
+container viene appunto viabilità
+
+265
+00:11:40,090 --> 00:11:43,990
+diciamo mi fa da passacarte tra la
+
+266
+00:11:43,990 --> 00:11:46,690
+chiamata al container dal poz susa te e
+
+267
+00:11:46,690 --> 00:11:48,700
+il contenere effettivo quindi veicolo al
+
+268
+00:11:48,700 --> 00:11:51,970
+traffico in sostanza poi c'è la pipe il
+
+269
+00:11:51,970 --> 00:11:55,360
+pilot che appunto propaga le regole per
+
+270
+00:11:55,360 --> 00:11:59,320
+verso i sidecar ci sono cioè il mixer il
+
+271
+00:11:59,320 --> 00:12:00,670
+sito adesso non tutti sono tutti
+
+272
+00:12:00,670 --> 00:12:03,370
+elementi che compongono appunto diciamo
+
+273
+00:12:03,370 --> 00:12:04,780
+ischia che permettono di raccogliere
+
+274
+00:12:04,780 --> 00:12:06,640
+metri che sulle esecuzioni per esempio
+
+275
+00:12:06,640 --> 00:12:08,170
+delle funzioni
+
+276
+00:12:08,170 --> 00:12:11,020
+via dicendo per fare la telemetria
+
+277
+00:12:11,020 --> 00:12:13,710
+per gestire l'autenticazione vide cello
+
+278
+00:12:13,710 --> 00:12:15,970
+allora i componenti di che imitino
+
+279
+00:12:15,970 --> 00:12:19,560
+appunto dicevamo sono sono tre bild e
+
+280
+00:12:19,560 --> 00:12:22,330
+serve per avere non è un sistema per
+
+281
+00:12:22,330 --> 00:12:24,100
+fare continui integration and delivery e
+
+282
+00:12:24,100 --> 00:12:25,990
+per fare appunto una build quindi io
+
+283
+00:12:25,990 --> 00:12:30,070
+posso dire dal mio codice lo versione su
+
+284
+00:12:30,070 --> 00:12:33,310
+un sistema diverso linga suscitando
+
+285
+00:12:33,310 --> 00:12:35,830
+quello che è e questo andrà a scatenare
+
+286
+00:12:35,830 --> 00:12:38,350
+che cosa l'esecuzione di una funzione
+
+287
+00:12:38,350 --> 00:12:40,810
+che mi esegue la bild la bild che può
+
+288
+00:12:40,810 --> 00:12:42,910
+essere sono i progetti java me ne può
+
+289
+00:12:42,910 --> 00:12:45,100
+essere la reazione l'artefatto può
+
+290
+00:12:45,100 --> 00:12:46,960
+essere qualsiasi cosa è come una sorta
+
+291
+00:12:46,960 --> 00:12:50,020
+di source to image di openshift per
+
+292
+00:12:50,020 --> 00:12:52,420
+esempio una funzionalità che bernini
+
+293
+00:12:52,420 --> 00:12:54,820
+speriamo che non aveva nativa mediante
+
+294
+00:12:54,820 --> 00:12:57,370
+questo questo componente è possibile
+
+295
+00:12:57,370 --> 00:12:59,830
+averla il sermig quello appunto del
+
+296
+00:12:59,830 --> 00:13:02,400
+serverless quindi esecuzioni di funzioni
+
+297
+00:13:02,400 --> 00:13:05,920
+ad invocate mediante chiamate http
+
+298
+00:13:05,920 --> 00:13:08,740
+quindi io faccio una chiamata http verso
+
+299
+00:13:08,740 --> 00:13:12,040
+la mia funzione e otterrò la risposta
+
+300
+00:13:12,040 --> 00:13:14,530
+della mia funzione e la parte di eventi
+
+301
+00:13:14,530 --> 00:13:17,140
+che invece che serve per appunto
+
+302
+00:13:17,140 --> 00:13:19,360
+disaccoppiare l'esecuzione di più
+
+303
+00:13:19,360 --> 00:13:22,240
+funzioni all'interno della mia del mio
+
+304
+00:13:22,240 --> 00:13:24,520
+contesto e per mandare appunto sistema
+
+305
+00:13:24,520 --> 00:13:29,410
+di per mandare dei messaggi su un basso
+
+306
+00:13:29,410 --> 00:13:31,810
+quindi che pure è un brooker non
+
+307
+00:13:31,810 --> 00:13:33,850
+tradizionale però un broker che poi a
+
+308
+00:13:33,850 --> 00:13:36,130
+sua volta è configurato per trigger all
+
+309
+00:13:36,130 --> 00:13:38,440
+esecuzione di altre funzioni e quindi
+
+310
+00:13:38,440 --> 00:13:40,360
+diciamo vanno a braccetto le componenti
+
+311
+00:13:40,360 --> 00:13:46,840
+serving ed eventi vado avanti
+
+312
+00:13:46,840 --> 00:13:48,460
+passò subito questa slide per cui vedete
+
+313
+00:13:48,460 --> 00:13:50,140
+che la parte building che ho fatto ha
+
+314
+00:13:50,140 --> 00:13:52,030
+detto molto velocemente
+
+315
+00:13:52,030 --> 00:13:53,890
+non c'è più nel senso del 20 agosto
+
+316
+00:13:53,890 --> 00:13:56,830
+l'hanno rimossa perché perché non aveva
+
+317
+00:13:56,830 --> 00:13:58,750
+tutte queste grandi potenzialità cioè
+
+318
+00:13:58,750 --> 00:14:01,810
+non era per intenderci per intenderci un
+
+319
+00:14:01,810 --> 00:14:05,020
+jenkins uno strumento per ottenere per
+
+320
+00:14:05,020 --> 00:14:07,150
+fare automation per eseguire delle build
+
+321
+00:14:07,150 --> 00:14:09,610
+e via dicendo era molto primitiva come
+
+322
+00:14:09,610 --> 00:14:12,340
+cosa era bella l'idea però è la
+
+323
+00:14:12,340 --> 00:14:14,529
+primitiva quindi
+
+324
+00:14:14,529 --> 00:14:16,990
+adesso si sta spostando la parte di
+
+325
+00:14:16,990 --> 00:14:18,490
+billing appunto è stata deprecata
+
+326
+00:14:18,490 --> 00:14:20,310
+addirittura è stata remo rimossa da
+
+327
+00:14:20,310 --> 00:14:23,350
+documentazione ed altro in favore di
+
+328
+00:14:23,350 --> 00:14:25,569
+tecton tecton pipe line che è un
+
+329
+00:14:25,569 --> 00:14:26,990
+progetto sempre di
+
+330
+00:14:26,990 --> 00:14:30,020
+di google nuovo che invece serve per
+
+331
+00:14:30,020 --> 00:14:32,779
+ottenere appunto insiste per usando il
+
+332
+00:14:32,779 --> 00:14:34,640
+sistema di build è vero e proprio quindi
+
+333
+00:14:34,640 --> 00:14:37,459
+con tutti i classici
+
+334
+00:14:37,459 --> 00:14:39,439
+con gli aneddoti vari annessi cioè
+
+335
+00:14:39,439 --> 00:14:42,620
+sistema di bill di tasche le run
+
+336
+00:14:42,620 --> 00:14:45,770
+un po come i vari jenkins ipossia ieri
+
+337
+00:14:45,770 --> 00:14:48,080
+dicendo però è specializzato a fare
+
+338
+00:14:48,080 --> 00:14:52,040
+quello non è un general purpose allora
+
+339
+00:14:52,040 --> 00:14:55,040
+500 di più sulla parte di fini ti servi
+
+340
+00:14:55,040 --> 00:14:57,100
+che è quella diciamo più interessante
+
+341
+00:14:57,100 --> 00:15:00,050
+quindi fine ti servi in cosa fa prova
+
+342
+00:15:00,050 --> 00:15:03,830
+fornisce un astrazione su kuber nate
+
+343
+00:15:03,830 --> 00:15:05,930
+super nitish fatta mediante appunto
+
+344
+00:15:05,930 --> 00:15:08,630
+queste estensioni che dicevamo c'è sono
+
+345
+00:15:08,630 --> 00:15:10,190
+state create tante cass congresso
+
+346
+00:15:10,190 --> 00:15:11,510
+definition
+
+347
+00:15:11,510 --> 00:15:15,590
+per ottenere questa esecuzione di
+
+348
+00:15:15,590 --> 00:15:21,790
+funzioni on demand come vi dicevo nella
+
+349
+00:15:21,790 --> 00:15:26,300
+quando io sviluppo una funzione che non
+
+350
+00:15:26,300 --> 00:15:28,580
+so mi fa una somma al suo banalizzo ma
+
+351
+00:15:28,580 --> 00:15:30,680
+somma mi fa una conversione di dato mi
+
+352
+00:15:30,680 --> 00:15:33,980
+segue un algoritmo così è questa questa
+
+353
+00:15:33,980 --> 00:15:36,700
+funzione cosa succede e viene invocata
+
+354
+00:15:36,700 --> 00:15:39,350
+dall'esterno nel senso classico per
+
+355
+00:15:39,350 --> 00:15:40,790
+esempio in cui vernice ci arriva
+
+356
+00:15:40,790 --> 00:15:42,890
+chiamata load balancer verrà girata
+
+357
+00:15:42,890 --> 00:15:44,510
+verso che cosa ci saranno degli ingressi
+
+358
+00:15:44,510 --> 00:15:46,250
+inglese gireranno verso il nostro
+
+359
+00:15:46,250 --> 00:15:49,430
+gateway che a rischio rischio riceverà
+
+360
+00:15:49,430 --> 00:15:51,590
+le informazioni della chiamata e girerà
+
+361
+00:15:51,590 --> 00:15:56,030
+verso il pod che tiene che sa che se non
+
+362
+00:15:56,030 --> 00:15:58,370
+esiste verrà avviato in quel momento ed
+
+363
+00:15:58,370 --> 00:16:00,530
+eseguirà la mia funzione quindi la
+
+364
+00:16:00,530 --> 00:16:02,690
+logica l'inter e questo in sostanza cioè
+
+365
+00:16:02,690 --> 00:16:06,050
+io faccio una chiamata http fa ingresso
+
+366
+00:16:06,050 --> 00:16:08,630
+gli stilisti o verifica
+
+367
+00:16:08,630 --> 00:16:11,270
+vediamo dopo come se c'è qualcuno in
+
+368
+00:16:11,270 --> 00:16:13,070
+grado di erogare quella richiesta se non
+
+369
+00:16:13,070 --> 00:16:14,420
+lo è andrà
+
+370
+00:16:14,420 --> 00:16:17,750
+il pod della funzione richiesta e mi
+
+371
+00:16:17,750 --> 00:16:24,190
+darà l'output benefici appunto
+
+372
+00:16:24,190 --> 00:16:27,050
+automatico e based activision scaling
+
+373
+00:16:27,050 --> 00:16:29,060
+quello che dicevo è se non esiste lui
+
+374
+00:16:29,060 --> 00:16:30,829
+avvia in quel momento il pod quindi di
+
+375
+00:16:30,829 --> 00:16:33,079
+conseguenza non ho uno spreco di risorse
+
+376
+00:16:33,079 --> 00:16:35,000
+tenendo tv servizio che magari viene
+
+377
+00:16:35,000 --> 00:16:36,649
+usato alla fine mese una volta al giorno
+
+378
+00:16:36,649 --> 00:16:40,910
+quindi solo è un demand a un sistema di
+
+379
+00:16:40,910 --> 00:16:43,670
+gestione delle configurazioni della
+
+380
+00:16:43,670 --> 00:16:45,550
+funzione e di
+
+381
+00:16:45,550 --> 00:16:47,890
+di roll back della funzione in caso ci
+
+382
+00:16:47,890 --> 00:16:49,660
+sia qualche problema quindi cosa succede
+
+383
+00:16:49,660 --> 00:16:51,970
+a fronte di una comito una modifica al
+
+384
+00:16:51,970 --> 00:16:54,070
+codice o della configurazione della
+
+385
+00:16:54,070 --> 00:16:56,140
+funzione viene generata in automatico
+
+386
+00:16:56,140 --> 00:16:59,260
+una revisione di quella funzione a cui
+
+387
+00:16:59,260 --> 00:17:01,899
+viene associato un identificativo che è
+
+388
+00:17:01,899 --> 00:17:03,250
+configurabile però diciamo
+
+389
+00:17:03,250 --> 00:17:05,170
+automaticamente lui dice ok la prima
+
+390
+00:17:05,170 --> 00:17:06,620
+versione è la
+
+391
+00:17:06,620 --> 00:17:09,290
+l'affaire sarà elisa e questa è la
+
+392
+00:17:09,290 --> 00:17:11,300
+revisione è immutabile
+
+393
+00:17:11,300 --> 00:17:12,860
+anche qui quindi sfrutta tutto il
+
+394
+00:17:12,860 --> 00:17:15,140
+concetto già presente in vernici è
+
+395
+00:17:15,140 --> 00:17:19,339
+immutabile la parte c'è possibilità di
+
+396
+00:17:19,339 --> 00:17:22,010
+fare uno split dal traffico delle
+
+397
+00:17:22,010 --> 00:17:26,559
+chiamate in basate su
+
+398
+00:17:26,919 --> 00:17:30,019
+percentuale di richieste piuttosto che
+
+399
+00:17:30,019 --> 00:17:33,409
+su del leader che arrivano degli
+
+400
+00:17:33,409 --> 00:17:35,000
+attributi che posso decidere quindi
+
+401
+00:17:35,000 --> 00:17:36,019
+posso dire
+
+402
+00:17:36,019 --> 00:17:37,880
+tengo due versioni per esempio della mia
+
+403
+00:17:37,880 --> 00:17:40,190
+funzione versione avercele b
+
+404
+00:17:40,190 --> 00:17:41,419
+supponiamo che sia un servizio a
+
+405
+00:17:41,419 --> 00:17:44,539
+pagamento posso decidere che chi ha un
+
+406
+00:17:44,539 --> 00:17:46,549
+determinato profilo riprenderà la
+
+407
+00:17:46,549 --> 00:17:48,019
+funzione a chi ha un altro profilo
+
+408
+00:17:48,019 --> 00:17:50,899
+prenderà la funzione di oppure posso
+
+409
+00:17:50,899 --> 00:17:52,880
+dire anche semplicemente nel modello
+
+410
+00:17:52,880 --> 00:17:54,620
+cannes ariccia posso dire un depero
+
+411
+00:17:54,620 --> 00:17:57,409
+posso fare un deployment continuo e man
+
+412
+00:17:57,409 --> 00:18:00,649
+mano di dirottare il traffico verso un
+
+413
+00:18:00,649 --> 00:18:03,049
+servizio o meglio un istanza della mia
+
+414
+00:18:03,049 --> 00:18:04,759
+funzione piuttosto che un'altra versione
+
+415
+00:18:04,759 --> 00:18:07,309
+della mia funzione oppure c'è anche
+
+416
+00:18:07,309 --> 00:18:08,750
+appunto blue green the prime e quindi
+
+417
+00:18:08,750 --> 00:18:11,360
+posso man mano switch aree dire la
+
+418
+00:18:11,360 --> 00:18:13,279
+versione 0 in questo momento ottiene
+
+419
+00:18:13,279 --> 00:18:15,919
+cento per cento del traffico nel momento
+
+420
+00:18:15,919 --> 00:18:17,809
+in cui de florio la mia nuova funzione
+
+421
+00:18:17,809 --> 00:18:20,750
+versione 2 posso dire dirottare il
+
+422
+00:18:20,750 --> 00:18:22,700
+traffico fino a che raggiunge lo zero
+
+423
+00:18:22,700 --> 00:18:24,200
+per cento la versione precedente in
+
+424
+00:18:24,200 --> 00:18:26,330
+sostanza quindi posso applicare tutte
+
+425
+00:18:26,330 --> 00:18:28,700
+queste logiche e poi a un controllo
+
+426
+00:18:28,700 --> 00:18:30,010
+appunto della
+
+427
+00:18:30,010 --> 00:18:32,700
+vale poi praticamente c'è possibilità di
+
+428
+00:18:32,700 --> 00:18:35,800
+far dialogare funzioni con altre
+
+429
+00:18:35,800 --> 00:18:39,190
+funzioni quindi sia in tre cluster
+
+430
+00:18:39,190 --> 00:18:41,320
+quindi senza esporre all'esterno oppure
+
+431
+00:18:41,320 --> 00:18:43,330
+esponendole direttamente come del game
+
+432
+00:18:43,330 --> 00:18:46,620
+point è raggiungibile pubblici diciamo
+
+433
+00:18:46,620 --> 00:18:51,280
+altra causa carina di gaynet e appunto
+
+434
+00:18:51,280 --> 00:18:52,990
+nella parte serving al fatto che si può
+
+435
+00:18:52,990 --> 00:18:56,020
+a dei componenti già presenti per il
+
+436
+00:18:56,020 --> 00:18:58,060
+monitoring e per il logging quindi posso
+
+437
+00:18:58,060 --> 00:19:02,980
+loggare su posso usare lo stack gfk
+
+438
+00:19:02,980 --> 00:19:07,030
+quindi o elastic settimana lobster o
+
+439
+00:19:07,030 --> 00:19:09,250
+altri elementi che magari ho già in casa
+
+440
+00:19:09,250 --> 00:19:14,080
+o sul mio classe kuber nitish altre cose
+
+441
+00:19:14,080 --> 00:19:16,150
+non vi e potrei dire accenno giacché per
+
+442
+00:19:16,150 --> 00:19:18,010
+esempio per la parte di metri che lui si
+
+443
+00:19:18,010 --> 00:19:22,180
+basa su si basa su gra fan e prometheus
+
+444
+00:19:22,180 --> 00:19:25,780
+in sostanza e poi va via elastic però
+
+445
+00:19:25,780 --> 00:19:27,340
+implacabile anche questo si possono
+
+446
+00:19:27,340 --> 00:19:30,100
+usare altri strumenti tipo stack driver
+
+447
+00:19:30,100 --> 00:19:33,309
+via dicendo quindi altamente
+
+448
+00:19:33,309 --> 00:19:35,919
+configurabile e customizzabile la
+
+449
+00:19:35,919 --> 00:19:38,350
+piattaforma da cosa è composto appunto
+
+450
+00:19:38,350 --> 00:19:40,830
+che nei team serving è composto da
+
+451
+00:19:40,830 --> 00:19:45,100
+quattro elementi fondamentali quindi c'è
+
+452
+00:19:45,100 --> 00:19:47,289
+una configuration che come dicevamo è lo
+
+453
+00:19:47,289 --> 00:19:51,840
+stato del servizio già posso definire
+
+454
+00:19:51,840 --> 00:19:56,380
+posso definire come deve essere come
+
+455
+00:19:56,380 --> 00:19:58,090
+come viene esposta la mia la mia
+
+456
+00:19:58,090 --> 00:20:00,340
+funzione effettivamente quindi è la
+
+457
+00:20:00,340 --> 00:20:03,070
+configurazione della funzione la
+
+458
+00:20:03,070 --> 00:20:04,510
+revisione che quella che dicevamo
+
+459
+00:20:04,510 --> 00:20:06,610
+appunto viene generata in automatico a
+
+460
+00:20:06,610 --> 00:20:10,240
+fronte di una change del codice o della
+
+461
+00:20:10,240 --> 00:20:13,390
+configurazione il rafting che è quello
+
+462
+00:20:13,390 --> 00:20:15,700
+che gli permette di appunto definire
+
+463
+00:20:15,700 --> 00:20:18,240
+come posso raggiungere la mia funzione
+
+464
+00:20:18,240 --> 00:20:21,190
+dall'esterno e poi c'è la parte di
+
+465
+00:20:21,190 --> 00:20:23,919
+service che è la fondamentale ed è
+
+466
+00:20:23,919 --> 00:20:25,419
+quello che gestisce tutto il ciclo di
+
+467
+00:20:25,419 --> 00:20:27,820
+vita di una funzione e che si occupa di
+
+468
+00:20:27,820 --> 00:20:29,620
+creare in automatico tutti gli altri
+
+469
+00:20:29,620 --> 00:20:31,900
+step quindi quelli che vi dicevo
+
+470
+00:20:31,900 --> 00:20:34,360
+configuration revisione rafting vengono
+
+471
+00:20:34,360 --> 00:20:37,059
+volendo vengono creati anzi di di forlì
+
+472
+00:20:37,059 --> 00:20:38,740
+il default e vengono creati in alto
+
+473
+00:20:38,740 --> 00:20:40,600
+alcune automatico dal service che è
+
+474
+00:20:40,600 --> 00:20:42,520
+l'unica cosa che lo sviluppatore in
+
+475
+00:20:42,520 --> 00:20:44,380
+teoria deve dichiarare quindi dichiarerà
+
+476
+00:20:44,380 --> 00:20:47,020
+nel service questo il nome della
+
+477
+00:20:47,020 --> 00:20:51,640
+funzione il namespace cui vorrà attivare
+
+478
+00:20:51,640 --> 00:20:55,539
+la funzione e basta la potenza a scusate
+
+479
+00:20:55,539 --> 00:20:57,880
+è l'immagine do perché contiene la mia
+
+480
+00:20:57,880 --> 00:20:59,590
+funzione al mio codice questo a loro
+
+481
+00:20:59,590 --> 00:21:02,650
+allora è l'obiettivo diciamo del service
+
+482
+00:21:02,650 --> 00:21:04,750
+è quello che gestiva il punto unico che
+
+483
+00:21:04,750 --> 00:21:07,780
+gestisce tutti gli altri le altre
+
+484
+00:21:07,780 --> 00:21:09,880
+componenti un polo mezzo del riassunto
+
+485
+00:21:09,880 --> 00:21:12,150
+tenetelo ben presente perché è
+
+486
+00:21:12,150 --> 00:21:14,610
+il punto chiave della xix funzionamento
+
+487
+00:21:14,610 --> 00:21:16,740
+di kinetic cioè sono sviluppatore
+
+488
+00:21:16,740 --> 00:21:18,870
+dichiara la sua funzione dove che vedete
+
+489
+00:21:18,870 --> 00:21:21,360
+nel grafico service ma i function questa
+
+490
+00:21:21,360 --> 00:21:23,100
+gestisce in automatico la configuration
+
+491
+00:21:23,100 --> 00:21:27,480
+il rafting la configuration a fronte di
+
+492
+00:21:27,480 --> 00:21:31,530
+un cambiamento va a generare dei record
+
+493
+00:21:31,530 --> 00:21:33,660
+punto ci sono delle revisioni immutabile
+
+494
+00:21:33,660 --> 00:21:35,880
+della funzione e rafting quello che
+
+495
+00:21:35,880 --> 00:21:39,080
+permette l'accesso alla funzione
+
+496
+00:21:39,080 --> 00:21:41,250
+dall'esterno e sostanze in realtà da
+
+497
+00:21:41,250 --> 00:21:43,980
+gateway in figura in sostanza un virtual
+
+498
+00:21:43,980 --> 00:21:46,640
+un virtual sinervis di rischio e
+
+499
+00:21:46,640 --> 00:21:49,860
+l'ingresso riceve la chiamata finisce a
+
+500
+00:21:49,860 --> 00:21:52,880
+liszt io liste lo giravamo alla funzione
+
+501
+00:21:52,880 --> 00:21:55,980
+non so se sono nato un po troppo nel
+
+502
+00:21:55,980 --> 00:22:00,690
+dettaglio 1 massimo seno se avete altre
+
+503
+00:22:00,690 --> 00:22:03,090
+domande volete vedere qualcosa di più o
+
+504
+00:22:03,090 --> 00:22:05,010
+se non vi è ben chiaro come questa
+
+505
+00:22:05,010 --> 00:22:05,940
+organizzazione
+
+506
+00:22:05,940 --> 00:22:10,200
+poi io sono qua allora vado diretto
+
+507
+00:22:10,200 --> 00:22:12,420
+quindi installazioni che in sé tve non
+
+508
+00:22:12,420 --> 00:22:15,810
+sto a spiegarvi a farvi tutto un pippone
+
+509
+00:22:15,810 --> 00:22:17,850
+in pratica basta andare sulla
+
+510
+00:22:17,850 --> 00:22:20,190
+documentazione ci sono tutti e tutte le
+
+511
+00:22:20,190 --> 00:22:22,620
+modalità di installazione a seconda del
+
+512
+00:22:22,620 --> 00:22:24,510
+vostro classica fuga uniti e la seconda
+
+513
+00:22:24,510 --> 00:22:26,640
+di dove è stato e via dicendo
+
+514
+00:22:26,640 --> 00:22:28,710
+si può decidere di installare solo
+
+515
+00:22:28,710 --> 00:22:30,480
+quello che serve perché come dicevamo è
+
+516
+00:22:30,480 --> 00:22:34,580
+composto da ormai due componenti serving
+
+517
+00:22:34,580 --> 00:22:36,890
+ed è venting più tutta la parte per
+
+518
+00:22:36,890 --> 00:22:38,600
+raccolta delle metriche via dicendo
+
+519
+00:22:38,600 --> 00:22:40,789
+posso decidere io cosa voglio usare
+
+520
+00:22:40,789 --> 00:22:43,580
+posso sul mio pc per fare le demo che
+
+521
+00:22:43,580 --> 00:22:44,570
+dopo vedremo
+
+522
+00:22:44,570 --> 00:22:46,519
+ad esempio messo solo a parte di serving
+
+523
+00:22:46,519 --> 00:22:49,070
+non mi sono installato da parte per il
+
+524
+00:22:49,070 --> 00:22:50,779
+monitoring via dicendo quindi posso
+
+525
+00:22:50,779 --> 00:22:52,519
+decidere di usare solo lo stack che
+
+526
+00:22:52,519 --> 00:22:55,669
+voglio e questo per esempio buono perché
+
+527
+00:22:55,669 --> 00:22:58,909
+così non introduco millemila elementi
+
+528
+00:22:58,909 --> 00:23:00,740
+che magari non lo so
+
+529
+00:23:00,740 --> 00:23:02,630
+vado subito una dimostrazione così
+
+530
+00:23:02,630 --> 00:23:04,789
+vedete un po come come funziona
+
+531
+00:23:04,789 --> 00:23:07,299
+effettivamente ho fatto un progettino
+
+532
+00:23:07,299 --> 00:23:09,970
+stupidissimo che prende praticamente
+
+533
+00:23:09,970 --> 00:23:12,679
+un'immagine luhr di un'immagine una
+
+534
+00:23:12,679 --> 00:23:15,260
+funzione scritta in road che usano la
+
+535
+00:23:15,260 --> 00:23:17,299
+libreria trasforma l'immagine nasce in
+
+536
+00:23:17,299 --> 00:23:20,450
+pratica e darà come output a lourdes è
+
+537
+00:23:20,450 --> 00:23:23,470
+l'immagine in formato ask in pratica
+
+538
+00:23:23,470 --> 00:23:26,830
+dopo le slide non so se le gireranno
+
+539
+00:23:26,830 --> 00:23:30,760
+diciamo che il repository a pubblico e
+
+540
+00:23:30,760 --> 00:23:32,590
+via dicendo vi faccio vedere come allora
+
+541
+00:23:32,590 --> 00:23:34,929
+è struttura come è strutturato il mio il
+
+542
+00:23:34,929 --> 00:23:37,910
+progetto ha una
+
+543
+00:23:37,910 --> 00:23:42,500
+un file che è una index.jsp il codice
+
+544
+00:23:42,500 --> 00:23:46,120
+che dice appunto cosa fa quella funzione
+
+545
+00:23:46,120 --> 00:23:48,530
+abbiamo detto subito all'inizio che il
+
+546
+00:23:48,530 --> 00:23:52,580
+serving espone le funzioni mediante http
+
+547
+00:23:52,580 --> 00:23:56,690
+quindi incline tve la funzione deve
+
+548
+00:23:56,690 --> 00:23:58,550
+esporre deve essere deve avere nel point
+
+549
+00:23:58,550 --> 00:24:01,130
+http quindi e questo è un po la
+
+550
+00:24:01,130 --> 00:24:02,750
+differenza rispetto ad altri prodotti
+
+551
+00:24:02,750 --> 00:24:05,060
+tipo pensasse via dicendo
+
+552
+00:24:05,060 --> 00:24:06,410
+e quindi avrò il mio la mia funzione
+
+553
+00:24:06,410 --> 00:24:08,390
+composta da deve esporre un servizio
+
+554
+00:24:08,390 --> 00:24:13,190
+rest http che una volta invocato va a
+
+555
+00:24:13,190 --> 00:24:16,670
+eseguire da eseguire l'ala quello che
+
+556
+00:24:16,670 --> 00:24:19,550
+gli ho detto di fare uno yambol un file
+
+557
+00:24:19,550 --> 00:24:22,370
+amor che è quello che dichiara il sen
+
+558
+00:24:22,370 --> 00:24:24,620
+il service appunto di kenneth cole che
+
+559
+00:24:24,620 --> 00:24:26,360
+dicevamo prima è il dottor fi che mi
+
+560
+00:24:26,360 --> 00:24:27,710
+serve per produrre l'immagine da
+
+561
+00:24:27,710 --> 00:24:30,260
+pubblicare su registri sul dock era blu
+
+562
+00:24:30,260 --> 00:24:32,510
+quello che volete in sostanza quindi
+
+563
+00:24:32,510 --> 00:24:34,730
+cosa che verrà fatto verrà bill data
+
+564
+00:24:34,730 --> 00:24:37,310
+l'immagine usata l'immagine su regis io
+
+565
+00:24:37,310 --> 00:24:38,810
+ho già fatto per problemi di tempo
+
+566
+00:24:38,810 --> 00:24:40,490
+perché aveva detto magari non funziona
+
+567
+00:24:40,490 --> 00:24:42,890
+dove la rete della rete quindi diciamo
+
+568
+00:24:42,890 --> 00:24:45,800
+che usciate sottoposi tori e gli faccio
+
+569
+00:24:45,800 --> 00:24:49,160
+vedere che cosa succede
+
+570
+00:24:49,160 --> 00:24:51,770
+anzi prima facciamo qui faccio vedere
+
+571
+00:24:51,770 --> 00:24:53,870
+prima il service e yambol da cosa è
+
+572
+00:24:53,870 --> 00:24:56,300
+composto vedete che non sono tante tante
+
+573
+00:24:56,300 --> 00:24:58,400
+righe chiaramente una versione minimale
+
+574
+00:24:58,400 --> 00:25:00,380
+non gli ho fatto non ho definito la
+
+575
+00:25:00,380 --> 00:25:01,810
+modalità di gestione del traffico
+
+576
+00:25:01,810 --> 00:25:04,610
+d'altro e proprio minimal e minimale
+
+577
+00:25:04,610 --> 00:25:07,850
+però dichiaro appunto tramite le custom
+
+578
+00:25:07,850 --> 00:25:10,010
+e sul definisce non ce n'è una appunto
+
+579
+00:25:10,010 --> 00:25:11,360
+fatta di che nei team che si chiama
+
+580
+00:25:11,360 --> 00:25:14,090
+service o dei metadati in cui da un
+
+581
+00:25:14,090 --> 00:25:16,850
+numero la funzione di chiaro quale la
+
+582
+00:25:16,850 --> 00:25:21,230
+spesa su cui fare il deployment di
+
+583
+00:25:21,230 --> 00:25:23,300
+default è in pratica e qual è l'immagine
+
+584
+00:25:23,300 --> 00:25:27,550
+da utilizzare per deplorare
+
+585
+00:25:27,550 --> 00:25:30,920
+l'applicazione non non ho neanche dagli
+
+586
+00:25:30,920 --> 00:25:33,260
+strumenti aggiuntivi rispetto se uno
+
+587
+00:25:33,260 --> 00:25:34,640
+abituato a utilizzare cooper mitis
+
+588
+00:25:34,640 --> 00:25:37,070
+l'acli e la stessa cioè dalla stessa dal
+
+589
+00:25:37,070 --> 00:25:40,280
+qb ctl riesco a fare tutte le operazioni
+
+590
+00:25:40,280 --> 00:25:42,680
+lavorare con con quei metri senza avere
+
+591
+00:25:42,680 --> 00:25:46,520
+un ulteriore li dedicata quindi anche lì
+
+592
+00:25:46,520 --> 00:25:49,040
+non c'è uno stravolgimento nella
+
+593
+00:25:49,040 --> 00:25:51,320
+modalità nell operatività diciamo di una
+
+594
+00:25:51,320 --> 00:25:53,720
+di un gruppo che ha abituato utilizzare
+
+595
+00:25:53,720 --> 00:25:55,910
+cooper nitish questo il comando appunto
+
+596
+00:25:55,910 --> 00:25:57,980
+per applicare la classico come si fa
+
+597
+00:25:57,980 --> 00:25:59,690
+accesso in the promesso cooper niti si
+
+598
+00:25:59,690 --> 00:26:06,130
+identico e andiamo a vedere cosa succede
+
+599
+00:26:06,130 --> 00:26:09,580
+non si riprende più
+
+600
+00:26:11,610 --> 00:26:16,220
+si vede o un gran disco un po
+
+601
+00:26:19,840 --> 00:26:29,880
+ok quindi facciamo ctl sociale
+
+602
+00:26:31,270 --> 00:26:34,270
+adesso non andrà più niente di sicuro
+
+603
+00:26:34,270 --> 00:26:36,520
+allora cosa succede praticamente io vado
+
+604
+00:26:36,520 --> 00:26:40,000
+a vedere cosa è successo
+
+605
+00:26:40,000 --> 00:26:41,560
+questo era un esempio che avevo già
+
+606
+00:26:41,560 --> 00:26:43,540
+preparato prima però diciamo quello che
+
+607
+00:26:43,540 --> 00:26:45,100
+ci interessa noi qua sono con questo
+
+608
+00:26:45,100 --> 00:26:47,410
+comando ottengo tutti i cani team
+
+609
+00:26:47,410 --> 00:26:49,540
+service presenti sul mio cluster è un
+
+610
+00:26:49,540 --> 00:26:53,050
+mini food attualissimo adesso nessuna
+
+611
+00:26:53,050 --> 00:26:55,660
+pochissima rame tutto solo giusto per
+
+612
+00:26:55,660 --> 00:26:57,640
+fare una prova quindi vedete che ho la
+
+613
+00:26:57,640 --> 00:27:00,550
+mia funzione deplorata un url che è
+
+614
+00:27:00,550 --> 00:27:03,460
+quello per poterla invocare quando è
+
+615
+00:27:03,460 --> 00:27:05,470
+stata creata e lo stato
+
+616
+00:27:05,470 --> 00:27:10,210
+quindi se è attiva 1 ora cosa cosa
+
+617
+00:27:10,210 --> 00:27:10,750
+facciamo
+
+618
+00:27:10,750 --> 00:27:15,580
+in pratica questa questa questa questa
+
+619
+00:27:15,580 --> 00:27:18,070
+questo deployment andata è andato a fare
+
+620
+00:27:18,070 --> 00:27:20,590
+cosa il service che ho deplorato si è
+
+621
+00:27:20,590 --> 00:27:22,150
+andato a creare quello che vi dicevo c'è
+
+622
+00:27:22,150 --> 00:27:25,510
+il rafting su che ntv la configurazione
+
+623
+00:27:25,510 --> 00:27:27,940
+in che i netiv la revisione quindi gli
+
+624
+00:27:27,940 --> 00:27:30,070
+sarà stato associato in sostanza una
+
+625
+00:27:30,070 --> 00:27:33,190
+debole immutabile applica al kuber
+
+626
+00:27:33,190 --> 00:27:35,290
+difese deployment effettivo e designer
+
+627
+00:27:35,290 --> 00:27:36,730
+anche al cube riti service perché
+
+628
+00:27:36,730 --> 00:27:38,740
+comunque gli serve nel senso è integrato
+
+629
+00:27:38,740 --> 00:27:41,290
+in cui unitis quindi il service deve
+
+630
+00:27:41,290 --> 00:27:44,440
+esistere in più e genera appunto quello
+
+631
+00:27:44,440 --> 00:27:46,750
+che si chiama virtual service di rischio
+
+632
+00:27:46,750 --> 00:27:48,870
+per poter veicolare il traffico dal
+
+633
+00:27:48,870 --> 00:27:53,520
+rischio verso la verso la funzione
+
+634
+00:27:53,820 --> 00:27:56,590
+allora qua lo avevo messo alcuni comandi
+
+635
+00:27:56,590 --> 00:27:58,360
+per per vedere quello che abbiamo visto
+
+636
+00:27:58,360 --> 00:27:59,890
+adesso quindi come si vede lo stato
+
+637
+00:27:59,890 --> 00:28:03,730
+della funzione cosa cosa succede
+
+638
+00:28:03,730 --> 00:28:08,640
+e allora come fu detto scusate torno qui
+
+639
+00:28:08,640 --> 00:28:12,010
+quindi se io volessi andare a chiamare
+
+640
+00:28:12,010 --> 00:28:15,310
+appunto la mia funzione farò una curva
+
+641
+00:28:15,310 --> 00:28:16,990
+andiamo se ce l'ho né agli storiche
+
+642
+00:28:16,990 --> 00:28:19,710
+dovrebbe esserci
+
+643
+00:28:21,150 --> 00:28:25,870
+se tipo questa gli do non è da
+
+644
+00:28:25,870 --> 00:28:27,760
+sviluppatore sto passando tutto indietro
+
+645
+00:28:27,760 --> 00:28:30,330
+fatta proprio così per provare
+
+646
+00:28:30,330 --> 00:28:32,740
+l'indirizzo della mia funzione lourdes
+
+647
+00:28:32,740 --> 00:28:36,130
+in funzione il parametro che gli passò
+
+648
+00:28:36,130 --> 00:28:37,870
+quindi lourdes andare a scaricare in
+
+649
+00:28:37,870 --> 00:28:39,730
+pratica prenderà l'immagine la
+
+650
+00:28:39,730 --> 00:28:41,470
+scaricherà e poi eseguire la conversione
+
+651
+00:28:41,470 --> 00:28:45,580
+mediante una libreria viene fuori una
+
+652
+00:28:45,580 --> 00:28:47,680
+cosa bruttissima però fa capire
+
+653
+00:28:47,680 --> 00:28:49,720
+vedete che ci vuole del tempo perché
+
+654
+00:28:49,720 --> 00:28:51,250
+perché in questo momento li stava
+
+655
+00:28:51,250 --> 00:28:53,620
+avviando il pod perche non c'era nessuna
+
+656
+00:28:53,620 --> 00:28:55,420
+istanza attiva di quella funzione quindi
+
+657
+00:28:55,420 --> 00:28:58,840
+al primo alla prima chiamata la funzione
+
+658
+00:28:58,840 --> 00:29:01,450
+viene viene verificata l'esistenza una
+
+659
+00:29:01,450 --> 00:29:03,850
+funzione la risposta sarà no non esiste
+
+660
+00:29:03,850 --> 00:29:06,220
+quindi verrà avviato l'auto scheler
+
+661
+00:29:06,220 --> 00:29:09,100
+l'auto scaler andrà avviare il food e in
+
+662
+00:29:09,100 --> 00:29:12,910
+quel momento verrà rigirata l'effettiva
+
+663
+00:29:12,910 --> 00:29:14,890
+richiesta alla mia funzione che poi mi
+
+664
+00:29:14,890 --> 00:29:15,700
+darai output
+
+665
+00:29:15,700 --> 00:29:18,070
+da questo momento in poi essendo già
+
+666
+00:29:18,070 --> 00:29:20,590
+stata avviata le chiamate successive
+
+667
+00:29:20,590 --> 00:29:23,020
+saranno istantanee perché al podio già
+
+668
+00:29:23,020 --> 00:29:26,920
+attivo cosa succede in pratica ora col
+
+669
+00:29:26,920 --> 00:29:29,140
+passare del tempo è configurabile il
+
+670
+00:29:29,140 --> 00:29:33,010
+default sia 90 secondi o due minuti il
+
+671
+00:29:33,010 --> 00:29:33,490
+pod
+
+672
+00:29:33,490 --> 00:29:36,850
+cosa fa allora è gestito da un elemento
+
+673
+00:29:36,850 --> 00:29:38,950
+da un elemento presente all'interno di
+
+674
+00:29:38,950 --> 00:29:40,450
+qinetiq che verifica il numero di
+
+675
+00:29:40,450 --> 00:29:44,310
+richieste che arrivano alla funzione al
+
+676
+00:29:44,310 --> 00:29:48,910
+default 100 richieste http per poi nel
+
+677
+00:29:48,910 --> 00:29:51,430
+momento in cui lui vede che arrivano
+
+678
+00:29:51,430 --> 00:29:53,920
+stanno arrivando 80 richieste e lui
+
+679
+00:29:53,920 --> 00:29:55,930
+inizia a prepararsi a prepararsi a fare
+
+680
+00:29:55,930 --> 00:29:57,940
+un'auto scaling del pod di quella
+
+681
+00:29:57,940 --> 00:29:59,800
+funzione per prepararsi a un carico
+
+682
+00:29:59,800 --> 00:30:02,740
+maggiore la stessa cosa viene fatta
+
+683
+00:30:02,740 --> 00:30:04,300
+anche in fase di schede dow quindi
+
+684
+00:30:04,300 --> 00:30:06,370
+quando vede che le chiamate diminuiscono
+
+685
+00:30:06,370 --> 00:30:09,190
+lui inizia a scalare a diminuire il
+
+686
+00:30:09,190 --> 00:30:12,130
+numero dei pod esistenti se non avevano
+
+687
+00:30:12,130 --> 00:30:15,670
+più chiamate per due minuti lui inizierà
+
+688
+00:30:15,670 --> 00:30:16,960
+a fare del termine
+
+689
+00:30:16,960 --> 00:30:19,210
+a killare podi in pratica lo termina e
+
+690
+00:30:19,210 --> 00:30:21,100
+quindi la mia funzione ripartirà da zero
+
+691
+00:30:21,100 --> 00:30:23,860
+e alla chiamata successivo la prima
+
+692
+00:30:23,860 --> 00:30:25,149
+chiamata sarà un po più di niente
+
+693
+00:30:25,149 --> 00:30:30,700
+in sostanza allora fa avevo messo dei
+
+694
+00:30:30,700 --> 00:30:34,059
+piccoli dettagli per verificare per
+
+695
+00:30:34,059 --> 00:30:36,399
+vedere appunto come chiamare la funzione
+
+696
+00:30:36,399 --> 00:30:38,320
+perché nelle guide di kenneth ive
+
+697
+00:30:38,320 --> 00:30:41,919
+trovate in comando né che ataf iata
+
+698
+00:30:41,919 --> 00:30:43,510
+prevede per farvi vedere come si
+
+699
+00:30:43,510 --> 00:30:46,600
+invocano le funzioni perché perché in un
+
+700
+00:30:46,600 --> 00:30:49,090
+cluster che non è settato correttamente
+
+701
+00:30:49,090 --> 00:30:53,280
+quindi non ho dns che risolve lone all
+
+702
+00:30:53,280 --> 00:30:56,610
+non all come si chiama un indirizzo
+
+703
+00:30:56,610 --> 00:31:00,180
+esterno cosa succede io qua con questo
+
+704
+00:31:00,180 --> 00:31:03,630
+comando per vado verificare qual è il
+
+705
+00:31:03,630 --> 00:31:05,730
+cluster i cluster alpi nel cassare
+
+706
+00:31:05,730 --> 00:31:07,920
+biblicamente l'indirizzo del nostro del
+
+707
+00:31:07,920 --> 00:31:10,320
+nostro in streaming in gran segreto e
+
+708
+00:31:10,320 --> 00:31:12,060
+cioè quello che riceve poi lerca le
+
+709
+00:31:12,060 --> 00:31:14,310
+chiamate e poi vedete che ha una porta
+
+710
+00:31:14,310 --> 00:31:16,740
+80 non porta che aveva mappa poi
+
+711
+00:31:16,740 --> 00:31:20,190
+sull'a310 39 se come nel mini cube è
+
+712
+00:31:20,190 --> 00:31:22,260
+anche la mia situazione locale non solo
+
+713
+00:31:22,260 --> 00:31:24,330
+external ip quindi praticamente cosa
+
+714
+00:31:24,330 --> 00:31:26,220
+fatta usato il mini più tanner che una
+
+715
+00:31:26,220 --> 00:31:28,740
+funzione che mappa le chiamate hth
+
+716
+00:31:28,740 --> 00:31:32,250
+traverso la 80 da 443 verso la solista
+
+717
+00:31:32,250 --> 00:31:34,080
+in questo caso verso il punto di
+
+718
+00:31:34,080 --> 00:31:37,410
+ingresso e siccome non ho bns ho fatto
+
+719
+00:31:37,410 --> 00:31:39,870
+ho preso il nome della mia funzione e lo
+
+720
+00:31:39,870 --> 00:31:43,200
+mappato un lippi della del mini cube
+
+721
+00:31:43,200 --> 00:31:44,910
+però è chiaro che queste sono cose che
+
+722
+00:31:44,910 --> 00:31:47,820
+non riguardano chi sviluppa ma super
+
+723
+00:31:47,820 --> 00:31:49,500
+eto'o al cern e soffitti propri chiti
+
+724
+00:31:49,500 --> 00:31:51,210
+predispone ai cluster lui che si va a
+
+725
+00:31:51,210 --> 00:31:53,040
+occupare di questa parte è tutta
+
+726
+00:31:53,040 --> 00:31:55,980
+documentata però diciamo è una cosa che
+
+727
+00:31:55,980 --> 00:31:58,170
+si è uno sviluppatore verso e vedere che
+
+728
+00:31:58,170 --> 00:32:01,440
+ne deve provarlo quando vede questa cosa
+
+729
+00:32:01,440 --> 00:32:03,480
+qua dice come fatto imbucare la mia
+
+730
+00:32:03,480 --> 00:32:06,900
+funzione si spaventa perché dice ho
+
+731
+00:32:06,900 --> 00:32:09,000
+bisogno di passargli un'idea che si
+
+732
+00:32:09,000 --> 00:32:10,950
+chiama sponente numera funzione poi
+
+733
+00:32:10,950 --> 00:32:13,770
+chiamare l'indirizzo del caso del mini
+
+734
+00:32:13,770 --> 00:32:17,110
+cube lippi del mini cube la porta nel
+
+735
+00:32:17,110 --> 00:32:19,840
+naismith way e poi i parametri che
+
+736
+00:32:19,840 --> 00:32:22,330
+servono mia funzione cioè da matti
+
+737
+00:32:22,330 --> 00:32:25,450
+allora praticamente diciamo 6 cast
+
+738
+00:32:25,450 --> 00:32:28,320
+vernici è configurato correttamente
+
+739
+00:32:28,320 --> 00:32:31,270
+risolvo il tutto usando appunto il dns
+
+740
+00:32:31,270 --> 00:32:33,610
+l'ex tra le pi e via dicendo e ottengo
+
+741
+00:32:33,610 --> 00:32:35,140
+la mia chiamata molto più semplice
+
+742
+00:32:35,140 --> 00:32:39,429
+diretta con una curva questo ad esempio
+
+743
+00:32:39,429 --> 00:32:44,679
+che vi ho fatto vedere allora questo è
+
+744
+00:32:44,679 --> 00:32:47,890
+un questo grafico fa vedere appunto il
+
+745
+00:32:47,890 --> 00:32:49,870
+flusso di cosa succede a fronte di una
+
+746
+00:32:49,870 --> 00:32:52,419
+chiamata quello che lo ripeto quindi
+
+747
+00:32:52,419 --> 00:32:54,850
+arriva una chiamata dell'esterno viene
+
+748
+00:32:54,850 --> 00:32:58,330
+girata verso verso rischio gli skill
+
+749
+00:32:58,330 --> 00:33:02,020
+cosa fa verifica se la rotta e attiva o
+
+750
+00:33:02,020 --> 00:33:03,070
+inattiva
+
+751
+00:33:03,070 --> 00:33:05,440
+quindi si è già presente oppure no se
+
+752
+00:33:05,440 --> 00:33:08,260
+attiva girerà la chiamata verso il podda
+
+753
+00:33:08,260 --> 00:33:10,150
+perché la funzione c'è già e siamo tutte
+
+754
+00:33:10,150 --> 00:33:12,400
+a posto se non è attiva chiamerà un
+
+755
+00:33:12,400 --> 00:33:14,020
+componente che si chiama activator che
+
+756
+00:33:14,020 --> 00:33:17,320
+andrà ad attivare la revisione attivare
+
+757
+00:33:17,320 --> 00:33:21,100
+di questa funzione e dopo praticamente
+
+758
+00:33:21,100 --> 00:33:25,660
+mi darà indietro la risposta se arrivano
+
+759
+00:33:25,660 --> 00:33:27,880
+dovessero arrivare tante chiamate con il
+
+760
+00:33:27,880 --> 00:33:29,950
+carico appunto che è specifica bile di
+
+761
+00:33:29,950 --> 00:33:32,860
+default il parlo dopo diciamo se dovesse
+
+762
+00:33:32,860 --> 00:33:34,240
+arrivare tante chiamate cosa verrà fatto
+
+763
+00:33:34,240 --> 00:33:35,950
+verrà chiamato praticamente l'auto
+
+764
+00:33:35,950 --> 00:33:38,110
+scaler per andare ad incrementare il
+
+765
+00:33:38,110 --> 00:33:41,650
+numero di stanze di quella funzione e
+
+766
+00:33:41,650 --> 00:33:43,780
+e via dicendo in pratica otterrò poi la
+
+767
+00:33:43,780 --> 00:33:46,960
+mia risposta è un po complesso giro
+
+768
+00:33:46,960 --> 00:33:48,760
+questo però il giro architetturale che
+
+769
+00:33:48,760 --> 00:33:50,560
+c'è all'interno è bene sapere come
+
+770
+00:33:50,560 --> 00:33:53,560
+funziona che quando ci si castra non
+
+771
+00:33:53,560 --> 00:33:55,420
+tanto per chi sviluppa chi per chi
+
+772
+00:33:55,420 --> 00:33:57,070
+magari fa più la lo segue più la parte
+
+773
+00:33:57,070 --> 00:33:59,620
+da boxe è bene sapere come la come
+
+774
+00:33:59,620 --> 00:34:04,810
+funziona poi internamente una piccola un
+
+775
+00:34:04,810 --> 00:34:09,040
+picco diciamo trucchetti nochè e deriva
+
+776
+00:34:09,040 --> 00:34:10,510
+dal fatto che come avete visto questa
+
+777
+00:34:10,510 --> 00:34:12,669
+funzione cosa fa riceve un url la mia
+
+778
+00:34:12,669 --> 00:34:14,200
+funzione deve andare a scaricare l'url e
+
+779
+00:34:14,200 --> 00:34:18,159
+poi convertirla il default inizio in che
+
+780
+00:34:18,159 --> 00:34:21,940
+nei team prevede che gli stia controlla
+
+781
+00:34:21,940 --> 00:34:23,380
+tutto il traffico in ingresso e in
+
+782
+00:34:23,380 --> 00:34:25,659
+uscita dal cluster quindi la
+
+783
+00:34:25,659 --> 00:34:28,899
+configurazione degli di fondi screen che
+
+784
+00:34:28,899 --> 00:34:30,669
+i meeting prevede appunto di
+
+785
+00:34:30,669 --> 00:34:31,929
+intercettare tutto il traffico in
+
+786
+00:34:31,929 --> 00:34:33,340
+ingresso e uscita se voi fate una
+
+787
+00:34:33,340 --> 00:34:34,659
+chiamata dalla vostra funzione verso
+
+788
+00:34:34,659 --> 00:34:36,820
+internet vida picche non andata nessuna
+
+789
+00:34:36,820 --> 00:34:37,780
+parte
+
+790
+00:34:37,780 --> 00:34:40,390
+quindi è una cosa configurabile che si
+
+791
+00:34:40,390 --> 00:34:42,520
+può definire nella nel appunto in una
+
+792
+00:34:42,520 --> 00:34:45,250
+coppia di q per l'itis che si chiama
+
+793
+00:34:45,250 --> 00:34:47,290
+config network all'interno delle space
+
+794
+00:34:47,290 --> 00:34:49,840
+dove sono stati tutti i servizi di
+
+795
+00:34:49,840 --> 00:34:53,220
+gaynet eve in cui gli dissi definisce
+
+796
+00:34:53,220 --> 00:34:57,520
+cosa è che deve controllare ischio nello
+
+797
+00:34:57,520 --> 00:35:00,460
+specifico il side car isti ho montato
+
+798
+00:35:00,460 --> 00:35:03,490
+nelle funzioni che vengono avviate e
+
+799
+00:35:03,490 --> 00:35:07,540
+quindi gli darò il set di network dal
+
+800
+00:35:07,540 --> 00:35:09,520
+mio cluster o degli indirizzi che voglio
+
+801
+00:35:09,520 --> 00:35:11,890
+far gestire a rischio e lasciando fuori
+
+802
+00:35:11,890 --> 00:35:13,600
+per esempio le chiamate verso internet
+
+803
+00:35:13,600 --> 00:35:14,730
+cos'altro
+
+804
+00:35:14,730 --> 00:35:16,810
+questo è un piccolo hanno piccole cose
+
+805
+00:35:16,810 --> 00:35:18,040
+che diciamo miss con cui mi sono
+
+806
+00:35:18,040 --> 00:35:19,990
+scontrato quando preparato le lingue che
+
+807
+00:35:19,990 --> 00:35:22,210
+quando l'ho vista toby le sentiamo uno
+
+808
+00:35:22,210 --> 00:35:24,310
+che magari può venire aiuto in aiuto a
+
+809
+00:35:24,310 --> 00:35:26,380
+qualcuno vi faccio vedere un'altra
+
+810
+00:35:26,380 --> 00:35:28,630
+un altro esempio velocissimo questo è
+
+811
+00:35:28,630 --> 00:35:30,820
+qual composto da sono due applicazioni
+
+812
+00:35:30,820 --> 00:35:33,340
+una di front end che andrà a chiamare
+
+813
+00:35:33,340 --> 00:35:34,530
+una funzione
+
+814
+00:35:34,530 --> 00:35:38,430
+di back end scritta appunto in python
+
+815
+00:35:38,430 --> 00:35:40,560
+usando tensor flow per fare un
+
+816
+00:35:40,560 --> 00:35:43,080
+riconoscimento un riconoscimento delle
+
+817
+00:35:43,080 --> 00:35:45,390
+immagini è un modello che non ho frenato
+
+818
+00:35:45,390 --> 00:35:48,330
+tantissimo quindi fa un modello diciamo
+
+819
+00:35:48,330 --> 00:35:51,720
+di apprendimento non non ultra skillato
+
+820
+00:35:51,720 --> 00:35:53,250
+però in grado di riconoscere più o meno
+
+821
+00:35:53,250 --> 00:35:57,930
+5 6mila categoria gli oggetti come fatta
+
+822
+00:35:57,930 --> 00:36:00,090
+la funzione praticamente stessa cosa ve
+
+823
+00:36:00,090 --> 00:36:05,700
+l'ho usata sul mio repository di tab usa
+
+824
+00:36:05,700 --> 00:36:08,040
+paitone tensor flow riceve espone sempre
+
+825
+00:36:08,040 --> 00:36:10,080
+anche lei una chiama un servizio rest
+
+826
+00:36:10,080 --> 00:36:12,120
+questo servizio ad essa riceve
+
+827
+00:36:12,120 --> 00:36:14,310
+l'immagine da scaricare scarica
+
+828
+00:36:14,310 --> 00:36:16,500
+l'immagine e poi dopo esegue texture
+
+829
+00:36:16,500 --> 00:36:18,120
+clos per andare a fare riconoscimento
+
+830
+00:36:18,120 --> 00:36:19,830
+delle immagini è un uso è una
+
+831
+00:36:19,830 --> 00:36:21,450
+dimostrazione di un'applicazione per
+
+832
+00:36:21,450 --> 00:36:25,310
+esempio del sed lex computing
+
+833
+00:36:25,310 --> 00:36:28,110
+cosa succede in pratica quanto ci andrò
+
+834
+00:36:28,110 --> 00:36:30,150
+a prendere un immagine tipo di una di un
+
+835
+00:36:30,150 --> 00:36:33,780
+bue e chiamerò la mia funzione la mia
+
+836
+00:36:33,780 --> 00:36:35,490
+funzione mi aspetto che torni 1
+
+837
+00:36:35,490 --> 00:36:39,330
+schooling nella dal dl sulla sulla
+
+838
+00:36:39,330 --> 00:36:41,640
+categoria sull'oggetto che io ho dato da
+
+839
+00:36:41,640 --> 00:36:43,530
+processare in questo caso dovrebbe
+
+840
+00:36:43,530 --> 00:36:46,050
+tornare questa cosa qui quindi dieci
+
+841
+00:36:46,050 --> 00:36:48,570
+nomi che il bue a c è un bel 58 per
+
+842
+00:36:48,570 --> 00:36:49,490
+cento
+
+843
+00:36:49,490 --> 00:36:53,630
+andiamo a vedere se funziona davvero
+
+844
+00:36:53,870 --> 00:36:56,670
+allora prima di tutto la de florio non
+
+845
+00:36:56,670 --> 00:36:59,000
+ce l'ho
+
+846
+00:37:09,280 --> 00:37:13,140
+ok adesso ha ovviamente si può avere
+
+847
+00:37:13,140 --> 00:37:15,760
+andiamo senso al tempo si dai tanto
+
+848
+00:37:15,760 --> 00:37:18,450
+viene cominciato in ritardo
+
+849
+00:37:22,019 --> 00:37:25,240
+ovviamente ho tutto o tutto lo stack per
+
+850
+00:37:25,240 --> 00:37:27,549
+verificare a 4 altro non riusciva a
+
+851
+00:37:27,549 --> 00:37:30,099
+beccare la configurazione aggiornata poi
+
+852
+00:37:30,099 --> 00:37:31,630
+dopo l'ha fatto
+
+853
+00:37:31,630 --> 00:37:33,700
+o tutto lo stack per verificare appunto
+
+854
+00:37:33,700 --> 00:37:35,890
+cosa fa la funzione quindi da qua riesco
+
+855
+00:37:35,890 --> 00:37:38,740
+a vedere che era outing ha creato e via
+
+856
+00:37:38,740 --> 00:37:40,509
+dicendo quindi chi devo gestisce in
+
+857
+00:37:40,509 --> 00:37:42,430
+grado di vedere se la funzione è stata
+
+858
+00:37:42,430 --> 00:37:44,859
+affiliata correttamente oppure no e
+
+859
+00:37:44,859 --> 00:37:48,089
+perché magari ha fallito un qualcosa
+
+860
+00:37:48,089 --> 00:37:50,259
+allora dicevamo quindi ho deplorato la
+
+861
+00:37:50,259 --> 00:37:51,670
+mia funziona la sua faccia solo una
+
+862
+00:37:51,670 --> 00:37:55,589
+curva verso la mia funzione
+
+863
+00:37:57,490 --> 00:38:00,050
+ok questo parabola del bue
+
+864
+00:38:00,050 --> 00:38:01,900
+quindi lui andrà a scaricare l'immagine
+
+865
+00:38:01,900 --> 00:38:04,790
+poi usato gpu per passare l'auto del
+
+866
+00:38:04,790 --> 00:38:07,040
+jason abbia uno strumento a command line
+
+867
+00:38:07,040 --> 00:38:11,090
+utile equa all oscuri nella mia funzione
+
+868
+00:38:11,090 --> 00:38:13,820
+eseguite cosa succede se fa vado a
+
+869
+00:38:13,820 --> 00:38:18,170
+vedere gli modo avviate vedete che ho la
+
+870
+00:38:18,170 --> 00:38:20,570
+mia funzione che era anning in pratica
+
+871
+00:38:20,570 --> 00:38:23,300
+perché appena stata chiamata lo
+
+872
+00:38:23,300 --> 00:38:25,670
+rivedremo fra un paio di minuti che
+
+873
+00:38:25,670 --> 00:38:27,530
+probabilmente sarei stato termine things
+
+874
+00:38:27,530 --> 00:38:29,060
+e non ho fatto altre chiamate vedete che
+
+875
+00:38:29,060 --> 00:38:31,940
+già la funzione quella nuda schiera già
+
+876
+00:38:31,940 --> 00:38:34,460
+già già morta in pratica già andata
+
+877
+00:38:34,460 --> 00:38:37,070
+non ho fatto tempo farmi vedere il
+
+878
+00:38:37,070 --> 00:38:40,400
+momento in cui crollava ma è già stata
+
+879
+00:38:40,400 --> 00:38:42,850
+eliminata
+
+880
+00:38:42,910 --> 00:38:45,290
+allora adesso prendiamo l'altra
+
+881
+00:38:45,290 --> 00:38:50,330
+applicazione che è quella di front end
+
+882
+00:38:50,330 --> 00:38:53,510
+che andrà a chiamare la funzione è
+
+883
+00:38:53,510 --> 00:38:56,060
+questa qua appunto è stata fatta da un
+
+884
+00:38:56,060 --> 00:38:57,830
+collega che mi ha dato una mano appunto
+
+885
+00:38:57,830 --> 00:39:02,000
+ha fatto tutta la parte grafica o un set
+
+886
+00:39:02,000 --> 00:39:03,890
+di immagini e posso passargli anche un
+
+887
+00:39:03,890 --> 00:39:06,050
+indirizzo un indirizzo http di
+
+888
+00:39:06,050 --> 00:39:07,730
+un'immagine presa dal ruolo quello che è
+
+889
+00:39:07,730 --> 00:39:10,190
+e andrai a chiamare effettivamente la
+
+890
+00:39:10,190 --> 00:39:15,290
+funzione ma noi le donne sta punta che
+
+891
+00:39:15,290 --> 00:39:19,610
+anche questo progetto e pubblico allora
+
+892
+00:39:19,610 --> 00:39:22,790
+avvio l'applicazione quella angola
+
+893
+00:39:22,790 --> 00:39:26,170
+perché è questa qui
+
+894
+00:39:30,299 --> 00:39:32,429
+faceva un attimo e non ho in peak o
+
+895
+00:39:32,429 --> 00:39:35,089
+altro
+
+896
+00:39:36,269 --> 00:39:37,739
+quindi ho fatto proprio in riserva
+
+897
+00:39:37,739 --> 00:39:41,839
+giusto per per avviare la funzione
+
+898
+00:39:45,510 --> 00:39:53,140
+forza ok quindi la mia applicazione di
+
+899
+00:39:53,140 --> 00:39:56,790
+front end la mia guardata esposta sulla
+
+900
+00:39:56,790 --> 00:40:05,440
+4200 ok che è questa cosa succederà nel
+
+901
+00:40:05,440 --> 00:40:08,020
+momento in cui chiamerò uno di non fare
+
+902
+00:40:08,020 --> 00:40:09,010
+nient'altro che fare quello che ho
+
+903
+00:40:09,010 --> 00:40:11,290
+simulato tramite comandare con una cura
+
+904
+00:40:11,290 --> 00:40:13,770
+quindi chiamò la questura
+
+905
+00:40:13,770 --> 00:40:16,090
+vediamo cosa dice vedete al primo avvio
+
+906
+00:40:16,090 --> 00:40:18,580
+e lento perché perché deve fare lo start
+
+907
+00:40:18,580 --> 00:40:21,340
+del povero poi l'immagine al suo volta
+
+908
+00:40:21,340 --> 00:40:22,780
+viene scaricata dalla funzione
+
+909
+00:40:22,780 --> 00:40:25,510
+processata e valutata e vede temi da un
+
+910
+00:40:25,510 --> 00:40:28,350
+vizio che all 82 per cento uno scimpanzé
+
+911
+00:40:28,350 --> 00:40:30,540
+oppure
+
+912
+00:40:30,540 --> 00:40:33,610
+questo questo ebbe essere un po
+
+913
+00:40:33,610 --> 00:40:35,710
+dell'elica più rapida la risposta perché
+
+914
+00:40:35,710 --> 00:40:39,180
+è appunto il pod è già stato avviato
+
+915
+00:40:39,570 --> 00:40:42,570
+ok
+
+916
+00:40:43,560 --> 00:40:50,650
+torniamo a vi faccio vedere giusto per
+
+917
+00:40:50,650 --> 00:40:57,870
+scrupolo cosa come ha fatta una funzione
+
+918
+00:41:01,490 --> 00:41:04,070
+come vedete cioè io quello che vi dicevo
+
+919
+00:41:04,070 --> 00:41:06,380
+un docker file mabel pecca jason per
+
+920
+00:41:06,380 --> 00:41:07,790
+dirgli le librerie che vado utilizzare
+
+921
+00:41:07,790 --> 00:41:10,700
+però ho una index js il mio service di
+
+922
+00:41:10,700 --> 00:41:12,500
+deployment cioè la index in questo caso
+
+923
+00:41:12,500 --> 00:41:15,110
+di questo servizio pesca che converte
+
+924
+00:41:15,110 --> 00:41:18,140
+non è nient'altro che un end point http
+
+925
+00:41:18,140 --> 00:41:22,190
+che quando riceve la chiamata quando
+
+926
+00:41:22,190 --> 00:41:23,690
+riceve la chiamata addirittura sul
+
+927
+00:41:23,690 --> 00:41:25,550
+contesto ruth con la vo messo prende il
+
+928
+00:41:25,550 --> 00:41:28,369
+parametro i miei jules sempre sinistra
+
+929
+00:41:28,369 --> 00:41:30,110
+vi dice dovete dimenticato i pezzi se
+
+930
+00:41:30,110 --> 00:41:32,420
+esisteva a chiamare unicamente una
+
+931
+00:41:32,420 --> 00:41:34,580
+funzione una libreria i miei tua c che
+
+932
+00:41:34,580 --> 00:41:37,400
+ha dato l'url mi produce laschi machine
+
+933
+00:41:37,400 --> 00:41:40,460
+in forma con 800 ridimensione via
+
+934
+00:41:40,460 --> 00:41:42,500
+dicendo e torno la risposta basta
+
+935
+00:41:42,500 --> 00:41:45,410
+fini è subito sviluppata cioè io mi
+
+936
+00:41:45,410 --> 00:41:47,119
+concentro su quello che voglio fargli
+
+937
+00:41:47,119 --> 00:41:49,220
+fare tenendo presente che dove esporre
+
+938
+00:41:49,220 --> 00:41:52,160
+esporlo come un point http poi non mi
+
+939
+00:41:52,160 --> 00:41:55,100
+preoccupo di dire c'è bisogno di mille
+
+940
+00:41:55,100 --> 00:41:56,960
+altre cose intorno c'è sviluppo mia
+
+941
+00:41:56,960 --> 00:41:59,960
+funzione il mio service ed all the
+
+942
+00:41:59,960 --> 00:42:02,350
+client
+
+943
+00:42:12,040 --> 00:42:15,700
+ok riprendo un attimo la parte di
+
+944
+00:42:15,700 --> 00:42:18,370
+canneti sulla parte molto quindi il
+
+945
+00:42:18,370 --> 00:42:19,900
+fatto che è pagabile con sistemi o
+
+946
+00:42:19,900 --> 00:42:24,340
+esistenti o oppure già prese esistenti
+
+947
+00:42:24,340 --> 00:42:26,320
+oppure che in stallo in quel momento
+
+948
+00:42:26,320 --> 00:42:28,450
+quindi tipicamente si usa grappa una
+
+949
+00:42:28,450 --> 00:42:29,710
+promessa perché sono quelli che vanno
+
+950
+00:42:29,710 --> 00:42:31,210
+più di moda e sono anche più carini
+
+951
+00:42:31,210 --> 00:42:34,990
+quindi ho possibilità già di avere out
+
+952
+00:42:34,990 --> 00:42:35,860
+of the box
+
+953
+00:42:35,860 --> 00:42:38,710
+ingraph another day board che mi moni
+
+954
+00:42:38,710 --> 00:42:40,180
+ritorno è praticamente il numero di
+
+955
+00:42:40,180 --> 00:42:42,250
+chiamate http fatte preparare visione di
+
+956
+00:42:42,250 --> 00:42:45,040
+funzione l'utilizzo dei nodi quanti poi
+
+957
+00:42:45,040 --> 00:42:49,000
+ci sono il deployment ho già delle
+
+958
+00:42:49,000 --> 00:42:51,130
+deleghe sborda pre fatte in sostanza
+
+959
+00:42:51,130 --> 00:42:54,490
+perché inediti stessa cosa per il
+
+960
+00:42:54,490 --> 00:42:59,920
+logging di il di base ogni pod contiene
+
+961
+00:42:59,920 --> 00:43:01,380
+della funzione contiene al suo interno
+
+962
+00:43:01,380 --> 00:43:03,670
+fluenti in pratica per collezionare i
+
+963
+00:43:03,670 --> 00:43:06,190
+long quindi si scrive su standar auto
+
+964
+00:43:06,190 --> 00:43:08,730
+tormenti sviluppata a contenerlo do come
+
+965
+00:43:08,730 --> 00:43:11,860
+assodato e diciamo che sia uno standard
+
+966
+00:43:11,860 --> 00:43:13,930
+c'è uno standard di fatto tra tutti
+
+967
+00:43:13,930 --> 00:43:15,760
+scrivono su long poi ci sarà qualcuno
+
+968
+00:43:15,760 --> 00:43:18,040
+che prende questi loghi e se le
+
+969
+00:43:18,040 --> 00:43:20,980
+immagazzina nel punto centrale dove
+
+970
+00:43:20,980 --> 00:43:22,630
+deciso di stornare tutte le cose a tutti
+
+971
+00:43:22,630 --> 00:43:24,790
+e tutto il login in pratica quindi lui
+
+972
+00:43:24,790 --> 00:43:26,980
+esce confluenti di base come immagine
+
+973
+00:43:26,980 --> 00:43:29,440
+per collezionare i log e poi avrò
+
+974
+00:43:29,440 --> 00:43:32,170
+configurato che i meeting per usare e la
+
+975
+00:43:32,170 --> 00:43:34,810
+six più chi bana piuttosto che mandare
+
+976
+00:43:34,810 --> 00:43:36,340
+star driver nel caso in cui sono su
+
+977
+00:43:36,340 --> 00:43:39,130
+google cloud oppure un plugin ashton di
+
+978
+00:43:39,130 --> 00:43:40,790
+love
+
+979
+00:43:40,790 --> 00:43:43,710
+o anche il tracing quindi posso vedere
+
+980
+00:43:43,710 --> 00:43:45,270
+nel caso in cui a funzioni che chiamano
+
+981
+00:43:45,270 --> 00:43:46,440
+altre funzioni che chiamano altre
+
+982
+00:43:46,440 --> 00:43:48,030
+funzioni posso o possibilità di
+
+983
+00:43:48,030 --> 00:43:50,400
+utilizzare due librerie che sono di pino
+
+984
+00:43:50,400 --> 00:43:51,120
+jagger
+
+985
+00:43:51,120 --> 00:43:52,950
+se avete non l'avete mai sentite solo
+
+986
+00:43:52,950 --> 00:43:54,690
+carina è praticamente cosa fanno
+
+987
+00:43:54,690 --> 00:43:56,850
+tracciano tutte ogni chiamata fatta una
+
+988
+00:43:56,850 --> 00:43:58,440
+funzione viene tracciata e questo mi
+
+989
+00:43:58,440 --> 00:44:00,870
+permette di costruire il flusso delle
+
+990
+00:44:00,870 --> 00:44:03,750
+chiamate dall'esterno arriva una
+
+991
+00:44:03,750 --> 00:44:04,950
+chiamata una funzione che chiama
+
+992
+00:44:04,950 --> 00:44:07,020
+un'altra funzione posso vedere i tempi
+
+993
+00:44:07,020 --> 00:44:10,350
+di risposta sia fallito qualcosa e via
+
+994
+00:44:10,350 --> 00:44:12,180
+dicendo e quindi costruire poi ciclo di
+
+995
+00:44:12,180 --> 00:44:16,260
+vita di una chiamata ricevuta prima vi
+
+996
+00:44:16,260 --> 00:44:19,710
+ho detto che che in chinetti appunto non
+
+997
+00:44:19,710 --> 00:44:21,330
+è necessario avere una command line
+
+998
+00:44:21,330 --> 00:44:23,850
+dedicata perché
+
+999
+00:44:23,850 --> 00:44:27,150
+nativa all'interno della della command
+
+1000
+00:44:27,150 --> 00:44:29,820
+line di cuper nitish in realtà hanno
+
+1001
+00:44:29,820 --> 00:44:32,069
+sviluppato anche una
+
+1002
+00:44:32,069 --> 00:44:33,200
+una fine una
+
+1003
+00:44:33,200 --> 00:44:36,950
+una command line nativa per ntv che
+
+1004
+00:44:36,950 --> 00:44:38,780
+semplifica un po i comandi nel senso
+
+1005
+00:44:38,780 --> 00:44:41,930
+invece di dire cui ctl vado a vedere ho
+
+1006
+00:44:41,930 --> 00:44:44,090
+detto vado a vedere il deploy memoria
+
+1007
+00:44:44,090 --> 00:44:45,780
+confermava dovere
+
+1008
+00:44:45,780 --> 00:44:47,610
+tutto quello che gira intorno a kinetic
+
+1009
+00:44:47,610 --> 00:44:49,650
+questo è molto più diretta cioè appena
+
+1010
+00:44:49,650 --> 00:44:52,560
+di di tekken e ti descrivi dal nome la
+
+1011
+00:44:52,560 --> 00:44:55,020
+funzione si fa vedere il mondo legato
+
+1012
+00:44:55,020 --> 00:44:57,690
+con la funzione quindi sotto è lei che
+
+1013
+00:44:57,690 --> 00:44:59,430
+va a fare tutte le chiamate per vedere
+
+1014
+00:44:59,430 --> 00:45:01,530
+lo stato della quella funzione in
+
+1015
+00:45:01,530 --> 00:45:05,310
+kinetic l'anno sviluppato in meglio è in
+
+1016
+00:45:05,310 --> 00:45:05,960
+sviluppo
+
+1017
+00:45:05,960 --> 00:45:08,220
+funziona diciamo è giusto per
+
+1018
+00:45:08,220 --> 00:45:11,040
+riportarvela come come utility che c'è
+
+1019
+00:45:11,040 --> 00:45:15,240
+in più accendo velocissimo la parte di
+
+1020
+00:45:15,240 --> 00:45:17,880
+eventing cosa succede che in e ting
+
+1021
+00:45:17,880 --> 00:45:20,220
+serving è sincrono per definizione
+
+1022
+00:45:20,220 --> 00:45:22,500
+quindi a fronte di una chiamata la
+
+1023
+00:45:22,500 --> 00:45:23,820
+funzione viene eseguita
+
+1024
+00:45:23,820 --> 00:45:26,580
+io ho configurabile volendo il tempo di
+
+1025
+00:45:26,580 --> 00:45:28,230
+risposta della chiamata a tempo e
+
+1026
+00:45:28,230 --> 00:45:30,540
+risposta chiamata di forte 300 secondi
+
+1027
+00:45:30,540 --> 00:45:32,910
+dopo di che si è tenuta ai mouse però è
+
+1028
+00:45:32,910 --> 00:45:35,550
+completamente sincrona nel momento in
+
+1029
+00:45:35,550 --> 00:45:38,160
+cui ho bisogno o comunque sicuramente ne
+
+1030
+00:45:38,160 --> 00:45:40,600
+ho bisogno di eseguire un
+
+1031
+00:45:40,600 --> 00:45:44,440
+un flusso asincrono qua nasce la palla
+
+1032
+00:45:44,440 --> 00:45:46,480
+viene viene utile da parte di eventi da
+
+1033
+00:45:46,480 --> 00:45:49,380
+party ed eventi in cosa fa praticamente
+
+1034
+00:45:49,380 --> 00:45:52,390
+a questa tipologia di architettura c'è
+
+1035
+00:45:52,390 --> 00:45:54,850
+una parte semplice diciamo veloce che
+
+1036
+00:45:54,850 --> 00:45:57,360
+prevede un source quindi in qualcuno che
+
+1037
+00:45:57,360 --> 00:46:00,730
+produce un producer di eventi arriva ad
+
+1038
+00:46:00,730 --> 00:46:04,690
+un broker è un consumer di eventi che
+
+1039
+00:46:04,690 --> 00:46:07,960
+scarica l'evento esegue un qualcosa da
+
+1040
+00:46:07,960 --> 00:46:09,640
+parte un po più complessa invece prevede
+
+1041
+00:46:09,640 --> 00:46:11,920
+appunto come vedete in questo caso sono
+
+1042
+00:46:11,920 --> 00:46:13,930
+tre tipi di eventi e o delle soft script
+
+1043
+00:46:13,930 --> 00:46:15,280
+shaun lui ragioni questa maniera qua
+
+1044
+00:46:15,280 --> 00:46:17,530
+dichiaro un
+
+1045
+00:46:17,530 --> 00:46:19,990
+un producer che manda un messaggio in
+
+1046
+00:46:19,990 --> 00:46:22,690
+questo caso è giallo su un canale dopo
+
+1047
+00:46:22,690 --> 00:46:23,740
+no
+
+1048
+00:46:23,740 --> 00:46:25,210
+dopo non riesco più però allora su un
+
+1049
+00:46:25,210 --> 00:46:28,150
+canale dichiara un trigger quindi cosa
+
+1050
+00:46:28,150 --> 00:46:29,680
+succede quando arriva quell'evento su
+
+1051
+00:46:29,680 --> 00:46:32,260
+quel canale e di chiaro chi sono i
+
+1052
+00:46:32,260 --> 00:46:34,300
+servizi che sono sottoscritti dove di
+
+1053
+00:46:34,300 --> 00:46:35,860
+chiaro chi sono chi ha sottoscritto quel
+
+1054
+00:46:35,860 --> 00:46:38,410
+canale a quel tipo di evento posso fare
+
+1055
+00:46:38,410 --> 00:46:40,450
+anche dal filter diretto un po come la
+
+1056
+00:46:40,450 --> 00:46:42,280
+logica del pub le subscribe o dei
+
+1057
+00:46:42,280 --> 00:46:45,190
+classici brooke e ridge ns che ci sono
+
+1058
+00:46:45,190 --> 00:46:46,840
+da danni
+
+1059
+00:46:46,840 --> 00:46:48,310
+la cosa bella appunto che posso creare
+
+1060
+00:46:48,310 --> 00:46:50,290
+delle logiche complesse quindi dire dall
+
+1061
+00:46:50,290 --> 00:46:53,080
+invio di un messaggio giallo finisce sul
+
+1062
+00:46:53,080 --> 00:46:55,090
+canale o dichiarato il trigger che vai
+
+1063
+00:46:55,090 --> 00:46:57,880
+vai a scatenare la mia funzione on
+
+1064
+00:46:57,880 --> 00:47:00,420
+demand di un service ma potenzialmente
+
+1065
+00:47:00,420 --> 00:47:02,890
+può essere che ho anche un altro trigger
+
+1066
+00:47:02,890 --> 00:47:05,140
+scatena dalla stessa dallo stesso
+
+1067
+00:47:05,140 --> 00:47:07,480
+messaggio scatena un altro service che
+
+1068
+00:47:07,480 --> 00:47:09,550
+produce un nuovo tipo di messaggio uno
+
+1069
+00:47:09,550 --> 00:47:12,070
+di tipo di evento che va su un altro o
+
+1070
+00:47:12,070 --> 00:47:15,550
+sullo stesso channel a cui praticamente
+
+1071
+00:47:15,550 --> 00:47:17,740
+ha sottoscritto un altra funzione che
+
+1072
+00:47:17,740 --> 00:47:19,210
+riceverà al messaggio quindi posso
+
+1073
+00:47:19,210 --> 00:47:21,100
+creare tutte le mie logiche ultra
+
+1074
+00:47:21,100 --> 00:47:22,900
+complesse e ottengo anche la
+
+1075
+00:47:22,900 --> 00:47:25,360
+sincronicità in questo modo quindi posso
+
+1076
+00:47:25,360 --> 00:47:29,500
+disaccoppiare le varie diciamo gli
+
+1077
+00:47:29,500 --> 00:47:32,110
+eventi dalle funzioni e via dicendo e
+
+1078
+00:47:32,110 --> 00:47:35,950
+funzioni da altre funzioni questo è un
+
+1079
+00:47:35,950 --> 00:47:38,110
+po quello che vi ho raccontato in
+
+1080
+00:47:38,110 --> 00:47:39,010
+maniera
+
+1081
+00:47:39,010 --> 00:47:41,530
+rapida ecco ho parlato di canali 1
+
+1082
+00:47:41,530 --> 00:47:43,720
+potrebbe mi potreste dire ok messaggi
+
+1083
+00:47:43,720 --> 00:47:46,840
+esplode qualcosa cosa succede
+
+1084
+00:47:46,840 --> 00:47:50,080
+il broker che c'è all'interno di kanye
+
+1085
+00:47:50,080 --> 00:47:52,570
+tv è configurabile per in modo che sia
+
+1086
+00:47:52,570 --> 00:47:56,890
+in memory persistente o su altri sistemi
+
+1087
+00:47:56,890 --> 00:47:59,680
+quindi potete bene immaginare ad esempio
+
+1088
+00:47:59,680 --> 00:48:02,560
+la parte in memory va bene volate cena
+
+1089
+00:48:02,560 --> 00:48:04,960
+sesso muore quell'amore quella quel
+
+1090
+00:48:04,960 --> 00:48:07,120
+broker o quello che tiene in piedi quel
+
+1091
+00:48:07,120 --> 00:48:10,330
+canale hai perso il messaggio per far la
+
+1092
+00:48:10,330 --> 00:48:11,830
+parte persistente cosa hanno usato
+
+1093
+00:48:11,830 --> 00:48:13,510
+essendo su cui vernici e segni montano
+
+1094
+00:48:13,510 --> 00:48:16,300
+un volume persistente e si sfrutta lo
+
+1095
+00:48:16,300 --> 00:48:17,920
+tengono tutta la parte di persistence
+
+1096
+00:48:17,920 --> 00:48:20,590
+gratis praticamente quindi sfruttano
+
+1097
+00:48:20,590 --> 00:48:23,230
+appieno tutta la parte di iq berny tease
+
+1098
+00:48:23,230 --> 00:48:26,160
+per gestire queste situazioni
+
+1099
+00:48:26,970 --> 00:48:29,230
+questo è quello che vi ho raccontato già
+
+1100
+00:48:29,230 --> 00:48:31,810
+prima niente questi sono un po di resa
+
+1101
+00:48:31,810 --> 00:48:35,890
+dire fresche da cui ho preso spunto e
+
+1102
+00:48:35,890 --> 00:48:38,860
+basta se avete domande anche se sono 11
+
+1103
+00:48:38,860 --> 00:48:40,030
+55 mila soci
+
+1104
+00:48:40,030 --> 00:48:44,460
+se avete domande sono qui
+
+1105
+00:48:46,730 --> 00:48:49,540
+sì
+
+1106
+00:48:50,940 --> 00:48:54,309
+[Applauso]
