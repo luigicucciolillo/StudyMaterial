@@ -1,0 +1,5 @@
+# Best Friends Keep No Secrets: Going Secretless with cert-manager - Ashley Davis & Tim Ramlot, Venafi
+
+In today's complex Kubernetes environments, managing secrets securely is a challenge. Traditional methods often involve complex configurations with secret vaults, secret syncing and secret backups. Regardless of which fancy technology is used, secrets always come with a risk of being leaked. Most of the secrets used in traditional applications can be replaced by short-lived certificates. Applications can prove to be the owner of a certificate without sharing any secrets. In Kubernetes, cert-manager can be used to provision these certificates to all applications without sharing any secret information. Table of contents: - Do we actually need secrets? Comparing authentication methods: static secrets vs short-lived secrets and proof of ownership - How to issue certificates using cert-manager without using [S|s]ecrets - Compatibility and other challenges
+
+https://www.youtube.com/watch?v=VbCtDF8qlWA
