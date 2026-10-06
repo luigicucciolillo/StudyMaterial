@@ -1,0 +1,5 @@
+#  Tutorial: Getting Started with eBPF - Liz Rice, Isovalent 
+
+1h 30min video conference - 25 may 2023 - link to video  [here](https://www.youtube.com/watch?v=TJgxjVTZtfw)
+
+eBPF is the enabling platform for a new generation of networking, observability and security tools. This workshop tutorial will use hands-on labs to give attendees an introduction to how eBPF works, and how to manage and observe eBPF programs and maps. Topics will include: - An overview of eBPF concepts: programs, maps and verification - Using the bpftool utility to manage eBPF programs and maps - An introduction to different types of eBPF programs attached to different events in the kernel such as kprobes, xdp and LSM. This tutorial will give attendees hands-on experience with this exciting and powerful technology, and basic skills for observing and managing eBPF programs.
